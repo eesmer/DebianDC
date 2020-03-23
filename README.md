@@ -1,9 +1,7 @@
 # DebianDC
 DebianDC Debian Domain Controller <br>
 DebianDC provides a Domain Controller installation and <i>graphical interface management environment</i> for Samba Active Directory.<br>
-DebianDC is installed with the Debian LXDE desktop environment and uses zenity screens.
-
-This repository includes documents and scripts used
+DebianDC installs a graphical interface called AD-Manager and manages the Active Directory environment with zenity screens.<br>
 
 
 ## Features
@@ -11,3 +9,5 @@ This repository includes documents and scripts used
 - User Management
 - Group Management
 - DNS Management (Samba Internal DNS)
+
+## Installation

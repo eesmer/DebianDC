@@ -11,9 +11,3 @@ This repository includes documents and scripts used
 - User Management
 - Group Management
 - DNS Management (Samba Internal DNS)
-
-## Installation
-You can download the DebianDc-buster-installer.iso file <a href="www.esmerkan.com/debiandc/web/iso/DebianDC-buster-installer.iso">here</a>
-
-## Installation Guide
-<a href ="www.esmerkan.com/debiandc/web/installation.html">DebianDC Installation</a>

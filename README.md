@@ -1,5 +1,5 @@
 # DebianDC
-DebianDC Debian Domain Controller
+DebianDC Debian Domain Controller <br>
 DebianDC provides a Domain Controller installation and <i>graphical interface management environment</i> for Samba Active Directory.<br>
 DebianDC is installed with the Debian LXDE desktop environment and uses zenity screens.
 

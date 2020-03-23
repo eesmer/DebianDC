@@ -1,0 +1,32 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Add a A Type Record" --title="Add a A Type DNS Record Screen" --width $WIDTH --height $HEIGHT \
+        --add-entry="Name of DNS Record" \
+	--add-entry="IP of DNS Record" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash dns_add_a_record
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash dns_add_record
+        exit 1
+fi
+
+NAME=$(echo $CHOICE | cut -d "|" -f 1)
+IP=$(echo $CHOICE | cut -d "|" -f 2)
+
+if [ "$NAME" = "" ] || [ "$IP" = "" ]
+then
+	bash dns_add_a_record
+	exit 1
+fi
+
+ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
+PASS=$(zenity --password --title="Administrator Password" --width $WIDTH --height $HEIGHT )
+samba-tool dns add 127.0.0.1 $ZONE $NAME A $IP -U Administrator --password=$PASS 2>&1 |tee /tmp/output.txt
+cat /tmp/output.txt | zenity --text-info --title="Result of the A Type DNS Record Adding Process in $ZONE Zone" --width $WIDTH --height $HEIGHT
+
+bash dns_add_record

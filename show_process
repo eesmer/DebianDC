@@ -1,0 +1,14 @@
+cd /usr/local/debiandc
+source common-value
+
+samba-tool processes | zenity --text-info --title="Report of Running Processes" --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "0" ] #OK
+then
+bash ad_maintenance
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash ad_maintenance
+exit 1
+fi

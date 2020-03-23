@@ -1,0 +1,23 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Change Password at Next Logon" --title="Screen of Change Password at Next Logon" --width $WIDTH --height $HEIGHT \
+        --add-entry="UserName" \
+	--add-password="Password" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash change_pass_at_next_logon
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash user_man
+        exit 1
+fi
+
+USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
+PASS=$(echo $CHOICE | cut -d "|" -f 2)
+
+samba-tool user setpassword --newpassword=$PASS --must-change-at-next-login $USERNAME 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of the Change Password at Next Logon for $USERNAME" --width $WIDTH --height $HEIGHT
+bash user_man

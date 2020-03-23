@@ -1,0 +1,23 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Add Member to Group" --title="Screen of Add Member to Group" --width $WIDTH --height $HEIGHT \
+        --add-entry="Group Name" \
+	--add-entry="UserName" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash add_member
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash group_man
+        exit 1
+fi
+
+GROUPNAME=$(echo $CHOICE | cut -d "|" -f 1)
+USERNAME=$(echo $CHOICE | cut -d "|" -f 2)
+
+samba-tool group addmembers $GROUPNAME $USERNAME 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of the Adding Membership Process of $USERNAME account to $GROUPNAME" --width $WIDTH --height $HEIGHT
+bash group_man

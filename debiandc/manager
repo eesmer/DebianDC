@@ -1,0 +1,33 @@
+SCREEN_WIDTH=$(xwininfo -root | awk '$1=="Width:" {print $2}')
+SCREEN_HEIGHT=$(xwininfo -root | awk '$1=="Height:" {print $2}')
+echo WIDTH=$SCREEN_WIDTH > /usr/local/debiandc/common-value
+echo HEIGHT=$SCREEN_HEIGHT >> /usr/local/debiandc/common-value
+
+cd /usr/local/debiandc
+
+CHOICE=$(zenity  --list  --text "Active Directory Management GUI" --title="Active Directory Management" --width $SCREEN_WIDTH --height $SCREEN_HEIGHT --radiolist --column "" --column "options" \
+FALSE "User Management" \
+FALSE "Group Management" \
+FALSE "DNS Management" \
+FALSE "Settings" \
+FALSE "Maintenance"
+)
+
+if [ "$CHOICE" = "User Management" ]
+then
+bash user_man
+elif [ "$CHOICE" = "Group Management" ]
+then
+bash group_man
+elif [ "$CHOICE" = "DNS Management" ]
+then
+bash dns_man
+elif [ "$CHOICE" = "Settings" ]
+then
+bash ad_settings
+elif [ "$CHOICE" = "Maintenance" ]
+then
+bash ad_maintenance
+else
+exit 1
+fi

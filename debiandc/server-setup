@@ -1,0 +1,82 @@
+DOMAIN_NAME=$(zenity --entry --text="DOMAIN NAME")
+PASSWORD=$(zenity --entry --text="Administrator Password" --hide-text)
+
+if [ "$DOMAIN_NAME" = "" ] || [ "$PASSWORD" = "" ]
+then
+zenity --error --text "Please fill all the fields" --width 150 height 150
+exit 1
+fi
+
+echo "DOMAIN NAME: $DOMAIN_NAME" > /tmp/setup-info.txt
+echo "-----------" >> /tmp/setup-info.txt
+echo "start installation?" >> /tmp/setup-info.txt
+
+cat /tmp/setup-info.txt | zenity --text-info --title="DC Setup" --width 500 --height 250
+
+if [ "$?" = "1" ] #CANCEL
+then
+exit 1
+fi
+
+HOSTNAME=DC01
+REALM=$(echo $DOMAIN_NAME | cut -d "." -f 1)
+
+function setup {
+echo "127.0.1.1 $HOSTNAME.$DOMAIN_NAME $HOSTNAME" >> /etc/hosts
+hostnamectl set-hostname $HOSTNAME.$DOMAIN_NAME
+
+export DEBIAN_FRONTEND=noninteractive
+apt -y install samba --install-recommends
+apt -y install winbind
+apt -y install krb5-config
+
+systemctl stop smbd.service
+systemctl stop nmbd.service
+systemctl disable smbd.service
+systemctl disable nmbd.service
+
+rm /etc/samba/smb.conf
+samba-tool domain provision \
+--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=$REALM --domain=$DOMAIN_NAME --adminpass=$PASSWORD
+
+rm /etc/krb5.conf
+ln -s /var/lib/samba/private/krb5.conf /etc/
+
+# samba services
+systemctl enable nmbd.service smbd.service
+systemctl disable winbind.service
+systemctl unmask samba-ad-dc.service
+systemctl enable samba-ad-dc.service
+systemctl start samba-ad-dc.service
+
+cat > /root/Desktop/AD-Manager.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=AD-Manager
+Terminal=false
+Comment=Active Directory Manager
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/sbin/manager
+EOF
+chmod +x /root/Desktop/AD-Manager.desktop
+
+cat > /root/.local/share/applications/AD-Manager.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=AD-Manager
+Terminal=false
+Comment=Active Directory Manager
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/sbin/manager
+EOF
+chmod +x /root/.local/share/applications/AD-Manager.desktop
+
+zenity --info --text "DC setup is complete.The computer will reboot." --width 350 --height 100
+reboot
+}
+
+ABC=$(setup | tee >(zenity --progress --pulsate))

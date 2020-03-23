@@ -1,0 +1,34 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Info of DNS Record" --title="Screen of Update a A Type Record" --width $WIDTH --height $HEIGHT \
+        --add-entry="Name of DNS Record" \
+	--add-entry="Current Address"  \
+	--add-entry="New Address" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash dns_update_a_record
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash dns_update_record
+        exit 1
+fi
+
+NAME=$(echo $CHOICE | cut -d "|" -f 1)
+CURRENTADDR=$(echo $CHOICE | cut -d "|" -f 2)
+NEWADDR=$(echo $CHOICE | cut -d "|" -f 3)
+
+if [ "$NAME" = "" ] || [ "$CURRENTADDR" = "" ] || [ "$NEWADDR" = "" ]
+then
+	bash dns_del_a_record
+	exit 1
+fi
+
+ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
+PASS=$(zenity --password --title="Administrator Password" --width=$WIDTH --height=$HEIGHT)
+samba-tool dns update 127.0.0.1 $ZONE $NAME A $CURRENTADDR $NEWADDR -U Administrator --password=$PASS 2>&1 |tee /tmp/output.txt
+cat /tmp/output.txt | zenity --text-info --title="Result of DNS Update from $CURRENTADDR to $NEWADDR in $ZONE zone for $NAME" --width $WIDTH --height $HEIGHT
+
+bash dns_update_record

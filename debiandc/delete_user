@@ -1,0 +1,28 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Delete User" --title="Screen of Delete User" --width $WIDTH --height $HEIGHT \
+	--add-entry="UserName" \
+	--add-combo="Confirm" --combo-values="Yes|No" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "| " ] #OK
+then
+	bash delete_user
+	exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+	bash user_man
+	exit 1
+fi
+
+USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
+CONFIRM=$(echo $CHOICE | cut -d "|" -f 2)
+
+if [ "$CONFIRM" = "Yes" ]
+then
+	samba-tool user delete $USERNAME 2>&1 | tee /tmp/outfile
+	cat /tmp/outfile | zenity --text-info --title="Result of the Delete User Process for $USERNAME" --width $WIDTH --height $HEIGHT
+fi
+
+bash user_man
+exit 1

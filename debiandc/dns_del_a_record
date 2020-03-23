@@ -1,0 +1,31 @@
+cd /usr/local/debiandc
+
+CHOICE=$(zenity --forms --text="Record Information" --title="Deletion a A Type Record" \
+        --add-entry="Name of DNS Record" \
+	--add-entry="IP of DNS Record" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash dns_del_a_record
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash dns_del_record
+        exit 1
+fi
+
+NAME=$(echo $CHOICE | cut -d "|" -f 1)
+IP=$(echo $CHOICE | cut -d "|" -f 2)
+
+if [ "$NAME" = "" ] || [ "$IP" = "" ]
+then
+	bash dns_del_a_record
+	exit 1
+fi
+
+ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
+PASS=$(zenity --password --title="Administrator Password")
+samba-tool dns delete 127.0.0.1 $ZONE $NAME A $IP -U Administrator --password=$PASS 2>&1 |tee /tmp/output.txt
+cat /tmp/output.txt | zenity --text-info --title="DNS Query" --width 700 --height 300
+
+bash dns_add_record

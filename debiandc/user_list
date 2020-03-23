@@ -1,0 +1,14 @@
+cd /usr/local/debiandc
+source common-value
+
+samba-tool user list | zenity --text-info --title="Active Directory User List" --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "0" ] #OK
+then
+bash user_man
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash user_man
+exit 1
+fi

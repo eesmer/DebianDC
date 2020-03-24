@@ -11,3 +11,7 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 - DNS Management (Samba Internal DNS)
 
 ## Installation
+```sh
+$ wget https://raw.githubusercontent.com/eesmer/backup-united/master/backup-united-install.sh
+$ bash backup-united-install.sh
+```

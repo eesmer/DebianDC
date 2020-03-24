@@ -15,7 +15,7 @@ desktop environment (mate, lxde etc.)<br>
 
 ## Installation and Usage
 ```sh
-$ wget https://github.com/eesmer/DebianDC/blob/master/debiandc-installer.sh
+$ wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh
 $ bash debiandc-installer.sh
 ```
 Use DebianDC and AD-Manager with root user

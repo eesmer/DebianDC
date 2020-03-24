@@ -12,12 +12,11 @@ This work has been done on Debian distribution. (Debian10 buster)
 - Group Management
 - DNS Management (Samba Internal DNS)
 
-## Installation
+## Installation and Usage
 ```sh
 $ wget https://raw.githubusercontent.com/eesmer/DebianDC/blob/master/debiandc-installer.sh
 $ bash debiandc-installer.sh
 ```
-## Usage
 Use DebianDC and AD-Manager with root user
 #### DC Setup
 

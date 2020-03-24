@@ -19,5 +19,5 @@ $ bash debiandc-installer.sh
 ```
 ## Usage
 Use DebianDC and AD-Manager with root user
-# DC Setup
+### DC Setup
 

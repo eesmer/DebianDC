@@ -10,12 +10,12 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 - DNS Management (Samba Internal DNS)
 
 ## Requirements
-desktop environment (mate,lxde etc.)<br>
+desktop environment (mate, lxde etc.)<br>
 *This work has been done on Debian distribution. (Debian10 buster)
 
 ## Installation and Usage
 ```sh
-$ wget https://raw.githubusercontent.com/eesmer/DebianDC/blob/master/debiandc-installer.sh
+$ wget https://github.com/eesmer/DebianDC/blob/master/debiandc-installer.sh
 $ bash debiandc-installer.sh
 ```
 Use DebianDC and AD-Manager with root user

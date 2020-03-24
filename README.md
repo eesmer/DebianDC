@@ -19,11 +19,12 @@ $ bash debiandc-installer.sh
 ```
 Use DebianDC and AD-Manager with root user
 #### DC Setup
+Run the server-setup command from the terminal screen
 ```sh
-$ Run the server-setup command from the terminal screen
+$ server-setup
 ```
 #### AD-Manager
+Run the manager command from the terminal screen
 ```sh
-$ Run the manager command from the terminal screen
+$ manager
 ```
-

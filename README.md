@@ -11,8 +11,7 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 
 ## Requirements
 desktop environment (mate, lxde etc.)<br>
-*This work has been done on Debian distribution. (Debian9 stretch)<br>
-Internal Samba DNS issues a problem in Debian Buster. Therefore, run with Debian 9.
+*This work has been done on Debian distribution. (Debian10 buster)<br>
 
 ## Installation and Usage
 ```sh

@@ -21,8 +21,6 @@ chown -R root:root /usr/local/debiandc
 chmod -R 744 /usr/local/debiandc
 chmod +x /usr/local/debiandc/server-setup
 chmod +x /usr/local/debiandc/manager
-chmod +x /usr/local/debiandc/server-setup
-chmod +x /usr/local/debiandc/manager
 cp /usr/local/debiandc/server-setup /usr/sbin/
 cp /usr/local/debiandc/manager /usr/sbin/
 chmod 755 /usr/sbin/server-setup

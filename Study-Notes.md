@@ -1,7 +1,8 @@
 # Study Notes
-===============
+===
 
-Static ipr must be used in DC. Otherwise, resolv.conf setting may be corrupted.
+Static ipr must be used in DC. Otherwise, resolv.conf setting may be
+corrupted.<br>
 https://wiki.debian.org/NetworkConfiguration#Configuring_the_interface_manually
 
 #### Network interfaces
@@ -13,7 +14,7 @@ For this reason, if there is more than one network interface for now, server-set
 
 #### samba-tool tool and parameters
 
-- --domain provision
+- %--domain provision%
 Creates the Active Directory database.
 Creates the first AD records. For example: Administrator user account
 It creates the necessary DNS entries for the AD environment.

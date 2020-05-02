@@ -13,34 +13,34 @@ For this reason, if there is more than one network interface for now, server-set
 
 #### samba-tool tool and parameters
 
-- '--domain provision'
+- `--domain provision`
 Creates the Active Directory database.
 Creates the first AD records. For example: Administrator user account
 It creates the necessary DNS entries for the AD environment.
 
-- --use-rfc2307 (enables the NIS extensions)
+- `--use-rfc2307` (enables the NIS extensions)
 This parameter allows the AD database to hold Unix attributes.
 These;
 - user IDs (UID)
 - home directory paths
 - group IDs (GID)
 
-- --realm
+- `--realm`
 It is the name of AD DNS Domain and it is expressed in capital letters. (EXAMPLE.COM, KURUM.LOC)
 
-- --domain
+- `--domain`
 NetBIOS domain name (WORKGROUP)
 It can be anything. It should consist of only one word.
 The first part of AD DNS Domain is usually used for this value. (EXAMPLE,KURUM)
 
-- --server-role
+- `--server-role`
 Installs the DC role of the AD DNS environment.
 
-- --dns-backend
+- `--dns-backend`
 It is the DNS side of the AD DNS environment.
 When AD DNS environment is installed for the first time, the machine that takes the DC role should be determined by setting DNS.
 
-- --adminpass
+- `--adminpass`
 Sets the password for the administrator of the AD environment.
 The provisioning will fail if the password is not complex enough.
 

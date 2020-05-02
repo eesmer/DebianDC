@@ -7,7 +7,7 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 - Domain and Domain Controller setup
 - User Management
 - Group Management
-- DNS Management (Samba Internal DNS)
+- DNS Management (BIN9_DLZ)
 
 ## Requirements
 desktop environment (mate, lxde etc.)<br>

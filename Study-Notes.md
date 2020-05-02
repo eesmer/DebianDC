@@ -13,7 +13,7 @@ For this reason, if there is more than one network interface for now, server-set
 
 #### samba-tool tool and parameters
 
-- %--domain provision%
+- '--domain provision'
 Creates the Active Directory database.
 Creates the first AD records. For example: Administrator user account
 It creates the necessary DNS entries for the AD environment.

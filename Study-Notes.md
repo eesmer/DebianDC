@@ -11,7 +11,7 @@ For this reason, if there is more than one network interface for now, server-set
 
 ### Samba Active Directory
 
-#### samba-tool and domain-provision parameter
+#### samba-tool and `domain provision` parameter
 
 - `--domain provision`
 Creates the Active Directory database.

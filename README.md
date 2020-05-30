@@ -8,6 +8,8 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 - User Management
 - Group Management
 - DNS Management (BIN9_DLZ)
+- OU Management (You can move AD accounts between Users and OUs -Currently only users)
+- Reports (more detailed reports than the listing process)
 
 ## Requirements
 desktop environment (mate, lxde etc.)<br>

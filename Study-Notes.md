@@ -30,19 +30,19 @@ These;<br>
 - --realm <br>
 It is the name of AD DNS Domain and it is expressed in capital letters. (EXAMPLE.COM, KURUM.LOC)
 
-- --domain
+- --domain <br>
 NetBIOS domain name (WORKGROUP)
 It can be anything. It should consist of only one word.
 The first part of AD DNS Domain is usually used for this value. (EXAMPLE,KURUM)
 
-- --server-role
+- --server-role <br>
 Installs the DC role of the AD DNS environment.
 
-- --dns-backend
+- --dns-backend <br>
 It is the DNS side of the AD DNS environment.
 When AD DNS environment is installed for the first time, the machine that takes the DC role should be determined by setting DNS.
 
-- --adminpass
+- --adminpass <br>
 Sets the password for the administrator of the AD environment.
 The provisioning will fail if the password is not complex enough.
 
@@ -50,11 +50,11 @@ The provisioning will fail if the password is not complex enough.
 BIND9_DLZ DNS environment was used in DebianDC. (--dns-backend=BIND9_DLZ)
 
 #### BIND9 DLZ
-- /var/lib/samba/private/dns_update_list
+- /var/lib/samba/private/dns_update_list <br>
 Server ip address is entered in this file.
 
 - /etc/default/bind9
-the content is as follows.
+the content is as follows.<br>
 ```
 RESOLVCONF=no
 OPTIONS="-u bind -4"
@@ -62,10 +62,10 @@ OPTIONS="-u bind -4"
 - /etc/bind/named.conf.options
 
 ### Kerberos Configuration
-Kerberos is used in the AD environment to authenticate users, machines and services.
-During the domain provision process Samba creates a Kerberos configuration file.
-During the installation, the Kerberos file is created for DC.
-We can copy this to the operating system by copying it to the / etc directory.
+Kerberos is used in the AD environment to authenticate users, machines and services.<br>
+During the domain provision process Samba creates a Kerberos configuration file.<br>
+During the installation, the Kerberos file is created for DC.<br>
+We can copy this to the operating system by copying it to the / etc directory.<br>
 ```bash
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
 ```

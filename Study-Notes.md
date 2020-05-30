@@ -16,7 +16,7 @@ For this reason, if there is more than one network interface for now, server-set
 
 ### Samba Active Directory
 
-#### samba-tool tool and parameters
+#### samba-tool and `domain provision` parameter
 
 <<<<<<< HEAD
 - %--domain provision%

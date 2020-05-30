@@ -8,9 +8,11 @@ cd /usr/local/debiandc
 CHOICE=$(zenity  --list  --text "Active Directory Management GUI" --title="Active Directory Management" --width $SCREEN_WIDTH --height $SCREEN_HEIGHT --radiolist --column "" --column "options" \
 FALSE "User Management" \
 FALSE "Group Management" \
+FALSE "OU Management" \
 FALSE "DNS Management" \
 FALSE "Settings" \
-FALSE "Maintenance"
+FALSE "Maintenance" \
+FALSE "Reports"
 )
 
 if [ "$CHOICE" = "User Management" ]
@@ -19,6 +21,9 @@ bash user_man
 elif [ "$CHOICE" = "Group Management" ]
 then
 bash group_man
+elif [ "$CHOICE" = "OU Management" ]
+then
+bash ou_man
 elif [ "$CHOICE" = "DNS Management" ]
 then
 bash dns_man
@@ -28,6 +33,9 @@ bash ad_settings
 elif [ "$CHOICE" = "Maintenance" ]
 then
 bash ad_maintenance
+elif [ "$CHOICE" = "Reports" ]
+then
+bash reports
 else
 exit 1
 fi

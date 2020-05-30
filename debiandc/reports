@@ -1,0 +1,19 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Detailed Users List" --title="Detailed Users List" --width $WIDTH --height $HEIGHT \
+        --add-combo="Reports" --combo-values="Detailed Users List")
+
+if [ "$?" = "1" ]
+then
+	bash manager
+elif [ "$CHOICE" = " " ]
+then
+	bash manager
+fi
+
+if [ "$CHOICE" = "Detailed Users List" ]
+then
+	bash report_user_list
+	exit 1
+fi

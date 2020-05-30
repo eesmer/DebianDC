@@ -1,0 +1,37 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="OU Management" --title="Organization Unit Management Screen" --width $WIDTH --height $HEIGHT \
+	--add-combo="OUManagement" --combo-values="Create OU|Delete OU|OU List|OU members|Add member to OU|Remove member from OU" )
+
+if [ "$CHOICE" = "Create OU" ]
+then
+	bash create_ou
+elif [ "$CHOICE" = "Delete OU" ]
+then
+	bash delete_ou
+elif [ "$CHOICE" = "OU List" ]
+then
+	bash ou_list
+	exit 1 
+elif [ "$CHOICE" = "OU members" ]
+then
+	bash ou_members_list
+	exit 1
+elif [ "$CHOICE" = "Add member to OU" ]
+then
+	bash ou_add_member
+	exit 1 
+elif [ "$CHOICE" = "Remove member from OU" ]
+then
+	bash ou_remove_member
+	exit 1
+elif [ "$CHOICE" = "" ] #OK_BUTTON
+then
+	bash manager
+	exit 1
+elif [ "$?" = "1" ] #CANCEL_BUTTON
+then
+	bash ou_man
+	exit 1
+fi

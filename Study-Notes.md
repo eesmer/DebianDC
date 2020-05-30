@@ -1,8 +1,12 @@
 # Study Notes
 ===
 
+<<<<<<< HEAD
 Static ipr must be used in DC. Otherwise, resolv.conf setting may be
 corrupted.<br>
+=======
+Static ipr must be used in DC. Otherwise, resolv.conf setting may be corrupted.<br>
+>>>>>>> f58f28b7ddcf3dd47edb18f7ca5d0d24e38e0a4b
 https://wiki.debian.org/NetworkConfiguration#Configuring_the_interface_manually
 
 #### Network interfaces
@@ -14,34 +18,38 @@ For this reason, if there is more than one network interface for now, server-set
 
 #### samba-tool tool and parameters
 
+<<<<<<< HEAD
 - %--domain provision%
+=======
+- `--domain provision`
+>>>>>>> f58f28b7ddcf3dd47edb18f7ca5d0d24e38e0a4b
 Creates the Active Directory database.
 Creates the first AD records. For example: Administrator user account
 It creates the necessary DNS entries for the AD environment.
 
-- --use-rfc2307 (enables the NIS extensions)
+- `--use-rfc2307` (enables the NIS extensions)
 This parameter allows the AD database to hold Unix attributes.
 These;
 - user IDs (UID)
 - home directory paths
 - group IDs (GID)
 
-- --realm
+- `--realm`
 It is the name of AD DNS Domain and it is expressed in capital letters. (EXAMPLE.COM, KURUM.LOC)
 
-- --domain
+- `--domain`
 NetBIOS domain name (WORKGROUP)
 It can be anything. It should consist of only one word.
 The first part of AD DNS Domain is usually used for this value. (EXAMPLE,KURUM)
 
-- --server-role
+- `--server-role`
 Installs the DC role of the AD DNS environment.
 
-- --dns-backend
+- `--dns-backend`
 It is the DNS side of the AD DNS environment.
 When AD DNS environment is installed for the first time, the machine that takes the DC role should be determined by setting DNS.
 
-- --adminpass
+- `--adminpass`
 Sets the password for the administrator of the AD environment.
 The provisioning will fail if the password is not complex enough.
 

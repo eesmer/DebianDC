@@ -1,0 +1,45 @@
+cd /usr/local/debiandc
+source common-value
+
+LINE1=----------------------------------------------------------------------------
+
+samba-tool user list > /tmp/user-list.txt
+echo "::. DETAILED USERS LIST ::." > /tmp/duser-list.txt
+
+sed -i '/Administrator/d' /tmp/user-list.txt
+sed -i '/Guest/d' /tmp/user-list.txt
+sed -i '/dns-/d' /tmp/user-list.txt
+sed -i '/krbtgt/d' /tmp/user-list.txt
+
+numuser=$(cat /tmp/user-list.txt | wc -l)
+i=1
+while [ "$i" -le $numuser ]; do
+account=$(ls -l | sed -n $i{p} /tmp/user-list.txt)
+
+samba-tool user show $account > /tmp/$account
+
+echo $LINE1 >> /tmp/duser-list.txt
+echo $account >> /tmp/duser-list.txt
+awk '/dn:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/mail:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/displayName:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/department:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/sAMAccountName:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/UserPrincipalName:/' /tmp/$account >> /tmp/duser-list.txt
+awk '/LogonCount:/' /tmp/$account >> /tmp/duser-list.txt
+echo $LINE1 >> /tmp/duser-list.txt
+
+i=$(( i + 1 ))
+done
+
+cat /tmp/duser-list.txt |zenity --text-info --title="Detailed User List" --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "0" ] #OK
+then
+bash reports
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash reports
+exit 1
+fi

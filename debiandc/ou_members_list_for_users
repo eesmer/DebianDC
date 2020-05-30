@@ -1,0 +1,20 @@
+cd /usr/local/debiandc
+source common-value
+
+samba-tool user list > /tmp/user-list.txt
+sed -i '/Administrator/d' /tmp/user-list.txt
+sed -i '/Guest/d' /tmp/user-list.txt
+sed -i '/dns-/d' /tmp/user-list.txt
+sed -i '/krbtgt/d' /tmp/user-list.txt
+
+cat /tmp/user-list.txt |zenity --text-info --title="User List" --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "0" ] #OK
+then
+bash ou_man
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash ou_man
+exit 1
+fi

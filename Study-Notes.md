@@ -15,19 +15,19 @@ For this reason, if there is more than one network interface for now, server-set
 
 #### samba-tool and `domain provision` parameter
 
-- domain provision
+- domain provision <br>
 Creates the Active Directory database.
 Creates the first AD records. For example: Administrator user account
 It creates the necessary DNS entries for the AD environment.
 
-- --use-rfc2307 (enables the NIS extensions)
-This parameter allows the AD database to hold Unix attributes.
-These;
-- user IDs (UID)
-- home directory paths
-- group IDs (GID)
+- --use-rfc2307 (enables the NIS extensions) <br>
+This parameter allows the AD database to hold Unix attributes.<br>
+These;<br>
+  - user IDs (UID)
+  - home directory paths
+  - group IDs (GID)
 
-- --realm
+- --realm <br>
 It is the name of AD DNS Domain and it is expressed in capital letters. (EXAMPLE.COM, KURUM.LOC)
 
 - --domain

@@ -57,7 +57,7 @@ OPTIONS="-u bind -4"
 EOF
 chmod 644 /etc/default/bind9
 
-echo 'include "/var/lib/samba/bind-dns/named.conf";' >> /etc/bind/named.conf.local
+echo 'include "/var/lib/samba/bind-dns/named.conf";' > /etc/bind/named.conf.local
 
 rm /etc/bind/named.conf.options
 INTERNAL1=127.0.0.0/8

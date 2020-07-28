@@ -62,7 +62,7 @@ echo 'include "/var/lib/samba/bind-dns/named.conf";' > /etc/bind/named.conf.loca
 rm /etc/bind/named.conf.options
 INTERNAL1=127.0.0.0/8
 INTERNAL2=$(ip r |grep link |grep src |cut -d' ' -f1)
-SUBNET=$(ip r |grep link |grep src |cut -d' ' -f1 |cut -d'0' -f2)
+SUBNET=$(ip r |grep link |grep src |cut -d' ' -f1 |cut -d'/' -f2)
 cat > /etc/bind/named.conf.options << EOF
 acl internals {
 $INTERNAL1;
@@ -86,7 +86,7 @@ allow-query-cache { "internals"; };
 allow-recursion { internals; };
 
 listen-on-v6 { none; };
-sortlist { $SERVER_IP$SUBNET; };
+sortlist { $SERVER_IP/$SUBNET; };
 tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
 
 };

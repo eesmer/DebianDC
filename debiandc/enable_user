@@ -1,7 +1,7 @@
 cd /usr/local/debiandc
 source common-value
 
-CHOICE=$(zenity --forms --text="Disable User" --title="Screen Of Enable User" --width $WIDTH --height $HEIGHT \
+CHOICE=$(zenity --forms --text="Enable User" --title="Screen Of Enable User" --width $WIDTH --height $HEIGHT \
         --add-entry="UserName" )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK

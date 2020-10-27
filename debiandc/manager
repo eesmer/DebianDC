@@ -5,8 +5,8 @@ echo HEIGHT=$SCREEN_HEIGHT >> /usr/local/debiandc/common-value
 
 cd /usr/local/debiandc
 
-CHOICE=$(zenity  --list  --text "Active Directory Management GUI" --title="Active Directory Management" --width $SCREEN_WIDTH --height $SCREEN_HEIGHT --radiolist --column "" --column "options" \
-FALSE "User Management" \
+CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Directory Management" --width $SCREEN_WIDTH --height $SCREEN_HEIGHT --radiolist --column "" --column "options" \
+FALSE "User & Computer Management" \
 FALSE "Group Management" \
 FALSE "OU Management" \
 FALSE "DNS Management" \
@@ -15,7 +15,7 @@ FALSE "Maintenance" \
 FALSE "Reports"
 )
 
-if [ "$CHOICE" = "User Management" ]
+if [ "$CHOICE" = "User & Computer Management" ]
 then
 bash user_man
 elif [ "$CHOICE" = "Group Management" ]

@@ -1,0 +1,21 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Delete Computer Account" --title="Screen of Delete the Computer Account" --width $WIDTH --height $HEIGHT \
+        --add-entry="Computer HostName")
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash computer_delete
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash user_man
+        exit 1
+fi
+
+HNAME=$(echo $CHOICE | cut -d "|" -f 1)
+
+samba-tool computer delete $HNAME 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of Expiration Delete for $HNAME Computer Account" --width $WIDTH --height $HEIGHT
+bash computer_delete

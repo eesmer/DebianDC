@@ -1,0 +1,13 @@
+cd /usr/local/debiandc
+source common-value
+
+ip link |grep pfifo_fast |cut -d':' -f2 |cut -d' ' -f2 > /tmp/interface-list
+let i=0
+W=()
+while read -r line; do
+let i=$i+1
+W+=($i "$line")
+done < <( cat /tmp/interface-list)
+IND=$(whiptail --title "Network Adapter Interface List" --menu "Chose one" 24 50 17 "${W[@]}" 3>&2 2>&1 1>&3)
+
+bash main_menu

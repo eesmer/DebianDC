@@ -5,10 +5,10 @@ samba-tool dbcheck | zenity --text-info --title="DB Check of AD" --width $WIDTH 
 
 if [ "$?" = "0" ] #OK
 then
-bash ad_maintenance
+bash settings
 exit 1
 elif [ "$?" = "1" ] #CANCEL
 then
-bash ad_maintenance
+bash settings
 exit 1
 fi

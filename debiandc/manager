@@ -27,12 +27,9 @@ bash ou_man
 elif [ "$CHOICE" = "DNS Management" ]
 then
 bash dns_man
-elif [ "$CHOICE" = "Settings" ]
+elif [ "$CHOICE" = "Settings & Maintenance" ]
 then
-bash ad_settings
-elif [ "$CHOICE" = "Maintenance" ]
-then
-bash ad_maintenance
+bash settings
 elif [ "$CHOICE" = "Reports" ]
 then
 bash reports

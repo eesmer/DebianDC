@@ -1,8 +1,9 @@
 cd /usr/local/debiandc
 source common-value
 
-CHOICE=$(zenity --forms --text="Detailed Users List" --title="Detailed Users List" --width $WIDTH --height $HEIGHT \
-        --add-combo="Reports" --combo-values="Detailed Users List")
+CHOICE=$(zenity --forms --text="DebianDC Reports" --title="DebianDC Reports" --width $WIDTH --height $HEIGHT \
+        --add-combo="Reports" --combo-values="Detailed Users List|Show to FSMO Roles|Show to Process|Domain Info"
+)
 
 if [ "$?" = "1" ]
 then
@@ -16,4 +17,16 @@ if [ "$CHOICE" = "Detailed Users List" ]
 then
 	bash report_user_list
 	exit 1
+elif [ "$CHOICE" = "Show to FSMO Roles" ]
+then
+        bash show_fsmo_roles
+        exit 1
+elif [ "$CHOICE" = "Show to Process" ]
+then
+        bash show_process
+        exit 1
+elif [ "$CHOICE" = "Domain Info" ]
+then
+        bash domain_info
+        exit 1
 fi

@@ -8,7 +8,7 @@ CHOICE=$(zenity --forms --text="Main Menu" --title="Main Menu of DebianDC" --wid
 
 if [ "$CHOICE" = "|" ] && [ "$?" = "0" ] #OK_BUTTON
 then
-	bash main_menu
+	bash mainmenu
 	exit 1
 fi
 
@@ -34,4 +34,4 @@ then
 	bash install_ad
 	exit 1
 fi
-bash main_menu
+bash mainmenu

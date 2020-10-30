@@ -2,36 +2,34 @@ cd /usr/local/debiandc
 source common-value
 
 ip link |grep pfifo_fast |cut -d':' -f2 |cut -d' ' -f2 > /tmp/interface-list
-let i=0
-W=()
-while read -r line; do
-let i=$i+1
-W+=($i "$line")
-done < <( cat /tmp/interface-list)
-IND=$(whiptail --title "Network Adapter Interface List" --menu "Chose one" 24 50 17 "${W[@]}" 3>&2 2>&1 1>&3)
-CHOOSE_INTERFACE=$(sed -n $IND\p /tmp/interface-list)
+sed -i 's/^/|/' /tmp/interface-list
+INTERFACES=$(cat /tmp/interface-list)
 
 CHOICE=$(zenity --forms --text="DebianDC Static IP Settings" --title="Settings Screen" --width $WIDTH --height $HEIGHT \
+--add-combo="Interface" --combo-values="$INTERFACES" \
 --add-entry="IP Adress" \
 --add-entry="Netmask" \
 --add-entry="Gateway"
 )
 
-IPADDRESS=$(echo $CHOICE | cut -d "|" -f 1)
-NETMASK=$(echo $CHOICE | cut -d "|" -f 2)
-GATEWAY=$(echo $CHOICE | cut -d "|" -f 3)
+INTERFACE=$(echo $CHOICE | cut -d "|" -f 1)
+IPADDRESS=$(echo $CHOICE | cut -d "|" -f 2)
+NETMASK=$(echo $CHOICE | cut -d "|" -f 3)
+GATEWAY=$(echo $CHOICE | cut -d "|" -f 4)
 
 function create_debiandcnw(){
+ifconfig $INTERFACE down
+sleep 1
 cat > /etc/network/interfaces.d/debiandcnw << EOF
-auto $CHOOSE_INTERFACE
-iface $CHOOSE_INTERFACE inet static
+auto $INTERFACE
+iface $INTERFACE inet static
 address $IPADDRESS
 netmask $NETMASK
 gateway $GATEWAY
 EOF
 chmod 644 /etc/network/interfaces.d/debiandcnw
-sed -i /$CHOOSE_INTERFACE/d /etc/network/interfaces
-systemctl restart networking.service
+sed -i /$INTERFACE/d /etc/network/interfaces
+ifconfig $INTERFACE up
 }
 
 rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup && create_debiandcnw
@@ -41,4 +39,5 @@ systemctl status networking.service >> /tmp/nw_status
 cat /tmp/nw_status |zenity --text-info --title="Network Status" --width $WIDTH --height $HEIGHT
 rm /tmp/nw_status
 
-bash main_menu
+zenity --info --text "The machine will be restarted for the use of the $IPADDRESS IP Adress" --width 350 --height 100
+reboot

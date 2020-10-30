@@ -6,4 +6,4 @@ systemctl status networking.service >> /tmp/nw_status
 cat /tmp/nw_status |zenity --text-info --title="Network Status" --width $WIDTH --height $HEIGHT
 rm /tmp/nw_status
 
-bash main_menu
+bash mainmenu

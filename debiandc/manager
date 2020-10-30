@@ -10,8 +10,7 @@ FALSE "User & Computer Management" \
 FALSE "Group Management" \
 FALSE "OU Management" \
 FALSE "DNS Management" \
-FALSE "Settings" \
-FALSE "Maintenance" \
+FALSE "Settings & Maintenance" \
 FALSE "Reports"
 )
 

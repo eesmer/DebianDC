@@ -2,42 +2,40 @@ cd /usr/local/debiandc
 source common-value
 
 CHOICE=$(zenity --forms --text="AD Settings" --title="Screen of AD Settings" --width $WIDTH --height $HEIGHT \
-        --add-combo="Active Directory Settings" --combo-values="Show Password Settings|Set Password Length|Set Password History Length|Set Password Age|Password Complexity" \
-	--add-combo="Server Settings" --combo-values="Set static IP|List Newtwork Cards|Show IP Address" \
+        --add-combo="Active Directory Settings" --combo-values="Set Password Length|Set Password History Length|Set Password Age|Set Password Complexity|Show Password Settings" \
 	--add-combo="Maintenance" --combo-values="Database Check"
 )
 
-
-if [ "$CHOICE" = "Show Password Settings" ]
-then
-	bash show_password_settings
-	exit 1 
-elif [ "$CHOICE" = "Set Password Length" ]
-then
-	bash set_password_length
-	exit 1 
-elif [ "$CHOICE" = "Set Password History Length" ]
-then
-	bash set_password_history
-	exit 1 
-elif [ "$CHOICE" = "Set Password Age" ]
-then
-	bash set_password_age
-	exit 1
-elif [ "$CHOICE" = "Password Complexity" ]
-then
-	bash password_complexity
-	exit 1
-elif [ "$CHOICE" = "| |Database Check" ]
-then
-	bash database_check
-	exit 1
-elif [ "$CHOICE" = "" ] #OK_BUTTON
+if [ "$CHOICE" = "" ] && [ "$?" = "0" ] #CANCEL_BUTTON
 then
 	bash manager
 	exit 1
-elif [ "$?" = "1" ] #CANCEL_BUTTON
+fi
+
+
+if [ "$CHOICE" = "Set Password Length| " ]
 then
-	bash settings
+	bash set_password_length
+	exit 1 
+elif [ "$CHOICE" = "Set Password History Length| " ]
+then
+	bash set_password_history
+	exit 1 
+elif [ "$CHOICE" = "Set Password Age| " ]
+then
+	bash set_password_age
+	exit 1
+elif [ "$CHOICE" = "Set Password Complexity| " ]
+then
+	bash password_complexity
+	exit 1
+elif [ "$CHOICE" = "Show Password Settings| " ]
+then
+	bash show_password_settings
+	exit 1
+elif [ "$CHOICE" = " |Database Check" ]
+then
+	bash database_check
 	exit 1
 fi
+bash settings

@@ -29,6 +29,7 @@ sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts
 hostnamectl set-hostname $HOSTNAME.$REALM
 
 export DEBIAN_FRONTEND=noninteractive
+apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
 apt-get -y install bind9 bind9utils dnsutils
 apt-get -y install samba --install-recommends
 apt-get -y install winbind
@@ -123,7 +124,7 @@ Exec=bash /usr/sbin/manager
 EOF
 chmod +x /root/.local/share/applications/AD-Manager.desktop
 
-zenity --info --text "DC setup is completed.The computer will reboot." --width 350 --height 100
+zenity --info --text "DC setup is completed.The computer will reboot." --width 500 --height 100
 reboot
 }
 

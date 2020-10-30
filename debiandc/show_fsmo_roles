@@ -3,12 +3,4 @@ source common-value
 
 samba-tool fsmo show | zenity --text-info --title="Report of FSMO Role" --width $WIDTH --height $HEIGHT
 
-if [ "$?" = "0" ] #OK
-then
-bash ad_maintenance
-exit 1
-elif [ "$?" = "1" ] #CANCEL
-then
-bash ad_maintenance
-exit 1
-fi
+bash reports

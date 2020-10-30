@@ -7,12 +7,4 @@ echo ":: Domain Level Info ::" >> /tmp/outfile
 samba-tool domain level show >> /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Report of Domain Info" --width $WIDTH --height $HEIGHT
 
-if [ "$?" = "0" ] #OK
-then
-bash ad_maintenance
-exit 1
-elif [ "$?" = "1" ] #CANCEL
-then
-bash ad_maintenance
-exit 1
-fi
+bash reports

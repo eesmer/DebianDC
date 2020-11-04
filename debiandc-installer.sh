@@ -16,14 +16,14 @@ apt-get -y install htop
 # -----------------------------------------------------------------------------
 git clone https://github.com/eesmer/DebianDC.git
 
-cp -R DebianDC/debiandc/ /usr/local && cp DebianDC/README.md /usr/local/debiandc/ && rm -rf DebianDC
+cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiandc/ && rm -r DebianDC
 chown -R root:root /usr/local/debiandc
 chmod -R 744 /usr/local/debiandc
-chmod +x /usr/local/debiandc/server-setup
+chmod +x /usr/local/debiandc/mainmenu
 chmod +x /usr/local/debiandc/manager
-cp /usr/local/debiandc/server-setup /usr/sbin/
+cp /usr/local/debiandc/mainmenu /usr/sbin/
 cp /usr/local/debiandc/manager /usr/sbin/
-chmod 755 /usr/sbin/server-setup
+chmod 755 /usr/sbin/mainmenu
 chmod 755 /usr/sbin/manager
-chmod +x /usr/sbin/server-setup
+chmod +x /usr/sbin/mainmenu
 chmod +x /usr/sbin/manager

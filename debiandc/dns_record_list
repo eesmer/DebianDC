@@ -2,8 +2,7 @@ cd /usr/local/debiandc
 source common-value
 
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
-PASS=$(zenity --password --title="Administrator Password" --width $WIDTH --height $HEIGHT)
-samba-tool dns query 127.0.0.1 $ZONE @ ALL -U administrator --password=$PASS |tee /tmp/output.txt
+samba-tool dns query $HNAME $ZONE @ ALL |tee /tmp/output.txt
 sed -i /msdcs/d /tmp/output.txt
 sed -i /sites/d /tmp/output.txt
 sed -i /tcp/d /tmp/output.txt

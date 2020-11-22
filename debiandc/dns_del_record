@@ -1,7 +1,8 @@
 cd /usr/local/debiandc
+source common-value
 
 CHOICE=$(zenity --forms --text="Select Record Type" \
-	--title="DNS Record Deletion Screen" --add-combo="Record Types" --combo-values="A" )
+	--title="DNS Record Deletion Screen" --add-combo="Record Types" --combo-values="A" --width $WIDTH --height $HEIGHT)
 
 if [ "$CHOICE" = "A" ]
 then

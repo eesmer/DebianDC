@@ -3,7 +3,8 @@ source common-value
 
 CHOICE=$(zenity --forms --text="Main Menu" --title="Main Menu of DebianDC" --width $WIDTH --height $HEIGHT \
 	--add-combo="Server Settings" --combo-values="Set static IP|List Newtwork Cards|Show IP Address" \
-        --add-combo="Server Setup" --combo-values="Install Active Directory|Uninstall Active Directory"
+        --add-combo="Server Setup" --combo-values="Install Active Directory|Uninstall Active Directory" \
+        --add-combo="Domain Operations" --combo-values="Reset Administrator Account Password"
 )
 
 if [ "$CHOICE" = "|" ] && [ "$?" = "0" ] #OK_BUTTON
@@ -17,21 +18,24 @@ then
 	exit 1
 fi
 
-if [ "$CHOICE" = "Set static IP| " ]
+if [ "$CHOICE" = "Set static IP| |" ]
 then
 	bash set_static_ip
 	exit 1
-elif [ "$CHOICE" = "List Newtwork Cards| " ]
+elif [ "$CHOICE" = "List Newtwork Cards| |" ]
 then
-	bash show_network_cards
+	bash /usr/local/debiandc/show_network_cards
 	exit 1
-elif [ "$CHOICE" = "Show IP Address| " ]
+elif [ "$CHOICE" = "Show IP Address| |" ]
 then
 	bash show_ip_address
 	exit 1
-elif [ "$CHOICE" = " |Install Active Directory" ]
+elif [ "$CHOICE" = "|Install Active Directory|" ]
 then
 	bash install_ad
 	exit 1
+elif [ "$CHOICE" = " | |Reset Administrator Account Password" ]
+then
+	lxterminal -e bash reset_administrator_pass
+	exit 1
 fi
-bash mainmenu

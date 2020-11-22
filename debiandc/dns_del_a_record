@@ -1,6 +1,7 @@
 cd /usr/local/debiandc
+source common-value
 
-CHOICE=$(zenity --forms --text="Record Information" --title="Deletion a A Type Record" \
+CHOICE=$(zenity --forms --text="Record Information" --title="Deletion a A Type Record" --width $WIDTH --height $HEIGHT \
         --add-entry="Name of DNS Record" \
 	--add-entry="IP of DNS Record" )
 
@@ -24,8 +25,7 @@ then
 fi
 
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
-PASS=$(zenity --password --title="Administrator Password")
-samba-tool dns delete 127.0.0.1 $ZONE $NAME A $IP -U Administrator --password=$PASS 2>&1 |tee /tmp/output.txt
+samba-tool dns delete $HNAME $ZONE $NAME A $IP 2>&1 |tee /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="DNS Query" --width 700 --height 300
 
 bash dns_add_record

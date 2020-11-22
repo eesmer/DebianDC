@@ -25,8 +25,7 @@ then
 fi
 
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
-PASS=$(zenity --password --title="Administrator Password" --width $WIDTH --height $HEIGHT )
-samba-tool dns add 127.0.0.1 $ZONE $NAME A $IP -U Administrator --password=$PASS 2>&1 |tee /tmp/output.txt
+samba-tool dns add $HNAME $ZONE $NAME A $IP 2>&1 |tee /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="Result of the A Type DNS Record Adding Process in $ZONE Zone" --width $WIDTH --height $HEIGHT
 
 bash dns_add_record

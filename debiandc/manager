@@ -1,9 +1,35 @@
 SCREEN_WIDTH=$(xwininfo -root | awk '$1=="Width:" {print $2}')
 SCREEN_HEIGHT=$(xwininfo -root | awk '$1=="Height:" {print $2}')
+ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
+DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:])
+HNAME=$(hostname -f)
+
 echo WIDTH=$SCREEN_WIDTH > /usr/local/debiandc/common-value
 echo HEIGHT=$SCREEN_HEIGHT >> /usr/local/debiandc/common-value
+echo DOMAIN=$DOMAIN >> /usr/local/debiandc/common-value
+echo HNAME=$HNAME >> /usr/local/debiandc/common-value
 
 cd /usr/local/debiandc
+
+TICKET=not_exist
+klist > /tmp/ticket_control.txt
+ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist
+
+if [ "$TICKET" = "not_exist" ]
+then
+ADMIN_PASS=$(zenity --entry --text="Administrator password" --hide-text)
+echo $ADMIN_PASS | kinit administrator@$DOMAIN
+
+klist > /tmp/ticket_control.txt
+ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist
+fi
+
+if [ "$TICKET" = "not_exist" ]
+then
+zenity --info --text="To use all the features of the AD-Manager application \n you must enter the correct password for the domain Administrator account of $DOMAIN \n \n You can change the password for the Administrator account on the ServerMenu screen" --ellipsize
+bash mainmenu
+exit 1
+fi
 
 CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Directory Management" --width $SCREEN_WIDTH --height $SCREEN_HEIGHT --radiolist --column "" --column "options" \
 FALSE "User & Computer Management" \
@@ -13,6 +39,12 @@ FALSE "DNS Management" \
 FALSE "Settings & Maintenance" \
 FALSE "Reports"
 )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ]
+then
+bash manager
+exit 1
+fi
 
 if [ "$CHOICE" = "User & Computer Management" ]
 then

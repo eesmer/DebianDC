@@ -3,12 +3,14 @@
 # -----------------------------------------------------------------------------
 # STANDART PACKAGES
 # -----------------------------------------------------------------------------
+export DEBIAN_FRONTEND=noninteractive
 apt-get -y install git
 apt-get -y install zenity
 apt-get -y install openssh-server ntp
 apt-get -y install tmux vim
 apt-get -y install dnsutils net-tools
 apt-get -y install curl wget
+apt-get -y install expect krb5-user
 apt-get -y install htop
 
 # -----------------------------------------------------------------------------

@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash reports' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -6,5 +10,7 @@ echo "" >> /tmp/outfile
 echo ":: Domain Level Info ::" >> /tmp/outfile
 samba-tool domain level show >> /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Report of Domain Info" --width $WIDTH --height $HEIGHT
+
+clear
 
 bash reports

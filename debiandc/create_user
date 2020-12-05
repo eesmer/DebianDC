@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash user_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -33,5 +37,6 @@ fi
 	then
 		samba-tool user setpassword --newpassword="$PASSWORD" --must-change-at-next-login $USERNAME
 	fi
+clear
+
 bash user_man
-exit 1

@@ -1,3 +1,4 @@
+#
 cd /usr/local/debiandc
 source common-value
 

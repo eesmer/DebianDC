@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash dns_add_record' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -27,5 +31,7 @@ fi
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 samba-tool dns delete $HNAME $ZONE $NAME A $IP 2>&1 |tee /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="DNS Query" --width 700 --height 300
+
+clear
 
 bash dns_add_record

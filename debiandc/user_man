@@ -1,65 +1,61 @@
+#
 cd /usr/local/debiandc
 source common-value
 
 CHOICE=$(zenity --forms --text="User and Computer Management" --title="Screen of User&Computer Management" --width $WIDTH --height $HEIGHT \
 	--add-combo="User Management" --combo-values="Create User|Delete User|Disable User|Enable User|Set Expiry|Set No Expiry|Change Password|Change Password at Next Logon|User List" \
-	--add-combo="Computer Management" --combo-values="Computer List|Move Computer to Another OU|Delete Computer"
 )
 
-if [ "$?" = "1" ] || [ "$CHOICE" = " " ]
-then
-	bash manager
-	exit 1
-fi
-
-if [ "$CHOICE" = "Create User| " ]
+if [ "$CHOICE" = "Create User" ]
 then
 	bash create_user
 	exit 1
-elif [ "$CHOICE" = "Delete User| " ]
+elif [ "$CHOICE" = "Delete User" ]
 then
 	bash delete_user
 	exit 1
-elif [ "$CHOICE" = "Disable User| " ]
+elif [ "$CHOICE" = "Disable User" ]
 then
 	bash disable_user
 	exit 1
-elif [ "$CHOICE" = "Enable User| " ]
+elif [ "$CHOICE" = "Enable User" ]
 then
 	bash enable_user
 	exit 1
-elif [ "$CHOICE" = "Set Expiry| " ]
+elif [ "$CHOICE" = "Set Expiry" ]
 then
 	bash set_expiry
 	exit 1
-elif [ "$CHOICE" = "Set No Expiry| " ]
+elif [ "$CHOICE" = "Set No Expiry" ]
 then
 	bash set_no_expiry
 	exit 1
-elif [ "$CHOICE" = "Change Password| " ]
+elif [ "$CHOICE" = "Change Password" ]
 then
 	bash change_pass
 	exit 1
-elif [ "$CHOICE" = "Change Password at Next Logon| " ]
+elif [ "$CHOICE" = "Change Password at Next Logon" ]
 then
 	bash change_pass_at_next_logon
 	exit 1
-elif [ "$CHOICE" = "User List| " ]
+elif [ "$CHOICE" = "User List" ]
 then
 	bash user_list
 	exit 1
-elif [ "$CHOICE" = " |Computer List" ]
-then
-	bash computer_list
-	exit 1
-elif [ "$CHOICE" = " |Move Computer to Another OU" ]
-then
-	bash computer_move_ou
-	exit 1
-elif [ "$CHOICE" = " |Delete Computer" ]
-then
-	bash computer_delete
-	exit 1
 fi
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash manager
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash user_man
+exit 1
+fi
+
+clear
 
 bash user_man

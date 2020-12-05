@@ -1,3 +1,4 @@
+#
 cd /usr/local/debiandc
 source common-value
 
@@ -5,7 +6,7 @@ CHOICE=$(zenity --forms --text="Add Member to OU" --title="Screen of Add Member 
         --add-entry="OU Name" \
 	--add-entry="UserName" )
 
-if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+if [ "$?" = "0" ] && [ "$CHOICE" = "|" ] #OK
 then
         bash ou_add_member
         exit 1
@@ -18,11 +19,18 @@ fi
 OUNAME=$(echo $CHOICE | cut -d "|" -f 1)
 USERNAME=$(echo $CHOICE | cut -d "|" -f 2)
 
-if [ $OUNAME = "Users" ]
+echo $CHOICE
+echo $OUNAME
+echo $USERNAME
+
+if [ "$OUNAME" = "Users" ]
 then
 samba-tool user move $USERNAME CN=Users 2>&1 | tee /tmp/outfile
 else
 samba-tool user move $USERNAME OU="$OUNAME" 2>&1 | tee /tmp/outfile
 fi
 cat /tmp/outfile | zenity --text-info --title="Result of the Adding Membership Process of $USERNAME account to $OUNAME" --width $WIDTH --height $HEIGHT
+
+clear
+
 bash ou_man

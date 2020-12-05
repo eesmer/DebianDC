@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash ou_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -17,5 +21,6 @@ fi
 samba-tool ou delete OU="$CHOICE" 2>&1 | tee /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Result of the Delete OU Process for $CHOICE" --width $WIDTH --height $HEIGHT
 
+clear
+
 bash ou_man
-exit 1

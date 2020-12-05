@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash manager' ERR
+
 cd /usr/local/debiandc
 source common-value
 

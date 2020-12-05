@@ -1,3 +1,4 @@
+#
 cd /usr/local/debiandc
 source common-value
 
@@ -20,4 +21,7 @@ USERNAME=$(echo $CHOICE | cut -d "|" -f 2)
 
 samba-tool group removemembers $GROUPNAME $USERNAME 2>&1 | tee /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Result of Removing $USERNAME from $GROUPNAME" --width $WIDTH --height $HEIGHT
+
+clear
+
 bash group_man

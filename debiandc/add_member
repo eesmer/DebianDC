@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash group_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -20,4 +24,7 @@ USERNAME=$(echo $CHOICE | cut -d "|" -f 2)
 
 samba-tool group addmembers $GROUPNAME $USERNAME 2>&1 | tee /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Result of the Adding Membership Process of $USERNAME account to $GROUPNAME" --width $WIDTH --height $HEIGHT
+
+clear
+
 bash group_man

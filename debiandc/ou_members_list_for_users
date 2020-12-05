@@ -9,6 +9,8 @@ sed -i '/krbtgt/d' /tmp/user-list.txt
 
 cat /tmp/user-list.txt |zenity --text-info --title="User List" --width $WIDTH --height $HEIGHT
 
+clear
+
 if [ "$?" = "0" ] #OK
 then
 bash ou_man

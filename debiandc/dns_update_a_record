@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash dns_update_record' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -29,5 +33,7 @@ fi
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 samba-tool dns update $HNAME $ZONE $NAME A $CURRENTADDR $NEWADDR 2>&1 |tee /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="Result of DNS Update from $CURRENTADDR to $NEWADDR in $ZONE zone for $NAME" --width $WIDTH --height $HEIGHT
+
+clear
 
 bash dns_update_record

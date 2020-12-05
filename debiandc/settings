@@ -1,3 +1,4 @@
+#
 cd /usr/local/debiandc
 source common-value
 
@@ -11,7 +12,6 @@ then
 	bash manager
 	exit 1
 fi
-
 
 if [ "$CHOICE" = "Set Password Length| " ]
 then
@@ -38,4 +38,7 @@ then
 	bash database_check
 	exit 1
 fi
+
+clear
+
 bash settings

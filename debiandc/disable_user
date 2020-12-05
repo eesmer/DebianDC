@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash user_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -17,4 +21,7 @@ fi
 USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
 
 samba-tool user disable $USERNAME
+
+clear
+
 bash user_man

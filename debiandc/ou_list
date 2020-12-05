@@ -1,9 +1,12 @@
+#
 cd /usr/local/debiandc
 source common-value
 
 samba-tool ou list > /tmp/ou-list.txt
 echo "CN=Users" >> /tmp/ou-list.txt #Users can be used like OU (users move command(samba-tool user move $USERNAME CN=Users))
 cat /tmp/ou-list.txt | zenity --text-info --title="Active Directory OU List" --width $WIDTH --height $HEIGHT
+
+clear
 
 if [ "$?" = "0" ] #OK
 then

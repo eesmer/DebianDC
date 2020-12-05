@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash user_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -24,5 +28,6 @@ then
 	cat /tmp/outfile | zenity --text-info --title="Result of the Delete User Process for $USERNAME" --width $WIDTH --height $HEIGHT
 fi
 
+clear
+
 bash user_man
-exit 1

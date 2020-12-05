@@ -1,6 +1,12 @@
+#
+set -e
+trap 'bash settings' ERR
+
 cd /usr/local/debiandc
 source common-value
 
 samba-tool dbcheck | zenity --text-info --title="DB Check of AD" --width $WIDTH --height $HEIGHT
+
+clear
 
 bash settings

@@ -1,3 +1,6 @@
+#
+set -e
+
 ADMIN_PASS=$(zenity --entry --text="Administrator password" --hide-text)
 expect -c "
 spawn samba-tool user setpassword administrator
@@ -8,5 +11,6 @@ send $ADMIN_PASS\r
 interact
 "
 
-echo parola resetlendi
-#zenity --notification --text="parola resetlendi"
+clear
+
+bash manager

@@ -1,7 +1,10 @@
+#
 cd /usr/local/debiandc
 source common-value
 
 samba-tool user list | zenity --text-info --title="Active Directory User List" --width $WIDTH --height $HEIGHT
+
+clear
 
 if [ "$?" = "0" ] #OK
 then

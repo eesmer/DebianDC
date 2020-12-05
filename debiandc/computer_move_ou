@@ -1,3 +1,4 @@
+#
 cd /usr/local/debiandc
 source common-value
 
@@ -12,7 +13,7 @@ then
         exit 1
 elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
 then
-        bash user_man
+        bash computer_man
         exit 1
 fi
 
@@ -21,5 +22,7 @@ OU=$(echo $CHOICE | cut -d "|" -f 2)
 
 samba-tool computer move $HNAME OU=$OU 2>&1 | tee /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Result of $HNAME migration to $OU" --width $WIDTH --height $HEIGHT
+
+clear
 
 bash computer_move_ou

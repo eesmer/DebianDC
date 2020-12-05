@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash user_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -20,4 +24,7 @@ PASS=$(echo $CHOICE | cut -d "|" -f 2)
 
 samba-tool user setpassword --newpassword=$PASS $USERNAME 2>&1 | tee /tmp/outfile
 cat /tmp/outfile | zenity --text-info --title="Result of the Password Change Process for $USERNAME" --width $WIDTH --height $HEIGHT
+
+clear
+
 bash user_man

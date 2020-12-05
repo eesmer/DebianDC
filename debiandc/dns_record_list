@@ -1,3 +1,7 @@
+#
+set -e
+trap 'bash dns_man' ERR
+
 cd /usr/local/debiandc
 source common-value
 
@@ -11,6 +15,8 @@ sed -i /DomainDnsZones/d /tmp/output.txt
 sed -i /ForestDnsZones/d /tmp/output.txt
 sed -i '/A:/a ------------------------------------------------------------------------------------------' /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="List of DNS Records in $ZONE zone" --width $WIDTH --height $HEIGHT
+
+clear
 
 if [ "$?" = "0" ] #OK
 then

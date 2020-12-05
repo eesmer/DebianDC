@@ -24,14 +24,9 @@ desktop environment (mate, lxde etc.)<br>
 $ wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh
 $ bash debiandc-installer.sh
 ```
-Use DebianDC and AD-Manager with root user
-#### DC Setup
+Use DebianDC and manager screen with root user
+#### Domain Setup and use Active Directory Environment
 Run the server-setup command from the terminal screen
-```sh
-$ server-setup
-```
-#### AD-Manager
-Run the manager command from the terminal screen
 ```sh
 $ manager
 ```

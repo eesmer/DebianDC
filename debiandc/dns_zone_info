@@ -1,13 +1,12 @@
 #
-set -e
-trap 'bash dns_man' ERR
-
 cd /usr/local/debiandc
 source common-value
 
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 samba-tool dns zoneinfo $HNAME $ZONE |tee /tmp/output.txt
 cat /tmp/output.txt | zenity --text-info --title="DNS $ZONE Info" --width $WIDTH --height $HEIGHT
+
+clear
 
 if [ "$?" = "0" ] #OK
 then

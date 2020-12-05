@@ -26,7 +26,7 @@ $ bash debiandc-installer.sh
 ```
 Use DebianDC and manager screen with root user
 #### Domain Setup and use Active Directory Environment
-Run the server-setup command from the terminal screen
+Run the manager command from the terminal screen
 ```sh
 $ manager
 ```

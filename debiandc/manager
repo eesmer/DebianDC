@@ -40,9 +40,6 @@ exit 1
 fi
 
 else
-#####ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
-#####DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:])
-#####HNAME=$(hostname -f)
 
 TICKET=not_exist
 klist > /tmp/ticket_control.txt

@@ -29,3 +29,10 @@ Run the manager command from the terminal screen
 ```sh
 $ manager
 ```
+#### You can also use DebianDC with non-desktop Debian
+Requires DebianDC X environment. However, this is not a desktop environment requirement.
+You can access the non-desktop DebianDC as follows.
+```sh
+ssh -X -p40022 root @ DebianDC
+```
+

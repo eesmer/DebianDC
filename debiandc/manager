@@ -1,16 +1,10 @@
 #SCREEN_WIDTH=$(xwininfo -root | awk '$1=="Width:" {print $2}')
 #SCREEN_HEIGHT=$(xwininfo -root | awk '$1=="Height:" {print $2}')
-###ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2) # (install-ad sonrasi common-value dosyasina yazilacak)
-###DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:]) # (install-ad sonrasi common-value dosyasina yazilacak)
-###HNAME=$(hostname -f) # (install-ad sonrasi common-value yazilacak)
-
-#echo WIDTH=$SCREEN_WIDTH > /usr/local/debiandc/common-value
-#echo HEIGHT=$SCREEN_HEIGHT >> /usr/local/debiandc/common-value
-###echo DOMAIN=$DOMAIN >> /usr/local/debiandc/common-value # (install-ad sonrasi yazilacak)
-###echo HNAME=$HNAME >> /usr/local/debiandc/common-value # (install-ad sonrasi yazilacak)
+#ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2) # (install-ad sonrasi common-value dosyasina yazilacak)
+#DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:]) # (install-ad sonrasi common-value dosyasina yazilacak)
+#HNAME=$(hostname -f) # (install-ad sonrasi common-value yazilacak)
 #
 set -e
-
 cd /usr/local/debiandc
 source common-value
 

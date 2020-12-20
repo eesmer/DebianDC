@@ -1,6 +1,6 @@
 #
-set -e
-trap 'bash dns_man' ERR
+#set -e
+#trap 'bash dns_man' ERR
 
 cd /usr/local/debiandc
 source common-value

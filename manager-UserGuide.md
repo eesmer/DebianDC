@@ -1,5 +1,9 @@
 # Manager Interface
-It is a graphical interface used with the manager command after installation.
+It is a graphical interface used with the manager command after installation.<br>
+Until the Active Directory role is installed, the server management menu (Server Manager) will be active.<br>
+After installing the Active Directory role, Active Directory management menus are used.<br>
+<br>
+You can continue reading the document for details.
 
 # Server configuration and Active Directory setup with Manager
 ![alt text](screenshots/1-server_manager.png "DebianDC Server Menu")
@@ -16,7 +20,7 @@ This process asks the server a new name, Domain Name, Domain Administrator passw
 ![alt text](screenshots/3-install_ad-1.png "Install AD")<br>
 ![alt text](screenshots/4-install_ad-2.png "Install AD")
 ![alt text](screenshots/5-install_ad-3.png "Install AD")
-![alt text](screenshots/6-install_ad-4.png "Install AD")
+![alt text](screenshots/6-install_ad-4.png "Install AD")<br>
 ![alt text](screenshots/8-install_ad-6.png "Install AD")
 
 # Manager Main Menu

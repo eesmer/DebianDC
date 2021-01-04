@@ -29,6 +29,8 @@ Run the manager command from the terminal screen
 ```sh
 $ manager
 ```
+[Manager Interface User Guide](https://github.com/eesmer/DebianDC/blob/master/manager-UserGuide.md)
+
 #### You can also use DebianDC with non-desktop Debian
 Requires DebianDC X environment. However, this is not a desktop environment requirement.<br>
 You can access the non-desktop DebianDC as follows.

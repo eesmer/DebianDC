@@ -13,10 +13,10 @@ For this reason, it is necessary to give a fixed IP Address to the DebianDC mach
 # Install Active Directory Role
 You can install the Domain and Active Directory environment by using the Install Active Directory Role menu.<br>
 This process asks the server a new name, Domain Name, Domain Administrator password respectively.<br>
-![alt text](screenshots/3-install_ad-1.png "Install AD")
+![alt text](screenshots/3-install_ad-1.png "Install AD")<br>
 ![alt text](screenshots/4-install_ad-2.png "Install AD")
-![alt text](screenshots/5-install_ad-3.png "Install AD")<br>
-![alt text](screenshots/6-install_ad-4.png "Install AD")<br>
+![alt text](screenshots/5-install_ad-3.png "Install AD")
+![alt text](screenshots/6-install_ad-4.png "Install AD")
 ![alt text](screenshots/8-install_ad-6.png "Install AD")
 
 # Manager Main Menu

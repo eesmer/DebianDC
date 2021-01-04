@@ -17,9 +17,9 @@ This process asks the server a new name, Domain Name, Domain Administrator passw
 ![alt text](screenshots/4-install_ad-2.png "Install AD")
 ![alt text](screenshots/5-install_ad-3.png "Install AD")<br>
 ![alt text](screenshots/6-install_ad-4.png "Install AD")<br>
-![alt text](screenshots/7-install_ad-5.png "Install AD")
+![alt text](screenshots/8-install_ad-6.png "Install AD")
 
-# Manager Main Menü
+# Manager Main Menu
 The Manager Screen that you run with the manager command will display the management menus since the Active Directory role is installed.<br>
 If the Kerberos ticket is not available, the Administrator creates it by asking for the password and opens the manager screen.<br>
 ![alt text](screenshots/9-manager_main_menu.png "Manager Main Menu")

@@ -4,7 +4,7 @@
 #DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:]) # (install-ad sonrasi common-value dosyasina yazilacak)
 #HNAME=$(hostname -f) # (install-ad sonrasi common-value yazilacak)
 #
-set -e
+#set -e
 cd /usr/local/debiandc
 source common-value
 

@@ -103,37 +103,35 @@ systemctl start samba-ad-dc.service
 #---------------------------------------------------------------------
 # Desktop shorcut and Menu for Desktop (lxde,mate tested)
 #---------------------------------------------------------------------
+#cat > /root/Desktop/AD-Manager.desktop << EOF
+#[Desktop Entry]
+#Encoding=UTF-8
+#Type=Application
+#Name=AD-Manager
+#Terminal=false
+#Comment=Active Directory Manager
+#Categories=IDE
+#Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+#Exec=bash /usr/sbin/manager
+#EOF
+#chmod +x /root/Desktop/AD-Manager.desktop
 
-cat > /root/Desktop/AD-Manager.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Name=AD-Manager
-Terminal=false
-Comment=Active Directory Manager
-Categories=IDE
-Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/sbin/manager
-EOF
-chmod +x /root/Desktop/AD-Manager.desktop
-
-cat > /root/.local/share/applications/AD-Manager.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Name=AD-Manager
-Terminal=false
-Comment=Active Directory Manager
-Categories=IDE
-Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/sbin/manager
-EOF
-chmod +x /root/.local/share/applications/AD-Manager.desktop
+#cat > /root/.local/share/applications/AD-Manager.desktop << EOF
+#[Desktop Entry]
+#Encoding=UTF-8
+#Type=Application
+#Name=AD-Manager
+#Terminal=false
+#Comment=Active Directory Manager
+#Categories=IDE
+#Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+#Exec=bash /usr/sbin/manager
+#EOF
+#chmod +x /root/.local/share/applications/AD-Manager.desktop
 
 #---------------------------------------------------
 # common-value
 #---------------------------------------------------
-
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 DOMAIN=$(echo $ZONE |tr [:lower:] [:upper:])
 HNAME=$(hostname -f)

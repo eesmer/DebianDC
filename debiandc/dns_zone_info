@@ -4,8 +4,17 @@ source common-value
 
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 samba-tool dns zoneinfo $HNAME $ZONE |tee /tmp/output.txt
-cat /tmp/output.txt | zenity --text-info --title="DNS $ZONE Info" --width $WIDTH --height $HEIGHT
 
+OUTPUTCHECK=empty
+if [ -s /tmp/output.txt ]; then OUTPUTCHECK=notempty; fi
+
+if [ "$OUTPUTCHECK" = empty ]; then
+kdestroy
+ADMIN_PASS=$(zenity --entry --text="Administrator password" --hide-text)
+echo $ADMIN_PASS | kinit administrator@$DOMAIN
+fi
+
+cat /tmp/output.txt | zenity --text-info --title="DNS $ZONE Info" --width $WIDTH --height $HEIGHT
 clear
 
 if [ "$?" = "0" ] #OK

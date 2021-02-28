@@ -1,6 +1,6 @@
 #
-set -e
-trap 'bash dns_update_record' ERR
+#set -e
+#trap 'bash dns_update_record' ERR
 
 cd /usr/local/debiandc
 source common-value

@@ -3,7 +3,7 @@ cd /usr/local/debiandc
 source common-value
 
 CHOICE=$(zenity --forms --text="User and Computer Management" --title="Screen of User&Computer Management" --width $WIDTH --height $HEIGHT \
-	--add-combo="Computer Management" --combo-values="Computer List|Move Computer to Another OU|Delete Computer"
+	--add-combo="Computer Management" --combo-values="Domain Controller List|Computer List|Move Computer to Another OU|Delete Computer"
 )
 
 if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
@@ -12,7 +12,11 @@ then
 	exit 1
 fi
 
-if [ "$CHOICE" = "Computer List" ]
+if [ "$CHOICE" = "Domain Controller List" ]
+then
+	bash computer_dc_list
+
+elif [ "$CHOICE" = "Computer List" ]
 then
 	bash computer_list
 	exit 1

@@ -41,6 +41,12 @@ fi
 
 else
 
+sed -i '/^$/d' common-value
+DOMAIN_NAME=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ':' -f2 |cut -d ' ' -f2 |tr a-z A-Z)
+sed -i '/DOMAIN/d' common-value
+echo "DOMAIN=$DOMAIN_NAME" >> common-value
+source common-value
+
 TICKET=not_exist
 klist > /tmp/ticket_control.txt
 ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist

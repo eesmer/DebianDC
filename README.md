@@ -21,7 +21,7 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 *This work has been done on Debian distribution. (Debian10 buster)<br>
 
 ## Installation and Usage
-### A few different ways to use DebianDC
+#### A few different ways to use DebianDC
 - If you do not have a Domain environment, you can set up a Domain environment with DebianDC and manage it with the interface it provides.
 - If you already have a Samba AD environment, you can install DebianDC on the current DC machine and get the management GUI.
 ```sh

@@ -1,7 +1,7 @@
 # DebianDC
-Samba Active Directory Graphic Interface Environment<br>
-DebianDC provides a Domain Controller installation and graphical interface manage environment for Samba Active Directory.<br>
-DebianDC installs a graphical interface called AD-Manager and manages the Active Directory environment with zenity screens.<br>
+### Samba Active Directory Graphic Interface Environment<br>
+DebianDC provides a graphical interface environment for Samba Active Directory.<br>
+You can install a new domain environment with DebianDC or manage your existing Samba AD environment.<br>
 
 ![alt text](screenshots/9-manager_main_menu.png "DebianDC Main Menu")
 <br>
@@ -21,6 +21,9 @@ DebianDC installs a graphical interface called AD-Manager and manages the Active
 *This work has been done on Debian distribution. (Debian10 buster)<br>
 
 ## Installation and Usage
+#### A few different ways to use DebianDC
+- If you do not have a Domain environment, you can set up a Domain environment with DebianDC and manage it with the interface it provides.
+- If you already have a Samba AD environment, you can install DebianDC on the current DC machine and get the management GUI.
 ```sh
 $ wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh
 $ bash debiandc-installer.sh

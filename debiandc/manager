@@ -13,8 +13,7 @@ if ! [ -x "$(command -v samba-tool)" ]; then
 CHOICE=$(zenity  --list  --text "Server Manager | Server Settings and Domain Setup Menu" --title="Server Manager" --width $WIDTH --height $HEIGHT --column "" \
 "Set Static IP" \
 "Install Active Directory Role" \
-"Show IP Address" \
-"Readme before setup"
+"Show IP Address"
 )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ]
@@ -32,9 +31,6 @@ bash install_ad
 elif [ "$CHOICE" = "Show IP Address" ]
 then
 bash show_ip_address
-elif [ "$CHOICE" = "Readme before setup" ]
-then
-bash manager
 else
 exit 1
 fi

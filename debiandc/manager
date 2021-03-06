@@ -10,10 +10,11 @@ source common-value
 
 if ! [ -x "$(command -v samba-tool)" ]; then
 
-CHOICE=$(zenity  --list  --text "Server Manager | Server Settings and Domain Setup Menu" --title="Server Manager" --width $WIDTH --height $HEIGHT --column "" \
+CHOICE=$(zenity  --list --text "Server Manager | Server Settings and Domain Setup Menu" --title "Server Settings" --column "" --width $WIDTH --height $HEIGHT \
+"Show IP Address" \
 "Set Static IP" \
-"Install Active Directory Role" \
-"Show IP Address"
+"Setup a New Domain" \
+"Join as DC to existing domain (Additional Domain Controller)"
 )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ]
@@ -22,15 +23,19 @@ bash manager
 exit 1
 fi
 
-if [ "$CHOICE" = "Set Static IP" ]
-then
-bash set_static_ip
-elif [ "$CHOICE" = "Install Active Directory Role" ]
-then
-bash install_ad
-elif [ "$CHOICE" = "Show IP Address" ]
+if [ "$CHOICE" = "Show IP Address" ]
 then
 bash show_ip_address
+elif [ "$CHOICE" = "Set Static IP" ]
+then
+bash set_static_ip
+elif [ "$CHOICE" = "Setup a New Domain" ]
+then
+bash install_ad
+elif [ "$CHOICE" = "Join as DC to existing domain (Additional Domain Controller)" ]
+then
+bash join_ad
+
 else
 exit 1
 fi

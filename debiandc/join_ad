@@ -1,0 +1,125 @@
+#
+
+HNAME=$(zenity --entry --text="Hostname without FQDN" --entry-text="DEBIANDC02")
+DNSSRV=$(zenity --entry --text="DNS Server")
+DOMAIN=$(zenity --entry --text="Domain Name" --entry-text="example.lan")
+PASSWORD=$(zenity --entry --text="Administrator Password" --hide-text)
+if [ "$HNAME" = "" ] || [ "$DNSSRV" = "" ] || [ "$DOMAIN" = "" ] || [ "$PASSWORD" = "" ] 
+then
+zenity --error --text "Please fill all the fields" --width 150 height 150
+bash manager
+exit 1
+fi
+
+hostnamectl set-hostname $HNAME.$DOMAIN
+echo "domain $DOMAIN" > /etc/resolv.conf && echo "search $DOMAIN" >> /etc/resolv.conf && echo "nameserver $DNSSRV" >> /etc/resolv.conf
+sed -i "/127.0.1.1/ c 127.0.1.1 $HNAME.$DOMAIN $HNAME" /etc/hosts
+
+ping $DOMAIN -c 1 &> /dev/null
+pingReturn=$?
+
+if [ $pingReturn -eq 1 ]; then
+zenity --error --text "$DOMAIN did not ping reply" --ellipsize
+bash manager
+exit 1
+elif [ $pingReturn -eq 2 ]; then
+zenity --error --text "$DOMAIN name could not be resolved\n\nCheck the DNS Server information ($DNSSRV)" --ellipsize
+bash manager
+exit 1
+else
+zenity --info --text "Great!!\n$DOMAIN Domain Name found.\nThe join process can be started." --ellipsize
+fi
+
+echo WIDTH=1300 > /usr/local/debiandc/common-value
+echo HEIGHT=700 >> /usr/local/debiandc/common-value
+echo DOMAIN=$DOMAIN |tr [:lower:] [:upper:] >> /usr/local/debiandc/common-value
+echo HNAME=$HNAME.$DOMAIN |tr [:lower:] [:upper:] >> /usr/local/debiandc/common-value
+
+function setup {
+PACK_INSTALL=FALSE
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y install bind9 bind9utils dnsutils krb5-config samba --install-recommends winbind && PACK_INSTALL=TRUE
+	if [ "$PACK_INSTALL" = "FALSE" ];then
+	zenity --error --text "Operation cannot continue!!\nThe required packages could not be installed.\nPlease check the internet access." --ellipsize
+	bash manager
+	exit 1
+	fi
+
+DOMAIN_JOIN=FALSE
+rm /etc/samba/smb.conf
+samba-tool domain join \
+$DOMAIN DC --dns-backend=BIND9_DLZ -U Administrator --password=$PASSWORD && DOMAIN_JOIN=TRUE
+	if [ "$DOMAIN_JOIN" = "FALSE" ];then
+	zenity --error --text "Could not join domain!!\nPlease check the information you entered." --ellipsize
+	bash manager
+	exit 1
+	fi
+
+rm /etc/default/bind9
+cat > /etc/default/bind9 << EOF
+RESOLVCONF=no
+OPTIONS="-u bind -4"
+EOF
+chmod 644 /etc/default/bind9
+
+chmod 644 /etc/default/bind9
+echo 'include "/var/lib/samba/bind-dns/named.conf";' > /etc/bind/named.conf.local
+
+rm /etc/bind/named.conf.options
+
+SERVER_IP=$(ip r |grep link |grep src |cut -d'/' -f2 |cut -d'c' -f3 |cut -d' ' -f2)
+INTERNAL1=127.0.0.0/8
+INTERNAL2=$(ip r |grep link |grep src |cut -d' ' -f1)
+SUBNET=$(ip r |grep link |grep src |cut -d' ' -f1 |cut -d'/' -f2)
+PDC=$(nslookup gordion.lab |grep Server: |cut -d ':' -f2)
+
+cat > /etc/bind/named.conf.options << EOF
+acl internals {
+$INTERNAL1;
+$INTERNAL2;
+};
+
+options {
+directory "/var/cache/bind";
+auth-nxdomain yes;
+empty-zones-enable no;
+notify no;
+minimal-responses yes;
+
+dnssec-validation no;
+dnssec-enable no;
+dnssec-lookaside no;
+
+allow-transfer { $PDC; };
+allow-query { internals; };
+allow-query-cache { "internals"; };
+allow-recursion { internals; };
+
+listen-on-v6 { none; };
+sortlist { $SERVER_IP; };
+tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+
+};
+EOF
+
+chmod 644 /etc/bind/named.conf.options
+chmod 644 /var/lib/samba/bind-dns/named.conf
+chown root:bind /etc/bind/named.conf.local
+chmod 644 /etc/bind/named.conf.local
+chgrp bind /var/lib/samba/bind-dns/
+
+systemctl unmask samba-ad-dc.service
+systemctl enable samba-ad-dc.service
+systemctl start samba-ad-dc.service
+
+systemctl restart samba-ad-dc.service
+systemctl restart bind9.service
+
+zenity --info --text "The $HNAME machine has been added to the $DOMAIN as ADDC" --ellipsize
+reboot
+#bash manager
+#exit 1
+}
+
+##ABC=$(pre_setup | tee >(zenity --progress --pulsate))
+ABC=$(setup | tee >(zenity --progress --pulsate))

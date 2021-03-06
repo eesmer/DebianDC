@@ -38,7 +38,7 @@ echo HNAME=$HNAME.$DOMAIN |tr [:lower:] [:upper:] >> /usr/local/debiandc/common-
 function setup {
 PACK_INSTALL=FALSE
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y install bind9 bind9utils dnsutils krb5-config samba --install-recommends winbind && PACK_INSTALL=TRUE
+apt-get -y install bind9 bind9utils dnsutils krb5-user samba --install-recommends winbind && PACK_INSTALL=TRUE
 	if [ "$PACK_INSTALL" = "FALSE" ];then
 	zenity --error --text "Operation cannot continue!!\nThe required packages could not be installed.\nPlease check the internet access." --ellipsize
 	bash manager

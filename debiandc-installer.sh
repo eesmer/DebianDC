@@ -35,3 +35,48 @@ chmod +x /usr/local/debiandc/manager
 cp /usr/local/debiandc/manager /usr/sbin/
 chmod 755 /usr/sbin/manager
 chmod +x /usr/sbin/manager
+
+# -----------------------------------------------------------------------------
+# DESKTOP ENV: INSTALL
+# -----------------------------------------------------------------------------
+apt-get -y install screenfetch
+DESKTOPCHECK=FALSE
+screenfetch |grep DE: > /tmp/desktop_info && DESKTOPCHECK=TRUE
+
+if [ "$DESKTOPCHECK" = "FALSE" ]; then
+apt-get -y install lxde-core
+
+mkdir -p /etc/skel/.local/share/applications
+cat > /etc/skel/.local/share/applications/DebianDC-Manager.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=DebianDC-Manager
+Terminal=false
+Comment=Active Directory Manager
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/local/debiandc/manager
+EOF
+
+mkdir -p /root/Desktop/DebianDC
+cp /etc/skel/.local/share/applications/DebianDC-Manager.desktop /root/Desktop/DebianDC/
+chmod +x /root/Desktop/DebianDC/DebianDC-Manager.desktop
+
+mkdir -p /root/.local/share/applications/
+cp /etc/skel/.local/share/applications/DebianDC-Manager.desktop /root/.local/share/applications/
+chmod +x /root/.local/share/applications/DebianDC-Manager.desktop
+
+# -----------------------------------------------------------------------------
+# DebianDC IMAGE,LOGO
+# ----------------------------------------------------------------------------
+ADDRESS="http://www.esmerkan.com/debiandc"-
+wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
+wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
+
+echo "####################################"
+echo "# DebianDC installation completed. #"
+echo "####################################"
+sleep 1
+reboot
+fi

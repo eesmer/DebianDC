@@ -12,11 +12,14 @@ You can install a new domain environment with DebianDC or manage your existing S
 
 ## Features
 - Domain and Domain Controller setup
+- DC or ADDC setup (New Domain or join to existing domain)
 - User Management
 - Group Management
-- Computer Management
 - OU Management
+- Computer Management
 - DNS Management (BIN9_DLZ)
+- Domain Operations (demote DC, fsmo management etc.) continues yet.
+- AD Settings Management
 - Reports (more detailed reports than the listing process)
 
 ## Requirements

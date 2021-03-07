@@ -77,6 +77,7 @@ CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Di
 "OU Management" \
 "Computer Management" \
 "DNS Management" \
+"DC Operations" \
 "Settings & Maintenance" \
 "Reports"
 )
@@ -102,6 +103,9 @@ bash computer_man
 elif [ "$CHOICE" = "DNS Management" ]
 then
 bash dns_man
+elif [ "$CHOICE" = "DC Operations" ]
+then
+bash operations_dc
 elif [ "$CHOICE" = "Settings & Maintenance" ]
 then
 bash settings

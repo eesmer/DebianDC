@@ -2,7 +2,7 @@
 cd /usr/local/debiandc
 source common-value
 
-zenity --question --text="This DC will be remowed from domain environment.\nDo you approve this action?" --default-cancel --ellipsize
+zenity --question --text="This DC, will be remove from domain environment.\nDo you approve this action?" --default-cancel --ellipsize
 
 DRETURN=$?
 

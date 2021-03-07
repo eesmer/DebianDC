@@ -2,14 +2,14 @@
 cd /usr/local/debiandc
 source common-value
 
-zenity --question --text="This DC, will be remove from domain environment.\nDo you approve this action?" --default-cancel --ellipsize
+zenity --question --text="This DC will be remowed from domain environment.\nDo you approve this action?" --default-cancel --ellipsize
 
 DRETURN=$?
 
 if [ "$DRETURN" = "1" ]
 then
 zenity --info --text="You are canceled process" --ellipsize
-bash operations_dc
+bash operations_domain
 exit 1
 fi
 
@@ -21,7 +21,7 @@ if [ "$DEMOTE_RESULT" = "FALSE" ]
 then
 zenity --error --text="The demote operation failed.\nPlease check the replication output." --ellipsize
 
-bash operations_dc
+bash operations_domain
 exit 1
 fi
 

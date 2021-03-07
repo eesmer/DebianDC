@@ -1,0 +1,30 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Domain Operations" --title="Screen of Domain Operations Management" --width $WIDTH --height $HEIGHT \
+	--add-combo="Domain Controller Operations" --combo-values="Demote DC| " \
+	--add-combo="FSMO Operations" --combo-values="Transfer FSMO Role|Seize FSMO Role|Show FSMO Roles| " \
+)
+
+if [ "$CHOICE" = "Demote DC| " ]
+then
+	bash dc_demote
+	exit 1
+fi
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash manager
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash operations_domain
+exit 1
+fi
+
+clear
+
+bash operation_domain

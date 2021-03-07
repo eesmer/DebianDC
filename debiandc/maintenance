@@ -1,0 +1,27 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Maintenance" --title="Screen of AD Maintenance" --width $WIDTH --height $HEIGHT \
+	--add-combo="Maintenance" --combo-values="Database Check|Replication Check"
+)
+
+if [ "$CHOICE" = "" ] && [ "$?" = "0" ] #CANCEL_BUTTON
+then
+	bash manager
+	exit 1
+fi
+
+if [ "$CHOICE" = "Database Check" ]
+then
+	bash database_check
+	exit 1
+elif [ "$CHOICE" = "Replication Check" ]
+then
+	bash maintenance
+	exit 1
+fi
+
+clear
+
+bash maintenance

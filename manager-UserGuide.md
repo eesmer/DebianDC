@@ -26,4 +26,4 @@ This process asks the server a new name, Domain Name, Domain Administrator passw
 ## Manager Main Menu
 The Manager Screen that you run with the manager command will display the management menus since the Active Directory role is installed.<br>
 If the Kerberos ticket is not available, the Administrator creates it by asking for the password and opens the manager screen.<br>
-![alt text](screenshots/9-manager_main_menu.png "Manager Main Menu")
+![alt text](screenshots/debiandc_manager1.png "Manager Main Menu")

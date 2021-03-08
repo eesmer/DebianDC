@@ -1,0 +1,27 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+DCMACHINE=$(zenity --entry --text="DC Machine Hostname")
+zenity --question --text="This process, will demote the non-working $DCMACHINE machine from the $DOMAIN environment.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+
+if [ "$DRETURN" = "1" ]; then
+zenity --info --text="You are canceled process" --ellipsize
+bash operations_domain
+exit 1
+fi
+
+DEMOTE_RESULT=FALSE
+samba-tool domain demote --remove-other-dead-server=$DCMACHINE && DEMOTE_RESULT=TRUE
+
+if [ "$DEMOTE_RESULT" = "FALSE" ]
+then
+zenity --error --text="The demote operation failed.\nPlease check the registered DC list or $DCMACHINE name.\n\nThis operation cannot be done on a machine that is not in the registered list." --ellipsize
+bash operations_domain
+exit 1
+fi
+
+zenity --info --text="$DCMACHINE DC demoted from $DOMAIN domain." --ellipsize
+bash operations_domain
+exit 1

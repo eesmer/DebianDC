@@ -3,14 +3,26 @@ cd /usr/local/debiandc
 source common-value
 
 CHOICE=$(zenity --forms --text="Domain Operations" --title="Screen of Domain Operations Management" --width $WIDTH --height $HEIGHT \
-	--add-combo="Domain Controller Operations" --combo-values="Demote DC| " \
+	--add-combo="Domain Controller Operations" --combo-values="Demote This DC|Make This DC dead|Demote Another DC|Registered DC on $DOMAIN| " \
 	--add-combo="FSMO Operations" --combo-values="Transfer FSMO Role|Seize FSMO Role|Show FSMO Roles| " \
 )
 
-if [ "$CHOICE" = "Demote DC| " ]
+if [ "$CHOICE" = "Demote This DC| " ]
 then
 	bash dc_demote
 	exit 1
+elif [ "$CHOICE" = "Make This DC dead| " ]
+then
+	bash dc_dead
+	exit 1
+elif [ "$CHOICE" = "Demote Another DC| " ]
+then
+	bash dc_demote_another_dc
+	exit 1
+elif [ "$CHOICE" = "Registered DC on $DOMAIN| " ]
+then
+	bash registered_dc_list
+	exit 1 
 fi
 
 if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
@@ -24,6 +36,9 @@ then
 bash operations_domain
 exit 1
 fi
+
+echo $CHOICE
+exit 1
 
 clear
 

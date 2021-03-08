@@ -145,8 +145,8 @@ echo "AD ROLE INSTALL COMPLETED"
 echo "********************************"
 sleep 1
 
-zenity --info --text "DC setup is completed.The computer will reboot." --width 500 --height 100
+zenity --info --text "$REALM Domain setup is completed.The computer will reboot." --width 500 --height 100
 reboot
 }
 
-ABC=$(setup | tee >(zenity --progress --pulsate))
+ABC=$(setup | tee >(zenity --progress --pulsate --text="Setup a New Domain:$REALM process is running.."))

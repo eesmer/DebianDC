@@ -15,13 +15,16 @@ fi
 
 PASSWORD=$(zenity --entry --text="Administrator Password" --hide-text)
 DEMOTE_RESULT=FALSE
-samba-tool domain demote -U Administrator --password=$PASSWORD && DEMOTE_RESULT=TRUE
+samba-tool domain demote -U Administrator --password=$PASSWORD && apt-get -y purge samba* && apt-get -y autoremove --purge && DEMOTE_RESULT=TRUE
 
 if [ "$DEMOTE_RESULT" = "FALSE" ]
 then
-zenity --error --text="The demote operation failed.\nPlease check the replication output." --ellipsize
+zenity --error --text="The demote operation failed.\nPlease check Administrator password or replication output.\n\nThis problem,may be in this $HNAME DC machine.\nIf the problem persists, use the 'Make This DC dead' menu and use 'Demote Another DC' menu from other DC machines." --ellipsize
 
 bash operations_domain
 exit 1
 fi
 
+zenity --info --text="$HNAME DC demoted from $DOMAIN domain."
+bash operations_domain
+exit 1

@@ -122,4 +122,4 @@ reboot
 }
 
 ##ABC=$(pre_setup | tee >(zenity --progress --pulsate))
-ABC=$(setup | tee >(zenity --progress --pulsate))
+ABC=$(setup | tee >(zenity --progress --pulsate --text="$HNAME join process is running.."))

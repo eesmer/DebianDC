@@ -1,0 +1,21 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+samba-tool fsmo show 2>&1 | tee /tmp/outfile
+zenity --text-info --title="Result of FSMO Role Transfer Domain DNS Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash operations_domain
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash fsmo_show
+exit 1
+fi
+
+clear
+bash operations_domain

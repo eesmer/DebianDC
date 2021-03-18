@@ -23,6 +23,19 @@ elif [ "$CHOICE" = "Registered DC on $DOMAIN| " ]
 then
 	bash registered_dc_list
 	exit 1 
+elif [ "$CHOICE" = " |Transfer FSMO Role" ]
+then
+	bash fsmo_transfer
+	exit 1 
+elif [ "$CHOICE" = " |Seize FSMO Role" ]
+then
+	bash fsmo_seize
+	exit 1
+elif [ "$CHOICE" = " |Show FSMO Roles" ]
+then
+	bash fsmo_show
+	exit 1
+
 fi
 
 if [ "$?" = "1" ] || [ "$CHOICE" = "" ]

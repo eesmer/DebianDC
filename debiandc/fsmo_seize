@@ -1,0 +1,53 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="FSMO Operations" --title="Screen of FSMO Seizing Management" --width $WIDTH --height $HEIGHT \
+	--add-combo="FSMO Seize" --combo-values="Domain Dns Zones Master Role|Forest Dns Zones Master Role" \
+)
+
+if [ "$CHOICE" = "Domain Dns Zones Master Role" ]
+then
+zenity --question --text="if you are going to remove the server from the environment, proceed with the migration.\nProblems can arise if the old DC continues to be active after migration.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+	if [ "$DRETURN" = "1" ]
+	then
+	zenity --info --text="You are canceled process" --ellipsize
+	bash fsmo_seize
+	exit 1
+	elif [ "$DRETURN" = "0" ]
+	then
+	samba-tool fsmo seize --role=domaindns 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer Domain DNS Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+
+elif [ "$CHOICE" = "Forest Dns Zones Master Role" ]
+then
+zenity --question --text="if you are going to remove the server from the environment, proceed with the migration.\nProblems can arise if the old DC continues to be active after migration.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+	if [ "$DRETURN" = "1" ]
+	then
+	zenity --info --text="You are canceled process" --ellipsize
+	bash fsmo_seize
+	exit 1
+	elif [ "$DRETURN" = "0" ]
+	then
+	samba-tool fsmo seize --role=forestdns 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer Forest DNS Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+fi
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash operations_domain
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash fsmo_seize
+exit 1
+fi
+
+clear
+bash fsmo_seize

@@ -1,0 +1,79 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+REPORT_NAME=showfsmoroles.html
+REPORT_DIR=/tmp/debiandcreportsdir
+mkdir -p $REPORT_DIR
+RDATE=$(date)
+
+cat > $REPORT_DIR/$REPORT_NAME << EOF
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<body>
+<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">$DOMAIN FSMO Roles</p>
+<p style="color: darkred; font-size: 10px; font-weight: bold; text-align:center;">$RDATE</p>
+<hr class="solid">
+EOF
+
+SchemaMasterRole=$(samba-tool fsmo show |grep SchemaMasterRole |cut -d ',' -f2)
+InfrastructureMasterRole=$(samba-tool fsmo show |grep InfrastructureMasterRole |cut -d ',' -f2)
+RidAllocationMasterRole=$(samba-tool fsmo show |grep RidAllocationMasterRole |cut -d ',' -f2)
+PdcEmulationMasterRole=$(samba-tool fsmo show |grep PdcEmulationMasterRole |cut -d ',' -f2)
+DomainNamingMasterRole=$(samba-tool fsmo show |grep DomainNamingMasterRole |cut -d ',' -f2)
+DomainDnsZonesMasterRole=$(samba-tool fsmo show |grep DomainDnsZonesMasterRole |cut -d ',' -f2)
+ForestDnsZonesMasterRole=$(samba-tool fsmo show |grep ForestDnsZonesMasterRole |cut -d ',' -f2)
+
+echo "<li><b>Schema Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $SchemaMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>Infrastructure Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $InfrastructureMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>Rid Allocation Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $RidAllocationMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>PDC Emulation Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $PdcEmulationMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>Domain Naming MasterRole Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $DomainNamingMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>Domain DNS Zone Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $DomainDnsZonesMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "<li><b>Forest DNS Zone Master Role</b></li>" >> $REPORT_DIR/$REPORT_NAME
+echo '<p style="color: indigo; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "Owner: &nbsp; $ForestDnsZonesMasterRole" >> $REPORT_DIR/$REPORT_NAME
+echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
+
+echo "</body>" >> $REPORT_DIR/$REPORT_NAME
+echo "</html>" >> $REPORT_DIR/$REPORT_NAME
+
+zenity --text-info --title="Show FSMO Roles" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+
+bash reports
+exit 1
+
+if [ "$?" = "0" ] #OK
+then
+bash reports
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash reports
+exit 1
+fi

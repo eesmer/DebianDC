@@ -4,7 +4,7 @@ source common-value
 
 CHOICE=$(zenity --forms --text="Domain Operations" --title="Screen of Domain Operations Management" --width $WIDTH --height $HEIGHT \
 	--add-combo="Domain Controller Operations" --combo-values="Demote This DC|Make This DC dead|Demote Another DC|Registered DC on $DOMAIN| " \
-	--add-combo="FSMO Operations" --combo-values="Transfer FSMO Role|Seize FSMO Role|Show FSMO Roles| " \
+	--add-combo="FSMO Operations" --combo-values="Transfer FSMO Role|Seize FSMO Role| " \
 )
 
 if [ "$CHOICE" = "Demote This DC| " ]
@@ -31,11 +31,6 @@ elif [ "$CHOICE" = " |Seize FSMO Role" ]
 then
 	bash fsmo_seize
 	exit 1
-elif [ "$CHOICE" = " |Show FSMO Roles" ]
-then
-	bash fsmo_show
-	exit 1
-
 fi
 
 if [ "$?" = "1" ] || [ "$CHOICE" = "" ]

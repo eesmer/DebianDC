@@ -57,7 +57,7 @@ ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist
 
 if [ "$TICKET" = "not_exist" ]
 then
-ADMIN_PASS=$(zenity --entry --text="Administrator password" --hide-text)
+ADMIN_PASS=$(zenity --entry --title="Administrator password" --text="Administrator password" --hide-text)
 echo $ADMIN_PASS | kinit administrator@$DOMAIN
 
 klist > /tmp/ticket_control.txt

@@ -34,6 +34,7 @@ or
 ```bash
 ssh -X -p40022 root@DEBIANDC_IP_ADDRESS
 run the 'manager' command
+manager
 ```
 can be used in the form.
 

@@ -86,6 +86,7 @@ After getting the information required to install the role, a screen will appear
 After the confirmation of this screen, the Active Directory role installation begins.
 
 ![alt text](screenshots/7-install_ad-5.png "Manager install AD Role")
+<br>
 ![alt text](screenshots/8-install_ad-6.png "Manager install AD Role")
 
 When the installation is complete, DebianDC will ask for a reboot.

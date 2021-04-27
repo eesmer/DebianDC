@@ -8,6 +8,7 @@ The document contains detailed information about the use for the DebianDC Active
 - [2. DebianDC-Manager](#2-debiandc-manager)
   - 2.1 DebianDC-Manager Screen
     - 2.1.1 Static ip Assignment
+    - 2.1.2 Setting up the Active Directory role
 ---
 
 ### 1. Installation
@@ -68,3 +69,24 @@ Otherwise, the changed ip address later may cause the Active Directory role to n
 ![alt text](screenshots/2-set_static_ip-1.png "Manager Static ip assignment")
 ![alt text](screenshots/2-set_static_ip-2.png "Manager Static ip assignment")
 
+DebianDC will prompt you to reboot for ip definition to take effect.
+
+##### 2.1.2- Setting up the Active Directory role
+Active Directory Role can be installed after fixed ip definition.
+The installation of this role is done with the "Setup a New Domain" option from the same menu.
+
+The process of installing the AD role;
+It asks for the new name of the machine, the domain name to be installed, and the password of the Administrator user, respectively.
+
+![alt text](screenshots/4-install_ad-2.png "Manager install AD Role")
+![alt text](screenshots/5-install_ad-3.png "Manager install AD Role")
+![alt text](screenshots/6-install_ad-4.png "Manager install AD Role")
+
+After getting the information required to install the role, a screen will appear asking for confirmation for installation.
+After the confirmation of this screen, the Active Directory role installation begins.
+
+![alt text](screenshots/7-install_ad-5.png "Manager install AD Role")
+![alt text](screenshots/8-install_ad-5.png "Manager install AD Role")
+
+When the installation is complete, DebianDC will ask for a reboot.
+After DebianDC restarts, you can log in with the root user and use the manager application.

@@ -46,3 +46,8 @@ After the installation is complete
 You can log in with the root user you specified during the installation.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
+
+You can access the Manager application from the opened DebianDC desktop environment.
+![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
+![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")
+

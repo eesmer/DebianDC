@@ -41,7 +41,7 @@ can be used in the form.
 
 download link will be added
 
-### 1. Configuration
+### 2. Configuration
 After the installation is complete
 You can log in with the root user you specified during the installation.
 

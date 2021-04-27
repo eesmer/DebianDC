@@ -5,6 +5,7 @@ The document contains detailed information about the use for the DebianDC Active
 - [1. Installation](#1-installation)
   - 1.1 Installing DebianDC on the ready Debian installation
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
+- [2. Configuration](#2-configuration)
 ---
 
 ### 1. Installation
@@ -40,4 +41,8 @@ can be used in the form.
 
 download link will be added
 
+### 1. Configuration
+After the installation is complete
+You can log in with the root user you specified during the installation.
 
+![alt text](screenshots/login1.png "DebianDC Login")

@@ -7,6 +7,7 @@ The document contains detailed information about the use for the DebianDC Active
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
 - [2. DebianDC-Manager](#2-debiandc-manager)
   - 2.1 DebianDC-Manager Screen
+    - 2.1.1 Static ip Assignment
 ---
 
 ### 1. Installation
@@ -61,7 +62,9 @@ When you open the Manager application, a menu will open with setup and configura
 `Important Notice`: <ins> You must give a fixed IP to the DC machine. </ins>
 
 ##### 2.1.1- Static ip assignment
+The IP address of the DC machine must be fixed.
+Otherwise, the changed ip address later may cause the Active Directory role to not work.
 
-
-You can start the Active Directory role setup with the "Setup a New Domain" option in this menu.
+![alt text](screenshots/2-set_static_ip-1.png "Manager Static ip assignment")
+![alt text](screenshots/2-set_static_ip-2.png "Manager Static ip assignment")
 

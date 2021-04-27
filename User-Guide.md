@@ -5,7 +5,8 @@ The document contains detailed information about the use for the DebianDC Active
 - [1. Installation](#1-installation)
   - 1.1 Installing DebianDC on the ready Debian installation
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
-- [2. Configuration](#2-configuration)
+- [2. DebianDC-Manager](#2-debiandc-manager)
+  - 2.1 DebianDC-Manager Screen
 ---
 
 ### 1. Installation
@@ -41,7 +42,7 @@ can be used in the form.
 
 download link will be added
 
-### 2. Configuration
+### 2. DebianDC-Manager
 After the installation is complete
 You can log in with the root user you specified during the installation.
 
@@ -50,4 +51,17 @@ You can log in with the root user you specified during the installation.
 You can access the Manager application from the opened DebianDC desktop environment.
 ![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
 ![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")
+
+#### 2.1- DebianDC-Manager Screen
+After the DebianDC desktop installation, the Active Directory role must be installed.
+When you open the Manager application, a menu will open with setup and configuration options if Active Directory Role is not installed.
+
+![alt text](screenshots/1-Manager_MainMenu1.png "Manager Main Menu")
+
+`Important Notice`: <ins> You must give a fixed IP to the DC machine. </ins>
+
+##### 2.1.1- Static ip assignment
+
+
+You can start the Active Directory role setup with the "Setup a New Domain" option in this menu.
 

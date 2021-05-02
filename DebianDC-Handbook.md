@@ -11,6 +11,7 @@ The document contains detailed information about the use for the DebianDC Active
     - 2.1.2 Setting up the Active Directory role
     - 2.1.3 Using the Manager application after domain setup
       - 2.1.3.1 User Management
+      - 2.1.3.2 Group Management
 ---
 
 ### 1. Installation
@@ -123,6 +124,15 @@ opening a new user account<br>
 <br>
 active directory user account list<br>
 ![alt text](screenshots/handbook/user-list-report-1.png "DebianDC User Management")
+
+#### 2.1.3.2 Group Management
+This screen is where Active Directory group management is done.
+
+![alt text](screenshots/handbook/group-management-1.png "DebianDC Group Management")
+
+From this menu
+You can create a group, delete the group, add members to the group, remove the group, group list and member list report can be obtained.
+
 
 
 

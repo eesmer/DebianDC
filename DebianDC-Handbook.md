@@ -112,12 +112,8 @@ This screen is where Active Directory user management is done.
 ![alt text](screenshots/handbook/user-management-1.png "DebianDC User Management")
 
 From this menu,
-can create new users
-user can delete
-can determine the duration of stay active
-can disable the use of the user account
-can set new password or force password change
-and you can get the list of user accounts.
+can create new users, user can delete, can determine the duration of stay active, can disable the use of the user account, <br>
+can set new password or force password change, and you can get the list of the user accounts.
 <br>
 <br>
 opening a new user account<br>

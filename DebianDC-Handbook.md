@@ -17,6 +17,8 @@ The document contains detailed information about the use for the DebianDC Active
       - 2.1.3.5 DNS Management
       - 2.1.3.6 Domain Operations
       - 2.1.3.7 Active Directory Settings
+ - [3. Usage Scenarios / Best Practies](#3-scenarios-practies)
+ - [4. FAQ](#4-faq)
 ---
 
 ### 1. Installation
@@ -174,13 +176,10 @@ From the FSMO Operations screen; FSMO roles can be transferred to DC machines.
 
 The operations here will be covered in detail in the Sample Scenarios and Best Practies title.
 
-#### 2.1.3.6 Active Directory Settings
+#### 2.1.3.7 Active Directory Settings
+This screen is where Active Directory settings is done
 
+This menu
+For user accounts; Password complexity, length, expiration time, etc. are set.
 
-
-
-
-
-
-
-
+![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")

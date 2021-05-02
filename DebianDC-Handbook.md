@@ -120,7 +120,8 @@ can set new password or force password change
 and you can get the list of user accounts.
 
 opening a new user account
-![alt text](screenshots/handbook/create-user-1.png "DebianDC User Management") ![alt text](screenshots/handbook/create-user-2.png "DebianDC User Management")
+![alt text](screenshots/handbook/create-user-1.png "DebianDC User Management")
+![alt text](screenshots/handbook/create-user-2.png "DebianDC User Management")
 
 active directory user account list
 ![alt text](screenshots/handbook/user-list-report-1.png "DebianDC User Management")

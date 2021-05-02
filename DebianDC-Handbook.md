@@ -118,12 +118,12 @@ can determine the duration of stay active
 can disable the use of the user account
 can set new password or force password change
 and you can get the list of user accounts.
-
-opening a new user account
+<br>
+opening a new user account<br>
 ![alt text](screenshots/handbook/create-user-1.png "DebianDC User Management")
 ![alt text](screenshots/handbook/create-user-2.png "DebianDC User Management")
-
-active directory user account list
+<br>
+active directory user account list<br>
 ![alt text](screenshots/handbook/user-list-report-1.png "DebianDC User Management")
 
 

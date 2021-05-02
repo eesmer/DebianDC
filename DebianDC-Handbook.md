@@ -12,6 +12,11 @@ The document contains detailed information about the use for the DebianDC Active
     - 2.1.3 Using the Manager application after domain setup
       - 2.1.3.1 User Management
       - 2.1.3.2 Group Management
+      - 2.1.3.3 OU Management
+      - 2.1.3.4 Computer Management
+      - 2.1.3.5 DNS Management
+      - 2.1.3.6 Domain Operations
+      - 2.1.3.7 Active Directory Settings
 ---
 
 ### 1. Installation
@@ -132,6 +137,49 @@ This screen is where Active Directory group management is done.
 
 From this menu
 You can create a group, delete the group, add members to the group, remove the group, group list and member list report can be obtained.
+
+#### 2.1.3.3 OU Management
+This screen is where Active Directory organization unit management is done.
+
+![alt text](screenshots/handbook/ou-management-1.png "DebianDC OU Management")
+
+From this menu
+You can create and delete organizational units, Members can be added to or removed from organizational units, OU list and OU member list report are created.
+
+#### 2.1.3.4 Computer Management
+This screen is where Active Directory Computer Management is done
+
+From this menu
+List of Domain Controller machines can be taken, A list of computer accounts that are members of the domain can be retrieved, Moving computer accounts between OUs
+and the computer account can be removed.
+
+![alt text](screenshots/handbook/computer-management-1.png "DebianDC Computer Management")
+
+#### 2.1.3.5 DNS Management
+This screen is where Active Directory DNS management is done.
+
+From this menu
+DNS Zone information can be obtained, DNS records can be added, deleted and updated
+
+![alt text](screenshots/handbook/dns-management-1.png "DebianDC DNS Management")
+
+#### 2.1.3.6 Domain Operations
+This screen is where domain operations is done
+
+There are 2 menus on this screen.
+From the Domain Controller Operations screen; DC machine can be removed and dropped from the environment.
+From the FSMO Operations screen; FSMO roles can be transferred to DC machines.
+
+![alt text](screenshots/handbook/domain-operations-1.png "DebianDC Domain Operations") ![alt text](screenshots/handbook/domain-operations-2.png "DebianDC Domain Operations") 
+
+The operations here will be covered in detail in the Sample Scenarios and Best Practies title.
+
+#### 2.1.3.6 Active Directory Settings
+
+
+
+
+
 
 
 

@@ -9,6 +9,8 @@ The document contains detailed information about the use for the DebianDC Active
   - 2.1 DebianDC-Manager Screen
     - 2.1.1 Static ip Assignment
     - 2.1.2 Setting up the Active Directory role
+    - 2.1.3 Using the Manager application after domain setup
+      - 2.1.3.1 User Management
 ---
 
 ### 1. Installation
@@ -42,7 +44,8 @@ manager
 ```
 can be used in the form.
 
-download link will be added
+**You can download the abc.iso file from this link.**
+https://sourceforge.net/projects/debiandc/files/latest/download
 
 ### 2. DebianDC-Manager
 After the installation is complete
@@ -91,3 +94,16 @@ After the confirmation of this screen, the Active Directory role installation be
 
 When the installation is complete, DebianDC will ask for a reboot.
 After DebianDC restarts, you can log in with the root user and use the manager application.
+
+Once the Domain setup is complete and DebianDC restarts, log in again.
+You can now use the Manager application with its new menus.
+
+![alt text](screenshots/login1.png "DebianDC Login")
+
+#### 2.1.3 Using the Manager application after domain setup
+The DebianDC-Manager application is used by obtaining a kerberos ticket.
+For this reason, if you do not have a kerberos ticket, the Manager will ask you for the Administrator user password when opening the Kerberos ticket.
+(Administrator password is the password you entered when setting up the domain.)
+Thus, it can be used in menus that require Administrator password without entering a password.
+
+##### 2.1.3.1 User Management

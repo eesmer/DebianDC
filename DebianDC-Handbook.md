@@ -76,10 +76,13 @@ At this stage, the installation will start and then it will ask you to set the r
 
 You can make the best choice according to your location and continue.
 The installation will then continue and complete without asking any further questions.
-
 <br>
-Either way, after the installation is complete
-By logging in from the login screen (with the root password specified during the installation)
+
+After the installation is complete
+You can log in with the root user you specified during the installation.
+
+![alt text](screenshots/login1.png "DebianDC Login")
+
 or
 
 ```bash
@@ -90,11 +93,6 @@ manager
 can be used in the form.
 
 ### 2. DebianDC-Manager
-After the installation is complete
-You can log in with the root user you specified during the installation.
-
-![alt text](screenshots/login1.png "DebianDC Login")
-
 You can access the Manager application from the opened DebianDC desktop environment.
 ![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
 ![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")

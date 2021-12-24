@@ -103,7 +103,7 @@ When you open the Manager application, a menu will open with setup and configura
 
 ![alt text](screenshots/1-Manager_MainMenu1.png "Manager Main Menu")
 
-`Important Notice`: <ins> You must give a fixed IP to the DC machine. </ins>
+`Important Notice`: <ins> You must give a static IP to the DC machine. </ins>
 
 ##### 2.1.1- Static ip assignment
 The IP address of the DC machine must be fixed.

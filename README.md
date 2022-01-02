@@ -1,4 +1,4 @@
-![alt text](screenshots/DebianDC-Logo.png "DebianDC")
+![alt text](screenshots/DebianDC_Logo.png "DebianDC")
 <br>
 # DebianDC
 ### Samba Active Directory Graphic Interface Environment<br>

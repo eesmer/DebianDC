@@ -43,7 +43,7 @@ systemctl mask smbd nmbd winbind
 
 rm /etc/samba/smb.conf
 samba-tool domain provision \
---server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
 
 sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 
@@ -53,9 +53,81 @@ cp /var/lib/samba/private/krb5.conf /etc/
 echo domain $REALM > /etc/resolv.conf
 echo nameserver 127.0.0.1 >> /etc/resolv.conf
 
+rm /etc/default/bind9
+cat > /etc/default/bind9 << EOF
+RESOLVCONF=no
+OPTIONS="-u bind -4"
+EOF
+chmod 644 /etc/default/bind9
+
+echo 'include "/var/lib/samba/bind-dns/named.conf";' > /etc/bind/named.conf.local
+
+rm /etc/bind/named.conf.options
+INTERNAL1=127.0.0.0/8
+INTERNAL2=$(ip r |grep link |grep src |cut -d' ' -f1)
+SUBNET=$(ip r |grep link |grep src |cut -d' ' -f1 |cut -d'/' -f2)
+cat > /etc/bind/named.conf.options << EOF
+acl internals {
+$INTERNAL1;
+$INTERNAL2;
+};
+
+options {
+directory "/var/cache/bind";
+auth-nxdomain yes;
+empty-zones-enable no;
+notify no;
+minimal-responses yes;
+
+dnssec-validation no;
+dnssec-enable no;
+dnssec-lookaside no;
+
+allow-transfer { none; };
+allow-query { internals; };
+allow-query-cache { "internals"; };
+allow-recursion { internals; };
+
+listen-on-v6 { none; };
+sortlist { $SERVER_IP/$SUBNET; };
+tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+
+};
+EOF
+chmod 644 /etc/bind/named.conf.options
+
 systemctl unmask samba-ad-dc.service
 systemctl enable samba-ad-dc.service
 systemctl start samba-ad-dc.service
+
+#---------------------------------------------------------------------
+# Desktop shorcut and Menu for Desktop (lxde,mate tested)
+#---------------------------------------------------------------------
+#cat > /root/Desktop/AD-Manager.desktop << EOF
+#[Desktop Entry]
+#Encoding=UTF-8
+#Type=Application
+#Name=AD-Manager
+#Terminal=false
+#Comment=Active Directory Manager
+#Categories=IDE
+#Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+#Exec=bash /usr/sbin/manager
+#EOF
+#chmod +x /root/Desktop/AD-Manager.desktop
+
+#cat > /root/.local/share/applications/AD-Manager.desktop << EOF
+#[Desktop Entry]
+#Encoding=UTF-8
+#Type=Application
+#Name=AD-Manager
+#Terminal=false
+#Comment=Active Directory Manager
+#Categories=IDE
+#Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+#Exec=bash /usr/sbin/manager
+#EOF
+#chmod +x /root/.local/share/applications/AD-Manager.desktop
 
 #---------------------------------------------------
 # common-value

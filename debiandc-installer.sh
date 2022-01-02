@@ -12,16 +12,8 @@ apt-get -y install openssh-server ntp
 apt-get -y install tmux vim
 apt-get -y install dnsutils net-tools
 apt-get -y install curl wget
-apt-get -y install ack expect krb5-user
+apt-get -y install ack expect krb5-user krb5-config
 apt-get -y install htop
-
-# -----------------------------------------------------------------------------
-# SERVER CONFIG
-# -----------------------------------------------------------------------------
-sed -i "12a# DebianDC Config" /etc/ssh/sshd_config
-sed -i "13aPort 40022" /etc/ssh/sshd_config
-sed -i "14aPermitRootLogin yes" /etc/ssh/sshd_config
-systemctl restart ssh.service
 
 # -----------------------------------------------------------------------------
 # APPLICATION INSTALL & CONFIG

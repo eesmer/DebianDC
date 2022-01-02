@@ -86,7 +86,7 @@ You can log in with the root user you specified during the installation.
 or
 
 ```bash
-ssh -X -p40022 root@DEBIANDC_IP_ADDRESS
+ssh -X -p22 root@DEBIANDC_IP_ADDRESS (-p22 or the server's ssh access port)
 run the 'manager' command
 manager
 ```

@@ -32,7 +32,6 @@ hostnamectl set-hostname $HOSTNAME.$REALM
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
-apt-get -y install bind9 bind9utils dnsutils
 apt-get -y install samba --install-recommends
 apt-get -y install winbind
 apt-get -y install krb5-config krb5-user

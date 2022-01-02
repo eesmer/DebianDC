@@ -20,3 +20,5 @@ You can install a new domain environment with DebianDC or manage your existing S
 - AD Settings Management (password policy, age, settings etc.)
 - Reports
 
+#### Use the manual for installation
+https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md

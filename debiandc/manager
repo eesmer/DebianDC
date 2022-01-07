@@ -80,7 +80,10 @@ CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Di
 "Domain Operations" \
 "Active Directory Settings" \
 "Maintenance" \
-"Reports"
+"Reports" \
+"::: Client Management Menu :::" \
+"    > Manage Windows Host"
+
 )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ]
@@ -89,33 +92,29 @@ bash manager
 exit 1
 fi
 
-if [ "$CHOICE" = "User Management" ]
-then
-bash user_man
-elif [ "$CHOICE" = "Group Management" ]
-then
-bash group_man
-elif [ "$CHOICE" = "OU Management" ]
-then
-bash ou_man
-elif [ "$CHOICE" = "Computer Management" ]
-then
-bash computer_man
-elif [ "$CHOICE" = "DNS Management" ]
-then
-bash dns_man
-elif [ "$CHOICE" = "Domain Operations" ]
-then
-bash operations_domain
-elif [ "$CHOICE" = "Active Directory Settings" ]
-then
-bash settings
-elif [ "$CHOICE" = "Maintenance" ]
-then
-bash maintenance
-elif [ "$CHOICE" = "Reports" ]
-then
-bash reports
+
+if [ "$CHOICE" = "User Management" ]; then
+	bash user_man
+elif [ "$CHOICE" = "Group Management" ]; then
+	bash group_man
+elif [ "$CHOICE" = "OU Management" ]; then
+	bash ou_man
+elif [ "$CHOICE" = "Computer Management" ]; then
+	bash computer_man
+elif [ "$CHOICE" = "DNS Management" ]; then
+	bash dns_man
+elif [ "$CHOICE" = "Domain Operations" ]; then
+	bash operations_domain
+elif [ "$CHOICE" = "Active Directory Settings" ]; then
+	bash settings
+elif [ "$CHOICE" = "Maintenance" ]; then
+	bash maintenance
+elif [ "$CHOICE" = "Reports" ]; then
+	bash reports
+elif [ "$CHOICE" = "::: Client Management Menu :::" ]; then
+	bash manager
+elif [ "$CHOICE" = "    > Manage Windows Host" ]; then
+	bash $ACTIONPATH/manage_windows_host
 else
 exit 1
 fi

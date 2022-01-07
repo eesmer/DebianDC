@@ -1,0 +1,74 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+MSIFILE=$(zenity --file-selection)
+if [ "$?" = "1" ] && [ "$MSIFILE" = "" ] #OK
+then
+	bash $ACTIONPATH/manage_windows_host
+        exit 1
+fi
+
+MACHINE=$(zenity --forms --text="install .msi Windows Host" --show-header --title="Screen of install .msi Windows Host" --width $WIDTH --height $HEIGHT \
+        --add-entry="Hostname" \
+        --add-entry="User" \
+        --add-password="Password"
+)
+
+if [ "$?" = "1" ] && [ "$MACHINE" = "" ] #OK
+then
+	bash $ACTIONPATH/manage_windows_host
+        exit 1
+fi
+
+WINHOST=$(echo $MACHINE | cut -d "|" -f1)
+WINUSER=$(echo $MACHINE | cut -d "|" -f2)
+WINPASS=$(echo $MACHINE | cut -d "|" -f3)
+
+ping $WINHOST -c 1 &> /dev/null
+pingReturn=$?
+
+if [ "$pingReturn" -eq 0 ]; then
+cat > /tmp/windowshost << EOF
+[G_$WINHOST]
+$WINHOST
+[G_$WINHOST:vars]
+ansible_user=$WINUSER
+ansible_password=$WINPASS
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+EOF
+
+cat > /tmp/install_msi.yml <<EOF
+---
+- name: install msi
+  hosts: $WINHOST
+
+  tasks:
+         - name: install msi
+           win_package:
+                   path: $MSIFILE
+                   state: present
+EOF
+
+	ansible-playbook -i /tmp/windowshost /tmp/install_msi.yml > /tmp/action_result.txt
+	rm /tmp/install_msi.yml
+	rm /tmp/windowshost
+	cat /tmp/action_result.txt | zenity --text-info --title="Action Result" --width $WIDTH --height $HEIGHT
+	rm /tmp/action_result.txt
+	bash $ACTIONPATH/installmsi_windows_host
+	exit 1
+fi
+
+elif [ "$pingReturn" -eq 1 ]; then
+        zenity --info --text="Host Unreachable" --ellipsize
+        bash $ACTIONPATH/installmsi_windows_host
+        exit 1
+elif [ "$pingReturn" -eq 2 ]; then
+        zenity --info --text="Hostname could not be resolved" --ellipsize
+        bash $ACTIONPATH/installmsi_windows_host
+        exit 1
+fi
+
+clear
+bash $ACTIONPATH/manage_windows_host

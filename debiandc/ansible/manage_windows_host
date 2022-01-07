@@ -1,0 +1,41 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+###egrep "^[0-9a-zA-Z]" windowshost |cut -d '#' -f1 |awk '{ print $1 }' | sort | uniq | grep -v "=" > /tmp/windows_hostlist.txt
+###sed -i 's/^/|/' /tmp/windows_hostlist.txt
+###WIN_HOSTLIST=$(cat /tmp/windows_hostlist.txt)
+###CHOICE=$(zenity  --forms --text "Manage Windows Host" --title "Manage Windows Host" --width $WIDTH --height $HEIGHT \
+###--add-combo="Machine" --combo-values="$WIN_HOSTLIST" \
+###--add-combo="Action" --combo-values="Ping|install .msi|uninstall .msi"
+###)
+
+ACTION=$(zenity  --list --text "Manage Windows Host" --title "Manage Windows Host" --column "" --width $WIDTH --height $HEIGHT \
+"Ping" \
+"install .msi" \
+"uninstall .msi"
+)
+
+if [ "$?" = "0" ] && [ "$ACTION" = "||" ] #OK
+then
+        bash $ACTIONPATH/manage_windows_host
+        exit 1
+elif [ "$?" = "1" ] && [ "$ACTION" = "" ] #CANCEL
+then
+        bash manager
+        exit 1
+fi
+
+if [ "$ACTION" = "Ping" ]; then
+	bash $ACTIONPATH/ping_windows_host
+	exit 1
+elif [ "$ACTION" = "install .msi" ]; then
+	bash $ACTIONPATH/installmsi_windows_host 
+	exit 1
+elif [ "$ACTION" = "uninstall .msi" ]; then
+	bash $ACTIONPATH/uninstallmsi_windows_host
+	exit 1
+fi
+
+clear
+bash manager

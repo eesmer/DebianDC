@@ -1,0 +1,65 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+#egrep "^[0-9a-zA-Z]" windowshost |cut -d '#' -f1 |awk '{ print $1 }' | sort | uniq | grep -v "=" > /tmp/windows_hostlist.txt
+#sed -i 's/^/|/' /tmp/windows_hostlist.txt
+#WIN_HOSTLIST=$(cat /tmp/windows_hostlist.txt)
+#
+#MACHINE=$(zenity  --forms --text "Manage Windows Host" --title "Manage Windows Host" --width $WIDTH --height $HEIGHT \
+#--add-combo="Machine" --combo-values="$WIN_HOSTLIST"
+#)
+
+MACHINE=$(zenity --forms --text="Ping Windows Host" --show-header --title="Screen of ping Windows Host" --width $WIDTH --height $HEIGHT \
+        --add-entry="Hostname" \
+        --add-entry="User" \
+        --add-password="Password"
+)
+
+if [ "$?" = "0" ] && [ "$MACHINE" = "||" ] #OK
+then
+        bash $ACTIONPATH/ping_windows_host
+        exit 1
+elif [ "$?" = "1" ] && [ "$MACHINE" = "" ] #CANCEL
+then
+        bash $ACTIONPATH/manage_windows_host
+        exit 1
+fi
+
+WINHOST=$(echo $MACHINE | cut -d "|" -f1)
+WINUSER=$(echo $MACHINE | cut -d "|" -f2)
+WINPASS=$(echo $MACHINE | cut -d "|" -f3)
+
+ping $WINHOST -c 1 &> /dev/null
+pingReturn=$?
+
+if [ "$pingReturn" -eq 0 ]; then
+cat >> /tmp/windowshost << EOF
+[G_$WINHOST]
+$WINHOST
+[G_$WINHOST:vars]
+ansible_user=$WINUSER
+ansible_password=$WINPASS
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+EOF
+
+	ansible $WINHOST -i /tmp/windowshost -m win_ping > /tmp/action_result.txt
+	cat /tmp/action_result.txt | zenity --text-info --title="Action Result" --width $WIDTH --height $HEIGHT
+	rm /tmp/action_result.txt
+	rm /tmp/windowshost
+	bash $ACTIONPATH/ping_windows_host
+	exit 1
+
+elif [ "$pingReturn" -eq 1 ]; then
+	zenity --info --text="Host Unreachable" --ellipsize
+	bash $ACTIONPATH/ping_windows_host
+	exit 1
+elif [ "$pingReturn" -eq 2 ]; then
+        zenity --info --text="Hostname could not be resolved" --ellipsize
+        bash $ACTIONPATH/ping_windows_host
+        exit 1
+fi
+
+clear
+bash $ACTIONPATH/manage_windows_host

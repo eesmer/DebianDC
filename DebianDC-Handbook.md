@@ -5,7 +5,7 @@ The document contains detailed information about the use for the DebianDC Active
 - [1. Installation](#1-installation)
   - 1.1 Installing DebianDC on the ready Debian installation
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
-- [2. DebianDC-Manager](#2-debiandc-manager)
+- [2. DebianDC Manager](#2-debiandc-manager)
   - 2.1 DebianDC-Manager Screen
     - 2.1.1 Static ip Assignment
     - 2.1.2 Setting up the Active Directory role
@@ -17,8 +17,10 @@ The document contains detailed information about the use for the DebianDC Active
       - 2.1.3.5 DNS Management
       - 2.1.3.6 Domain Operations
       - 2.1.3.7 Active Directory Settings
- - [3. Usage Scenarios / Best Practies](#3-scenarios-practies)
- - [4. FAQ](#4-faq)
+ - [3. DebianDC Host Management](#3-debiandc-hostmanagement)
+  - 3.1 Manage Windows Host
+ - [4. Usage Scenarios / Best Practies](#3-scenarios-practies)
+ - [5. FAQ](#4-faq)
 ---
 
 ### 1. Installation
@@ -217,3 +219,7 @@ This menu
 For user accounts; Password complexity, length, expiration time, etc. are set.
 
 ![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
+
+#### 2.2 Host Management Screen
+Host machines can be managed from this menu.
+The purpose of this screen; is to try to make daily work your central point. 

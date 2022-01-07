@@ -248,6 +248,7 @@ You can use a special user account or Administrator account for access with winr
 <br>
 ![alt text](screenshots/handbook/manage_windows_host-1.png "DebianDC Manage Windows")
 <br>
+<br>
 ### use of Ping Action
 ![alt text](screenshots/handbook/manage_windows_host-2_ping.png "DebianDC Manage Windows Host ping action")
 ![alt text](screenshots/handbook/manage_windows_host-3_ping.png "DebianDC Manage Windows Host access for ping action")

@@ -4,7 +4,7 @@
 ### Samba Active Directory Graphic Interface Environment<br>
 DebianDC provides a graphical interface environment for Samba Active Directory.<br>
 You can install a new domain environment with DebianDC or manage your existing Samba AD environment.<br>
-You can centrally manage Windows client and host machines<br>
+- You can centrally manage Windows client and host machines<br>
 
 ![alt text](screenshots/manager1.png "DebianDC Main Menu")
 ![alt text](screenshots/manager2.png "DebianDC User Management Menu")

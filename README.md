@@ -6,8 +6,7 @@ DebianDC provides a graphical interface environment for Samba Active Directory.<
 You can install a new domain environment with DebianDC or manage your existing Samba AD environment.<br>
 - You can centrally manage Windows client and host machines<br>
 
-![alt text](screenshots/manager1.png "DebianDC Main Menu")
-![alt text](screenshots/manager2.png "DebianDC User Management Menu")
+![alt text](screenshots/manager-1.png "DebianDC Main Menu")
 
 ## Features
 - Domain and Domain Controller setup
@@ -16,7 +15,7 @@ You can install a new domain environment with DebianDC or manage your existing S
 - Group Management
 - OU Management
 - Computer Management
-- DNS Management (BIN9_DLZ)
+- DNS Management
 - Domain Operations (demote DC, fsmo management etc.)
 - AD Settings Management (password policy, age, settings etc.)
 - Reports

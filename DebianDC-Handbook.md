@@ -17,8 +17,8 @@ The document contains detailed information about the use for the DebianDC Active
       - 2.1.3.5 DNS Management
       - 2.1.3.6 Domain Operations
       - 2.1.3.7 Active Directory Settings
- - [3. DebianDC Host Management](#3-debiandc-hostmanagement)
-  - 3.1 Manage Windows Host
+ - [3. DebianDC Host Management](#3-debiandc-host_management)
+      - 3.1 Manage Windows Host
  - [4. Usage Scenarios / Best Practies](#3-scenarios-practies)
  - [5. FAQ](#4-faq)
 ---
@@ -220,6 +220,6 @@ For user accounts; Password complexity, length, expiration time, etc. are set.
 
 ![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
 
-#### 2.2 Host Management Screen
-Host machines can be managed from this menu.
+### 3. DebianDC-Host_Management
+Host machines can be managed from this menu.<br>
 The purpose of this screen; is to try to make daily work your central point. 

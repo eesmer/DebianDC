@@ -246,5 +246,5 @@ It should be seen that the HTTP:5985 and HTTPS:5986 ports are in listening mode.
 After these processes, you can use the Windows host machine over DebianDC.<br>
 You can use a special user account or Administrator account for access with winrm.
 <br>
-#### ping process
+#### Communication control with ping
 ![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Manage Windows Host ping action")

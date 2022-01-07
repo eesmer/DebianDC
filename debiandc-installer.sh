@@ -14,6 +14,7 @@ apt-get -y install dnsutils net-tools
 apt-get -y install curl wget
 apt-get -y install ack expect krb5-user krb5-config
 apt-get -y install htop
+apt-get -y install ansible
 
 # -----------------------------------------------------------------------------
 # APPLICATION INSTALL & CONFIG

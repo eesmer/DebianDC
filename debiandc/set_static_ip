@@ -5,7 +5,7 @@ trap 'bash manager' ERR
 cd /usr/local/debiandc
 source common-value
 
-ip link |grep pfifo_fast |cut -d':' -f2 |cut -d' ' -f2 > /tmp/interface-list
+ip link |grep "state UP" |grep -v "lo:" |cut -d ":" -f2 |cut -d " " -f2 > /tmp/interface-list
 sed -i 's/^/|/' /tmp/interface-list
 INTERFACES=$(cat /tmp/interface-list)
 

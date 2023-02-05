@@ -6,7 +6,7 @@ cd /usr/local/debiandc
 source common-value
 
 #ip link |grep "state UP" |grep -v "lo:" |cut -d ":" -f2 |cut -d " " -f2 > /tmp/interface-list
-cat /var/run/network/ifstate |cut -d "=" |grep -v "lo" > /tmp/interface-list
+cat /var/run/network/ifstate |cut -d "=" -f1 |grep -v "lo" > /tmp/interface-list
 sed -i 's/^/|/' /tmp/interface-list
 INTERFACES=$(cat /tmp/interface-list)
 
@@ -39,10 +39,16 @@ ifconfig $INTERFACE up
 
 rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup && create_debiandcnw
 
-ip r |grep "link src" > /tmp/nw_status
-systemctl status networking.service >> /tmp/nw_status
-cat /tmp/nw_status |zenity --text-info --title="Network Status" --width $WIDTH --height $HEIGHT
-rm /tmp/nw_status
+ifdown $INTERFACE
+sleep 1
+ifup $INTERFACE
 
-zenity --info --text "The machine will be restarted for the use of the $IPADDRESS IP Adress" --width 350 --height 100
-reboot
+#ip r |grep "link src" > /tmp/nw_status
+#systemctl status networking.service >> /tmp/nw_status
+#cat /tmp/nw_status |zenity --text-info --title="Network Status" --width $WIDTH --height $HEIGHT
+#rm /tmp/nw_status
+
+#zenity --info --text "The machine will be restarted for the use of the $IPADDRESS IP Adress" --width 350 --height 100
+zenity --info --text "The new ip address: $IPADDRESS" --width 350 --height 100
+#reboot
+bash manager

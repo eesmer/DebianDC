@@ -64,6 +64,8 @@ chmod +x /root/.local/share/applications/DebianDC-Manager.desktop
 # DebianDC IMAGE,LOGO
 # ----------------------------------------------------------------------------
 ADDRESS="http://www.esmerkan.com/debiandc"
+sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
+update-grub
 wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
 wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
 

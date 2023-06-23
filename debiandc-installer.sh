@@ -32,11 +32,13 @@ chmod +x /usr/sbin/manager
 # -----------------------------------------------------------------------------
 # DESKTOP ENV: INSTALL
 # -----------------------------------------------------------------------------
-apt-get -y install screenfetch
-DESKTOPCHECK=FALSE
-screenfetch |grep DE: > /tmp/desktop_info && DESKTOPCHECK=TRUE
+XDIR=FALSE
+[ -d "/usr/share/xsessions/" ] && XDIR=TRUE
+if [ "$XDIR" = "TRUE" ]; then
+    [ "$(ls -A /usr/share/xsessions/)" ] && XDIR=FULL || XDIR=EMPTY
+fi
 
-if [ "$DESKTOPCHECK" = "FALSE" ]; then
+if [ "$XDIR" = "FALSE" ] || [ "$XDIR" = "EMPTY" ; then
 apt-get -y install lxde-core
 
 mkdir -p /etc/skel/.local/share/applications

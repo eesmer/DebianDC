@@ -33,10 +33,10 @@ This setup; It is made from the DebianDC repository to the existing Debian insta
 
 As the `root`: <ins>perform operations as root user.!!</ins>
 
-```sh
+```bash
 wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh
 ```
-```sh
+```bash
 bash debiandc-installer.sh
 ```
 **If a desktop environment is not installed in the system, the DebianDC installation installs the lxde-core desktop environment.**

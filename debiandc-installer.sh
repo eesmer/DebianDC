@@ -4,7 +4,8 @@
 # STANDART PACKAGES
 # -----------------------------------------------------------------------------
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
+apt-get -y update
+#&& apt-get -y upgrade && apt-get -y autoremove
 
 apt-get -y install git
 apt-get -y install zenity
@@ -36,12 +37,21 @@ chmod +x /usr/sbin/manager
 # -----------------------------------------------------------------------------
 XDIR=FALSE
 [ -d "/usr/share/xsessions/" ] && XDIR=TRUE
-if [ "$XDIR" = "TRUE" ]; then
-    [ "$(ls -A /usr/share/xsessions/)" ] && XDIR=FULL || XDIR=EMPTY
-fi
+ps -e | grep -E -i "xfce|kde|gnome|lxde|cinnamon" && XDIR=TRUE
 
-if [ "$XDIR" = "FALSE" ] || [ "$XDIR" = "EMPTY" ]; then
-apt-get -y install lxde-core
+if [ "$XDIR" = "FALSE" ]; then
+	apt-get -y install lxde-core
+	mkdir -p /etc/skel/.local/share/applications
+
+# -----------------------------------------------------------------------------
+# DebianDC IMAGE,LOGO
+# ----------------------------------------------------------------------------
+ADDRESS="http://www.esmerkan.com/debiandc"
+sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
+update-grub
+wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
+wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
+fi
 
 mkdir -p /etc/skel/.local/share/applications
 cat > /etc/skel/.local/share/applications/DebianDC-Manager.desktop << EOF
@@ -64,18 +74,10 @@ mkdir -p /root/.local/share/applications/
 cp /etc/skel/.local/share/applications/DebianDC-Manager.desktop /root/.local/share/applications/
 chmod +x /root/.local/share/applications/DebianDC-Manager.desktop
 
-# -----------------------------------------------------------------------------
-# DebianDC IMAGE,LOGO
-# ----------------------------------------------------------------------------
-ADDRESS="http://www.esmerkan.com/debiandc"
-sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
-update-grub
-wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
-wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
+echo -e
 
-echo "####################################"
+echo "------------------------------------"
 echo "# DebianDC installation completed. #"
-echo "####################################"
+echo "------------------------------------"
 sleep 1
 reboot
-fi

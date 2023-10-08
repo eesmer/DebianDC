@@ -41,7 +41,7 @@ ps -e | grep -E -i "xfce|kde|gnome|lxde|cinnamon" && XDIR=TRUE
 
 if [ "$XDIR" = "FALSE" ]; then
 	apt-get -y install lxde-core
-	mkdir -p /etc/skel/.local/share/applications
+    #mkdir -p /etc/skel/.local/share/applications
 
 # -----------------------------------------------------------------------------
 # DebianDC IMAGE,LOGO

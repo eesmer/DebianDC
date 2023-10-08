@@ -32,7 +32,7 @@ The document contains detailed information about the use for the DebianDC Active
 ## 1. Installation
 
 You can use the DebianDC application in two ways.
-#### 1.1- Installing DebianDC on the ready Debian installation <br>
+### 1.1- Installing DebianDC on the ready Debian installation <br>
 For fresh Debian installation: https://www.debian.org/distrib/
 <br>
 This setup; It is made from the DebianDC repository to the existing Debian installed machine.

@@ -11,22 +11,22 @@ The document contains detailed information about the use for the DebianDC Active
     - from Windows
   - 2.2 SSH
     - from Linux
-- [2. DebianDC Manager](#2-debiandc-manager)
-  - 2.1 DebianDC-Manager Screen
-    - 2.1.1 Static ip Assignment
-    - 2.1.2 Setting up the Active Directory role
-    - 2.1.3 Using the Manager application after domain setup
-      - 2.1.3.1 User Management
-      - 2.1.3.2 Group Management
-      - 2.1.3.3 OU Management
-      - 2.1.3.4 Computer Management
-      - 2.1.3.5 DNS Management
-      - 2.1.3.6 Domain Operations
-      - 2.1.3.7 Active Directory Settings
- - [3. DebianDC Host Management](#3-debiandc-host_management)
-      - 3.1 Manage Windows Host
- - [4. Usage Scenarios / Best Practies](#3-scenarios-practies)
- - [5. FAQ](#4-faq)
+- [3. DebianDC Manager](#2-debiandc-manager)
+  - 3.1 DebianDC-Manager Screen
+    - 3.1.1 Static ip Assignment
+    - 3.1.2 Setting up the Active Directory role
+    - 3.1.3 Using the Manager application after domain setup
+      - 3.1.3.1 User Management
+      - 3.1.3.2 Group Management
+      - 3.1.3.3 OU Management
+      - 3.1.3.4 Computer Management
+      - 3.1.3.5 DNS Management
+      - 3.1.3.6 Domain Operations
+      - 3.1.3.7 Active Directory Settings
+ - [4. DebianDC Host Management](#3-debiandc-host_management)
+      - 4.1 Manage Windows Host
+ - [5. Usage Scenarios / Best Practies](#3-scenarios-practies)
+ - [6. FAQ](#4-faq)
 ---
 
 ### 1. Installation

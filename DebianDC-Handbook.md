@@ -1,4 +1,4 @@
-## DebianDC-Handbook / User Guide
+# DebianDC-Handbook / User Guide
 
 The document contains detailed information about the use for the DebianDC Active Directory Domain Environment GUI.
 
@@ -29,7 +29,7 @@ The document contains detailed information about the use for the DebianDC Active
  - [6. FAQ](#4-faq)
 ---
 
-### 1. Installation
+## 1. Installation
 
 You can use the DebianDC application in two ways.
 #### 1.1- Installing DebianDC on the ready Debian installation <br>
@@ -47,7 +47,7 @@ bash debiandc-installer.sh
 ```
 **If a desktop environment is not installed in the system, the DebianDC installation installs the lxde-core desktop environment.**
 
-#### 1.2- Installing DebianDC with DebianDC-buster-installer.iso
+### 1.2- Installing DebianDC with DebianDC-buster-installer.iso
 This installation is done automatically from the installer.iso file.
 Auto install creates shortcuts for lxde-core desktop and DebianDC-Manager application on Debian distribution.
 To install, it is sufficient to attach the installer.iso file to the machine.
@@ -95,18 +95,18 @@ You can log in with the root user you specified during the installation.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
 
-### 2. Access to DebianDC Host
+## 2. Access to DebianDC Host
 DebianDC is configured with XRDP for remote desktop access support.<br>
 Remote desktop access can be made with any RDP client.<br>
 www.xrdp.org
-#### 2.1 Remote Desktop Access
+### 2.1 Remote Desktop Access
 
-### 3. DebianDC-Manager
+## 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.
 ![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
 ![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")
 
-#### 3.1- DebianDC-Manager Screen
+### 3.1- DebianDC-Manager Screen
 After the DebianDC desktop installation, the Active Directory role must be installed.
 When you open the Manager application, a menu will open with setup and configuration options if Active Directory Role is not installed.
 
@@ -114,7 +114,7 @@ When you open the Manager application, a menu will open with setup and configura
 
 `Important Notice`: <ins> You must give a static IP to the DC machine. </ins>
 
-##### 2.1.1- Static ip assignment
+#### 2.1.1- Static ip assignment
 The IP address of the DC machine must be fixed.
 Otherwise, the changed ip address later may cause the Active Directory role to not work.
 
@@ -123,7 +123,7 @@ Otherwise, the changed ip address later may cause the Active Directory role to n
 
 DebianDC will prompt you to reboot for ip definition to take effect.
 
-##### 2.1.2- Setting up the Active Directory role
+#### 2.1.2- Setting up the Active Directory role
 Active Directory Role can be installed after fixed ip definition.
 The installation of this role is done with the "Setup a New Domain" option from the same menu.
 
@@ -149,13 +149,13 @@ You can now use the Manager application with its new menus.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
 
-#### 2.1.3 Using the Manager application after domain setup
+### 2.1.3 Using the Manager application after domain setup
 The DebianDC-Manager application is used by obtaining a kerberos ticket.
 For this reason, if you do not have a kerberos ticket, the Manager will ask you for the Administrator user password when opening the Kerberos ticket.
 (Administrator password is the password you entered when setting up the domain.)
 Thus, it can be used in menus that require Administrator password without entering a password.
 
-##### 2.1.3.1 User Management
+#### 2.1.3.1 User Management
 This screen is where Active Directory user management is done.
 
 ![alt text](screenshots/handbook/user-management-1.png "DebianDC User Management")
@@ -173,7 +173,7 @@ opening a new user account<br>
 active directory user account list<br>
 ![alt text](screenshots/handbook/user-list-report-1.png "DebianDC User Management")
 
-#### 2.1.3.2 Group Management
+### 2.1.3.2 Group Management
 This screen is where Active Directory group management is done.
 
 ![alt text](screenshots/handbook/group-management-1.png "DebianDC Group Management")
@@ -181,7 +181,7 @@ This screen is where Active Directory group management is done.
 From this menu
 You can create a group, delete the group, add members to the group, remove the group, group list and member list report can be obtained.
 
-#### 2.1.3.3 OU Management
+### 2.1.3.3 OU Management
 This screen is where Active Directory organization unit management is done.
 
 ![alt text](screenshots/handbook/ou-management-1.png "DebianDC OU Management")
@@ -189,7 +189,7 @@ This screen is where Active Directory organization unit management is done.
 From this menu
 You can create and delete organizational units, Members can be added to or removed from organizational units, OU list and OU member list report are created.
 
-#### 2.1.3.4 Computer Management
+### 2.1.3.4 Computer Management
 This screen is where Active Directory Computer Management is done
 
 From this menu
@@ -198,7 +198,7 @@ and the computer account can be removed.
 
 ![alt text](screenshots/handbook/computer-management-1.png "DebianDC Computer Management")
 
-#### 2.1.3.5 DNS Management
+### 2.1.3.5 DNS Management
 This screen is where Active Directory DNS management is done.
 
 From this menu
@@ -206,7 +206,7 @@ DNS Zone information can be obtained, DNS records can be added, deleted and upda
 
 ![alt text](screenshots/handbook/dns-management-1.png "DebianDC DNS Management")
 
-#### 2.1.3.6 Domain Operations
+### 2.1.3.6 Domain Operations
 This screen is where domain operations is done
 
 There are 2 menus on this screen.
@@ -217,7 +217,7 @@ From the FSMO Operations screen; FSMO roles can be transferred to DC machines.
 
 The operations here will be covered in detail in the Sample Scenarios and Best Practies title.
 
-#### 2.1.3.7 Active Directory Settings
+### 2.1.3.7 Active Directory Settings
 This screen is where Active Directory settings is done
 
 This menu
@@ -225,11 +225,11 @@ For user accounts; Password complexity, length, expiration time, etc. are set.
 
 ![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
 
-### 3. DebianDC-Host_Management
+## 3. DebianDC-Host_Management
 Host machines can be managed from this menu.<br>
 The purpose of this screen; is to try to make daily work from central point.
 
-#### 3.1 Windows Host Management
+### 3.1 Windows Host Management
 DebianDC accesses the Windows machine with ansible and winrm.<br>
 To use this feature on a Windows machine, the following steps are required.<br>
 <br>

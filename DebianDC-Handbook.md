@@ -7,10 +7,10 @@ The document contains detailed information about the use for the DebianDC Active
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
 - [2. Access to DebianDC Host](#1-access_to_debiandc)
   - 2.1 Remote Desktop Access
-    - from Linux
-    - from Windows
+    - 2.1.1 from Linux
+    - 2.1.2 from Windows
   - 2.2 SSH
-    - from Linux
+    - 2.2.1 from Linux
 - [3. DebianDC Manager](#2-debiandc-manager)
   - 3.1 DebianDC-Manager Screen
     - 3.1.1 Static ip Assignment

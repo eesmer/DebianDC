@@ -95,15 +95,6 @@ You can log in with the root user you specified during the installation.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
 
-or
-
-```bash
-ssh -X -p22 root@DEBIANDC_IP_ADDRESS (-p22 or the server's ssh access port)
-run the 'manager' command
-manager
-```
-can be used in the form.
-
 ### 2. Access to DebianDC Host
 DebianDC is configured with XRDP for remote desktop access support.<br>
 Remote desktop access can be made with any RDP client.<br>

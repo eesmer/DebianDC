@@ -38,9 +38,11 @@ chmod +x /usr/sbin/manager
 XDIR=FALSE
 [ -d "/usr/share/xsessions/" ] && XDIR=TRUE
 ps -e | grep -E -i "xfce|kde|gnome|lxde|cinnamon" && XDIR=TRUE
+NEW_DESKTOP="NO"
 
 if [ "$XDIR" = "FALSE" ]; then
 	apt-get -y install lxde-core
+	NEW_DESKTOP="YES(LXDE-Core)"
     #mkdir -p /etc/skel/.local/share/applications
 
 # -----------------------------------------------------------------------------
@@ -79,5 +81,13 @@ echo -e
 echo "------------------------------------"
 echo "# DebianDC installation completed. #"
 echo "------------------------------------"
+echo -e
+echo "New Desktop Install        : $NEW_DESKTOP"
+echo "Remote Access from Linux   : xfreerdp /w:1366 /h:768 /v:SERVER_IP:3389"
+echo "Remote Access from Linux   : remmina, vinagre etc"
+echo "Remote Access from Windows : RemoteDesktop : SERVER_IP"
+echo -e
+echo "User Guide                 : https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md"
+
 sleep 1
 reboot

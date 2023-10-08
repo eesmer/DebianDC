@@ -104,12 +104,17 @@ manager
 ```
 can be used in the form.
 
-### 2. DebianDC-Manager
+### 2. Access to DebianDC Host
+DebianDC is configured with XRDP for remote desktop access support.<br>
+Remote desktop access can be made with any RDP client.<br>
+#### 2.1 Remote Desktop Access
+
+### 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.
 ![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
 ![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")
 
-#### 2.1- DebianDC-Manager Screen
+#### 3.1- DebianDC-Manager Screen
 After the DebianDC desktop installation, the Active Directory role must be installed.
 When you open the Manager application, a menu will open with setup and configuration options if Active Directory Role is not installed.
 

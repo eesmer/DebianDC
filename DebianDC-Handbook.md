@@ -48,7 +48,9 @@ bash debiandc-installer.sh
 <br>
 
 **If a desktop environment is not installed in the system, the DebianDC installation installs the lxde-core desktop environment.**<br>
-www.lxde.org
+www.lxde.org <br>
+<br>
+If you are installing DebianDC on a system with a desktop installed, DebianDC Manager is placed in the existing desktop application menu.
 
 ### 1.2- Installing DebianDC with DebianDC-buster-installer.iso
 This installation is done automatically from the installer.iso file.

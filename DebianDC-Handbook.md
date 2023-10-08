@@ -45,7 +45,10 @@ wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer
 ```bash
 bash debiandc-installer.sh
 ```
-**If a desktop environment is not installed in the system, the DebianDC installation installs the lxde-core desktop environment.**
+<br>
+
+**If a desktop environment is not installed in the system, the DebianDC installation installs the lxde-core desktop environment.**<br>
+www.lxde.org
 
 ### 1.2- Installing DebianDC with DebianDC-buster-installer.iso
 This installation is done automatically from the installer.iso file.

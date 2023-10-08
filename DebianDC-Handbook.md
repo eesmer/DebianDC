@@ -107,7 +107,7 @@ can be used in the form.
 ### 2. Access to DebianDC Host
 DebianDC is configured with XRDP for remote desktop access support.<br>
 Remote desktop access can be made with any RDP client.<br>
-www.xrdp.org/
+www.xrdp.org
 #### 2.1 Remote Desktop Access
 
 ### 3. DebianDC-Manager

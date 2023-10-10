@@ -105,6 +105,10 @@ DebianDC is configured with XRDP for remote desktop access support.<br>
 Remote desktop access can be made with any RDP client.<br>
 www.xrdp.org
 ### 2.1 Remote Desktop Access
+#### 2.1.1 From Linux
+```
+xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
+```
 
 ## 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.

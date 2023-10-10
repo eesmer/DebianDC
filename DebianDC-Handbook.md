@@ -112,7 +112,8 @@ xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 ![alt text](screenshots/handbook/xrdp-login1.png "XRDP Login Screen")
 
 #### 2.1.2 From Windows
-![alt text](screenshots/handbook/rdp-fromwindows1.png "Windows RDP Screen")
+
+![alt text](screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
 
 ## 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.

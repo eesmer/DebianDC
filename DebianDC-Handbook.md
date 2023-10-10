@@ -109,6 +109,8 @@ www.xrdp.org
 ```
 xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 ```
+![alt text](screenshots/handbook/xrdplogin1.png "XRDP Login Screen")
+
 
 ## 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.

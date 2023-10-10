@@ -109,7 +109,7 @@ www.xrdp.org
 ```
 xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 ```
-![alt text](screenshots/handbook/xrdplogin1.png "XRDP Login Screen")
+![alt text](screenshots/handbook/xrdp-login1.png "XRDP Login Screen")
 
 
 ## 3. DebianDC-Manager

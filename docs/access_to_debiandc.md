@@ -2,7 +2,7 @@
 DebianDC is configured with XRDP for remote desktop access support.<br>
 Remote desktop access can be made with any RDP client.<br>
 www.xrdp.org
-### Remote Desktop Access
+### 1- Remote Desktop Access
 #### From Linux
 ```
 xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
@@ -13,7 +13,7 @@ xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 
 ![alt text](screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
 
-#### SSH
+#### 2- SSH
 ```
 ssh -p22 root@DebianDC_server
 ```

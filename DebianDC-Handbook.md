@@ -3,6 +3,7 @@
 The document contains detailed information about the use for the DebianDC Active Directory Domain Environment GUI.
 
 - [1. Installation](#1-installation)
+- [1. Installation](#https://github.com/eesmer/DebianDC/blob/master/docs/installation.md)
   - 1.1 Installing DebianDC on the ready Debian installation
   - 1.2 Installing DebianDC with DebianDC-buster-installer.iso
 - [2. Access to DebianDC Host](#2-access-to-debiandc-host)

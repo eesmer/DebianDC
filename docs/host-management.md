@@ -2,7 +2,7 @@
 Host machines can be managed from this menu.<br>
 The purpose of this screen; is to try to make daily work from central point.
 
-### Windows Host Management
+### 1- Windows Host Management
 DebianDC accesses the Windows machine with ansible and winrm.<br>
 To use this feature on a Windows machine, the following steps are required.<br>
 <br>

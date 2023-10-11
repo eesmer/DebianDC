@@ -27,7 +27,7 @@ wget https://raw.githubusercontent.com/eesmer/sambad-tui/master/sambadtui.sh
 ```
 bash sambadtui.sh
 ```
-### 2- RSAT Tool for alternative GUI usage
+### 3- RSAT Tool for alternative GUI usage
 You can connect to the Active Directory Domain environment with the Windows RSAT tool, which can be installed on some Windows versions. <br>
 RSAT is the same as the Microsoft Active Directory usage screen. <br>
 <br>

@@ -115,6 +115,21 @@ xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 
 ![alt text](screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
 
+#### 2.2 SSH
+```
+ssh -p22 DebianDC_server
+```
+You can console access to the DebianDC server via SSH. <br>
+You can use TUI as an alternative to DebianDC GUI. <br>
+<br>
+
+```
+wget https://raw.githubusercontent.com/eesmer/sambad-tui/master/sambadtui.sh
+```
+```
+bash sambadtui.sh
+```
+
 ## 3. DebianDC-Manager
 You can access the Manager application from the opened DebianDC desktop environment.
 ![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")

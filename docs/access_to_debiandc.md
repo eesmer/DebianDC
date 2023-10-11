@@ -31,5 +31,10 @@ bash sambadtui.sh
 You can connect to the Active Directory Domain environment with the Windows RSAT tool, which can be installed on some Windows versions. <br>
 RSAT is the same as the Microsoft Active Directory usage screen. <br>
 <br>
+
+For example, the screenshot below is a screenshot of RSAT connected to the Samba Active Directory environment. <br>
+
+![alt text](screenshots/handbook/rsat-screenshot1.png "RSAT Screen")
+
 You can see the link below for details. <br>
 https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/remote-server-administration-tools

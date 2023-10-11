@@ -10,7 +10,6 @@ The document contains detailed information about the use for the DebianDC Active
     - 2.1.1 from Linux
     - 2.1.2 from Windows
   - 2.2 SSH
-    - 2.2.1 from Linux
 - [3. DebianDC Manager](#3-debiandc-manager)
   - 3.1 DebianDC-Manager Screen
     - 3.1.1 Static ip Assignment
@@ -117,7 +116,7 @@ xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 
 #### 2.2 SSH
 ```
-ssh -p22 DebianDC_server
+ssh -p22 root@DebianDC_server
 ```
 You can console access to the DebianDC server via SSH. <br>
 You can use TUI as an alternative to DebianDC GUI. <br>

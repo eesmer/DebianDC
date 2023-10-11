@@ -37,4 +37,4 @@ For example, the screenshot below is a screenshot of RSAT connected to the Samba
 ![alt text](screenshots/handbook/rsat-screenshot1.png "RSAT Screen")
 
 You can see the link below for details. <br>
-https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/remote-server-administration-tools
+https://wiki.samba.org/index.php/Installing_RSAT

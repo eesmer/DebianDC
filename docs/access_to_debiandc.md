@@ -13,7 +13,7 @@ xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
 
 ![alt text](screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
 
-#### 2- SSH
+### 2- SSH
 ```
 ssh -p22 root@DebianDC_server
 ```

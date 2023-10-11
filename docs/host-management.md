@@ -1,8 +1,8 @@
-## 4. DebianDC-Host_Management
+## DebianDC-Host_Management
 Host machines can be managed from this menu.<br>
 The purpose of this screen; is to try to make daily work from central point.
 
-### 4.1 Windows Host Management
+### Windows Host Management
 DebianDC accesses the Windows machine with ansible and winrm.<br>
 To use this feature on a Windows machine, the following steps are required.<br>
 <br>
@@ -28,7 +28,7 @@ You can use a special user account or Administrator account for access with winr
 ![alt text](screenshots/handbook/manage_windows_host-1.png "DebianDC Manage Windows")
 <br>
 <br>
-### use of Ping Action
+#### use of Ping Action
 ![alt text](screenshots/handbook/manage_windows_host-2_ping.png "DebianDC Manage Windows Host ping action")
 ![alt text](screenshots/handbook/manage_windows_host-3_ping.png "DebianDC Manage Windows Host access for ping action")
 ![alt text](screenshots/handbook/manage_windows_host-4_ping_result.png "DebianDC Manage Windows Host result of ping action")

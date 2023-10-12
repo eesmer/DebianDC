@@ -93,16 +93,20 @@ chmod +x /root/.local/share/applications/DebianDC-Manager.desktop
 
 echo -e
 
+$CYAN
 echo "------------------------------------"
 echo "# DebianDC installation completed. #"
 echo "------------------------------------"
 echo -e
+$YELLOW
 echo "New Desktop Install        : $NEW_DESKTOP"
 echo "Remote Access from Linux   : xfreerdp /w:1366 /h:768 /v:$HOSTIP:3389"
 echo "Remote Access from Linux   : remmina, vinagre etc"
 echo "Remote Access from Windows : RemoteDesktop : $HOSTIP"
 echo -e
+$WHITE
 echo "User Guide                 : https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md"
+echo -e
 
 sleep 1
 reboot

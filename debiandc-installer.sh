@@ -1,5 +1,7 @@
 #!/bin/bash
 
+HOSTIP=$(hostname -I)
+
 # -----------------------------------------------------------------------------
 # STANDART PACKAGES
 # -----------------------------------------------------------------------------
@@ -83,9 +85,9 @@ echo "# DebianDC installation completed. #"
 echo "------------------------------------"
 echo -e
 echo "New Desktop Install        : $NEW_DESKTOP"
-echo "Remote Access from Linux   : xfreerdp /w:1366 /h:768 /v:SERVER_IP:3389"
+echo "Remote Access from Linux   : xfreerdp /w:1366 /h:768 /v:$HOSTIP:3389"
 echo "Remote Access from Linux   : remmina, vinagre etc"
-echo "Remote Access from Windows : RemoteDesktop : SERVER_IP"
+echo "Remote Access from Windows : RemoteDesktop : $HOSTIP"
 echo -e
 echo "User Guide                 : https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md"
 

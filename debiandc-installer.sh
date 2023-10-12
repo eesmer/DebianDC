@@ -2,6 +2,19 @@
 
 HOSTIP=$(hostname -I)
 
+#------------------
+# Color Codes
+#------------------
+MAGENTA="tput setaf 1"
+GREEN="tput setaf 2"
+YELLOW="tput setaf 3"
+DGREEN="tput setaf 4"
+CYAN="tput setaf 6"
+WHITE="tput setaf 7"
+GRAY="tput setaf 8"
+RED="tput setaf 9"
+NOCOL="tput sgr0"
+
 # -----------------------------------------------------------------------------
 # STANDART PACKAGES
 # -----------------------------------------------------------------------------

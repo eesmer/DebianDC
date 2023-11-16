@@ -44,6 +44,8 @@ rm /etc/samba/smb.conf
 samba-tool domain provision \
 --server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
 sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
+sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
+sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
 
 sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 

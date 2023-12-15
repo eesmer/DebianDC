@@ -8,9 +8,9 @@ echo "DebianDC post-install is running..."
 # INSTALL DESKTOP Env.
 # -----------------------------------------------------------------------------
 apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
-#apt-get install -y lxde-core
+apt-get install -y lxde-core
 #apt-get install -y mate-desktop-environment-core #FOR MATE DESKTOP
-#apt-get install -y lightdm
+apt-get install -y lightdm
 apt-get autoremove -y && apt-get -y autoclean
 
 # -----------------------------------------------------------------------------

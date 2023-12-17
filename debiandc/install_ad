@@ -23,8 +23,8 @@ then
 exit 1
 fi
 
-SERVER_IP=$(ip r |grep link |grep src |cut -d'/' -f2 |cut -d'c' -f3 |cut -d' ' -f2)
-DOMAIN=$(echo $REALM | cut -d "." -f 1)
+SERVER_IP=$(ip r |grep link |grep src |cut -d '/' -f2 |cut -d'c' -f3 |cut -d ' ' -f2)
+DOMAIN=$(echo $REALM | cut -d "." -f1)
 
 function setup {
 sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts

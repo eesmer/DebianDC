@@ -1,0 +1,10 @@
+#/bin/bash
+
+# DNS Service Check
+netstat -tulanp | grep 53 | grep samba | grep dns >> /dev/null
+
+if [ "$?" = "1" ]; then
+zenity --error --text="DNS Service is not working properly. \nIn this case; Kerberos ticket cannot be provided \nYou can refer to the DebianDC Handbook \n \nErrorCode:\n \nhttps://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md" --ellipsize
+
+exit 1
+fi

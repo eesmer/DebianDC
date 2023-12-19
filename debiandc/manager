@@ -81,9 +81,9 @@ CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Di
 "Active Directory Settings" \
 "Maintenance" \
 "Reports" \
-"::: Client Management Menu :::" \
-"    > Manage Windows Host"
-
+"" \
+" > Host & Client Management" \
+"    :: Manage Windows Host" \
 )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ]
@@ -111,9 +111,9 @@ elif [ "$CHOICE" = "Maintenance" ]; then
 	bash maintenance
 elif [ "$CHOICE" = "Reports" ]; then
 	bash reports
-elif [ "$CHOICE" = "::: Client Management Menu :::" ]; then
+elif [ "$CHOICE" = " > Host & Client Management" ]; then
 	bash manager
-elif [ "$CHOICE" = "    > Manage Windows Host" ]; then
+elif [ "$CHOICE" = "    :: Manage Windows Host" ]; then
 	bash $ACTIONPATH/manage_windows_host
 else
 exit 1

@@ -83,7 +83,7 @@ CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Di
 "Reports" \
 "" \
 " > Host & Client Management" \
-"    :: Manage Windows Host" \
+"    :: Manage Windows Host"
 )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "" ]

@@ -9,15 +9,15 @@ CHOICE=$(zenity --forms --text="Change Password" --title="Screen of Change Passw
         --add-entry="UserName" \
 	--add-password="Password" )
 
-if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
-then
-        bash change_password
-        exit 1
-elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
-then
-        bash user_man
-        exit 1
-fi
+#if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+#then
+#        bash change_password
+#        exit 1
+#elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+#then
+#        bash user_man
+#        exit 1
+#fi
 
 USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
 PASS=$(echo $CHOICE | cut -d "|" -f 2)

@@ -72,11 +72,11 @@ wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
 fi
 
 mkdir -p /etc/skel/.local/share/applications
-cat > /etc/skel/.local/share/applications/DebianDC-Manager.desktop << EOF
+cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Name=DebianDC-Manager
+Name=DebianDC-ADManager
 Terminal=false
 Comment=Active Directory Manager
 Categories=IDE
@@ -85,12 +85,12 @@ Exec=bash /usr/local/debiandc/manager
 EOF
 
 mkdir -p /root/Desktop/DebianDC
-cp /etc/skel/.local/share/applications/DebianDC-Manager.desktop /root/Desktop/DebianDC/
-chmod +x /root/Desktop/DebianDC/DebianDC-Manager.desktop
+cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/
+chmod +x /root/Desktop/DebianDC/DebianDC-ADManager.desktop
 
 mkdir -p /root/.local/share/applications/
-cp /etc/skel/.local/share/applications/DebianDC-Manager.desktop /root/.local/share/applications/
-chmod +x /root/.local/share/applications/DebianDC-Manager.desktop
+cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/.local/share/applications/
+chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
 
 echo -e
 

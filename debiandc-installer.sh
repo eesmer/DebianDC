@@ -83,6 +83,17 @@ Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
 Exec=bash /usr/local/debiandc/manager
 EOF
+cat > /etc/skel/.local/share/applications/DebianDC-Utility.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=DebianDC-Utility
+Terminal=false
+Comment=Active Directory Environment Utility
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/local/debiandc/utility
+EOF
 
 mkdir -p /root/Desktop/DebianDC
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/

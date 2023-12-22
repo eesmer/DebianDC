@@ -97,11 +97,15 @@ EOF
 
 mkdir -p /root/Desktop/DebianDC
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/
+cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/Desktop/DebianDC/
 chmod +x /root/Desktop/DebianDC/DebianDC-ADManager.desktop
+chmod +x /root/Desktop/DebianDC/DebianDC-Utility.desktop
 
 mkdir -p /root/.local/share/applications/
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/.local/share/applications/
+cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/.local/share/applications/
 chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
+chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
 
 echo -e
 

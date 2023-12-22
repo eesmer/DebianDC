@@ -1,0 +1,28 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+LINE=""
+
+CHOICE=$(zenity --forms --text="Maintenance" --title="DebianDC Utiliy" --width $WIDTH --height $HEIGHT \
+        --add-combo="Utility Tools" --combo-values="Database Check|Replication Check"
+)
+
+if [ "$CHOICE" = "" ] && [ "$?" = "0" ] #CANCEL_BUTTON
+then
+        exit 1
+fi
+
+if [ "$CHOICE" = "Database Check" ]
+then
+        bash database_check
+        exit 1
+elif [ "$CHOICE" = "Replication Check" ]
+then
+        bash utility
+        exit 1
+fi
+
+clear
+
+bash utility

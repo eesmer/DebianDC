@@ -1,7 +1,7 @@
-## DebianDC-Manager
+## DebianDC-ADManager
 You can access the Manager application from the opened DebianDC desktop environment.
-![alt text](screenshots/Desktop_menu1.png "DebianDC Manager Menu")
-![alt text](screenshots/Desktop_folder1.png "DebianDC Manager Menu")
+![alt text](screenshots/Desktop_menu1.png "DebianDC ADManager Menu")
+![alt text](screenshots/Desktop_folder1.png "DebianDC ADManager Menu")
 
 ### 1- DebianDC-Manager Screen
 After the DebianDC desktop installation, the Active Directory role must be installed.

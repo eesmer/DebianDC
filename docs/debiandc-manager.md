@@ -34,9 +34,9 @@ It asks for the new name of the machine, the domain name to be installed, and th
 After getting the information required to install the role, a screen will appear asking for confirmation for installation.
 After the confirmation of this screen, the Active Directory role installation begins.
 
-![alt text](screenshots/7-install_ad-5.png "Manager install AD Role")
+![alt text](screenshots/7-install_ad-5.png "ADManager install AD Role")
 <br>
-![alt text](screenshots/8-install_ad-6.png "Manager install AD Role")
+![alt text](screenshots/8-install_ad-6.png "ADManager install AD Role")
 
 When the installation is complete, DebianDC will ask for a reboot.
 After DebianDC restarts, you can log in with the root user and use the manager application.
@@ -47,7 +47,7 @@ You can now use the Manager application with its new menus.
 ![alt text](screenshots/login1.png "DebianDC Login")
 
 ### 4- Using the Manager application after domain setup
-The DebianDC-Manager application is used by obtaining a kerberos ticket.
+The DebianDC-ADManager application is used by obtaining a kerberos ticket.
 For this reason, if you do not have a kerberos ticket, the Manager will ask you for the Administrator user password when opening the Kerberos ticket.
 (Administrator password is the password you entered when setting up the domain.)
 Thus, it can be used in menus that require Administrator password without entering a password.

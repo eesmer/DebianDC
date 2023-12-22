@@ -7,7 +7,7 @@ You can access the Manager application from the opened DebianDC desktop environm
 After the DebianDC desktop installation, the Active Directory role must be installed.
 When you open the Manager application, a menu will open with setup and configuration options if Active Directory Role is not installed.
 
-![alt text](screenshots/1-Manager_MainMenu1.png "Manager Main Menu")
+![alt text](screenshots/1-Manager_MainMenu1.png "ADManager Main Menu")
 
 `Important Notice`: <ins> You must give a static IP to the DC machine. </ins>
 
@@ -15,8 +15,8 @@ When you open the Manager application, a menu will open with setup and configura
 The IP address of the DC machine must be fixed.
 Otherwise, the changed ip address later may cause the Active Directory role to not work.
 
-![alt text](screenshots/2-set_static_ip-1.png "Manager Static ip assignment")
-![alt text](screenshots/2-set_static_ip-2.png "Manager Static ip assignment")
+![alt text](screenshots/2-set_static_ip-1.png "ADManager Static ip assignment")
+![alt text](screenshots/2-set_static_ip-2.png "ADManager Static ip assignment")
 
 DebianDC will prompt you to reboot for ip definition to take effect.
 

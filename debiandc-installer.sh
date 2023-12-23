@@ -107,6 +107,23 @@ cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/.local/sha
 chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
 chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
 
+# Desktop Menu - removed menus
+rm /usr/share/applications/gcr-prompter.desktop
+rm /usr/share/applications/gcr-viewer.desktop
+rm /usr/share/applications/lxde-screenlock.desktop
+rm /usr/share/applications/lxrandr.desktop
+rm /usr/share/applications/lxsession-default-apps.desktop
+rm /usr/share/applications/mimeinfo.cache
+rm /usr/share/applications/notification-daemon.desktop
+rm /usr/share/applications/obconf.desktop
+rm /usr/share/applications/openbox.desktop
+rm /usr/share/applications/org.gnome.Screenshot.desktop
+rm /usr/share/applications/pavucontrol.desktop
+rm /usr/share/applications/python3.11.desktop
+rm /usr/share/applications/screensavers
+rm /usr/share/applications/vim.desktop
+rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
+
 echo -e
 
 $CYAN

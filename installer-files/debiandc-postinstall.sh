@@ -73,6 +73,7 @@ chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
 rm /usr/share/applications/gcr-prompter.desktop
 rm /usr/share/applications/gcr-viewer.desktop
 rm /usr/share/applications/lxde-screenlock.desktop
+rm /usr/share/applications/lxrandr.desktop
 
 echo "post-install finished"
 echo "Please reboot the machine"

@@ -38,7 +38,7 @@ cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Name=DebianDC-Manager
+Name=DebianDC-ADManager
 Terminal=false
 Comment=Active Directory ADManager
 Categories=IDE

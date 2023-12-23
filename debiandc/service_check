@@ -10,7 +10,7 @@ fi
 # resolv.conf Check
 ack 127.0.0.1 /etc/resolv.conf >> /dev/null
 if [ ! "$?" = "0" ]; then
-zenity --error --text="DC server must be specified in resolv.conf configuration.\n\Otherwise, kerberos ticket cannot be provided.\n \nErrorCode:\n \nhttps://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md" --ellipsize
+zenity --error --text="DC server must be specified in resolv.conf configuration. (127.0.0.1)\n\Otherwise, kerberos ticket cannot be provided.\n \nErrorCode:\n \nhttps://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md" --ellipsize
 fi
 
 exit 1

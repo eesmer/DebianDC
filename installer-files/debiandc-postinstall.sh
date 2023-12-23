@@ -80,6 +80,11 @@ rm /usr/share/applications/notification-daemon.desktop
 rm /usr/share/applications/obconf.desktop
 rm /usr/share/applications/openbox.desktop
 rm /usr/share/applications/org.gnome.Screenshot.desktop
+rm /usr/share/applications/pavucontrol.desktop
+rm /usr/share/applications/python3.11.desktop
+rm /usr/share/applications/screensavers
+rm /usr/share/applications/vim.desktop
+rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
 
 echo "post-install finished"
 echo "Please reboot the machine"

@@ -123,6 +123,7 @@ rm /usr/share/applications/python3.11.desktop
 rm /usr/share/applications/screensavers
 rm /usr/share/applications/vim.desktop
 rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
+rm /usr/share/applications/xscreensaver-settings.desktop
 
 echo -e
 

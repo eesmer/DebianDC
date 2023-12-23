@@ -69,5 +69,8 @@ cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/.local/sha
 chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
 chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
 
+# Desktop Menu Customize
+rm /usr/share/applications/gcr-prompter.desktop
+
 echo "post-install finished"
 echo "Please reboot the machine"

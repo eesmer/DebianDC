@@ -76,7 +76,7 @@ cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Name=DebianDC-ADManager
+Name=DebianDC - ADManager
 Terminal=false
 Comment=Active Directory Manager
 Categories=IDE
@@ -87,9 +87,9 @@ cat > /etc/skel/.local/share/applications/DebianDC-Utility.desktop << EOF
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Name=DebianDC-Utility
+Name=DebianDC - Utility
 Terminal=false
-Comment=Active Directory Environment Utility
+Comment=Active Directory Environment Utility Tools
 Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
 Exec=bash /usr/local/debiandc/utility

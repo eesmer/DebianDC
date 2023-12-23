@@ -66,7 +66,7 @@ fi
 
 if [ "$TICKET" = "not_exist" ]
 then
-zenity --info --text="Kerberos ticket could not be obtained \n \nPlease make sure you entered domain Administrator account password of $DOMAIN" --ellipsize
+zenity --error --text="Kerberos ticket could not be obtained \n \nPlease make sure you entered domain Administrator account password of $DOMAIN" --ellipsize
 bash service_check
 #bash reset_administrator_pass
 exit 1

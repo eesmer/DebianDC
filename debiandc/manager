@@ -8,7 +8,10 @@
 cd /usr/local/debiandc
 source common-value
 
-if ! [ -x "$(command -v samba-tool)" ]; then
+# checking that samba is installed and AD is installed
+netstat -tulanp | grep 636 | grep -w tcp >> /dev/null && ADPORT1=OK
+netstat -tulanp | grep 389 | grep -w tcp >> /dev/null && ADPORT2=OK
+if ! [ -x "$(command -v samba-tool)" ] || [ ! "$ADPORT1" = "OK" ] || [ ! "$ADPORT2" = "OK" ]; then
 
 CHOICE=$(zenity  --list --text "Server Manager | Server Settings and Domain Setup Menu" --title "Server Settings" --column "" --width $WIDTH --height $HEIGHT \
 "Show IP Address" \

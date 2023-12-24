@@ -22,7 +22,7 @@ then
         exit 1
 elif [ "$?" = "1" ] && [ "$MACHINE" = "" ] #CANCEL
 then
-        bash $ACTIONPATH/manage_windows_host
+        bash $ACTIONPATH/windows_manager
         exit 1
 fi
 
@@ -62,4 +62,4 @@ elif [ "$pingReturn" -eq 2 ]; then
 fi
 
 clear
-bash $ACTIONPATH/manage_windows_host
+bash $ACTIONPATH/windows_manager

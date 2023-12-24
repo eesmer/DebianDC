@@ -1,6 +1,6 @@
 ## DebianDC-ADManager
 You can access the Manager application from the opened DebianDC desktop environment.
-![alt text](screenshots/Desktop_menu1.png "DebianDC ADManager Menu")
+![alt text](screenshots/StartMenu-ADManager.png "DebianDC Start Menu ADManager")
 ![alt text](screenshots/Desktop_folder1.png "DebianDC ADManager Menu")
 
 ### 1- DebianDC-Manager Screen

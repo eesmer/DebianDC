@@ -16,15 +16,15 @@ ACTION=$(zenity  --list --text "Manage Windows Host" --title "Manage Windows Hos
 "uninstall .msi"
 )
 
-if [ "$?" = "0" ] && [ "$ACTION" = "||" ] #OK
-then
-        bash $ACTIONPATH/manage_windows_host
-        exit 1
-elif [ "$?" = "1" ] && [ "$ACTION" = "" ] #CANCEL
-then
-        bash manager
-        exit 1
-fi
+#if [ "$?" = "0" ] && [ "$ACTION" = "||" ] #OK
+#then
+#        #bash $ACTIONPATH/windows_manager
+#        exit 1
+#elif [ "$?" = "1" ] && [ "$ACTION" = "" ] #CANCEL
+#then
+#        bash $ACTIONPATH/windows_manager
+#        exit 1
+#fi
 
 if [ "$ACTION" = "Ping" ]; then
 	bash $ACTIONPATH/ping_windows_host
@@ -38,4 +38,4 @@ elif [ "$ACTION" = "uninstall .msi" ]; then
 fi
 
 clear
-bash manager
+bash windows_manager

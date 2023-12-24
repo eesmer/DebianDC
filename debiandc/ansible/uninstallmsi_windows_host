@@ -5,7 +5,7 @@ source common-value
 MSIFILE=$(zenity --file-selection)
 if [ "$?" = "1" ] && [ "$MSIFILE" = "" ] #CANCEL
 then
-	bash $ACTIONPATH/manage_windows_host
+	bash $ACTIONPATH/windows_manager
         exit 1
 fi
 
@@ -17,7 +17,7 @@ MACHINE=$(zenity --forms --text="Uninstall .msi Windows Host" --show-header --ti
 
 if [ "$?" = "1" ] && [ "$MACHINE" = "" ] #CANCEL
 then
-	bash $ACTIONPATH/manage_windows_host
+	bash $ACTIONPATH/windows_manager
         exit 1
 fi
 
@@ -71,4 +71,4 @@ elif [ "$pingReturn" -eq 2 ]; then
 fi
 
 clear
-bash $ACTIONPATH/manage_windows_host
+bash $ACTIONPATH/windows_manager

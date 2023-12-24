@@ -65,7 +65,7 @@ Terminal=false
 Comment=Windows Host Manager
 Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/local/debiandc/ansible/manage_windows_host
+Exec=bash /usr/local/debiandc/ansible/windows_manager
 EOF
 
 mkdir -p /root/Desktop/DebianDC

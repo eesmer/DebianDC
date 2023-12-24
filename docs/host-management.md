@@ -25,7 +25,6 @@ After these processes, you can use the Windows host machine over DebianDC.<br>
 You can use a special user account or Administrator account for access with winrm.
 <br>
 <br>
-![alt text](screenshots/handbook/manage_windows_host-1.png "DebianDC Manage Windows")
 ![alt text](screenshots/StartMenu_WindowsManager.png "DebianDC StartMenu Windows Manager")
 <br>
 <br>

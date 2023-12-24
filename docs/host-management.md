@@ -26,6 +26,7 @@ You can use a special user account or Administrator account for access with winr
 <br>
 <br>
 ![alt text](screenshots/handbook/manage_windows_host-1.png "DebianDC Manage Windows")
+![alt text](screenshots/StartMenu_WindowsManager.png "DebianDC StartMenu Windows Manager")
 <br>
 <br>
 #### use of Ping Action

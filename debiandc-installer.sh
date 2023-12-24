@@ -94,18 +94,33 @@ Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
 Exec=bash /usr/local/debiandc/utility
 EOF
+cat > /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=DebianDC - Windows Manager
+Terminal=false
+Comment=Windows Host Manager
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/local/debiandc/ansible/manage_windows_host
+EOF
 
 mkdir -p /root/Desktop/DebianDC
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/
 cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/Desktop/DebianDC/
+cp /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop /root/Desktop/DebianDC/
 chmod +x /root/Desktop/DebianDC/DebianDC-ADManager.desktop
 chmod +x /root/Desktop/DebianDC/DebianDC-Utility.desktop
+chmod +x /root/Desktop/DebianDC/DebianDC-WindowsManager.desktop
 
 mkdir -p /root/.local/share/applications/
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/.local/share/applications/
 cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/.local/share/applications/
+cp /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop /root/Desktop/DebianDC/
 chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
 chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
+chmod +x /root/Desktop/DebianDC/DebianDC-WindowsManager.desktop
 
 # Desktop Menu - removed menus
 rm /usr/share/applications/gcr-prompter.desktop

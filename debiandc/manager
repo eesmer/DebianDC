@@ -115,10 +115,6 @@ elif [ "$CHOICE" = "Maintenance" ]; then
 	bash maintenance
 elif [ "$CHOICE" = "Reports" ]; then
 	bash reports
-elif [ "$CHOICE" = " > Host & Client Management" ]; then
-	bash manager
-elif [ "$CHOICE" = "    :: Manage Windows Host" ]; then
-	bash $ACTIONPATH/manage_windows_host
 else
 exit 1
 fi

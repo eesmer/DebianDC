@@ -14,14 +14,19 @@ zenity --info --text="DC server must be specified in resolv.conf configuration. 
 fi
 
 # kerberos ticket is expired
-TICKET_TIME=$(ls -l /tmp/krb5cc_0 | awk '{print $8}' | cut -d ":" -f1)
+if [ ! -f "/tmp/krb5cc_0" ]; then
+        TICKET_TIME=0
+else
+        TICKET_TIME=$(ls -l /tmp/krb5cc_0 | awk '{print $8}' | cut -d ":" -f1)
+fi
+#EXPIRE_TIME=$(klist | grep "krbtgt" | awk '{print $4}' | cut -d ":" -f1)
 NOW=$(printf "%(%H:%M)T" | cut -d ":" -f1)
 PASS_TIME=$(expr $NOW - $TICKET_TIME)
 
-if [ "$PASS_TIME" -gt "9" ]; then
+if [ "$PASS_TIME" -gt "8" ]; then
         rm /tmp/krb5cc_0
-        #bash manager
         zenity --info --text="Kerberos Ticket Expired.\n\\nErrorCode:\n \nhttps://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md" --ellipsize
+        #bash manager
 fi
 
 exit 1

@@ -20,10 +20,11 @@ You can install a new domain environment with DebianDC or manage your existing S
 - Domain Operations (demote DC, fsmo management etc.)
 - AD Settings Management (password policy, age, settings etc.)
 - Reports
-
 ### Other Additional Features
 - Centralized management of Windows client and host machines
     - install and uninstall .msi package
 
+## Help
+- The Issues section of this GitHub repository
 #### Use the manual for installation
 [DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)

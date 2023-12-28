@@ -6,7 +6,7 @@ The purpose of this screen; is to try to make daily work from central point.
 DebianDC accesses the Windows machine with ansible and winrm.<br>
 To use this feature on a Windows machine, the following steps are required.<br>
 <br>
-**download:** https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 <br>
+**download** https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1 <br>
 save this .ps1 content to the Administrator desktop on the Windows machine
 Example filename: debiandc_config.ps1<br>
 **run:** Then you can run it from the powershell screen.

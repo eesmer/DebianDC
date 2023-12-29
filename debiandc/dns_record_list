@@ -2,6 +2,8 @@
 cd /usr/local/debiandc
 source common-value
 
+bash service_check
+
 ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
 samba-tool dns query $HNAME $ZONE @ ALL |tee /tmp/output.txt
 

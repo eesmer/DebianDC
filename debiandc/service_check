@@ -1,5 +1,8 @@
 #/bin/bash
 
+cd /usr/local/debiandc
+source common-value
+
 # DNS Service Check
 netstat -tulanp | grep 53 | grep samba | grep dns >> /dev/null
 

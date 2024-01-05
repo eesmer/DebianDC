@@ -56,27 +56,6 @@ source common-value
 
 bash service_check
 
-#TICKET=not_exist
-#klist > /tmp/ticket_control.txt
-#ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist
-#
-#if [ "$TICKET" = "not_exist" ]
-#then
-#ADMIN_PASS=$(zenity --entry --title="Administrator password" --text="Administrator password" --hide-text)
-#echo $ADMIN_PASS | kinit administrator@$DOMAIN
-#
-#klist > /tmp/ticket_control.txt
-#ack 'Valid starting' /tmp/ticket_control.txt > /dev/null && TICKET=exist
-#fi
-#
-#if [ "$TICKET" = "not_exist" ]
-#then
-#zenity --error --text="Kerberos ticket could not be obtained \n \nPlease make sure you entered domain Administrator account password of $DOMAIN" --ellipsize
-#bash service_check
-##bash reset_administrator_pass
-#exit 1
-#fi
-
 CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Directory Management" --width $WIDTH --height $HEIGHT --column "" \
 "User Management" \
 "Group Management" \

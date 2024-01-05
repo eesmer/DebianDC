@@ -22,4 +22,14 @@ if [ ! -f "/tmp/krb5cc_0" ]; then
 	ADMIN_PASS=$(zenity --entry --title="Administrator password" --text="Administrator password" --hide-text)
 	echo $ADMIN_PASS | kinit administrator@$DOMAIN
 	bash manager
+else
+	TICKET_TIME=$(stat -c %Y "/tmp/krb5cc_0") && TICKET_TIME=$(($TICKET_TIME / (60*60) % 24))
+	NOW=$(date +%s) && NOW=$(($NOW / (60*60) % 24))
+	PASS_TIME=$((NOW - TICKET_TIME))
+	if [ "$PASS_TIME" -gt "5" ]; then
+		zenity --info --text="Kerberos ticket has expired.\n\You must provide an administrator password for it to renew.\n\After the Kerberos ticket process, you will be directed back to the main menu." --ellipsize
+		ADMIN_PASS=$(zenity --entry --title="Administrator password" --text="Administrator password" --hide-text)
+		echo $ADMIN_PASS | kinit administrator@$DOMAIN
+		bash manager
+	fi
 fi

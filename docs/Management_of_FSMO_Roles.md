@@ -11,3 +11,5 @@ It is called Flexible Single Master Operations.<br>
 These roles;<br>
 1- PDC Emulator<br>
 2- RID Master<br>
+3- Schema Master<br>
+4- Domain Naming Master<br>

@@ -9,3 +9,9 @@ The document contains detailed information about the use for the DebianDC Active
 [5. Usage Scenarios / Best Practies]() <br>
 
 ---
+
+## Domain Environments
+
+[1. Management of FSMO Roles](https://github.com/eesmer/DebianDC/blob/master/docs/host-management.md) <br>
+
+---

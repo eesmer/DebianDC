@@ -13,3 +13,4 @@ These roles;<br>
 2- RID Master<br>
 3- Schema Master<br>
 4- Domain Naming Master<br>
+5- Infrastructure Master<br>

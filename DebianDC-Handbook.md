@@ -12,6 +12,6 @@ The document contains detailed information about the use for the DebianDC Active
 
 ## Domain Environments
 
-[1. Management of FSMO Roles](https://github.com/eesmer/DebianDC/blob/master/docs/host-management.md) <br>
+[1. Management of FSMO Roles](https://github.com/eesmer/DebianDC/blob/master/docs/Management_of_FSMO_Roles.md) <br>
 
 ---

@@ -5,3 +5,9 @@ These roles cannot exist on more than one DC machine at the same time, but can b
 Additionally, if the DC machine that holds the role becomes inaccessible, another DC machine can take over this role.<br>
 These tasks are called FSMO because they are managed from a single DC machine and can be transferred between DC machines.<br>
 It is called Flexible Single Master Operations.<br>
+
+---
+
+These roles;<br>
+1- PDC Emulator<br>
+2- RID Master<br>

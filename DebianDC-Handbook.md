@@ -11,7 +11,7 @@ The document contains detailed information about the use for the DebianDC Active
 ---
 
 ### About Concepts and Domain Environment
-[1. About of Domain and Active Directory](https://github.com/eesmer/DebianDC/blob/master/docs/Management_of_FSMO_Roles.md) <br>
+[1. About of Domain and Active Directory](https://github.com/eesmer/DebianDC/blob/master/docs/Domain_and_Active_Directory.md) <br>
 [1. FSMO Roles](https://github.com/eesmer/DebianDC/blob/master/docs/Management_of_FSMO_Roles.md) <br>
 
 ---

@@ -10,7 +10,7 @@ The document contains detailed information about the use for the DebianDC Active
 
 ---
 
-## Domain Environments
+### About Concepts and Domain Environment
 
 [1. Management of FSMO Roles](https://github.com/eesmer/DebianDC/blob/master/docs/Management_of_FSMO_Roles.md) <br>
 

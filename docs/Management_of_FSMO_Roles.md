@@ -14,3 +14,5 @@ These roles;<br>
 3- Schema Master<br>
 4- Domain Naming Master<br>
 5- Infrastructure Master<br>
+6- Domain DNS Master<br>
+7- Forest DNS Master<br>

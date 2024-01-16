@@ -20,4 +20,7 @@ Domain Controller is the machine on which the Active Directory service runs.<br>
 Domain Controller is the role of a physical machine in the Active Directory environment.<br>
 
 ## Why does an Active Directory environment require DNS?
-Active Directory registers every object in the domain with a name.
+Active Directory registers every object in the domain with a name.<br>
+It keeps the computer names and IP Addresses in these records.<br>
+It is important for ease of use to access the computer or service by name instead of IP Address.<br>
+

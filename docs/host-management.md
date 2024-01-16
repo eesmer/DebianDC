@@ -36,3 +36,7 @@ You can use a special user account or Administrator account for access with winr
 ![alt text](screenshots/handbook/manage_windows_host-2_ping.png "DebianDC Manage Windows Host ping action")
 ![alt text](screenshots/handbook/manage_windows_host-3_ping.png "DebianDC Manage Windows Host access for ping action")
 ![alt text](screenshots/handbook/manage_windows_host-4_ping_result.png "DebianDC Manage Windows Host result of ping action")
+
+<br>
+
+[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)

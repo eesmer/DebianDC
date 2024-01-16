@@ -14,3 +14,7 @@ The machine, which acquires the DC role by installing the Active Directory servi
 For example;<br>
 Responding to a client's request to become a member of the Domain.<br>
 Responding to a client logging into the Domain.<br>
+
+### What is Domain Controller?
+Domain Controller is the machine on which the Active Directory service runs.<br>
+Domain Controller is the role of a physical machine in the Active Directory environment.<br>

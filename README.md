@@ -9,7 +9,7 @@ You can install a new domain environment with DebianDC or manage your existing S
 <br>
 ![alt text](docs/screenshots/DebianDC-StartMenu.png "DebianDC StartMenu")
 
-## Features
+## Key Features
 - Domain and Domain Controller setup
 - DC or ADDC setup (New Domain or join to existing domain)
 - User Management

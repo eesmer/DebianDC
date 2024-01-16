@@ -121,3 +121,7 @@ This menu
 For user accounts; Password complexity, length, expiration time, etc. are set.
 
 ![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
+
+<br>
+
+[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)

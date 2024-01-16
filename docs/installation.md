@@ -70,5 +70,7 @@ After the installation is complete
 You can log in with the root user you specified during the installation.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
+
 <br>
+
 [DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)

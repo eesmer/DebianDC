@@ -10,7 +10,7 @@ This service runs on the machine (Domain Controller) that has the DC role.<br>
 Installing the DC role on a machine means installing the Active Directory service.<br>
 Active Directory is the service that runs on the DC machine and runs the domain environment.<br>
 <br>
-The machine, which acquires the DC role by installing the Active Directory service, listens to the network and responds to it in accordance with AD services.
-For example;
-Responding to a client's request to become a member of the Domain.
-Responding to a client logging into the Domain.
+The machine, which acquires the DC role by installing the Active Directory service, listens to the network and responds to it in accordance with AD services.<br>
+For example;<br>
+Responding to a client's request to become a member of the Domain.<br>
+Responding to a client logging into the Domain.<br>

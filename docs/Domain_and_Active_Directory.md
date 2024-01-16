@@ -23,4 +23,5 @@ Domain Controller is the role of a physical machine in the Active Directory envi
 Active Directory registers every object in the domain with a name.<br>
 It keeps the computer names and IP Addresses in these records.<br>
 It is important for ease of use to access the computer or service by name instead of IP Address.<br>
-
+Therefore, a mechanism is required that translates IP Address -> Machine / Machine -> IP Address.<br>
+Like DNS servers in the Internet environment, DNS servers in the Domain environment also perform the same process.<br>

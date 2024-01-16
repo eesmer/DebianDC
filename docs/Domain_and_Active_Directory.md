@@ -18,3 +18,6 @@ Responding to a client logging into the Domain.<br>
 ## What is Domain Controller?
 Domain Controller is the machine on which the Active Directory service runs.<br>
 Domain Controller is the role of a physical machine in the Active Directory environment.<br>
+
+## Why does an Active Directory environment require DNS?
+Active Directory registers every object in the domain with a name.

@@ -22,7 +22,10 @@ These roles;<br>
   dig -t SRV _ldap._tcp.pdc._msdcs.$DOMAIN
   ```
 
-- RID Master
+- RID Master<br>
+  In the Active Directory environment, all objects (user accounts, machine accounts, groups) have a SID definition and this definition is unique.
+  The SID definition of a object also includes the SID of the domain.<br>
+
 - Schema Master
 - Domain Naming Master
 - Infrastructure Master

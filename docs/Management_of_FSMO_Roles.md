@@ -16,7 +16,11 @@ These roles;<br>
   - An incorrect password entry in the domain environment is sent to the DC machine operating this role before being transmitted to the relevant client.
   - The Group Policy management screen works with the DC machine that holds the PDC Emulator role.
 
-   The DC machine operating this role must be running at all times.
+   The DC machine operating this role must be running at all times.<br>
+   With the following command from any client that is a member of the domain, the DC machine running the "PDC emulator" role will be listed.
+  ```
+  dig -t SRV _ldap._tcp.pdc._msdcs.$DOMAIN
+  ```
 
 - RID Master
 - Schema Master

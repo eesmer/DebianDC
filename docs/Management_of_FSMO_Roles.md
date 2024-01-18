@@ -9,7 +9,13 @@ It is called Flexible Single Master Operations.<br>
 ---
 
 These roles;<br>
-1- PDC Emulator<br>
+- PDC Emulator<br>
+  - Manages the time service. Client machines synchronize time with the DC machine running the PDC task.
+  - Keeps password changes. If the account password is made from a DC machine that does not operate the PDC role, the change is sent to the DC machine that also operates the PDC role.
+  - Executes account lockouts with the DC machine operating this role.
+  - An incorrect password entry in the domain environment is sent to the DC machine operating this role before being transmitted to the relevant client.
+  - The Group Policy management screen works with the DC machine that holds the PDC Emulator role.
+
 2- RID Master<br>
 3- Schema Master<br>
 4- Domain Naming Master<br>

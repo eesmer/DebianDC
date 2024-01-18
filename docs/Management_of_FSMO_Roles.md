@@ -25,6 +25,9 @@ These roles;<br>
 - RID Master<br>
   In the Active Directory environment, all objects (user accounts, machine accounts, groups) have a SID definition and this definition is unique.
   The SID definition of a object also includes the SID of the domain.<br>
+  So, for example, just as objects that are members of the example.lan domain have their own SIDs, this SID definition also includes the SID of the example.lan domain.<br>
+  Thus, objects have a common definition that includes the SID definition of the domain they are a member of.<br>
+  In addition to the domain SID, the objects contained in the domain also have a domain-specific and unique RID definition.<br>
 
 - Schema Master
 - Domain Naming Master

@@ -29,7 +29,7 @@ These roles;<br>
   Thus, objects have a common definition that includes the SID definition of the domain they are a member of.<br>
   In addition to the domain SID, the objects contained in the domain also have a domain-specific and unique RID definition.<br>
   <br>
-  **Example:**
+  **Example:**<br>
   *Domain SID:* S-1-5-21-3134998938-619743855-3616620706 <br>
   *Object SID:* S-1-5-21-3134998938-619743855-3616620706-1121 <br>
 

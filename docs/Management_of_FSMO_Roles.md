@@ -16,12 +16,12 @@ These roles;<br>
   - An incorrect password entry in the domain environment is sent to the DC machine operating this role before being transmitted to the relevant client.
   - The Group Policy management screen works with the DC machine that holds the PDC Emulator role.
 
-- RID Master<br>
-- Schema Master<br>
-- Domain Naming Master<br>
-- Infrastructure Master<br>
-- Domain DNS Master<br>
-- Forest DNS Master<br>
+- RID Master
+- Schema Master
+- Domain Naming Master
+- Infrastructure Master
+- Domain DNS Master
+- Forest DNS Master
 
 <br>
 

@@ -9,7 +9,7 @@ It is called Flexible Single Master Operations.<br>
 ---
 
 These roles;<br>
-- PDC Emulator
+- **PDC Emulator**
   - Manages the time service. Client machines synchronize time with the DC machine running the PDC task.
   - Keeps password changes. If the account password is made from a DC machine that does not operate the PDC role, the change is sent to the DC machine that also operates the PDC role.
   - Executes account lockouts with the DC machine operating this role.
@@ -22,7 +22,7 @@ These roles;<br>
   dig -t SRV _ldap._tcp.pdc._msdcs.$DOMAIN
   ```
 
-- RID Master<br>
+- **RID Master**<br>
   In the Active Directory environment, all objects (user accounts, machine accounts, groups) have a SID definition and this definition is unique.
   The SID definition of a object also includes the SID of the domain.<br>
   So, for example, just as objects that are members of the example.lan domain have their own SIDs, this SID definition also includes the SID of the example.lan domain.<br>
@@ -33,11 +33,11 @@ These roles;<br>
   *Domain SID:* S-1-5-21-3134998938-619743855-3616620706 <br>
   *Object SID:* S-1-5-21-3134998938-619743855-3616620706-1121 <br>
 
-- Schema Master
-- Domain Naming Master
-- Infrastructure Master
-- Domain DNS Master
-- Forest DNS Master
+- **Schema Master**
+- **Domain Naming Master**
+- **Infrastructure Master**
+- **Domain DNS Master**
+- **Forest DNS Master**
 
 <br>
 

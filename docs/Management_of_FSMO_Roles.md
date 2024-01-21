@@ -38,8 +38,7 @@ These roles;<br>
   The SID of the object may change, the RID definition it contains may change, but the GUID never changes.<br>
   <br>
   **About GUID<br>
-  Global Unique Identifier**
-  <br>
+    [Global Unique Identifier](https://wiki.samba.org/index.php/Terms_and_Abbreviations#Globally_Unique_Identifier_.28GUID.29)
 
 - **Schema Master**
 - **Domain Naming Master**

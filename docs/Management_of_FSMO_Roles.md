@@ -39,6 +39,9 @@ These roles;<br>
   <br>
   **About GUID**<br>
     [Global Unique Identifier](https://wiki.samba.org/index.php/Terms_and_Abbreviations#Globally_Unique_Identifier_.28GUID.29)
+  <br>
+  <br>
+  This RID definition is assigned for each object created in the domain, and DC machines use a RID pool to make this definition.<br>
 
 - **Schema Master**
 - **Domain Naming Master**

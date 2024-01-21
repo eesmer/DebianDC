@@ -32,6 +32,8 @@ These roles;<br>
   **Example:**<br>
   *Domain SID:* S-1-5-21-3134998938-619743855-3616620706 <br>
   *Object SID:* S-1-5-21-3134998938-619743855-3616620706-1121 <br>
+  <br>
+  The object SID starts with the domain SID, continues with its own SID, and ends with the RID.<br>
 
 - **Schema Master**
 - **Domain Naming Master**

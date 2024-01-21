@@ -42,6 +42,10 @@ These roles;<br>
   <br>
   <br>
   This RID definition is assigned for each object created in the domain, and DC machines use a RID pool to make this definition.<br>
+  If a DC machine is added or removed from the domain environment, this RID pool is updated and the DC machines must be accessible during this process.<br>
+  If the DC machine running the RID Master role is not running, creating new objects in the domain may not be executed.<br>
+  <br>
+  <br>
 
 - **Schema Master**
 - **Domain Naming Master**

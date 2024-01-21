@@ -37,7 +37,7 @@ These roles;<br>
   If an object is moved to another domain, the Domain SID and RID definition it contains changes.<br>
   The SID of the object may change, the RID definition it contains may change, but the GUID never changes.<br>
   <br>
-  **About GUID<br>
+  **About GUID**<br>
     [Global Unique Identifier](https://wiki.samba.org/index.php/Terms_and_Abbreviations#Globally_Unique_Identifier_.28GUID.29)
 
 - **Schema Master**

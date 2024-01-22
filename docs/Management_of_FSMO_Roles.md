@@ -51,7 +51,6 @@ These roles;<br>
   The "Schema Master" role is specific to the forest area that hosts the domain environment.<br>
   This role, Responsible for updating the Active Directory schema.<br>
   The update is done on the Schema Master DC machine and replicated to all DC machines in the forest area.<br>
-  <br>
   
 - **Domain Naming Master**
 - **Infrastructure Master**

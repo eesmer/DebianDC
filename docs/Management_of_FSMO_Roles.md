@@ -54,6 +54,7 @@ These roles;<br>
 ### Domain Naming Master
 This role is responsible for domain definitions within the forest area.<br>
 When a domain is added or removed within the Forest, the DC that holds this role is made from the machine.<br>
+This role must be operational in order to have more than one domain in the forest area and to carry out trust operations.<br>
 
 ### Infrastructure Master
 ### Domain DNS Master

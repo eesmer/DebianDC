@@ -52,6 +52,7 @@ These roles;<br>
   The update is done on the Schema Master DC machine and replicated to all DC machines in the forest area.<br>
   
 ### Domain Naming Master
+This role is responsible for domain definitions within the forest area.<br>
 ### Infrastructure Master
 ### Domain DNS Master
 ### Forest DNS Master

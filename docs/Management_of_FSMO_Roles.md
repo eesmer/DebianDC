@@ -9,7 +9,7 @@ It is called Flexible Single Master Operations.<br>
 ---
 
 These roles;<br>
-- **PDC Emulator**
+**PDC Emulator**
   - Manages the time service. Client machines synchronize time with the DC machine running the PDC task.
   - Keeps password changes. If the account password is made from a DC machine that does not operate the PDC role, the change is sent to the DC machine that also operates the PDC role.
   - Executes account lockouts with the DC machine operating this role.
@@ -22,7 +22,7 @@ These roles;<br>
   dig -t SRV _ldap._tcp.pdc._msdcs.$DOMAIN
   ```
 
-- **RID Master**<br>
+**RID Master**<br>
   In the Active Directory environment, all objects (user accounts, machine accounts, groups) have a SID definition and this definition is unique.
   The SID definition of a object also includes the SID of the domain.<br>
   So, for example, just as objects that are members of the example.lan domain have their own SIDs, this SID definition also includes the SID of the example.lan domain.<br>
@@ -45,15 +45,15 @@ These roles;<br>
   If a DC machine is added or removed from the domain environment, this RID pool is updated and the DC machines must be accessible during this process.<br>
   If the DC machine running the RID Master role is not running, creating new objects in the domain may not be executed.<br>
 
-- **Schema Master**<br>
+**Schema Master**<br>
   The "Schema Master" role is specific to the forest area that hosts the domain environment.<br>
   This role, Responsible for updating the Active Directory schema.<br>
   The update is done on the Schema Master DC machine and replicated to all DC machines in the forest area.<br>
   
-- **Domain Naming Master**
-- **Infrastructure Master**
-- **Domain DNS Master**
-- **Forest DNS Master**
+**Domain Naming Master**
+**Infrastructure Master**
+**Domain DNS Master**
+**Forest DNS Master**
 
 <br>
 

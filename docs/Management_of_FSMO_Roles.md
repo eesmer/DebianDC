@@ -9,6 +9,7 @@ It is called Flexible Single Master Operations.<br>
 ---
 
 These roles;<br>
+<br>
 **PDC Emulator**
   - Manages the time service. Client machines synchronize time with the DC machine running the PDC task.
   - Keeps password changes. If the account password is made from a DC machine that does not operate the PDC role, the change is sent to the DC machine that also operates the PDC role.

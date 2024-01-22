@@ -47,7 +47,9 @@ These roles;<br>
   <br>
   <br>
 
-- **Schema Master**
+- **Schema Master**<br>
+  The "Schema Master" role is specific to the forest area that hosts the domain environment.<br>
+  
 - **Domain Naming Master**
 - **Infrastructure Master**
 - **Domain DNS Master**

@@ -64,6 +64,7 @@ In cases where changes are required in these definitions of the object, this DC 
 This role is responsible for updating DNS server records integrated into the Active Directory environment, such as creating/removing AD Zone definitions.<br>
 
 ### Forest DNS Master
+The Forest DNS Zone Master role is responsible for DNS records and AD zone definitions in the forest area.<br>
 
 <br>
 

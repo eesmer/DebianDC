@@ -61,6 +61,8 @@ The DC machine that holds this role is responsible for SID changes of domain obj
 In cases where changes are required in these definitions of the object, this DC machine makes the necessary update.<br>
 
 ### Domain DNS Master
+This role is responsible for updating DNS server records integrated into the Active Directory environment, such as creating/removing AD Zone definitions.<br>
+
 ### Forest DNS Master
 
 <br>

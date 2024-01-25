@@ -57,6 +57,9 @@ When a domain is added or removed within the Forest, the DC that holds this role
 This role must be operational in order to have more than one domain in the forest area and to carry out trust operations.<br>
 
 ### Infrastructure Master
+The DC machine that holds this role is responsible for SID changes of domain objects and the object's "Distinguished Names" definition.<br>
+In cases where changes are required in these definitions of the object, this DC machine makes the necessary update.<br>
+
 ### Domain DNS Master
 ### Forest DNS Master
 

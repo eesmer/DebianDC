@@ -124,4 +124,4 @@ For user accounts; Password complexity, length, expiration time, etc. are set.
 
 <br>
 
-[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)
+[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)

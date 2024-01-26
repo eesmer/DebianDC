@@ -39,4 +39,4 @@ You can use a special user account or Administrator account for access with winr
 
 <br>
 
-[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)
+[DebianDC-UserGuide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)

@@ -1,4 +1,4 @@
-![alt text](docs/screenshots/DebianDC-UserGuide/DebianDC_Logo-bookworm.png "DebianDC Main Menu")
+![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC_Logo-bookworm.png "DebianDC Main Menu")
 <br>
 # DebianDC
 ### Samba Active Directory Graphic Interface Environment<br>

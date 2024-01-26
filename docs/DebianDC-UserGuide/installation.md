@@ -3,7 +3,7 @@
 You can use the DebianDC application in two ways. <br>
 <br>
 <br>
-### 1- Installing DebianDC on the ready Debian installation <br>
+### Option 1: Installing DebianDC on the ready Debian installation <br>
 For fresh Debian installation: https://www.debian.org/distrib/
 <br>
 This setup; It is made from the DebianDC repository to the existing Debian installed machine.
@@ -23,7 +23,7 @@ www.lxde.org <br>
 <br>
 If you are installing DebianDC on a system with a desktop installed, **DebianDC ADManager** is placed in the existing desktop application menu. <br>
 
-### 2- Installing DebianDC with DebianDC-buster-installer.iso
+### Option 2: Installing DebianDC with DebianDC-buster-installer.iso
 This installation is done automatically from the installer.iso file.
 Auto install creates shortcuts for lxde-core desktop and DebianDC-ADManager application on Debian distribution.
 To install, it is sufficient to attach the installer.iso file to the machine.

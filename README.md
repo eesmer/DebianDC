@@ -29,16 +29,13 @@ You can install a new domain environment with DebianDC or manage your existing S
 #### Installation
 [Installation Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation.md)
 
----
-
 #### User Guide
 [User Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)
 
 ---
-
-#### Active Directory and Concepts Documentation
-[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)
+#### Issues
+The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub repository
 
 ---
-
-The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub repository
+#### Active Directory and Concepts Documentation
+[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)

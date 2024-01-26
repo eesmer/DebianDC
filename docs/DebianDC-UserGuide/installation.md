@@ -73,4 +73,4 @@ You can log in with the root user you specified during the installation.
 
 <br>
 
-[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)
+[DebianDC-UserGuide](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)

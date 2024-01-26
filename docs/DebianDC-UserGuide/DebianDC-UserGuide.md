@@ -1,4 +1,4 @@
-# DebianDC-Handbook / User Guide
+# DebianDC-UserGuide
 
 The document contains detailed information about the use for the DebianDC Active Directory Domain Environment GUI.
 

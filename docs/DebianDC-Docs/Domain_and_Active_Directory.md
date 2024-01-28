@@ -29,4 +29,4 @@ DNS is not required for the network to function, but DNS is required for the dom
 
 <br>
 
-[DebianDC Handbook](https://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md)
+[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)

@@ -105,6 +105,17 @@ Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
 Exec=bash /usr/local/debiandc/ansible/windows_manager
 EOF
+cat > /etc/skel/.local/share/applications/DebianDC-ChangeToAdministratorPassword.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=DebianDC - Administrator Password Changer
+Terminal=false
+Comment=Administrator Password Changer
+Categories=IDE
+Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
+Exec=bash /usr/local/debiandc/ansible/administrator_changepass
+EOF
 
 mkdir -p /root/Desktop/DebianDC
 cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/

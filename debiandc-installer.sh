@@ -114,7 +114,7 @@ Terminal=false
 Comment=Administrator Password Changer
 Categories=IDE
 Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/local/debiandc/ansible/administrator_changepass
+Exec=bash /usr/local/debiandc/administrator_changepass
 EOF
 
 mkdir -p /root/Desktop/DebianDC

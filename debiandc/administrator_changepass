@@ -1,8 +1,10 @@
 #
+cd /usr/local/debiandc
+source common-value
 
-CHOICE=$(zenity --forms --text="Change Password for Administrator Account" --title="Screen of Change Password" \
+CHOICE=$(zenity --forms --text="Change Password for Administrator Account" --title="Screen of Change Password" --width $WIDTH --height $HEIGHT \
         --add-password="Password" )
 
 PASS=$(echo $CHOICE | cut -d "|" -f 1)
-samba-tool user setpassword --newpassword=$PASS $USERNAME 2>&1 | tee /tmp/outfile
-zenity --info --text="New Administrator Password is\n\'$PASS'" --ellipsize
+samba-tool user setpassword --newpassword=$PASS Administrator 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of Password change" --width $WIDTH --height $HEIGHT

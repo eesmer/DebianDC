@@ -1,0 +1,8 @@
+#
+
+CHOICE=$(zenity --forms --text="Change Password for Administrator Account" --title="Screen of Change Password" \
+        --add-password="Password" )
+
+PASS=$(echo $CHOICE | cut -d "|" -f 1)
+samba-tool user setpassword --newpassword=$PASS $USERNAME 2>&1 | tee /tmp/outfile
+zenity --info --text="New Administrator Password is\n\'$PASS'" --ellipsize

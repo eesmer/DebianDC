@@ -15,3 +15,7 @@ Accordingly, for example; <br>
 - **domain-wide** FSMO roles run on another server. <br>
     - SchemaMaster
     - DomainMaster
+<br>
+The following configuration items must be applied for domain environment management. <br>
+1- domain-wide FSMO roles must be run on the same server <br>
+2- PDC Emulator and RidMaster roles must be run on the same server. <br>

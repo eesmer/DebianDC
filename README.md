@@ -40,3 +40,6 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 ---
 #### Active Directory and Concepts Documentation
 [DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)
+
+#### DebianDC Best Practices
+[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-BestPractices.md)

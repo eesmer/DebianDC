@@ -6,3 +6,12 @@ This document describes recommended best configurations for DebianDC installatio
 When you set up a new domain with DebianDC, all FSMO roles are installed on a single server (the first DC created with the installation). <br>
 The best application of this is; It is to distribute FSMO roles among different DC servers. <br>
 The minimum configuration at all times and in all situations is 2 DC servers.<br>
+
+Accordingly, for example; <br>
+- **Forest-wide** FSMO roles are run on a server. <br>
+    - RIDMaster
+    - InfrastructureMaster
+    - PDC Emulator
+- **domain-wide** FSMO roles run on another server. <br>
+    - SchemaMaster
+    - DomainMaster

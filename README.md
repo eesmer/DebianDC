@@ -42,4 +42,4 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 [DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)
 
 #### DebianDC Best Practices
-[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-BestPractices.md)
+[Best Practices Configuration on DebianDC](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-BestPractices.md)

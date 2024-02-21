@@ -18,6 +18,10 @@ Responding to a client logging into the Domain. <br>
 **The following basic ports are used in a domain.** <br>
 These ports are distributed according to their roles above the DC. <br>
 
+- **TCP/UDP 389** <br>
+Used for LDAP (Lightweight Directory Access Protocol) communication. User authentication, directory queries, and other LDAP-based operations are performed through this port. <br>
+- **TCP/UDP 636** <br>
+Used for SSL/TLS secure connection over LDAP. This port is used for encryption and security of LDAP communication. <br>
 
 ## What is Domain Controller?
 Domain Controller is the machine on which the Active Directory service runs.<br>

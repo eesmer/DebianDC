@@ -13,7 +13,11 @@ Active Directory is the service that runs on the DC machine and runs the domain 
 The machine, which acquires the DC role by installing the Active Directory service, listens to the network and responds to it in accordance with AD services.<br>
 For example;<br>
 Responding to a client's request to become a member of the Domain.<br>
-Responding to a client logging into the Domain.<br>
+Responding to a client logging into the Domain. <br>
+
+**The following basic ports are used in a domain.** <br>
+These ports are distributed according to their roles above the DC. <br>
+
 
 ## What is Domain Controller?
 Domain Controller is the machine on which the Active Directory service runs.<br>

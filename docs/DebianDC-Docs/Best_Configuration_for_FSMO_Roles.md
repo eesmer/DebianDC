@@ -18,3 +18,5 @@ Accordingly, for example; <br>
 2- PDC Emulator and RidMaster roles must be run on the same server. <br>
 3- The InfrastructureMaster role must be run on a server that does not have the Global Catalog role installed. <br>
 4- DC servers should not be assigned any role other than AD service. <br>
+<br>
+[DebianDC Documentation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)

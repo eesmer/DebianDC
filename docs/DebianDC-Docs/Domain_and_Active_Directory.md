@@ -26,6 +26,7 @@ Used for SSL/TLS secure connection over LDAP. This port is used for encryption a
 - **TCP 3268** <br> Used for Global Catalog communication. The Global Catalog is a data directory used for quick searches that contains a concise summary of all objects (users, groups, resources, etc.) in the Active Directory environment. <br>
 - **TCP 3269** <br> Used for SSL/TLS over Global Catalog <br>
 - **TCP/UDP 88** <br> Used for Kerberos authentication. Kerberos is a secure protocol for authenticating users in an Active Directory environment. <br>
+- **TCP/UDP 53** <br> Used for DNS (Domain Name System) communication. In an Active Directory environment, DNS is important for name resolution and record updates between domain controllers and other servers. <br>
 
 
 ## What is Domain Controller?

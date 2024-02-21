@@ -68,4 +68,4 @@ The Forest DNS Zone Master role is responsible for DNS records and AD zone defin
 
 <br>
 
-[DebianDC-Docs](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs)
+[DebianDC Documentation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)

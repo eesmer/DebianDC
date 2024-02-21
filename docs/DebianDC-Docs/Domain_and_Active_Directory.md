@@ -23,6 +23,11 @@ Used for LDAP (Lightweight Directory Access Protocol) communication. User authen
 - **TCP/UDP 636** <br>
 Used for SSL/TLS secure connection over LDAP. This port is used for encryption and security of LDAP communication. <br>
 
+- **TCP 3268** <br> Used for Global Catalog communication. The Global Catalog is a data directory used for quick searches that contains a concise summary of all objects (users, groups, resources, etc.) in the Active Directory environment. <br>
+- **TCP 3269** <br> Used for SSL/TLS over Global Catalog <br>
+- **TCP/UDP 88** <br> Used for Kerberos authentication. Kerberos is a secure protocol for authenticating users in an Active Directory environment. <br>
+
+
 ## What is Domain Controller?
 Domain Controller is the machine on which the Active Directory service runs.<br>
 Domain Controller is the role of a physical machine in the Active Directory environment.<br>

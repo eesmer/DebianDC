@@ -4,7 +4,8 @@ cd /usr/local/debiandc
 source common-value
 
 # DNS Service Check
-netstat -tulanp | grep 53 | grep samba | grep dns >> /dev/null
+#netstat -tulanp | grep 53 | grep samba | grep dns >> /dev/null
+netstat -tulanp | grep 0.0.0.0:53 | grep samba >> /dev/null
 
 if [ "$?" = "1" ]; then
 zenity --info --text="DNS Service is not working properly. \nIn this case; Kerberos ticket cannot be provided \nYou can refer to the DebianDC Handbook \n \nErrorCode:\n \nhttps://github.com/eesmer/DebianDC/blob/master/DebianDC-Handbook.md" --ellipsize

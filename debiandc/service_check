@@ -19,8 +19,8 @@ fi
 
 # kerberos ticket is expired
 if [ ! -f "/tmp/krb5cc_0" ]; then
-	zenity --info --text="You must provide an administrator password to obtain a kerberos ticket.\n\After the Kerberos ticket process, you will be directed back to the main menu." --ellipsize
-	zenity --info --text="Kerberos ticket needs to be renewed.\n\Please enter the Administrator password.\n\After Kerberos ticket renewal, you will be directed to the main menu." --ellipsize
+	#zenity --info --text="You must provide an administrator password to obtain a kerberos ticket.\n\After the Kerberos ticket process, you will be directed back to the main menu." --ellipsize
+	zenity --info --text="Kerberos ticket needs to be renewed.\n\Please enter the Administrator password.\n\After Kerberos ticket renewal, you will be directed to the Manager Main Menu." --ellipsize
 	ADMIN_PASS=$(zenity --entry --title="Administrator password" --text="Administrator password" --hide-text)
 	echo $ADMIN_PASS | kinit administrator@$DOMAIN
 	bash manager

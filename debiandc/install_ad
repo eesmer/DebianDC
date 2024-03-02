@@ -22,7 +22,8 @@ if [ "$?" = "1" ]; then #CANCEL
 	exit 1
 fi
 
-SERVER_IP=$(ip r |grep link |grep src |cut -d '/' -f2 |cut -d'c' -f3 |cut -d ' ' -f2)
+# Get server IP and domain name
+SERVER_IP=$(ip r | grep link | grep src | cut -d '/' -f2 | cut -d'c' -f3 | cut -d ' ' -f2)
 DOMAIN=$(echo $REALM | cut -d "." -f1)
 
 function setup {

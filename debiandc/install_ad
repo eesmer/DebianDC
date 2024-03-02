@@ -44,19 +44,19 @@ setup() {
 	samba-tool domain provision \
 	--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
 
-# Log configs
-#sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
-sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
-sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
-sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
+	# Log configs
+	# #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
+	sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
+	sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
+	sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
 
-sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
+	sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
+	
+	rm /etc/krb5.conf
+	cp /var/lib/samba/private/krb5.conf /etc/
 
-rm /etc/krb5.conf
-cp /var/lib/samba/private/krb5.conf /etc/
-
-echo domain $REALM > /etc/resolv.conf
-echo nameserver 127.0.0.1 >> /etc/resolv.conf
+	echo "domain $REALM" > /etc/resolv.conf
+	echo "nameserver 127.0.0.1" >> /etc/resolv.conf
 
 systemctl unmask samba-ad-dc.service
 systemctl enable samba-ad-dc.service

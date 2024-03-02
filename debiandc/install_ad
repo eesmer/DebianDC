@@ -6,10 +6,9 @@ HOSTNAME=$(zenity --entry --text="HOSTNAME")
 REALM=$(zenity --entry --text="DOMAIN NAME" --entry-text="EXAMPLE.LOC")
 PASSWORD=$(zenity --entry --text="Administrator Password" --hide-text)
 
-if [ -z "$REALM" ] || [ -z "$PASSWORD" ] || [ -z "$HOSTNAME" ]
-then
-zenity --error --text "Please fill all the fields" --width 150 --height 150
-exit 1
+if [ -z "$REALM" ] || [ -z "$PASSWORD" ] || [ -z "$HOSTNAME" ]; then
+	zenity --error --text "Please fill all the fields" --width 150 --height 150
+	exit 1
 fi
 
 echo "DOMAIN NAME: $REALM" > /tmp/setup-info.txt
@@ -18,9 +17,9 @@ echo "start installation?" >> /tmp/setup-info.txt
 
 cat /tmp/setup-info.txt | zenity --text-info --title="DC Setup" --width 500 --height 250
 
-if [ "$?" = "1" ] #CANCEL
-then
-exit 1
+# Exit if user cancels
+if [ "$?" = "1" ]; then #CANCEL
+	exit 1
 fi
 
 SERVER_IP=$(ip r |grep link |grep src |cut -d '/' -f2 |cut -d'c' -f3 |cut -d ' ' -f2)

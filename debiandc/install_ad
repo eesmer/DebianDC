@@ -36,13 +36,13 @@ setup() {
 	apt-get -y install winbind
 	apt-get -y install krb5-config krb5-user
 
-systemctl stop smbd nmbd winbind
-systemctl disable smbd nmbd winbind
-systemctl mask smbd nmbd winbind
+	systemctl stop smbd nmbd winbind
+	systemctl disable smbd nmbd winbind
+	systemctl mask smbd nmbd winbind
 
-rm /etc/samba/smb.conf
-samba-tool domain provision \
---server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+	rm /etc/samba/smb.conf
+	samba-tool domain provision \
+	--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
 
 # Log configs
 #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf

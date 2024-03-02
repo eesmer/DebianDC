@@ -1,4 +1,4 @@
-### Installing DebianDC on the ready Debian installation <br>
+## Installing DebianDC on the ready Debian installation <br>
 For fresh Debian installation: https://www.debian.org/distrib/
 <br>
 This setup; It is made from the DebianDC repository to the existing Debian installed machine.

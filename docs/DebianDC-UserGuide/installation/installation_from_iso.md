@@ -8,7 +8,7 @@ The setup itself will do the rest.
 https://sourceforge.net/projects/debiandc/files/latest/download
 <br>
 
-![alt text](docs/DebianDC-UserGuide/screenshots/handbook/install-1.png "DebianDC Install")
+![alt text](/screenshots/handbook/install-1.png "DebianDC Install")
 
 The screen that started the installation.<br>
 You can start the installation by pressing the enter button on this screen.

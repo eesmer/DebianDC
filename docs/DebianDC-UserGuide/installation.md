@@ -1,8 +1,12 @@
 ## Installation
 
-You can use the DebianDC application in two ways. <br>
-<br>
-<br>
+**A few alternative methods for DebianDC installation** <br>
+You can install the DebianDC application in two ways. <br>
+
+---
+
+[1.Installing DebianDC on the ready Debian installation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation.md) <br>
+
 ### Option 1: Installing DebianDC on the ready Debian installation <br>
 For fresh Debian installation: https://www.debian.org/distrib/
 <br>

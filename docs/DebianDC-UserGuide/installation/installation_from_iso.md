@@ -13,7 +13,7 @@ https://sourceforge.net/projects/debiandc/files/latest/download
 The screen that started the installation.<br>
 You can start the installation by pressing the enter button on this screen.
 
-![alt text](screenshots/handbook/install-2.png "DebianDC Install")
+![alt text](docs/DebianDC-UserGuide/screenshots/handbook/install-2.png "DebianDC Install")
 
 You can continue by adjusting the location and keyboard settings.
 

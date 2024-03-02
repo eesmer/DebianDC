@@ -5,8 +5,8 @@ You can install the DebianDC application in two ways. <br>
 
 ---
 
-[1.Installing DebianDC on the ready Debian installation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation_fromscript.md) <br>
-[2.Installing DebianDC with DebianDC-buster-installer.iso](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation_fromiso.md) <br>
+[1.Installing DebianDC on the ready Debian installation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation_from_script.md) <br>
+[2.Installing DebianDC with DebianDC-buster-installer.iso](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation_from_iso.md) <br>
 
 ### Option 2: Installing DebianDC with DebianDC-buster-installer.iso
 This installation is done automatically from the installer.iso file.

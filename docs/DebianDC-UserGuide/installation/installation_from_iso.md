@@ -26,16 +26,16 @@ You can set a machine name
 The domain name is asked after the machine name.<br>
 Leave this blank
 
-![alt text](screenshots/handbook/install-5.png "DebianDC Install")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/screenshots/handbook/install-5.png "DebianDC Install")
 
 Set password for root user<br>
 You will be logged into the system by this
 
-![alt text](screenshots/handbook/install-6.png "DebianDC Install")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/screenshots/handbook/install-6.png "DebianDC Install")
 
 At this stage, the installation will start and then it will ask you to set the repo address for the package archive.
 
-![alt text](screenshots/handbook/install-7.png "DebianDC Install")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/screenshots/handbook/install-7.png "DebianDC Install")
 
 You can make the best choice according to your location and continue.
 The installation will then continue and complete without asking any further questions.
@@ -45,6 +45,7 @@ After the installation is complete
 You can log in with the root user you specified during the installation.
 
 ![alt text](screenshots/login1.png "DebianDC Login")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/screenshots/login1.png "DebianDC Login")
 
 <br>
 

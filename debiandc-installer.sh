@@ -73,6 +73,9 @@ wget -O /etc/xrdp/km-0000041f.ini $ADDRESS/install/configs/km-0000041f.ini
 wget -O /ect/xrdp/xrdp_keyboard.ini $ADDRESS/install/configs/xrdp_keyboard.ini
 fi
 
+chmod 644 /etc/xrdp/km-0000041f.ini
+chmod 644 /etc/xrdp/xrdp_keyboard.ini
+
 mkdir -p /etc/skel/.local/share/applications
 cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
 [Desktop Entry]

@@ -69,6 +69,8 @@ sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
 update-grub
 wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
 wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
+wget -O /etc/xrdp/km-0000041f.ini $ADDRESS/install/configs/km-0000041f.ini
+wget -O /ect/xrdp/xrdp_keyboard.ini $ADDRESS/install/configs/xrdp_keyboard.ini
 fi
 
 mkdir -p /etc/skel/.local/share/applications
@@ -154,6 +156,9 @@ rm /usr/share/applications/screensavers
 rm /usr/share/applications/vim.desktop
 rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
 rm /usr/share/applications/xscreensaver-settings.desktop
+
+
+# xrdp settings
 
 echo -e
 

@@ -160,8 +160,11 @@ rm /usr/share/applications/vim.desktop
 rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
 rm /usr/share/applications/xscreensaver-settings.desktop
 
-
 # xrdp settings
+wget -O /etc/xrdp/km-0000041f.ini $ADDRESS/install/configs/km-0000041f.ini
+wget -O /ect/xrdp/xrdp_keyboard.ini $ADDRESS/install/configs/xrdp_keyboard.ini
+chmod 644 /etc/xrdp/km-0000041f.ini
+chmod 644 /etc/xrdp/xrdp_keyboard.ini
 
 echo -e
 

@@ -69,12 +69,7 @@ sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
 update-grub
 wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
 wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
-wget -O /etc/xrdp/km-0000041f.ini $ADDRESS/install/configs/km-0000041f.ini
-wget -O /ect/xrdp/xrdp_keyboard.ini $ADDRESS/install/configs/xrdp_keyboard.ini
 fi
-
-chmod 644 /etc/xrdp/km-0000041f.ini
-chmod 644 /etc/xrdp/xrdp_keyboard.ini
 
 mkdir -p /etc/skel/.local/share/applications
 cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
@@ -142,7 +137,9 @@ chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
 chmod +x /root/Desktop/DebianDC/DebianDC-WindowsManager.desktop
 chmod +x /root/Desktop/DebianDC/DebianDC-ChangeToAdministratorPassword.desktop
 
+# -----------------------------------------------------------------------------
 # Desktop Menu - removed menus
+# -----------------------------------------------------------------------------
 rm /usr/share/applications/gcr-prompter.desktop
 rm /usr/share/applications/gcr-viewer.desktop
 rm /usr/share/applications/lxde-screenlock.desktop
@@ -160,7 +157,9 @@ rm /usr/share/applications/vim.desktop
 rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
 rm /usr/share/applications/xscreensaver-settings.desktop
 
+# -----------------------------------------------------------------------------
 # xrdp settings
+# -----------------------------------------------------------------------------
 wget -O /etc/xrdp/km-0000041f.ini $ADDRESS/install/configs/km-0000041f.ini
 wget -O /ect/xrdp/xrdp_keyboard.ini $ADDRESS/install/configs/xrdp_keyboard.ini
 chmod 644 /etc/xrdp/km-0000041f.ini

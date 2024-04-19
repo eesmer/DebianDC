@@ -17,10 +17,10 @@ CHOICE=$(zenity --forms --text="DebianDC Static IP Settings" --title="Settings S
 --add-entry="Gateway"
 )
 
-INTERFACE=$(echo $CHOICE | cut -d "|" -f 1)
-IPADDRESS=$(echo $CHOICE | cut -d "|" -f 2)
-NETMASK=$(echo $CHOICE | cut -d "|" -f 3)
-GATEWAY=$(echo $CHOICE | cut -d "|" -f 4)
+INTERFACE=$(echo $CHOICE | cut -d "|" -f1)
+IPADDRESS=$(echo $CHOICE | cut -d "|" -f2)
+NETMASK=$(echo $CHOICE | cut -d "|" -f3)
+GATEWAY=$(echo $CHOICE | cut -d "|" -f4)
 
 function create_debiandcnw(){
 ifconfig $INTERFACE down

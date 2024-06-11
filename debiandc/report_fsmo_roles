@@ -12,8 +12,8 @@ cat > $REPORT_DIR/$REPORT_NAME << EOF
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <body>
-<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">$DOMAIN FSMO Roles</p>
-<p style="color: darkblue; font-size 15px; text-align:left;">$DOMAIN</p>
+<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">FSMO Roles</p>
+<p style="color: darkblue; font-size 10px; text-align:left;">$DOMAIN</p>
 <p style="color: darkred; font-size: 10px; text-align:left;">$RDATE</p>
 <hr class="solid">
 EOF
@@ -64,7 +64,7 @@ echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
 echo "</body>" >> $REPORT_DIR/$REPORT_NAME
 echo "</html>" >> $REPORT_DIR/$REPORT_NAME
 
-zenity --text-info --title="Show FSMO Roles" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+zenity --text-info --title="Report of FSMO Roles" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
 
 bash reports
 exit 1

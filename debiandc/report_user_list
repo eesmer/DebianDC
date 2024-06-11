@@ -12,8 +12,8 @@ cat > $REPORT_DIR/$REPORT_NAME << EOF
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <body>
-<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">$DOMAIN Detailed User List</p>
-<p style="color: darkblue; font-size 10px; text-align:left;">Detailed User List</p>
+<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">Detailed User List</p>
+<p style="color: darkblue; font-size 10px; text-align:left;">$DOMAIN</p>
 <p style="color: darkred; font-size: 10px; text-align:left;">$RDATE</p>
 <hr class="solid">
 EOF

@@ -49,7 +49,7 @@ done
 echo "</body>" >> $REPORT_DIR/$REPORT_NAME
 echo "</html>" >> $REPORT_DIR/$REPORT_NAME
 
-zenity --text-info --title="$DOMAIN User List" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+zenity --text-info --title="User List" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
 
 bash user_man
 exit 1

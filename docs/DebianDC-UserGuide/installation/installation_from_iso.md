@@ -1,4 +1,4 @@
-## Installing DebianDC with DebianDC-buster-installer.iso
+## Installing DebianDC with DebianDC.iso
 This installation is done automatically from the installer.iso file.
 Auto install creates shortcuts for lxde-core desktop and DebianDC-ADManager application on Debian distribution.
 To install, it is sufficient to attach the installer.iso file to the machine.

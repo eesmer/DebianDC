@@ -4,7 +4,7 @@ Auto install creates shortcuts for lxde-core desktop and DebianDC-ADManager appl
 To install, it is sufficient to attach the installer.iso file to the machine.
 The setup itself will do the rest.
 
-**You can download the debiandc_buster_installer.iso file from this link.**<br>
+**You can download the DebianDC.iso file from this link.**<br>
 https://sourceforge.net/projects/debiandc/files/latest/download
 <br>
 

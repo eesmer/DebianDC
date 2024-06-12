@@ -78,10 +78,6 @@ ACTIONPATH=ansible
 	EOF
 
 	#echo WIDTH=1300 > /usr/local/debiandc/common-value
-	#echo HEIGHT=700 >> /usr/local/debiandc/common-value
-	#echo DOMAIN=$DOMAIN >> /usr/local/debiandc/common-value
-	#echo HNAME=$HNAME >> /usr/local/debiandc/common-value
-	#echo ACTIONPATH=ansible >> /usr/local/debiandc/common-value
 	
 	echo "********************************"
 	echo "AD ROLE INSTALL COMPLETED"

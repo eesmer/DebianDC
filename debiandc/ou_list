@@ -2,18 +2,31 @@
 cd /usr/local/debiandc
 source common-value
 
-samba-tool ou list > /tmp/ou-list.txt
-echo "CN=Users" >> /tmp/ou-list.txt #Users can be used like OU (users move command(samba-tool user move $USERNAME CN=Users))
-cat /tmp/ou-list.txt | zenity --text-info --title="Active Directory OU List" --width $WIDTH --height $HEIGHT
+REPORT_NAME=oulist.html
+REPORT_DIR=/tmp/debiandcreportsdir
+mkdir -p $REPORT_DIR
+RDATE=$(date)
 
-clear
+cat > $REPORT_DIR/$REPORT_NAME << EOF
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<body>
+<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">Domain Organizational Unit List</p>
+<p style="color: darkblue; font-size 10px; text-align:left;">$DOMAIN</p>
+<p style="color: darkred; font-size: 10px; text-align:left;">$RDATE</p>
+<hr class="solid">
+EOF
 
-if [ "$?" = "0" ] #OK
-then
-bash ou_man
-exit 1
-elif [ "$?" = "1" ] #CANCEL
-then
-bash ou_man
-exit 1
-fi
+
+#clear
+#
+#if [ "$?" = "0" ] #OK
+#then
+#bash ou_man
+#exit 1
+#elif [ "$?" = "1" ] #CANCEL
+#then
+#bash ou_man
+#exit 1
+#fi

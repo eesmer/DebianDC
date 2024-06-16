@@ -21,6 +21,27 @@ cat > $REPORT_DIR/$REPORT_NAME << EOF
 <hr class="solid">
 EOF
 
+samba-tool group list > $REPORT_DIR/group-list.txt
+#| zenity --text-info --title="Active Directory Group List" --width $WIDTH --height $HEIGHT
+
+#samba-tool ou list > $REPORT_DIR/ou-list.txt
+#echo "CN=Users" >> $REPORT_DIR/ou-list.txt #Users can be used like OU (users move command(samba-tool user move $USERNAME CN=Users))
+###cat /tmp/ou-list.txt | zenity --text-info --title="Active Directory OU List" --width $WIDTH --height $HEIGHT
+
+numgroup=$(cat $REPORT_DIR/group-list.txt | wc -l)
+i=1
+while [ "$i" -le $numgroup ]; do
+group=$(ls -l | sed -n $i{p} $REPORT_DIR/group-list.txt)
+
+echo '<p style="color: black; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "$i- &nbsp; $group" >> $REPORT_DIR/$REPORT_NAME
+
+i=$(( i + 1 ))
+done
+
+echo "</body>" >> $REPORT_DIR/$REPORT_NAME
+echo "</html>" >> $REPORT_DIR/$REPORT_NAME
+
 #samba-tool group list | zenity --text-info --title="Active Directory Group List" --width $WIDTH --height $HEIGHT
 #if [ "$?" = "0" ] #OK
 #then

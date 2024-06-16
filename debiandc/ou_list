@@ -40,15 +40,3 @@ zenity --text-info --title="User List" --html --filename="$REPORT_DIR/$REPORT_NA
 
 bash ou_man
 exit 1
-
-#clear
-#
-#if [ "$?" = "0" ] #OK
-#then
-#bash ou_man
-#exit 1
-#elif [ "$?" = "1" ] #CANCEL
-#then
-#bash ou_man
-#exit 1
-#fi

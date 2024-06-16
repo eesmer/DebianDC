@@ -22,11 +22,6 @@ cat > $REPORT_DIR/$REPORT_NAME << EOF
 EOF
 
 samba-tool group list > $REPORT_DIR/group-list.txt
-#| zenity --text-info --title="Active Directory Group List" --width $WIDTH --height $HEIGHT
-
-#samba-tool ou list > $REPORT_DIR/ou-list.txt
-#echo "CN=Users" >> $REPORT_DIR/ou-list.txt #Users can be used like OU (users move command(samba-tool user move $USERNAME CN=Users))
-###cat /tmp/ou-list.txt | zenity --text-info --title="Active Directory OU List" --width $WIDTH --height $HEIGHT
 
 numgroup=$(cat $REPORT_DIR/group-list.txt | wc -l)
 i=1

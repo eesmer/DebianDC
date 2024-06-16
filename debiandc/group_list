@@ -42,13 +42,7 @@ done
 echo "</body>" >> $REPORT_DIR/$REPORT_NAME
 echo "</html>" >> $REPORT_DIR/$REPORT_NAME
 
-#samba-tool group list | zenity --text-info --title="Active Directory Group List" --width $WIDTH --height $HEIGHT
-#if [ "$?" = "0" ] #OK
-#then
-#bash group_man
-#exit 1
-#elif [ "$?" = "1" ] #CANCEL
-#then
-#bash group_man
-#exit 1
-#fi
+zenity --text-info --title="Group List" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+
+bash group_man
+exit 1

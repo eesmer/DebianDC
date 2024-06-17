@@ -7,6 +7,7 @@ source common-value
 
 #ip link |grep "state UP" |grep -v "lo:" |cut -d ":" -f2 |cut -d " " -f2 > /tmp/interface-list
 cat /var/run/network/ifstate |cut -d "=" -f1 |grep -v "lo" > /tmp/interface-list
+netstat -i | awk {'print $1'} | grep -v "Kernel" | grep -v "Iface" > /tmp/interface-list
 sed -i 's/^/|/' /tmp/interface-list
 INTERFACES=$(cat /tmp/interface-list)
 

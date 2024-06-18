@@ -9,10 +9,12 @@ clear
 
 if [ "$?" = "0" ] #OK
 then
-bash operations_domain
+#bash operations_domain
+bash reports
 exit 1
 elif [ "$?" = "1" ] #CANCEL
 then
-bash operations_domain
+##bash operations_domain
+bash reports
 exit 1
 fi

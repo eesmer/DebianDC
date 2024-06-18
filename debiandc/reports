@@ -3,7 +3,7 @@ cd /usr/local/debiandc
 source common-value
 
 CHOICE=$(zenity --forms --text="DebianDC Reports" --title="DebianDC Reports" --width $WIDTH --height $HEIGHT \
-        --add-combo="Reports" --combo-values="Detailed Users List|Show to FSMO Roles|Domain Info"
+        --add-combo="Reports" --combo-values="Detailed Users List|Show to FSMO Roles|Domain Info|Registered DC on $DOMAIN"
 )
 
 if [ "$?" = "1" ]
@@ -25,5 +25,9 @@ then
 elif [ "$CHOICE" = "Domain Info" ]
 then
         bash domain_info
+        exit 1
+elif [ "$CHOICE" = "Registered DC on $DOMAIN" ]
+then
+        bash registered_dc_list
         exit 1
 fi

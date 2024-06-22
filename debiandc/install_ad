@@ -52,6 +52,9 @@ setup() {
 
 	# time/sync config
 	echo "pool 0.debian.pool.ntp.org iburst" > /etc/chrony/conf.d/debiandc-chrony.conf
+	echo "pool 1.debian.pool.ntp.org iburst" >> /etc/chrony/conf.d/debiandc-chrony.conf
+	echo "pool 2.debian.pool.ntp.org iburst" >> /etc/chrony/conf.d/debiandc-chrony.conf
+	echo "pool 3.debian.pool.ntp.org iburst" >> /etc/chrony/conf.d/debiandc-chrony.conf
 	systemctl restart chrony.service
 
 	sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list

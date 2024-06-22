@@ -20,7 +20,7 @@ NOCOL="tput sgr0"
 # -----------------------------------------------------------------------------
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get -y purge systemd-timesyncd #systemd-timesyncd Conflicts time-daemon
+## apt-get -y purge systemd-timesyncd #systemd-timesyncd Conflicts time-daemon # will be tested again
 apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
 
 apt-get -y install git

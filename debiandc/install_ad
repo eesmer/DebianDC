@@ -50,6 +50,10 @@ setup() {
 	sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
 	sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
 
+	# time/sync config
+	echo "pool 0.debian.pool.ntp.org iburst" > /etc/chrony/conf.d/debiandc-chrony.conf
+	systemctl restart chrony.service
+
 	sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 	
 	rm /etc/krb5.conf

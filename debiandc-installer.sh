@@ -32,7 +32,7 @@ apt-get -y install curl wget
 apt-get -y install ack expect krb5-user krb5-config
 apt-get -y install htop
 apt-get -y install ansible
-apt-get -y install syslog-ng #for auth.logş
+apt-get -y install syslog-ng #for auth.log
 apt-get -y install xrdp #settings not completed
 
 # -----------------------------------------------------------------------------

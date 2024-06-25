@@ -98,6 +98,7 @@ EOF
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service
+	systemctl restart bind9
 
 	#---------------------------------------------------
 	# common-value

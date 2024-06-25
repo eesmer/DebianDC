@@ -66,7 +66,36 @@ setup() {
 
 	echo "domain $REALM" > /etc/resolv.conf
 	echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+#----------------------------------------------------------------------------------------
+# bind9 config
+rm /etc/bind/named.conf.options
+cat > /etc/bind/named.conf.options << EOF
+options {
+directory "/var/cache/bind";
 
+forwarders {
+1.1.1.1;
+};
+
+allow-query {  any;};
+dnssec-validation no;
+
+auth-nxdomain no;    # for RFC1035
+listen-on-v6 { any; };
+
+tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+minimal-responses yes;
+};
+EOF
+
+rm /etc/default/bind9
+cat > /etc/default/bind9 << EOF
+RESOLVCONF=no
+OPTIONS="-u bind -4"
+EOF
+
+chmod 644 /etc/default/bind9
+#----------------------------------------------------------------------------------------
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service

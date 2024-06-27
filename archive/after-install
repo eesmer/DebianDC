@@ -1,0 +1,1 @@
+samba-tool domain provision --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --server-role=dc --adminpass="$PASSWORD"

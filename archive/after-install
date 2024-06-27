@@ -46,3 +46,16 @@ cat /etc/default/bind << EOF
 RESOLVCONF=no
 OPTIONS="-4 -u bind"
 EOF
+
+# smb.conf
+server services = -dns
+
+mkdir /var/lib/samba/bind-dns
+mkdir /var/lib/samba/bind-dns/dns
+
+sleep 3
+samba_upgradedns --dns-backend=BIND9_DLZ
+sleep 1
+
+systemctl restart samba-ad-dc
+systemctl restart bind9

@@ -1,1 +1,11 @@
+# domain provision
 samba-tool domain provision --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --server-role=dc --adminpass="$PASSWORD"
+
+apt install -y chrony ntpdate
+ntpdate -bu pool.ntp.org
+echo "allow 0.0.0.0/0" >> /etc/chrony/chrony.conf
+echo "ntpsigndsocket  /var/lib/samba/ntp_signd" >> /etc/chrony/chrony.conf
+chown root:_chrony /var/lib/samba/ntp_signd/
+chmod 750 /var/lib/samba/ntp_signd/
+systemctl restart chrony
+systemctl enable chrony

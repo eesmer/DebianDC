@@ -10,3 +10,25 @@ chown root:_chrony /var/lib/samba/ntp_signd/
 chmod 750 /var/lib/samba/ntp_signd/
 systemctl restart chrony
 systemctl enable chrony
+
+# bind9 install and config
+apt install -y bind9
+# named.conf.options
+cat /etc/bind/named.conf.options << EOF
+options {
+ directory "/var/cache/bind";
+
+ forwarders {
+        8.8.8.8;
+  };
+
+ allow-query {  any;};
+ dnssec-validation no;
+
+ auth-nxdomain no;
+ listen-on-v6 { any; };
+
+ tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+ minimal-responses yes;
+};
+EOF

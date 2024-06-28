@@ -103,6 +103,8 @@ OPTIONS="-4 -u bind"
 EOF
 	chmod 644 /etc/default/bind9
 
+	sed -i 's/dns forwarders = .*/server services = -dns/' /etc/samba/smb.conf
+
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service

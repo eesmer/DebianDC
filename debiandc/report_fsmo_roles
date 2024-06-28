@@ -69,9 +69,8 @@ zenity --text-info --title="Report of FSMO Roles" --html --filename="$REPORT_DIR
 zenity --progress \
   --title="Report Generating.." \
   --text="$REALM FSMO Roles Report" \
-  --percentage=0
-  --width $WIDTH
-  --height $HEIGHT
+  --percentage=0 \
+  --auto-close
 
 if [ "$?" = -1 ] ; then
         zenity --error \

@@ -60,9 +60,8 @@ setup() {
         chmod 750 /var/lib/samba/ntp_signd/
         systemctl restart chrony
         systemctl enable chrony
-
-
-	sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
+	
+	#sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 	
 	rm /etc/krb5.conf
 	cp /var/lib/samba/private/krb5.conf /etc/

@@ -13,19 +13,36 @@ bash operations_domain
 exit 1
 fi
 
-killdc() {
-	DEMOTE_RESULT=FALSE
-	apt-get -y purge samba* && apt-get -y autoremove --purge && DEMOTE_RESULT=TRUE
+(
+DEMOTE_RESULT=FALSE
 
-	if [ "$DEMOTE_RESULT" = "FALSE" ]; then
-		zenity --error --text="The operation could not be completed." --ellipsize
-		bash operations_domain
-		exit 1
-	fi
+apt-get -y purge samba*
+apt-get -y autoremove --purge
 
-	zenity --info --text="$HNAME DC dead.\n\nR.I.P"
+echo "40" ; sleep 1
+
+DEMOTE_RESULT=TRUE
+
+echo "75" ; sleep 1
+
+if [ "$DEMOTE_RESULT" = "FALSE" ]; then
+	zenity --error --text="The operation could not be completed." --ellipsize
 	bash operations_domain
 	exit 1
-}
+fi
 
-ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC process is running.."))
+zenity --info --text="$HNAME DC dead.\n\nR.I.P"
+bash operations_domain
+exit 1
+) |
+zenity --progress \
+  --title="Demote DC" \
+  --text="Demote DC process is running.." \
+  --percentage=0
+
+if [ "$?" = -1 ] ; then
+        zenity --error \
+          --text="Demote DC process canceled."
+fi
+
+#ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC process is running.."))

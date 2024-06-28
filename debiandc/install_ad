@@ -108,11 +108,13 @@ EOF
 	mkdir -p /var/lib/samba/bind-dns/dns
 	
 	samba_upgradedns --dns-backend=BIND9_DLZ
-
+	
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
-	systemctl start samba-ad-dc.service
+	systemctl restart samba-ad-dc
 	systemctl restart bind9
+	#systemctl start samba-ad-dc.service
+	#systemctl restart bind9
 
 	#---------------------------------------------------
 	# common-value

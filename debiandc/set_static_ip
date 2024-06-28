@@ -56,7 +56,8 @@ zenity --info --text "The new ip address: $IPADDRESS" --ellipsize #--width 350 -
 zenity --progress \
   --title="IP Config" \
   --text="Set Static IP Address" \
-  --percentage=0
+  --percentage=0 \
+  --auto-close
 
 if [ "$?" = -1 ] ; then
         zenity --error \

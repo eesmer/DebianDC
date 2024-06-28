@@ -38,7 +38,8 @@ exit 1
 zenity --progress \
   --title="Demote DC" \
   --text="Demote DC process is running.." \
-  --percentage=0
+  --percentage=0 \
+  --auto-close
 
 if [ "$?" = -1 ] ; then
         zenity --error \

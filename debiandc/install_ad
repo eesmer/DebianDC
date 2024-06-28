@@ -42,10 +42,10 @@ setup() {
 	systemctl mask smbd nmbd winbind
 
 	rm /etc/samba/smb.conf
-	samba-tool domain provision \
+	#samba-tool domain provision \
 	#--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
 	#--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
-	--server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
+	samba-tool domain provision --server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
 
 	# Log configs
 	# #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
@@ -78,9 +78,9 @@ setup() {
 	#---------------------------------------------------
 	# common-value
 	#---------------------------------------------------
-	ZONE=$(samba-tool domain info 127.0.0.1 | grep Domain | cut -d ":" -f2 | cut -d " " -f2)
-	DOMAIN=$(echo "$ZONE" |tr [:lower:] [:upper:])
-	HNAME=$(hostname -f |tr [:lower:] [:upper:])
+	#ZONE=$(samba-tool domain info 127.0.0.1 | grep Domain | cut -d ":" -f2 | cut -d " " -f2)
+	#DOMAIN=$(echo "$ZONE" |tr [:lower:] [:upper:])
+	#HNAME=$(hostname -f |tr [:lower:] [:upper:])
 
 	#cat <<EOF > /usr/local/debiandc/common-value
 	#WIDTH=1300
@@ -90,10 +90,10 @@ setup() {
 	#ACTIONPATH=ansible
 	#EOF
 	
-	echo "********************************"
-	echo "AD ROLE INSTALL COMPLETED"
-	echo "********************************"
-	sleep 1
+	#echo "********************************"
+	#echo "AD ROLE INSTALL COMPLETED"
+	#echo "********************************"
+	#sleep 1
 
 	zenity --info --text "$REALM Domain setup is completed.The computer will reboot." --width 500 --height 100
 	reboot

@@ -60,7 +60,8 @@ zenity --text-info --title="Detailed User List" --html --filename="$REPORT_DIR/$
 zenity --progress \
   --title="Report Generating.." \
   --text="$REALM User Report" \
-  --percentage=0
+  --percentage=0 \
+  --auto-close
 
 if [ "$?" = -1 ] ; then
         zenity --error \

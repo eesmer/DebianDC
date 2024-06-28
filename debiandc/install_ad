@@ -90,6 +90,13 @@ minimal-responses yes;
 };
 EOF
 
+# named.conf.local
+cat > /etc/bind/named.conf.local << EOF
+dlz "$REALM" {
+database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_10.so";
+};
+EOF
+
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service

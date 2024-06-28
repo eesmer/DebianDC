@@ -97,6 +97,12 @@ database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_10.so";
 };
 EOF
 
+cat > /etc/default/bind << EOF
+RESOLVCONF=no
+OPTIONS="-4 -u bind"
+EOF
+	chmod 644 /etc/default/bind9
+
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service

@@ -13,17 +13,19 @@ bash operations_domain
 exit 1
 fi
 
-DEMOTE_RESULT=FALSE
-apt-get -y purge samba* && apt-get -y autoremove --purge && DEMOTE_RESULT=TRUE
+killdc() {
+	DEMOTE_RESULT=FALSE
+	apt-get -y purge samba* && apt-get -y autoremove --purge && DEMOTE_RESULT=TRUE
 
-if [ "$DEMOTE_RESULT" = "FALSE" ]
-then
-zenity --error --text="The operation could not be completed." --ellipsize
+	if [ "$DEMOTE_RESULT" = "FALSE" ]; then
+		zenity --error --text="The operation could not be completed." --ellipsize
+		bash operations_domain
+		exit 1
+	fi
 
-bash operations_domain
-exit 1
-fi
+	zenity --info --text="$HNAME DC dead.\n\nR.I.P"
+	bash operations_domain
+	exit 1
+}
 
-zenity --info --text="$HNAME DC dead. You can do the demote process offline from another DC."
-bash operations_domain
-exit 1
+ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC for $REALM process is running.."))

@@ -44,7 +44,8 @@ setup() {
 	rm /etc/samba/smb.conf
 	samba-tool domain provision \
 	#--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
-	--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+	#--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+	--server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
 
 	# Log configs
 	# #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
@@ -69,34 +70,6 @@ setup() {
 	echo "search $REALM" > /etc/resolv.conf # echo "domain $REALM" > /etc/resolv.conf
 	echo "nameserver 127.0.0.1" >> /etc/resolv.conf
 
-	# bind9 config
-	rm /etc/bind/named.conf.options
-cat > /etc/bind/named.conf.options << EOF
-options {
-directory "/var/cache/bind";
-
-forwarders {
-8.8.8.8;
-};
-
-allow-query {  any;};
-dnssec-validation no;
-
-auth-nxdomain no;    # for RFC1035
-listen-on-v6 { any; };
-
-tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
-minimal-responses yes;
-};
-EOF
-
-rm /etc/default/bind9
-cat > /etc/default/bind9 << EOF
-RESOLVCONF=no
-OPTIONS="-u bind -4"
-EOF
-	chmod 644 /etc/default/bind9
-	
 	systemctl unmask samba-ad-dc.service
 	systemctl enable samba-ad-dc.service
 	systemctl start samba-ad-dc.service
@@ -109,15 +82,13 @@ EOF
 	DOMAIN=$(echo "$ZONE" |tr [:lower:] [:upper:])
 	HNAME=$(hostname -f |tr [:lower:] [:upper:])
 
-	cat <<EOF > /usr/local/debiandc/common-value
-WIDTH=1300
-HEIGHT=700
-DOMAIN=$DOMAIN_UPPER
-HNAME=$HNAME_UPPER
-ACTIONPATH=ansible
-	EOF
-
-	#echo WIDTH=1300 > /usr/local/debiandc/common-value
+	#cat <<EOF > /usr/local/debiandc/common-value
+	#WIDTH=1300
+	#HEIGHT=700
+	#DOMAIN=$DOMAIN_UPPER
+	#HNAME=$HNAME_UPPER
+	#ACTIONPATH=ansible
+	#EOF
 	
 	echo "********************************"
 	echo "AD ROLE INSTALL COMPLETED"

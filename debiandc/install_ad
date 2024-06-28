@@ -103,7 +103,7 @@ OPTIONS="-4 -u bind"
 EOF
 	chmod 644 /etc/default/bind9
 
-	sed -i 's/dns forwarders = .*/server services = -dns/' /etc/samba/smb.conf
+	sed -i 's/dns forwarder = .*/server services = -dns/' /etc/samba/smb.conf
 	mkdir -p /var/lib/samba/bind-dns
 	mkdir -p /var/lib/samba/bind-dns/dns
 	

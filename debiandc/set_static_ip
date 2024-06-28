@@ -18,12 +18,17 @@ CHOICE=$(zenity --forms --text="DebianDC Static IP Settings" --title="Settings S
 --add-entry="Gateway"
 )
 
+(
 INTERFACE=$(echo $CHOICE | cut -d "|" -f1)
 IPADDRESS=$(echo $CHOICE | cut -d "|" -f2)
 NETMASK=$(echo $CHOICE | cut -d "|" -f3)
 GATEWAY=$(echo $CHOICE | cut -d "|" -f4)
 
-function create_debiandcnw(){
+echo "10" ; sleep 1
+
+rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup #&& create_debiandcnw
+
+#####function create_debiandcnw(){
 ifconfig $INTERFACE down
 sleep 1
 cat > /etc/network/interfaces.d/debiandcnw << EOF
@@ -36,13 +41,29 @@ EOF
 chmod 644 /etc/network/interfaces.d/debiandcnw
 sed -i /$INTERFACE/d /etc/network/interfaces
 ifconfig $INTERFACE up
-}
+##################################}
 
-rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup && create_debiandcnw
+echo "50" ; sleep 1
 
 ifdown $INTERFACE
 sleep 1
 ifup $INTERFACE
+
+echo "99" ; sleep 1
+
+zenity --info --text "The new ip address: $IPADDRESS" --ellipsize #--width 350 --height 100
+) |
+zenity --progress \
+  --title="IP Config" \
+  --text="Set Static IP Address" \
+  --percentage=0
+
+if [ "$?" = -1 ] ; then
+        zenity --error \
+          --text="Set IP Address process canceled."
+fi
+
+#rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup && create_debiandcnw
 
 #ip r |grep "link src" > /tmp/nw_status
 #systemctl status networking.service >> /tmp/nw_status
@@ -50,6 +71,6 @@ ifup $INTERFACE
 #rm /tmp/nw_status
 
 #zenity --info --text "The machine will be restarted for the use of the $IPADDRESS IP Adress" --width 350 --height 100
-zenity --info --text "The new ip address: $IPADDRESS" --width 350 --height 100
+##############zenity --info --text "The new ip address: $IPADDRESS" --width 350 --height 100
 #reboot
 bash manager

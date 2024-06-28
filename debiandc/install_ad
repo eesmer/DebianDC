@@ -149,7 +149,8 @@ echo "90" ; sleep 1
 zenity --progress \
   --title="Domain Installation" \
   --text="$REALM Domain Install" \
-  --percentage=0
+  --percentage=0 \
+  --auto-close
 
 if [ "$?" = -1 ] ; then
         zenity --error \

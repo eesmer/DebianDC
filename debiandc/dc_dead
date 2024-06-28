@@ -28,4 +28,4 @@ killdc() {
 	exit 1
 }
 
-ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC for $REALM process is running.."))
+ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC process is running.."))

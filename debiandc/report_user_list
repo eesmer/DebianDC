@@ -7,6 +7,7 @@ REPORT_DIR=/tmp/debiandcreportsdir
 mkdir -p $REPORT_DIR
 RDATE=$(date)
 
+(
 cat > $REPORT_DIR/$REPORT_NAME << EOF
 <!DOCTYPE html>
 <html>
@@ -24,12 +25,16 @@ sed -i '/Guest/d' $REPORT_DIR/user-list.txt
 sed -i '/dns-/d' $REPORT_DIR/user-list.txt
 sed -i '/krbtgt/d' $REPORT_DIR/user-list.txt
 
+echo "25" ; sleep 1
+
 numuser=$(cat $REPORT_DIR/user-list.txt | wc -l)
 i=1
 while [ "$i" -le $numuser ]; do
 account=$(ls -l | sed -n $i{p} $REPORT_DIR/user-list.txt)
 
 samba-tool user show $account > $REPORT_DIR/$account
+
+echo "50" ; sleep 1
 
 echo "<li><b>$account</b></li>" >> $REPORT_DIR/$REPORT_NAME 
 echo '<p style="color: black; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
@@ -45,10 +50,22 @@ echo "<hr class="solid">" >> $REPORT_DIR/$REPORT_NAME
 i=$(( i + 1 ))
 done
 
+echo "75" ; sleep 1
+
 echo "</body>" >> $REPORT_DIR/$REPORT_NAME
 echo "</html>" >> $REPORT_DIR/$REPORT_NAME
 
 zenity --text-info --title="Detailed User List" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+) |
+zenity --progress \
+  --title="Report Generating.." \
+  --text="$REALM User Report" \
+  --percentage=0
+
+if [ "$?" = -1 ] ; then
+        zenity --error \
+          --text="Report generate canceled."
+fi
 
 bash reports
 exit 1

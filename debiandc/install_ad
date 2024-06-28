@@ -33,8 +33,6 @@ DOMAIN=$(echo $REALM | cut -d "." -f1)
 sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts
 hostnamectl set-hostname $HOSTNAME.$REALM
 
-echo "10" ; sleep 0.5
-
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
 apt-get -y install bind9 bind9utils dnsutils
@@ -77,7 +75,7 @@ cp /var/lib/samba/private/krb5.conf /etc/
 echo "search $REALM" > /etc/resolv.conf # echo "domain $REALM" > /etc/resolv.conf
 echo "nameserver 127.0.0.1" >> /etc/resolv.conf
 
-echo "75" ; sleep 0.5
+echo "50" ; sleep 0.5
 
 # named.conf.options
 cat > /etc/bind/named.conf.options << EOF 
@@ -115,6 +113,8 @@ chmod 644 /etc/default/bind9
 sed -i 's/dns forwarder = .*/server services = -dns/' /etc/samba/smb.conf
 mkdir -p /var/lib/samba/bind-dns
 mkdir -p /var/lib/samba/bind-dns/dns
+
+echo "75" ; sleep 1
 	
 samba_upgradedns --dns-backend=BIND9_DLZ
 	
@@ -144,10 +144,7 @@ systemctl restart bind9
 #echo "AD ROLE INSTALL COMPLETED"
 #echo "********************************"
 #sleep 1
-
-echo "99" ; sleep 1
-
-#reboot
+echo "90" ; sleep 1
 ) |
 zenity --progress \
   --title="Domain Installation" \
@@ -161,6 +158,5 @@ fi
 
 #bash reports
 #ABC=$(setup | tee >(zenity --progress --pulsate --text="Setup a New Domain:$REALM process is running.."))
-#zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
 zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
 reboot

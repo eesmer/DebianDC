@@ -29,49 +29,55 @@ fi
 SERVER_IP=$(ip r | grep link | grep src | cut -d '/' -f2 | cut -d'c' -f3 | cut -d ' ' -f2)
 DOMAIN=$(echo $REALM | cut -d "." -f1)
 
-setup() {
-	sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts
-	hostnamectl set-hostname $HOSTNAME.$REALM
+(
+sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts
+hostnamectl set-hostname $HOSTNAME.$REALM
 
-	export DEBIAN_FRONTEND=noninteractive
-	apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
-	apt-get -y install bind9 bind9utils dnsutils
-	apt-get -y install samba --install-recommends
-	apt-get -y install winbind
-	apt-get -y install krb5-config krb5-user
+echo "10" ; sleep 0.5
 
-	systemctl stop smbd nmbd winbind
-	systemctl disable smbd nmbd winbind
-	systemctl mask smbd nmbd winbind
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
+apt-get -y install bind9 bind9utils dnsutils
+apt-get -y install samba --install-recommends
+apt-get -y install winbind
+apt-get -y install krb5-config krb5-user
 
-	rm /etc/samba/smb.conf
-	#samba-tool domain provision \
-	#--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
-	#--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
-	samba-tool domain provision --server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
+systemctl stop smbd nmbd winbind
+systemctl disable smbd nmbd winbind
+systemctl mask smbd nmbd winbind
 
-	# Log configs
-	# #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
-	sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
-	sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
-	sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
+echo "25" ; sleep 0.5
 
-	# time/sync config
-        ntpdate -bu pool.ntp.org
-        echo "allow 0.0.0.0/0" >> /etc/chrony/chrony.conf
-        echo "ntpsigndsocket  /var/lib/samba/ntp_signd" >> /etc/chrony/chrony.conf
-        chown root:_chrony /var/lib/samba/ntp_signd/
-        chmod 750 /var/lib/samba/ntp_signd/
-        systemctl restart chrony
-        systemctl enable chrony
+rm /etc/samba/smb.conf
+#samba-tool domain provision \
+#--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
+#--server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+samba-tool domain provision --server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
+
+# Log configs
+# #sed -i '/server role =/a server services = s3fs, rpc, nbt, wrepl, ldap, cldap, kdc, drepl, winbindd, ntp_signd, kcc, dnsupdate' /etc/samba/smb.conf
+sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
+sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
+sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
+
+# time/sync config
+ntpdate -bu pool.ntp.org
+echo "allow 0.0.0.0/0" >> /etc/chrony/chrony.conf
+echo "ntpsigndsocket  /var/lib/samba/ntp_signd" >> /etc/chrony/chrony.conf
+chown root:_chrony /var/lib/samba/ntp_signd/
+chmod 750 /var/lib/samba/ntp_signd/
+systemctl restart chrony
+systemctl enable chrony
+
+#sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 	
-	#sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
-	
-	rm /etc/krb5.conf
-	cp /var/lib/samba/private/krb5.conf /etc/
+rm /etc/krb5.conf
+cp /var/lib/samba/private/krb5.conf /etc/
 
-	echo "search $REALM" > /etc/resolv.conf # echo "domain $REALM" > /etc/resolv.conf
-	echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+echo "search $REALM" > /etc/resolv.conf # echo "domain $REALM" > /etc/resolv.conf
+echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+
+echo "75" ; sleep 0.5
 
 # named.conf.options
 cat > /etc/bind/named.conf.options << EOF 
@@ -104,43 +110,57 @@ cat > /etc/default/bind << EOF
 RESOLVCONF=no
 OPTIONS="-4 -u bind"
 EOF
-	chmod 644 /etc/default/bind9
+chmod 644 /etc/default/bind9
 
-	sed -i 's/dns forwarder = .*/server services = -dns/' /etc/samba/smb.conf
-	mkdir -p /var/lib/samba/bind-dns
-	mkdir -p /var/lib/samba/bind-dns/dns
+sed -i 's/dns forwarder = .*/server services = -dns/' /etc/samba/smb.conf
+mkdir -p /var/lib/samba/bind-dns
+mkdir -p /var/lib/samba/bind-dns/dns
 	
-	samba_upgradedns --dns-backend=BIND9_DLZ
+samba_upgradedns --dns-backend=BIND9_DLZ
 	
-	systemctl unmask samba-ad-dc.service
-	systemctl enable samba-ad-dc.service
-	systemctl restart samba-ad-dc
-	systemctl restart bind9
-	#systemctl start samba-ad-dc.service
-	#systemctl restart bind9
+systemctl unmask samba-ad-dc.service
+systemctl enable samba-ad-dc.service
+systemctl restart samba-ad-dc
+systemctl restart bind9
+#systemctl start samba-ad-dc.service
+#systemctl restart bind9
 
-	#---------------------------------------------------
-	# common-value
-	#---------------------------------------------------
-	#ZONE=$(samba-tool domain info 127.0.0.1 | grep Domain | cut -d ":" -f2 | cut -d " " -f2)
-	#DOMAIN=$(echo "$ZONE" |tr [:lower:] [:upper:])
-	#HNAME=$(hostname -f |tr [:lower:] [:upper:])
+#---------------------------------------------------
+# common-value
+#---------------------------------------------------
+#ZONE=$(samba-tool domain info 127.0.0.1 | grep Domain | cut -d ":" -f2 | cut -d " " -f2)
+#DOMAIN=$(echo "$ZONE" |tr [:lower:] [:upper:])
+#HNAME=$(hostname -f |tr [:lower:] [:upper:])
 
-	#cat <<EOF > /usr/local/debiandc/common-value
-	#WIDTH=1300
-	#HEIGHT=700
-	#DOMAIN=$DOMAIN_UPPER
-	#HNAME=$HNAME_UPPER
-	#ACTIONPATH=ansible
-	#EOF
+#cat <<EOF > /usr/local/debiandc/common-value
+#WIDTH=1300
+#HEIGHT=700
+#DOMAIN=$DOMAIN_UPPER
+#HNAME=$HNAME_UPPER
+#ACTIONPATH=ansible
+#EOF
 	
-	#echo "********************************"
-	#echo "AD ROLE INSTALL COMPLETED"
-	#echo "********************************"
-	#sleep 1
+#echo "********************************"
+#echo "AD ROLE INSTALL COMPLETED"
+#echo "********************************"
+#sleep 1
 
-	zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
-	reboot
-}
+echo "99" ; sleep 1
 
-ABC=$(setup | tee >(zenity --progress --pulsate --text="Setup a New Domain:$REALM process is running.."))
+#reboot
+) |
+zenity --progress \
+  --title="Domain Installation" \
+  --text="$REALM Domain Install" \
+  --percentage=0
+
+if [ "$?" = -1 ] ; then
+        zenity --error \
+          --text="Report generate canceled."
+fi
+
+#bash reports
+#ABC=$(setup | tee >(zenity --progress --pulsate --text="Setup a New Domain:$REALM process is running.."))
+#zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
+zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
+reboot

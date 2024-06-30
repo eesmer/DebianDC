@@ -28,10 +28,10 @@ You can install a new domain environment with DebianDC or manage your existing S
     - install and uninstall .msi package
 ---
 
-## Help
-
 ![alt text](docs/DebianDC-UserGuide/screenshots/installationguide-icon.png "DebianDC Installation Guide") <br>
 [Installation Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation.md)
+
+<br>
 
 ![alt text](docs/DebianDC-UserGuide/screenshots/userguide-icon.png "DebianDC User Guide") <br>
 [User Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)

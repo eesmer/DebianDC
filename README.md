@@ -29,6 +29,8 @@ You can install a new domain environment with DebianDC or manage your existing S
 
 ---
 
+# Help and Documentation
+
 ![alt text](docs/DebianDC-UserGuide/screenshots/installationguide-icon.png "DebianDC Installation Guide") <br>
 [Installation Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation.md)
 
@@ -44,7 +46,10 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 
 ---
 
-### Samba Active Directory with DebianDC
-**DebianDC Best Practices & Active Directory Concepts Documentation** <br>
+![alt text](docs/DebianDC-UserGuide/screenshots/userguide-icon.png "DebianDC User Guide") <br>
+## Samba Active Directory with DebianDC
+**DebianDC Best Practices and Active Directory Concepts**
 
-[DebianDC Documentation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)
+<br>
+
+[Samba Active Directory with DebianDC](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)

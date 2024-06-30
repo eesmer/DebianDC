@@ -30,7 +30,7 @@ You can install a new domain environment with DebianDC or manage your existing S
 
 ## Help
 
-#### Installation
+![alt text](docs/DebianDC-UserGuide/screenshots/installationguide-icon.png "DebianDC StartMenu")
 [Installation Guide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation.md)
 
 ![alt text](docs/DebianDC-UserGuide/screenshots/userguide-icon.png "DebianDC StartMenu")

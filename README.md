@@ -46,7 +46,7 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 
 ---
 
-# Help and Documentation
+# Book
 
 #### Samba AD Best Practies with DebianDC
 ![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-ebook.png "DebianDC Book") <br>

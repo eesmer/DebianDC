@@ -46,7 +46,7 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 
 ---
 
-![alt text](docs/DebianDC-UserGuide/screenshots/userguide-icon.png "DebianDC User Guide") <br>
+![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-ebook.png "DebianDC User Guide") <br>
 ## Samba Active Directory with DebianDC
 **DebianDC Best Practices and Active Directory Concepts**
 

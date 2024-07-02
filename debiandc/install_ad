@@ -138,10 +138,6 @@ systemctl restart bind9
 #ACTIONPATH=ansible
 #EOF
 	
-#echo "********************************"
-#echo "AD ROLE INSTALL COMPLETED"
-#echo "********************************"
-#sleep 1
 echo "90" ; sleep 1
 ) |
 zenity --progress \
@@ -155,7 +151,6 @@ if [ "$?" = -1 ] ; then
           --text="Report generate canceled."
 fi
 
-#bash reports
 #ABC=$(setup | tee >(zenity --progress --pulsate --text="Setup a New Domain:$REALM process is running.."))
 zenity --info --text "$REALM Domain setup is completed.\n\nThe computer will reboot." --ellipsize
 reboot

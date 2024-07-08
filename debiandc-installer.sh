@@ -26,11 +26,10 @@ apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
 apt-get -y install git
 apt-get -y install zenity
 apt-get -y install openssh-server chrony ntpdate # - ntp (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1033088)
-apt-get -y install tmux vim
 apt-get -y install dnsutils net-tools
 apt-get -y install curl wget
 apt-get -y install ack expect krb5-user krb5-config
-apt-get -y install htop
+apt-get -y install tmux vim htop
 apt-get -y install ansible
 apt-get -y install syslog-ng #for auth.log
 apt-get -y install xrdp #settings not completed

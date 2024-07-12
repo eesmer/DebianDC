@@ -63,6 +63,9 @@ sed -i '/idmap_ldb:use/a\ \tprinting = bsd' /etc/samba/smb.conf
 sed -i '/idmap_ldb:use/a\ \tdisable spoolss = yes' /etc/samba/smb.conf
 sed -i '/idmap_ldb:use/a\ \tload printers = no' /etc/samba/smb.conf
 sed -i '/idmap_ldb:use/a\ \tprintcap name = /dev/null' /etc/samba/smb.conf
+sed -i '/global/a\ \tprinting = bsd' /etc/samba/smb.conf
+
+
 
 # time/sync config
 ntpdate -bu pool.ntp.org

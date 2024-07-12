@@ -58,6 +58,12 @@ sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
 sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
 sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
 
+# Disable printer
+sed -i '/idmap_ldb:use/a\ \tprinting = bsd' /etc/samba/smb.conf
+sed -i '/idmap_ldb:use/a\ \tdisable spoolss = yes' /etc/samba/smb.conf
+sed -i '/idmap_ldb:use/a\ \tload printers = no' /etc/samba/smb.conf
+sed -i '/idmap_ldb:use/a\ \tprintcap name = /dev/null' /etc/samba/smb.conf
+
 # time/sync config
 ntpdate -bu pool.ntp.org
 echo "allow 0.0.0.0/0" >> /etc/chrony/chrony.conf

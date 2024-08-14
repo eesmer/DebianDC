@@ -190,3 +190,9 @@ systemctl restart bind9
 
 CHECK_DISTRO
 SAMBAAD_INSTALL
+
+echo -e
+echo "$DOMAIN Samba AD Installation Successfully"
+echo -e
+echo "--------------------------------------------------------"
+sleep 5

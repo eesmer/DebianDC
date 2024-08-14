@@ -187,12 +187,17 @@ systemctl enable samba-ad-dc.service
 systemctl restart samba-ad-dc
 systemctl restart bind9
 
+$BOLD
+$BLUE
 echo -e
 echo "--------------------------------------------------------"
 echo -e
+$GREEN
 echo "$REALM Samba AD Installation Successfully"
 echo -e
+$BLUE
 echo "--------------------------------------------------------"
+$NOCOL
 sleep 5 #for DebianDC
 
 zenity --info --text="$REALM Samba AD Domain Install Successfully" --ellipsize

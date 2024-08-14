@@ -39,7 +39,7 @@ apt-get -y install xrdp #settings not completed
 # -----------------------------------------------------------------------------
 git clone https://github.com/eesmer/DebianDC.git
 
-cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiandc/ #&& rm -r DebianDC
+cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiandc/ && rm -r DebianDC
 chown -R root:root /usr/local/debiandc
 chmod -R 744 /usr/local/debiandc
 chmod +x /usr/local/debiandc/manager

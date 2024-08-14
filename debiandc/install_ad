@@ -186,13 +186,15 @@ systemctl unmask samba-ad-dc.service
 systemctl enable samba-ad-dc.service
 systemctl restart samba-ad-dc
 systemctl restart bind9
-}
 
-CHECK_DISTRO
-SAMBAAD_INSTALL
-
+echo -e
+echo "--------------------------------------------------------"
 echo -e
 echo "$DOMAIN Samba AD Installation Successfully"
 echo -e
 echo "--------------------------------------------------------"
-sleep 5
+sleep 5 #for DebianDC
+}
+
+CHECK_DISTRO
+SAMBAAD_INSTALL

@@ -190,10 +190,13 @@ systemctl restart bind9
 echo -e
 echo "--------------------------------------------------------"
 echo -e
-echo "$DOMAIN Samba AD Installation Successfully"
+echo "$REALM Samba AD Installation Successfully"
 echo -e
 echo "--------------------------------------------------------"
 sleep 5 #for DebianDC
+
+zenity --info --text="$REALM Samba AD Domain Install Successfully" --ellipsize
+
 }
 
 CHECK_DISTRO

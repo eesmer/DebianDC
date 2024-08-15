@@ -71,7 +71,7 @@ SERVER_IP=$(ip r |grep link |grep src |cut -d'/' -f2 |cut -d'c' -f3 |cut -d' ' -
 INTERNAL1=127.0.0.0/8
 INTERNAL2=$(ip r |grep link |grep src |cut -d' ' -f1)
 SUBNET=$(ip r |grep link |grep src |cut -d' ' -f1 |cut -d'/' -f2)
-PDC=$(nslookup gordion.lab |grep Server: |cut -d ':' -f2)
+PDC=$(nslookup $DOMAIN |grep Server: |cut -d ':' -f2)
 
 cat > /etc/bind/named.conf.options << EOF
 acl internals {

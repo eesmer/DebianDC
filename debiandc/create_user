@@ -9,12 +9,10 @@ CHOICE=$(zenity --forms --text="Create User" --show-header --title="Screen of Cr
         --add-entry="Name" \
         --add-entry="SurName" \
         --add-entry="UserName" \
-        --add-entry="Email" \
-        --add-entry="Department" \
 	--add-password="Password" \
         --add-combo="Must Change at Next Login" --combo-values="Yes|No" )
 
-if [ "$?" = "0" ] && [ "$CHOICE" = "|||||| " ] #OK
+if [ "$?" = "0" ] && [ "$CHOICE" = "|| " ] #OK
 then
 	bash create_user
 	exit 1
@@ -27,10 +25,9 @@ fi
 	NAME=$(echo $CHOICE | cut -d "|" -f 1)
         SURNAME=$(echo $CHOICE | cut -d "|" -f 2)
         USERNAME=$(echo $CHOICE | cut -d "|" -f 3)
-        EMAIL=$(echo $CHOICE | cut -d "|" -f 4)
-        DEPARTMENT=$(echo $CHOICE | cut -d "|" -f 5)
-        PASSWORD=$(echo $CHOICE | cut -d "|" -f 6)
-        #samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --mail-address=$EMAIL --department=$DEPARTMENT 2>&1 | tee /tmp/outfile
+        PASSWORD=$(echo $CHOICE | cut -d "|" -f 4)
+
+        # samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --mail-address=$EMAIL --department=$DEPARTMENT 2>&1 | tee /tmp/outfile
         samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME 2>&1 | tee /tmp/outfile
 	cat /tmp/outfile | zenity --text-info --title="Result of the Create User Process for $USERNAME" --width $WIDTH --height $HEIGHT
 	CHANGEPASS=$(echo $CHOICE | cut -d "|" -f 7)

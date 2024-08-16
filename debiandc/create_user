@@ -5,11 +5,16 @@ trap 'bash user_man' ERR
 cd /usr/local/debiandc
 source common-value
 
+samba-tool ou list | cut -d "=" -f2 > /tmp/ou-list
+sed -i 's/^/|/' /tmp/ou-list
+OU=$(cat /tmp/ou-list)
+
 CHOICE=$(zenity --forms --text="Create User" --show-header --title="Screen of Create User" --width $WIDTH --height $HEIGHT \
         --add-entry="Name" \
         --add-entry="SurName" \
         --add-entry="UserName" \
 	--add-password="Password" \
+	--add-combo="OU" --combo-values="$OU" \
         --add-combo="Must Change at Next Login" --combo-values="Yes|No" )
 
 if [ "$?" = "0" ] && [ "$CHOICE" = "|| " ] #OK
@@ -26,9 +31,10 @@ fi
         SURNAME=$(echo $CHOICE | cut -d "|" -f 2)
         USERNAME=$(echo $CHOICE | cut -d "|" -f 3)
         PASSWORD=$(echo $CHOICE | cut -d "|" -f 4)
+        OU=$(echo $CHOICE | cut -d "|" -f 5)
 
         # samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --mail-address=$EMAIL --department=$DEPARTMENT 2>&1 | tee /tmp/outfile
-        samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME 2>&1 | tee /tmp/outfile
+        samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --userou="ou=$OU" 2>&1 | tee /tmp/outfile
 	cat /tmp/outfile | zenity --text-info --title="Result of the Create User Process for $USERNAME" --width $WIDTH --height $HEIGHT
 	CHANGEPASS=$(echo $CHOICE | cut -d "|" -f 7)
 	if [ "$CHANGEPASS" = "Yes" ]

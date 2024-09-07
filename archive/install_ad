@@ -44,6 +44,7 @@ systemctl mask smbd nmbd winbind
 rm /etc/samba/smb.conf
 samba-tool domain provision \
 --server-role=dc --use-rfc2307 --dns-backend=BIND9_DLZ --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
+#--server-role=dc --use-rfc2307 --dns-backend=SAMBA_INTERNAL --realm=$REALM --domain=$DOMAIN --adminpass=$PASSWORD
 
 sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
 

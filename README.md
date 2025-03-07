@@ -6,6 +6,18 @@
 DebianDC provides a graphical interface environment for Samba Active Directory.<br>
 You can install a new domain environment with DebianDC or manage your existing Samba AD environment.<br>
 
+---
+
+## 🎛️ Project Purpose
+
+- Automatic installation via Custom ISO.
+- Simple interface with desktop environment (LXDE).
+- Samba Active Directory installation and management.
+- Provides GUI with Zenity interface.
+
+
+---
+
 ![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-Screenshot.png "DebianDC_Desktop")
 
 <br>

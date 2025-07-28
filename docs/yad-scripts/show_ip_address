@@ -1,0 +1,43 @@
+#!/bin/bash
+
+cd /usr/local/debiandc
+source common-value
+
+# IP ve ağ bilgilerini oku
+IPINFO=$(ip -4 addr show | awk '
+  $1 == "inet" {
+    split($2, ip, "/")
+    print ip[1]
+    exit
+  }')
+
+IFACE=$(ip -4 addr show | awk '$1 == "inet" { print $NF; exit }')
+GATEWAY=$(ip r | awk '/default/ { print $3 }')
+NETSTATUS=$(systemctl is-active networking.service)
+
+# Durum metni renkli olarak hazırla
+if [[ "$NETSTATUS" == "active" ]]; then
+  STATUS_LINE="<span foreground='green'>networking.service : AKTİF (çalışıyor)</span>"
+else
+  STATUS_LINE="<span foreground='red'>networking.service : PASİF (çalışmıyor)</span>"
+fi
+
+# YAD Form
+yad --form \
+  --title="Network Bilgisi" \
+  --window-icon=network-workgroup \
+  --width=500 --height=300 \
+  --text="
+<b>[ Ağ Bilgisi ]</b>
+
+Cihaz     : <b>$IFACE</b>
+IP Adresi : <span foreground='blue'><b>$IPINFO</b></span>
+Gateway   : <b>$GATEWAY</b>
+
+<b>[ Hizmet Durumu ]</b>
+$STATUS_LINE
+" \
+  --button="Tamam:0"
+
+clear
+bash /root/Desktop/yad/manage.sh

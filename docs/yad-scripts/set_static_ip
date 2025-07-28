@@ -1,0 +1,68 @@
+#!/bin/bash
+
+cd /usr/local/debiandc
+source common-value
+
+# Ağ arayüzlerini çıkart, ilk adaptöre `|` ekle
+netstat -i | awk {'print $1'} | grep -v "Kernel" | grep -v "Iface" | grep -v "lo" > /tmp/interfacelist
+INTERFACES=$(paste -sd'!' /tmp/interfacelist)
+
+# Formu göster
+CHOICE=$(yad --form \
+  --title="DebianDC Statik IP Ayarı" \
+  --window-icon=network-workgroup \
+  --width=$WIDTH --height=$HEIGHT \
+  --center \
+  --text="Lütfen ağ ayarlarını girin:" \
+  --field="Arayüz:CB" "$INTERFACES" \
+  --field="IP Adresi" "" \
+  --field="Netmask" "" \
+  --field="Gateway" "" \
+  --separator="|" \
+  --button="Ayarla:0" --button="İptal:1")
+
+[[ $? -ne 0 || -z "$CHOICE" ]] && exit
+
+# Formdan dönen değerleri ayır
+IFS="|" read -r INTERFACE IPADDRESS NETMASK GATEWAY <<< "$CHOICE"
+INTERFACE=$(echo $CHOICE | cut -d "|" -f1)
+
+# IP yapılandırmasını uygula
+(
+echo "10"; sleep 1
+
+rm -f /etc/network/interfaces.d/debiandcnw
+
+cat > /etc/network/interfaces.d/debiandcnw <<EOF
+auto $INTERFACE
+iface $INTERFACE inet static
+address $IPADDRESS
+netmask $NETMASK
+gateway $GATEWAY
+EOF
+
+chmod 644 /etc/network/interfaces.d/debiandcnw
+sed -i "/$INTERFACE/d" /etc/network/interfaces
+
+echo "50"; sleep 1
+
+ifdown "$INTERFACE"
+sleep 1
+ifup "$INTERFACE"
+
+echo "90"; sleep 1
+) | yad --progress \
+  --title="IP Yapılandırması" \
+  --text="Statik IP ayarlanıyor..." \
+  --percentage=0 \
+  --auto-close
+
+[[ $? -eq 0 ]] && \
+  yad --info \
+    --title="Başarılı" \
+    --text="<b>Yeni IP adresi:</b> <span foreground='blue'>$IPADDRESS</span>" \
+    --width=400 --height=100 \
+    --window-icon=network-workgroup
+
+clear
+bash manager

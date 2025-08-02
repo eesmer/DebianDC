@@ -5,7 +5,7 @@ www.xrdp.org
 ### 1- Remote Desktop Access
 #### From Linux
 ```
-xfreerdp /w:1366 /h:768 /v:DebianDC_Server:3389
+xfreerdp /u:root /p:$PASSWORD /w:1366 /h:768 /v:$DEBIANDC_SERVER:3389
 ```
 ![alt text](screenshots/handbook/xrdp-login1.png "XRDP Login Screen")
 

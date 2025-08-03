@@ -1,0 +1,69 @@
+#!/bin/bash
+
+cd /opt/debiandc
+source common-value
+
+netstat -i | awk {'print $1'} | grep -v "Kernel" | grep -v "Iface" | grep -v "lo" > /tmp/interfacelist
+INTERFACES=$(paste -sd'!' /tmp/interfacelist)
+
+if CHOICE=$(yad $YAD_OPTS --form \
+	--title="DebianDC Static IP Settings" \
+	--window-icon=network-workgroup \
+	--center \
+	--text="Please enter network settings:" \
+	--field="Interface:CB" "$INTERFACES" \
+	--field="IP Address" "" \
+	--field="Netmask" "" \
+	--field="Gateway" "" \
+	--separator="|" \
+	--button="Set!gtk-ok:0" --button="Cancel!gtk-cancel:1"); then
+ 
+  [[ -z "$CHOICE" ]] && exec bash "$MAIN"
+
+else
+  cd "$BASE_DIR"
+  exec bash "$MAIN"
+fi
+
+IFS="|" read -r INTERFACE IPADDRESS NETMASK GATEWAY <<< "$CHOICE"
+INTERFACE=$(echo $CHOICE | cut -d "|" -f1)
+
+(
+echo "10"; sleep 1
+
+rm -f /etc/network/interfaces.d/debiandcnw
+
+cat > /etc/network/interfaces.d/debiandcnw <<EOF
+auto $INTERFACE
+iface $INTERFACE inet static
+address $IPADDRESS
+netmask $NETMASK
+gateway $GATEWAY
+EOF
+
+chmod 644 /etc/network/interfaces.d/debiandcnw
+sed -i "/$INTERFACE/d" /etc/network/interfaces
+
+echo "50"; sleep 1
+
+ifdown "$INTERFACE"
+sleep 1
+ifup "$INTERFACE"
+
+echo "90"; sleep 1
+) | yad $YAD_OPTS --progress \
+  --title="IP Configuration" \
+  --text="Setting static IP" \
+  --percentage=0 \
+  --auto-close
+
+[[ $? -eq 0 ]] && \
+  yad $YAD_OPTS --info \
+    --title="Success" \
+    --text="<b>New IP Address:</b> <span foreground='blue'>$IPADDRESS</span>" \
+    --window-icon=network-workgroup \
+    --button="OK:0"
+
+clear
+bash $MAIN
+

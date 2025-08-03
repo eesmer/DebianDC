@@ -19,3 +19,7 @@ if CHOICE=$(yad $YAD_OPTS --form \
 
   [[ -z "$CHOICE" ]] && exec bash "$MAIN"
 
+else
+  cd "$BASE_DIR"
+  exec bash "$MAIN"
+fi

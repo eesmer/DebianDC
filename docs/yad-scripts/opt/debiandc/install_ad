@@ -1,0 +1,219 @@
+#!/bin/bash
+
+#-------------------------------------------------------------------
+# This script has been tested in Debian environment.
+# It is compatible with Debian.
+#-------------------------------------------------------------------
+
+cd /opt/debiandc     # (for DebianDC)
+source common-value  # (for DebianDC)
+
+# Color Codes
+MAGENTA="tput setaf 1"
+GREEN="tput setaf 2"
+YELLOW="tput setaf 3"
+DGREEN="tput setaf 4"
+CYAN="tput setaf 6"
+WHITE="tput setaf 7"
+GRAY="tput setaf 8"
+RED="tput setaf 9"
+BLUE="tput setaf 12"
+NOCOL="tput sgr0"
+BOLD="tput bold"
+
+whiptail --msgbox \
+        ".:: Samba Active Directory Domain Controller Installer ::. \
+        \n---------------------------------------------------------------- \
+        \nThis program is distributed for the purpose of being useful. \
+        \nThis program installs Samba Active Directory. \
+        \nIt will ask you questions about the domain and it will install and will install it according to the information it receives. \
+        \n\nWhen the installation is completed;\na Domain is created and this machine is configured as a Domain Controller. \
+        \n---------------------------------------------------------------- \
+        \n\nhttps://github.com/eesmer/SambaAD-HelperScripts \
+        \nhttps://github.com/eesmer/sambadtui \
+        \nhttps://github.com/eesmer/DebianDC" 20 90 45
+
+CHECK_DISTRO() {
+cat /etc/*-release /etc/issue > "/tmp/distrocheck"
+grep "debian" "/tmp/distrocheck" >/dev/null
+if [ "$?" = "0" ]; then
+	DIST=DEB
+fi
+rm /tmp/distrocheck
+# Not support message
+if [ "$DIST" = "DEB" ]; then
+	VER=$(cat /etc/debian_version | cut -d "." -f1)
+	if [ "$VER" -lt "11" ]; then
+		$RED
+		echo -e
+		echo "-------------------------------------------------------------------------------------"
+		echo -e "This script has been tested with Debian 11 and Debian 12 \nIt is recommended to use it with Debian 11 or Debian 12"
+		echo "-------------------------------------------------------------------------------------"
+		echo -e
+		$NOCOL
+		exit 1
+	fi
+else
+	$RED
+	echo -e
+	echo "-------------------------------------------------------------------------------------"
+	echo -e "This script has been tested in Debian environment.\nIt is compatible with Debian. "
+	echo "-------------------------------------------------------------------------------------"
+	$NOCOL
+fi
+}
+
+SAMBAAD_INSTALL() {
+	HNAME=$(whiptail --inputbox "Enter DC Machine Hostname (e.g.,DC01)" 10 50 --title "DC Hostname" --backtitle "DC Hostname" 3>&1 1>&2 2>&3)
+        ANSWER=$?
+        if [ ! $ANSWER = 0 ]; then
+                echo "User canceled"
+		bash $MAIN #(for DebianDC)
+		exit 1
+        fi
+	REALM=$(whiptail --inputbox "Enter Domain Name (e.g., EXAMPLE.LOC)" 10 50 --title "DomainName" --backtitle "Domain Name" 3>&1 1>&2 2>&3)
+	ANSWER=$?
+	if [ ! $ANSWER = 0 ]; then
+		echo "User canceled"
+		bash $MAIN #(for DebianDC)
+		exit 1
+	fi
+        PASSWORD=$(whiptail --passwordbox "Enter Administrator Password" 10 50 --title "Administrator Password" --backtitle "Administrator Password" 3>&1 1>&2 2>&3)
+	ANSWER=$?
+	if [ ! $ANSWER = 0 ]; then
+		echo "User canceled"
+		bash $MAIN #(for DebianDC)
+		exit 1
+	fi
+	if [ -z "$HNAME" ] || [ -z "$REALM" ] || [ -z "$PASSWORD" ]; then
+		whiptail --msgbox "Please fill in all fields.." --title "SambaAD Install" --backtitle "Samba Active Directory Installation" 0 0 0
+		SAMBAAD_INSTALL
+	fi
+
+	whiptail --yesno "Domain Name: $REALM\n Start Installation?" 0 0 0
+	ANSWER=$?
+	if [ ! $ANSWER = 0 ]; then
+		echo "User canceled"
+		bash $MAIN #(for DebianDC)
+		exit 1
+	fi
+
+	SERVER_IP=$(ip r | grep link | grep src | cut -d '/' -f2 | cut -d'c' -f3 | cut -d ' ' -f2)
+	DOMAIN=$(echo $REALM | cut -d "." -f1)
+	#sed -i "/127.0.1.1/ c 127.0.1.1 $HOSTNAME.$REALM $HOSTNAME" /etc/hosts
+	sed -i "/127.0.1.1/ c 127.0.1.1 $HNAME.$REALM $HNAME $REALM" /etc/hosts
+	hostnamectl set-hostname $HNAME.$REALM
+	
+	export DEBIAN_FRONTEND=noninteractive
+	apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
+	apt-get -y install bind9 bind9utils dnsutils
+	apt-get -y install samba --install-recommends
+	apt-get -y install winbind
+	apt-get -y install krb5-config krb5-user
+	
+	systemctl stop smbd nmbd winbind
+	systemctl disable smbd nmbd winbind
+	systemctl mask smbd nmbd winbind
+
+	apt-get -y install chrony ntpdate
+	apt-get -y install dnsutils net-tools
+	apt-get -y install openssh-server 
+	#apt-get -y install ack expect krb5-user krb5-config
+	#apt-get -y install curl wget
+	
+	#Domain Provision
+	rm /etc/samba/smb.conf
+	samba-tool domain provision --server-role=dc --use-rfc2307 --realm="$REALM" --domain="$DOMAIN" --adminpass="$PASSWORD"
+	
+	##Log Config
+	#sed -i '/server services =/a log level = 4' /etc/samba/smb.conf
+	#sed -i '/log level =/a log file = /var/log/samba/$REALM.log' /etc/samba/smb.conf
+	#sed -i '/log file =/a debug timestamp = yes' /etc/samba/smb.conf
+	
+	#Time/Sync Config
+	ntpdate -bu pool.ntp.org
+	echo "allow 0.0.0.0/0" >> /etc/chrony/chrony.conf
+	echo "ntpsigndsocket  /var/lib/samba/ntp_signd" >> /etc/chrony/chrony.conf
+	chown root:_chrony /var/lib/samba/ntp_signd/
+	chmod 750 /var/lib/samba/ntp_signd/
+	systemctl restart chrony
+	systemctl enable chrony
+	#sed -i "s/\$IP/$SERVER_IP/" /var/lib/samba/private/dns_update_list
+	
+	rm /etc/krb5.conf
+	cp /var/lib/samba/private/krb5.conf /etc/
+	echo "search $REALM" > /etc/resolv.conf
+	echo "nameserver 127.0.0.1" >> /etc/resolv.conf
+
+# named.conf.options
+cat > /etc/bind/named.conf.options << EOF
+options {
+directory "/var/cache/bind";
+
+forwarders {
+8.8.8.8;
+};
+
+allow-query { any; };
+dnssec-validation no;
+
+auth-nxdomain no; #RFC1035
+listen-on-v6 { any; };
+
+tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+minimal-responses yes;
+};
+EOF
+
+# named.conf.local
+cat > /etc/bind/named.conf.local << EOF
+dlz "$REALM" {
+database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_10.so";
+};
+EOF
+
+cat > /etc/default/named << EOF
+RESOLVCONF=no
+OPTIONS="-4 -u bind"
+EOF
+chmod 644 /etc/default/named
+
+sed -i 's/dns forwarder = .*/server services = -dns/' /etc/samba/smb.conf
+mkdir -p /var/lib/samba/bind-dns
+mkdir -p /var/lib/samba/bind-dns/dns
+
+##Log Config
+sed -i "/server services =/a log level = 2" /etc/samba/smb.conf
+sed -i "/log level =/a log file = /var/log/samba/$REALM.log" /etc/samba/smb.conf
+sed -i "/log file =/a debug timestamp = yes" /etc/samba/smb.conf
+
+samba_upgradedns --dns-backend=BIND9_DLZ
+
+systemctl unmask samba-ad-dc.service
+systemctl enable samba-ad-dc.service
+systemctl restart samba-ad-dc
+systemctl restart bind9
+
+$BOLD
+$BLUE
+echo -e
+echo "--------------------------------------------------------"
+echo -e
+$GREEN
+echo "$REALM Samba AD Installation Successfully"
+echo -e
+$BLUE
+echo "--------------------------------------------------------"
+$NOCOL
+sleep 5 #for DebianDC
+
+yad --info \
+  --title="Installation Successfully" \
+  --window-icon="gtk-apply" \
+  --text="<b>$REALM</b> Samba AD Domain Install Successfully" \
+  --center \
+  --button="Tamam:0"
+}
+
+CHECK_DISTRO
+SAMBAAD_INSTALL

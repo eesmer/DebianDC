@@ -1,0 +1,21 @@
+#!/bin/bash
+# /opt/debiandc/join_ad.sh
+
+set -euo pipefail
+
+cd /opt/debiandc/ || exit 1
+source common-value
+: "${YAD_OPTS:=}"
+
+if CHOICE=$(yad $YAD_OPTS --form \
+    --title="Join to Existing AD (ADC)" \
+    --text="<b>Mevcut domaine Additional Domain Controller (ADC) olarak katılım</b>\nLütfen bilgileri girin." \
+    --separator="|" \
+    --field="Hostname (Short, Without FQDN):" "DEBIANDC02" \
+    --field="DNS Server (Domain Controller IP Address):" "" \
+    --field="Domain Name (FQDN - example.lan):" "example.lan" \
+    --field="Administrator Password:H" "" \
+    --button="Continue!gtk-ok:0" --button="Cancel!gtk-cancel:1"); then
+
+  [[ -z "$CHOICE" ]] && exec bash "$MAIN"
+

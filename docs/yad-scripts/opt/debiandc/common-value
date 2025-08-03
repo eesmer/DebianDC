@@ -1,0 +1,3 @@
+BASE_DIR="/opt/debiandc"
+YAD_OPTS="--fullscreen --on-top"
+MAIN="/opt/debiandc/manager.sh"

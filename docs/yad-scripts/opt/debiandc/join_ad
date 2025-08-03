@@ -23,3 +23,21 @@ else
   cd "$BASE_DIR"
   exec bash "$MAIN"
 fi
+
+IFS="|" read -r HNAME DNSSRV DOMAIN PASSWORD <<< "$CHOICE"
+
+ERR=""
+[[ -z "$HNAME" ]]    && ERR+="\n- Hostname"
+[[ -z "$DNSSRV" ]]   && ERR+="\n- DNS Server"
+[[ -z "$DOMAIN" ]]   && ERR+="\n- Domain Name"
+[[ -z "$PASSWORD" ]] && ERR+="\n- Administrator Password"
+
+if [[ -n "$ERR" ]]; then
+  yad $YAD_OPTS --error \
+    --title="Missing Fields" \
+    --text="Please fill in:$ERR" \
+    --button="OK!gtk-ok:0"
+  bash "$MAIN"
+  exit 0
+fi
+

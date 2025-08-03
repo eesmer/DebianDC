@@ -41,3 +41,31 @@ if [[ -n "$ERR" ]]; then
   exit 0
 fi
 
+hostnamectl set-hostname "${HNAME}.${DOMAIN}"
+if [[ -f /etc/resolv.conf ]]; then
+  cp -a /etc/resolv.conf /etc/resolv.conf.bak.joinad || true
+fi
+{
+  echo "domain ${DOMAIN}"
+  echo "search ${DOMAIN}"
+  echo "nameserver ${DNSSRV}"
+} > /etc/resolv.conf
+
+if grep -q '^127\.0\.1\.1' /etc/hosts; then
+  sed -i "s/^127\.0\.1\.1.*/127.0.1.1 ${HNAME}.${DOMAIN} ${HNAME}/" /etc/hosts
+else
+  echo "127.0.1.1 ${HNAME}.${DOMAIN} ${HNAME}" >> /etc/hosts
+fi
+
+if ! ping -c 1 -W 2 "${DOMAIN}" >/dev/null 2>&1; then
+  yad $YAD_OPTS --error --text="$DOMAIN Ping did not respond or the domain name could not be resolved.\nDNS: ${DNSSRV}" \
+  --button="OK!gtk-ok:0"
+  bash "$MAIN"
+  exit 0
+else
+  yad $YAD_OPTS --info --text="Ok,\n${DOMAIN} found. The join process will begin."
+fi
+
+echo DOMAIN=$(echo "$DOMAIN" | tr '[:lower:]' '[:upper:]') >> $BASE_DIR/common-value
+echo HNAME=$(echo "${HNAME}.${DOMAIN}" | tr '[:lower:]' '[:upper:]') >> $BASE_DIR/common-value
+

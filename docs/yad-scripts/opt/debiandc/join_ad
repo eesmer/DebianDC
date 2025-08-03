@@ -141,3 +141,30 @@ options {
 };
 EOF
 
+  chmod 644 /etc/bind/named.conf.options
+  chmod 644 /var/lib/samba/bind-dns/named.conf || true
+  chown root:bind /etc/bind/named.conf.local
+  chmod 644 /etc/bind/named.conf.local
+  chgrp bind /var/lib/samba/bind-dns/ || true
+
+  echo "80"; echo "# Services are being activeted..."
+  systemctl unmask samba-ad-dc.service || true
+  systemctl enable samba-ad-dc.service || true
+  systemctl start samba-ad-dc.service || true
+  systemctl restart samba-ad-dc.service || true
+  systemctl restart bind9.service || true
+
+  echo "95"; echo "# Checking Configuration..."
+  samba-tool drs showrepl 127.0.0.1 >/dev/null 2>&1 || true
+  samba-tool domain level show        >/dev/null 2>&1 || true
+
+  echo "100"; echo "# Done"
+) | yad $YAD_OPTS --progress \
+     --title="Join to Existing AD (ADC)" \
+     --percentage=0 --auto-close --no-buttons
+
+yad $YAD_OPTS --info --title="Success" \
+  --text="Makine <b>${HNAME}.${DOMAIN}</b>, <b>${DOMAIN}</b> to the domain <b>ADDC</b> added.\n\nThe system will reboot"
+
+reboot
+

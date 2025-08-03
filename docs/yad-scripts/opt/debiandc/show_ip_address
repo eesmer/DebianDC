@@ -1,0 +1,40 @@
+#!/bin/bash
+
+cd /opt/debiandc
+source common-value
+
+IPINFO=$(ip -4 addr show | awk '
+  $1 == "inet" {
+    split($2, ip, "/")
+    print ip[1]
+    exit
+  }')
+
+IFACE=$(ip -4 addr show | awk '$1 == "inet" { print $NF; exit }')
+GATEWAY=$(ip r | awk '/default/ { print $3 }')
+NETSTATUS=$(systemctl is-active networking.service)
+
+if [[ "$NETSTATUS" == "active" ]]; then
+  STATUS_LINE="<span foreground='green'>networking.service : ACTIVE (running)</span>"
+else
+  STATUS_LINE="<span foreground='red'>networking.service : PASIVE (not running)</span>"
+fi
+
+yad $YAD_OPTS --form \
+  --title="Network Info" \
+  --window-icon=network-workgroup \
+  --text="
+<b>[ Network Info ]</b>
+
+Device     : <b>$IFACE</b>
+IP Address : <span foreground='blue'><b>$IPINFO</b></span>
+Gateway    : <b>$GATEWAY</b>
+
+<b>[ Service Status ]</b>
+$STATUS_LINE
+" \
+  --button="OK:0"
+
+clear
+bash $MAIN
+

@@ -119,3 +119,25 @@ $INTERNAL1;
 $INTERNAL2;
 };
 
+options {
+  directory "/var/cache/bind";
+  auth-nxdomain yes;
+  empty-zones-enable no;
+  notify no;
+  minimal-responses yes;
+
+  dnssec-validation no;
+  dnssec-enable no;
+  dnssec-lookaside no;
+
+  allow-transfer { $PDC; };
+  allow-query { internals; };
+  allow-query-cache { "internals"; };
+  allow-recursion { internals; };
+
+  listen-on-v6 { none; };
+  sortlist { $SERVER_IP; };
+  tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+};
+EOF
+

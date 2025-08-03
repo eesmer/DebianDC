@@ -69,3 +69,53 @@ fi
 echo DOMAIN=$(echo "$DOMAIN" | tr '[:lower:]' '[:upper:]') >> $BASE_DIR/common-value
 echo HNAME=$(echo "${HNAME}.${DOMAIN}" | tr '[:lower:]' '[:upper:]') >> $BASE_DIR/common-value
 
+(
+  echo "5";  echo "# Packages are being installed..."
+  export DEBIAN_FRONTEND=noninteractive
+  PACK_INSTALL=FALSE
+  if apt-get update -y && apt-get -y install bind9 bind9utils dnsutils krb5-user samba --install-recommends winbind; then
+    PACK_INSTALL=TRUE
+  fi
+  if [[ "$PACK_INSTALL" != "TRUE" ]]; then
+    echo "100"; echo "# Mandatory packages could not be installed. Check your internet or repository access connection."
+    exit 1
+  fi
+
+  echo "20"; echo "# Cleaning smb.conf..."
+  rm -f /etc/samba/smb.conf || true
+
+  echo "40"; echo "# The machine is joined to the Domain as a DC..."
+  DOMAIN_JOIN=FALSE
+  if samba-tool domain join "$DOMAIN" DC --dns-backend=BIND9_DLZ -U Administrator --password="$PASSWORD"; then
+    DOMAIN_JOIN=TRUE
+  fi
+  if [[ "$DOMAIN_JOIN" != "TRUE" ]]; then
+    echo "100"; echo "# Domain join failed. Check your login information."
+    exit 1
+  fi
+
+  echo "55"; echo "# BIND defaults..."
+  rm -f /etc/default/bind9 || true
+  cat > /etc/default/bind9 << 'EOF'
+RESOLVCONF=no
+OPTIONS="-u bind -4"
+EOF
+  chmod 644 /etc/default/bind9
+
+  echo "65"; echo "# named.conf.local preparing..."
+  echo 'include "/var/lib/samba/bind-dns/named.conf";' > /etc/bind/named.conf.local
+
+  rm -f /etc/bind/named.conf.options || true
+
+  SERVER_IP=$(ip r | grep link | grep src | awk '{for(i=1;i<=NF;i++) if($i=="src"){print $(i+1); exit}}')
+  INTERNAL1=127.0.0.0/8
+  INTERNAL2=$(ip r | grep link | grep src | awk '{print $1; exit}')
+  SUBNET=$(ip r | grep link | grep src | awk -F'[/ ]' '{print $1"/"$2; exit}')
+  PDC=$(nslookup "$DOMAIN" 2>/dev/null | awk -F': ' '/Server:/{print $2; exit}')
+
+  cat > /etc/bind/named.conf.options << EOF
+acl internals {
+$INTERNAL1;
+$INTERNAL2;
+};
+

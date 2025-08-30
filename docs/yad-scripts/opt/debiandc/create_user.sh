@@ -38,3 +38,19 @@ gecos=$(cut -d"|" -f3 <<< "$FIELDS")
 password1=$(cut -d"|" -f4 <<< "$FIELDS")
 password2=$(cut -d"|" -f5 <<< "$FIELDS")
 
+if [[ -z "$username" || -z "$fullname" || -z "$password1" || -z "$password2" ]]; then
+  "$YAD_BIN" $YAD_WIN --error --text="You must fill in all fields" --button=gtk-ok:0
+  exit 1
+fi
+
+if [[ "$password1" != "$password2" ]]; then
+  "$YAD_BIN" $YAD_WIN --error --text="Passwords do not match" --button=gtk-ok:0
+  exit 1
+fi
+
+# Kullanıcı oluşturma komutu (örnek)
+echo "User creating..: $username ($fullname)"
+samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos"
+
+"$YAD_BIN" $YAD_WIN --info --text="User <b>$username</b> successfully created" --button=gtk-ok:0
+

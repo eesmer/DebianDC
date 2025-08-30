@@ -29,3 +29,12 @@ FIELDS=$("$YAD_BIN" $YAD_WIN \
   --button="Cancel:1" \
   --button="Create:0")
 
+status=$?
+[[ $status -ne 0 ]] && exit 0
+
+username=$(cut -d"|" -f1 <<< "$FIELDS")
+fullname=$(cut -d"|" -f2 <<< "$FIELDS")
+gecos=$(cut -d"|" -f3 <<< "$FIELDS")
+password1=$(cut -d"|" -f4 <<< "$FIELDS")
+password2=$(cut -d"|" -f5 <<< "$FIELDS")
+

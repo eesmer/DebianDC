@@ -39,3 +39,32 @@ while true; do
        exit $? ;;
   esac
 
+  sel_user=${CHOICE%%|*}
+
+  if [[ -z "$sel_user" || "$sel_user" == "(none)" ]]; then
+    "$YAD_BIN" $YAD_WIN --info --title="User Management" --text="No action selected" --button=gtk-ok:0 --fixed
+    continue
+  fi
+
+  case "$sel_user" in
+    "Create User")                       script="create_user" ;;
+    "Delete User")                       script="delete_user" ;;
+    "Disable User")                      script="disable_user" ;;
+    "Enable User")                       script="enable_user" ;;
+    "Set Expiry")                        script="set_expiry" ;;
+    "Set No Expiry")                     script="set_no_expiry" ;;
+    "Change Password")                   script="change_password" ;;
+    "Change Password at Next Logon")     script="change_password_next_logon" ;;
+    "User List")                         script="user_list" ;;
+    *)                                   script="" ;;
+  esac
+
+  if [[ -n "$script" && -f "./$script" ]]; then
+    bash "./$script"
+  else
+    "$YAD_BIN" $YAD_WIN --error --title="User Management" \
+      --text="Script Not Found:\n<b>$script</b>" \
+      --button=gtk-ok:0 --borders=8 --fixed
+  fi
+done
+

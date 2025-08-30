@@ -48,7 +48,6 @@ if [[ "$password1" != "$password2" ]]; then
   exit 1
 fi
 
-# Kullanıcı oluşturma komutu (örnek)
 echo "User creating..: $username ($fullname)"
 samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos"
 

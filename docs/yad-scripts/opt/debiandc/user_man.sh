@@ -14,3 +14,28 @@ source common-value
 #  exit 1
 #fi
 
+while true; do
+  CHOICE=$(
+    "$YAD_BIN" $YAD_WIN \
+      --form \
+      --title="User and Computer Management" \
+      --window-icon=preferences-system \
+      --text="<b>User Management</b> select an action" \
+      --borders=10 \
+      --separator="|" \
+      --field="User Management:CB" "Create User!Delete User!Disable User!Enable User!Set Expiry!Set No Expiry!Change Password!Change Password at Next Logon!User List" \
+      --button="Back:2" --button="Run:0" --button="gtk-close:1"
+  )
+
+  status=$?
+  case $status in
+    1) exit 0 ;; # Kapat
+    2) # Back (if exist MAIN not exist manager)
+       if [[ -n "$MAIN" && -f "$MAIN" ]]; then
+         bash "$MAIN"
+       else
+         bash manager
+       fi
+       exit $? ;;
+  esac
+

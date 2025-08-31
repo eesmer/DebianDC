@@ -48,8 +48,9 @@ if [[ "$password1" != "$password2" ]]; then
   exit 1
 fi
 
-echo "User creating..: $username ($fullname)"
-samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos"
+{ samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos" 2>&1 tee /tmp/create_user.log ; }
 
-"$YAD_BIN" $YAD_WIN --info --text="User <b>$username</b> successfully created" --button=gtk-ok:0
+"$YAD_BIN" --text-info --title="Result" $YAD_WIN --button=gtk-ok:0 --filename=/tmp/create_user.log
+
+bash user_man.sh
 

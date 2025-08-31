@@ -14,4 +14,14 @@ source common-value
 #  exit 1
 #fi
 
+username=$( \
+  "$YAD_BIN" $YAD_WIN \
+  --form \
+  --geometry=500x200 \
+  --columns=1 \
+  --field="Username:ENTRY" "" \
+  --button="Cancel:1" --button="Delete:0" \
+)
+
+username="${username%%|}"
 

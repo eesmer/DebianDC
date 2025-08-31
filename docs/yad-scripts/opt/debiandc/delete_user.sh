@@ -17,6 +17,10 @@ source common-value
 username=$( \
   "$YAD_BIN" $YAD_WIN \
   --form \
+  --title="Delete User Account" \
+  --text="<b>Enter the user account to be deleted</b>" \
+  --borders=50 \
+  --window-icon="system-users" \
   --geometry=500x200 \
   --columns=1 \
   --field="Username:ENTRY" "" \

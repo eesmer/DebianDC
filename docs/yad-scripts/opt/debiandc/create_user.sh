@@ -3,6 +3,7 @@ set -o pipefail
 
 cd /opt/debiandc || exit 1
 source common-value
+LOG_FILE="/tmp/$(basename "$0" .sh).log"
 
 #[ -f comman_value ] && source comman_value
 : "${YAD_BIN:=yad}"
@@ -29,7 +30,10 @@ FIELDS=$("$YAD_BIN" $YAD_WIN \
   --button="Create:0")
 
 status=$?
-[[ $status -ne 0 ]] && exit 0
+if [[ $status -eq 1 ]]; then
+  bash user_man.sh
+  exit 0
+fi
 
 username=$(cut -d"|" -f1 <<< "$FIELDS")
 fullname=$(cut -d"|" -f2 <<< "$FIELDS")
@@ -39,13 +43,11 @@ password2=$(cut -d"|" -f5 <<< "$FIELDS")
 
 if [[ -z "$username" || -z "$fullname" || -z "$password1" || -z "$password2" ]]; then
   "$YAD_BIN" $YAD_WIN --error --text="You must fill in all fields" --button=gtk-ok:0
-  #exit 1
   bash create_user.sh
 fi
 
 if [[ "$password1" != "$password2" ]]; then
   "$YAD_BIN" $YAD_WIN --error --text="Passwords do not match" --button=gtk-ok:0
-  #exit 1
   bash create_user.sh
 fi
 

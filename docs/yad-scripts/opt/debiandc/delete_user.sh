@@ -1,9 +1,9 @@
 #!/bin/bash
-set -e
 set -o pipefail
 
 cd /opt/debiandc || exit 1
 source common-value
+LOG_FILE="/tmp/$(basename "$0" .sh).log"
 
 #[ -f comman_value ] && source comman_value
 : "${YAD_BIN:=yad}"
@@ -27,18 +27,22 @@ username=$( \
   --button="Cancel:1" --button="Delete:0" \
 )
 
-username="${username%%|}"
-
 status=$?
-[[ $status -ne 0 ]] && exit 0
+if [[ $status -eq 1 ]]; then
+  bash user_man.sh
+  exit 0
+fi
+
+username="${username%%|}"
 
 if [[ -z "$username" ]]; then
   "$YAD_BIN" $YAD_WIN --error --text="Username field cannot be empty" --button=gtk-ok:0
-  exit 1
+  bash delete_user.sh
 fi
 
-echo "Username deleting: $username"
-samba-tool user delete "$username"
+{ samba-tool user delete "$username" 2>&1 | tee $LOG_FILE ; } || true
 
-"$YAD_BIN" $YAD_WIN --info --text="User <b>$username</b> successfully deleted" --button=gtk-ok:0
+"$YAD_BIN" --text-info --title="Result" $YAD_WIN --button=gtk-ok:0 --filename=$LOG_FILE
+
+bash user_man.sh
 

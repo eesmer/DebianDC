@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 set -o pipefail
 
 cd /opt/debiandc || exit 1

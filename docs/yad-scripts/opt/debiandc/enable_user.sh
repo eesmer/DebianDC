@@ -23,3 +23,22 @@ status=$?
 [[ $status -eq 1 ]] && bash user_man.sh && exit 0
 [[ $status -ne 0 ]] && exit 0
 
+username="${username%%|}"
+
+if [[ -z "$username" ]]; then
+  "$YAD_BIN" $YAD_WIN \
+    --error \
+    --text="Username field cannot be empty" \
+    --button=gtk-ok:0
+  bash enable_user.sh
+  exit 1
+fi
+
+{ samba-tool user enable "$username" 2>&1 | tee "$LOG_FILE" ; } || true
+
+"$YAD_BIN" --text-info --title="Result" $YAD_WIN \
+  --button=gtk-ok:0 \
+  --filename="$LOG_FILE"
+
+bash user_man.sh
+

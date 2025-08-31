@@ -40,17 +40,19 @@ password2=$(cut -d"|" -f5 <<< "$FIELDS")
 
 if [[ -z "$username" || -z "$fullname" || -z "$password1" || -z "$password2" ]]; then
   "$YAD_BIN" $YAD_WIN --error --text="You must fill in all fields" --button=gtk-ok:0
-  exit 1
+  #exit 1
+  bash create_user.sh
 fi
 
 if [[ "$password1" != "$password2" ]]; then
   "$YAD_BIN" $YAD_WIN --error --text="Passwords do not match" --button=gtk-ok:0
-  exit 1
+  #exit 1
+  bash create_user.sh
 fi
 
-{ samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos" 2>&1 tee /tmp/create_user.log ; }
+{ samba-tool user create "$username" "$password1" --given-name="$fullname" --description="$gecos" 2>&1 | tee $LOG_FILE ; } || true
 
-"$YAD_BIN" --text-info --title="Result" $YAD_WIN --button=gtk-ok:0 --filename=/tmp/create_user.log
+"$YAD_BIN" --text-info --title="Result" $YAD_WIN --button=gtk-ok:0 --filename=$LOG_FILE
 
 bash user_man.sh
 

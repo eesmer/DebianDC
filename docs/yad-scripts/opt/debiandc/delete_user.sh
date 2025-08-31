@@ -25,3 +25,16 @@ username=$( \
 
 username="${username%%|}"
 
+status=$?
+[[ $status -ne 0 ]] && exit 0
+
+if [[ -z "$username" ]]; then
+  "$YAD_BIN" $YAD_WIN --error --text="Username field cannot be empty" --button=gtk-ok:0
+  exit 1
+fi
+
+echo "Username deleting: $username"
+samba-tool user delete "$username"
+
+"$YAD_BIN" $YAD_WIN --info --text="User <b>$username</b> successfully deleted" --button=gtk-ok:0
+

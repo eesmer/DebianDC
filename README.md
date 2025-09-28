@@ -71,4 +71,4 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 ---
 
 # ![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-ebook.png "DebianDC Book") <br>
-#### [SambaAD Mastering](https://github.com/eesmer/Mastering-SambaActiveDirectory)
+#### [Mastering Samba Active Directory](https://github.com/eesmer/Mastering-SambaActiveDirectory)

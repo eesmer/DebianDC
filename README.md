@@ -70,9 +70,5 @@ The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub r
 
 ---
 
-# Book
-
-#### Samba Active Directory Best Practies with DebianDC
-![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-ebook.png "DebianDC Book") <br>
-
-#### [Samba AD best practices with DebianDC](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)
+# ![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-ebook.png "DebianDC Book") <br>
+#### [SambaAD Mastering](https://github.com/eesmer/Mastering-SambaActiveDirectory)

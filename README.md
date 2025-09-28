@@ -60,5 +60,5 @@ You can install a new domain environment with DebianDC or manage your existing S
 
 ---
 
-#### Issues
+### Issues
 The [Issues](https://github.com/eesmer/DebianDC/issues) section of this GitHub repository

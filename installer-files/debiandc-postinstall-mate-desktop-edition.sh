@@ -109,3 +109,32 @@ EOF
 
 dconf load /org/mate/panel/ < /usr/share/debiandc/mate/debiandc-mate-panel.conf || true
 
+# -----------------------------------------------------------------------------
+# 5) DebianDC Logo & Logout Banner Add/Set
+# -----------------------------------------------------------------------------
+ICON_URL="${ADDRESS}/images/DebianDC-icon.png"
+
+for SIZE in 24 32 48; do
+    ICON_PATH="/usr/share/icons/mate/${SIZE}x${SIZE}/places"
+    if [ -d "$ICON_PATH" ]; then
+        wget -q -O "${ICON_PATH}/start-here-mate.png" "$ICON_URL" || true
+    fi
+done
+
+if [ -d /usr/share/icons/mate ]; then
+    gtk-update-icon-cache /usr/share/icons/mate || true
+fi
+
+BANNER_URL="${ADDRESS}/images/logout-banner.png"
+BANNER_PATH="/usr/share/backgrounds/debiandc-logout-banner.png"
+
+wget -q -O "$BANNER_PATH" "$BANNER_URL" || true
+
+mkdir -p /etc/lightdm
+
+cat >/etc/lightdm/slick-greeter.conf <<EOF
+[Greeter]
+background=${BANNER_PATH}
+draw-grid=false
+EOF
+

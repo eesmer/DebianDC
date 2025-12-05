@@ -107,3 +107,5 @@ y=775
 y-bottom=0
 EOF
 
+dconf load /org/mate/panel/ < /usr/share/debiandc/mate/debiandc-mate-panel.conf || true
+

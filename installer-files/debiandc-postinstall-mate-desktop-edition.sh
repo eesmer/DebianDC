@@ -138,3 +138,16 @@ background=${BANNER_PATH}
 draw-grid=false
 EOF
 
+# -----------------------------------------------------------------------------
+# 6) DebianDC Installer
+# -----------------------------------------------------------------------------
+TMP_INSTALLER="/tmp/debiandc-installer.sh"
+
+if wget -q -O "$TMP_INSTALLER" "https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh"; then
+    chmod +x "$TMP_INSTALLER"
+    bash "$TMP_INSTALLER" || true
+else
+    echo "WARNING: debiandc-installer.sh could not be downloaded."
+    echo "You can run it manually later if needed."
+fi
+

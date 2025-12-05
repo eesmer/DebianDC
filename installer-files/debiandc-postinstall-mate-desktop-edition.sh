@@ -50,3 +50,7 @@ fi
 
 systemctl set-default graphical.target || true
 
+# Set NetworkManager
+systemctl enable NetworkManager.service 2>/dev/null || true
+systemctl start  NetworkManager.service 2>/dev/null || true
+

@@ -54,3 +54,24 @@ systemctl set-default graphical.target || true
 systemctl enable NetworkManager.service 2>/dev/null || true
 systemctl start  NetworkManager.service 2>/dev/null || true
 
+# -----------------------------------------------------------------------------
+# MATE Panel Layout
+# -----------------------------------------------------------------------------
+mkdir -p /usr/share/debiandc/mate
+cat >/usr/share/debiandc/mate/debiandc-mate-panel.conf <<'EOF'
+[/]
+object-id-list=['notification-area', 'clock', 'object-0', 'object-1']
+toplevel-id-list=['top']
+
+[objects/clock]
+applet-iid='ClockAppletFactory::ClockApplet'
+locked=true
+object-type='applet'
+panel-right-stick=true
+position=0
+toplevel-id='top'
+
+[objects/clock/prefs]
+custom-format=''
+format='24-hour'
+

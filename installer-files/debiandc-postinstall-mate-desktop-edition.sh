@@ -75,3 +75,35 @@ toplevel-id='top'
 custom-format=''
 format='24-hour'
 
+[objects/notification-area]
+applet-iid='NotificationAreaAppletFactory::NotificationArea'
+locked=true
+object-type='applet'
+panel-right-stick=true
+position=10
+toplevel-id='top'
+
+[objects/object-0]
+object-type='menu'
+panel-right-stick=false
+position=0
+tooltip='Compact Menu'
+toplevel-id='top'
+use-menu-path=false
+
+[objects/object-1]
+applet-iid='WnckletFactory::WindowListApplet'
+object-type='applet'
+panel-right-stick=false
+position=34
+toplevel-id='top'
+
+[toplevels/top]
+expand=true
+orientation='bottom'
+screen=0
+size=24
+y=775
+y-bottom=0
+EOF
+

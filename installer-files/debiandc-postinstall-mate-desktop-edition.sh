@@ -151,3 +151,12 @@ else
     echo "You can run it manually later if needed."
 fi
 
+echo "Cleaning up apt cache..."
+apt-get autoremove -y
+apt-get autoclean -y
+
+echo "--------------------------------------------------"
+echo " DebianDC post-install finished."
+echo " You can reboot the machine"
+echo "--------------------------------------------------"
+

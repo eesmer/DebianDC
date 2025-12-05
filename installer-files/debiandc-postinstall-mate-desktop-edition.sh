@@ -20,3 +20,23 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y autoremove
 
+# -----------------------------------------------------------------------------
+# Minimal MATE Desktop Install
+# -----------------------------------------------------------------------------
+apt-get install -y \
+    xorg \
+    mate-desktop-environment-core \
+    mate-terminal \
+    mate-panel \
+    mate-session-manager \
+    mate-settings-daemon \
+    marco \
+    caja caja-extensions-common \
+    pluma \
+    engrampa \
+    network-manager-gnome \
+    lightdm \
+    slick-greeter \
+    dconf-cli \
+    policykit-1-gnome
+

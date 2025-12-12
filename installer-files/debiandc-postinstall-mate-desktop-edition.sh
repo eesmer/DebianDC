@@ -114,7 +114,7 @@ dconf load /org/mate/panel/ < /usr/share/debiandc/mate/debiandc-mate-panel.conf 
 # -----------------------------------------------------------------------------
 ICON_URL="${ADDRESS}/images/DebianDC-icon.png"
 
-for SIZE in 24 32 48; do
+for SIZE in 22 24 32 48; do
     ICON_PATH="/usr/share/icons/mate/${SIZE}x${SIZE}/places"
     if [ -d "$ICON_PATH" ]; then
         wget -q -O "${ICON_PATH}/start-here-mate.png" "$ICON_URL" || true
@@ -152,8 +152,8 @@ else
 fi
 
 echo "Cleaning up apt cache..."
-apt-get autoremove -y
-apt-get autoclean -y
+apt-get -y autoremove
+apt-get -y autoclean
 
 echo "--------------------------------------------------"
 echo " DebianDC post-install finished."

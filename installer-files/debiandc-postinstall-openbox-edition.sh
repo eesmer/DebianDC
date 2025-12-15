@@ -21,4 +21,9 @@ cat > /root/.config/openbox/menu.xml << EOF
         <command>/usr/local/bin/manager.sh</command>
         </action>
         </item>
+	<item label="Restart DebianDC Console">
+        <action name="Execute">
+        <command>/usr/local/bin/debiandc-console-restart.sh</command>
+        </action>
+        </item>
 EOF

@@ -27,4 +27,7 @@ cat > /root/.config/openbox/menu.xml << EOF
         </action>
         </item>
 	<separator/>
+	<item label="Reload Openbox">
+        <action name="Reconfigure"/>
+        </item>
 EOF

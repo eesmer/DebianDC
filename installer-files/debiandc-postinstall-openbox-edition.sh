@@ -11,3 +11,14 @@ fi
 sleep 1
 /usr/local/debiandc/manager &
 EOF
+
+cat > /root/.config/openbox/menu.xml << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+        <menu id="root-menu" label="DebianDC">
+        <item label="Open DebianDC Console">
+        <action name="Execute">
+        <command>/usr/local/bin/manager.sh</command>
+        </action>
+        </item>
+EOF

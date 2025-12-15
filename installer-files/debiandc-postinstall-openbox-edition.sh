@@ -30,4 +30,8 @@ cat > /root/.config/openbox/menu.xml << EOF
 	<item label="Reload Openbox">
         <action name="Reconfigure"/>
         </item>
+	<item label="Logout">
+        <action name="Exit"/>
+        </item>
+        </menu>
 EOF

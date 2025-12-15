@@ -26,4 +26,5 @@ cat > /root/.config/openbox/menu.xml << EOF
         <command>/usr/local/bin/debiandc-console-restart.sh</command>
         </action>
         </item>
+	<separator/>
 EOF

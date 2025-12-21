@@ -1,0 +1,8 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+# Logs:
+LOG_DIR="/var/log/debiandc"
+LOG_MAIN="${LOG_DIR}/ad-bind13-install.log"
+LOG_PROV="${LOG_DIR}/ad-bind13-provision.log"
+

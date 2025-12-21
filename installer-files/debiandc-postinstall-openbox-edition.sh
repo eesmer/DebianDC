@@ -30,6 +30,7 @@ mkdir -p /root/.config/openbox
 cp /etc/xdg/openbox/{rc.xml,autostart} /root/.config/openbox/
 
 cat > /root/.config/openbox/autostart << EOF
+#!/bin/sh
 exec >> "$HOME/.openbox-autostart.log" 2>&1
 echo "=== AUTOSTART $(date) ==="
 xsetroot -solid "#1e1e1e" || true
@@ -37,6 +38,7 @@ if command -v dbus-launch >/dev/null 2>&1; then
   eval "$(dbus-launch --sh-syntax --exit-with-session)"
 fi
 sleep 1
+#/usr/local/bin/debiandc-console.sh &
 /usr/local/debiandc/manager &
 EOF
 

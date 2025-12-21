@@ -14,6 +14,18 @@ apt-get -y install --no-install-recommends xorg openbox dbus-x11 x11-xserver-uti
 apt-get -y install --no-install-recommends lightdm lightdm-gtk-greeter
 systemctl enable lightdm
 
+# -----------------------------------------------------------------------------
+# APPLICATION INSTALL & CONFIG
+# -----------------------------------------------------------------------------
+git clone https://github.com/eesmer/DebianDC.git
+cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiandc/ && rm -r DebianDC
+chown -R root:root /usr/local/debiandc
+chmod -R 744 /usr/local/debiandc
+chmod +x /usr/local/debiandc/manager
+cp /usr/local/debiandc/manager /usr/sbin/
+chmod 755 /usr/sbin/manager
+chmod +x /usr/sbin/manager
+
 cat > /root/.config/openbox/autostart << EOF
 exec >> "$HOME/.openbox-autostart.log" 2>&1
 echo "=== AUTOSTART $(date) ==="

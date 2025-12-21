@@ -11,3 +11,39 @@ die() { zenity --error --width=720 --height=260 --text="$1"; exit 1; }
 info(){ zenity --info  --width=720 --height=220 --text="$1"; }
 ask() { zenity --question --width=720 --height=280 --text="$1"; }
 
+while true; do
+if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostname (e.g., DC01)" --width=400); then
+	zenity --info \
+	--title="Operation Canceled" \
+	--text="Hostname input was canceled.\nReturning to DebianDC Manager." \
+	--width=350
+	pgrep -f '/usr/local/bin/manager\.sh' >/dev/null || /usr/local/bin/manager.sh &
+	exit 1
+fi
+HNAME="$(printf '%s' "$HNAME" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+if [ -z "$HNAME" ]; then
+	zenity --error \
+        --title="Hostname Required" \
+        --text="Hostname cannot be empty. Please enter a hostname (e.g., DC01)." \
+        --width=380
+        continue
+fi
+# Long Check
+if [ "${#HNAME}" -gt 15 ]; then
+        zenity --error \
+        --title="Invalid Hostname Length" \
+        --text="Hostname must be between 1 and 15 characters." \
+        --width=380
+        continue
+fi
+# Regex Check - letters/numbers / dash can use / It cannot start/end with dash.
+if ! [[ "$HNAME" =~ ^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$ ]]; then
+        zenity --error \
+        --title="Invalid Hostname" \
+        --text="Hostname may contain only letters, numbers, and hyphens (-).\nIt cannot start or end with a hyphen." \
+        --width=420
+        continue
+fi
+break
+done
+

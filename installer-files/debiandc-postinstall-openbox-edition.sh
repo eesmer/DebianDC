@@ -26,6 +26,9 @@ cp /usr/local/debiandc/manager /usr/sbin/
 chmod 755 /usr/sbin/manager
 chmod +x /usr/sbin/manager
 
+mkdir -p /root/.config/openbox
+cp /etc/xdg/openbox/{rc.xml,autostart} /root/.config/openbox/
+
 cat > /root/.config/openbox/autostart << EOF
 exec >> "$HOME/.openbox-autostart.log" 2>&1
 echo "=== AUTOSTART $(date) ==="

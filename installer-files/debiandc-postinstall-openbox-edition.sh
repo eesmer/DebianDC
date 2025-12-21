@@ -46,12 +46,12 @@ cat > /root/.config/openbox/menu.xml << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
         <menu id="root-menu" label="DebianDC">
-        <item label="Open DebianDC Console">
+        <item label="Open DebianDC Manager">
         <action name="Execute">
         <command>/usr/local/bin/manager.sh</command>
         </action>
         </item>
-	<item label="Restart DebianDC Console">
+	<item label="Restart DebianDC Manager Screen">
         <action name="Execute">
         <command>/usr/local/bin/debiandc-console-restart.sh</command>
         </action>

@@ -1,5 +1,18 @@
 #!/bin/bash
-apt-get install -y --no-install-recommends xorg openbox dbus-x11 x11-xserver-utils zenity yad
+
+apt-get -y install git
+apt-get -y install zenity
+apt-get -y install openssh-server chrony ntpdate # - ntp (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1033088)
+apt-get -y install dnsutils net-tools
+apt-get -y install curl wget
+apt-get -y install ack expect krb5-user krb5-config
+apt-get -y install tmux vim htop
+apt-get -y install ansible
+apt-get -y install syslog-ng #for auth.log
+apt-get -y install xrdp
+apt-get -y install --no-install-recommends xorg openbox dbus-x11 x11-xserver-utils xterm zenity yad
+apt-get -y install --no-install-recommends lightdm lightdm-gtk-greeter
+systemctl enable lightdm
 
 cat > /root/.config/openbox/autostart << EOF
 exec >> "$HOME/.openbox-autostart.log" 2>&1

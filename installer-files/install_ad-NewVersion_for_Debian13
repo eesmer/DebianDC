@@ -88,3 +88,11 @@ while true; do
     continue
   fi
 
+  if [[ "$REALM" == .* || "$REALM" == *. || "$REALM" == *..* ]]; then
+    zenity --error \
+      --title="Invalid Domain Format" \
+      --text="Domain cannot start/end with a dot and cannot contain consecutive dots." \
+      --width=440
+    continue
+  fi
+

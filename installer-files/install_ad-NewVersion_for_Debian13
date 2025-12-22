@@ -188,3 +188,4 @@ done
   break
 done
 
+DNS_BACKEND="BIND9_DLZ"

@@ -180,7 +180,10 @@ while true; do
     unset ADMIN_PASS_1 ADMIN_PASS_2
     continue
   fi
-
+  ADMIN_PASS="$ADMIN_PASS_1"
+  unset ADMIN_PASS_1 ADMIN_PASS_2
+  break
+done
   break
 done
 

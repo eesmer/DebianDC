@@ -104,4 +104,21 @@ while true; do
       --width=420
     continue
   fi
+  bad_label=0
+  IFS='.' read -r -a _labels <<< "$REALM"
+  for _l in "${_labels[@]}"; do
+    if [ -z "$_l" ] || [ "${#_l}" -gt 63 ]; then
+      bad_label=1
+      break
+    fi
+  done
+  if [ "$bad_label" -eq 1 ]; then
+    zenity --error \
+      --title="Invalid Domain Label" \
+      --text="Each domain part between dots must be 1–63 characters.\nExample: EXAMPLE.LOC" \
+      --width=460
+    continue
+  fi
+  break
+done
 

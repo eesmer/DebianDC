@@ -66,3 +66,25 @@ while true; do
     exit 1
   fi
 
+  # Trim
+  REALM="$(printf '%s' "$REALM" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+  if [ -z "$REALM" ]; then
+    zenity --error \
+      --title="Domain Required" \
+      --text="Domain name cannot be empty. Example: EXAMPLE.LOC" \
+      --width=420
+    continue
+  fi
+
+  # for Uppercase
+  REALM="$(printf '%s' "$REALM" | tr '[:lower:]' '[:upper:]')"
+
+  if ! [[ "$REALM" =~ ^[A-Z0-9]+(\.[A-Z0-9]+)+$ ]]; then
+    zenity --error \
+      --title="Invalid Domain Format" \
+      --text="Use only letters, numbers and dots.\nExample: EXAMPLE.LOC\nNo spaces, underscores, or hyphens." \
+      --width=440
+    continue
+  fi
+

@@ -159,6 +159,18 @@ while true; do
       --width=380
     continue
   fi
+  
+  if ! ADMIN_PASS_2=$(zenity --password \
+      --title="Confirm Password" \
+      --text="Re-enter the Administrator password to confirm." \
+      --width=420); then
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="Password confirmation was canceled.\nReturning to DebianDC Manager." \
+      --width=380
+    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    exit 1
+  fi
 
   break
 done

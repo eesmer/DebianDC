@@ -132,6 +132,8 @@ while true; do
 	  pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
 	  exit 1
   fi
+  break
+done
 
   while true; do
   if ! ADMIN_PASS_1=$(zenity --password \
@@ -182,8 +184,7 @@ while true; do
   fi
   ADMIN_PASS="$ADMIN_PASS_1"
   unset ADMIN_PASS_1 ADMIN_PASS_2
-  break
-done
+
   break
 done
 

@@ -96,3 +96,12 @@ while true; do
     continue
   fi
 
+  # DNS limits
+  if [ "${#REALM}" -gt 253 ]; then
+    zenity --error \
+      --title="Domain Too Long" \
+      --text="Domain name is too long (max 253 characters)." \
+      --width=420
+    continue
+  fi
+

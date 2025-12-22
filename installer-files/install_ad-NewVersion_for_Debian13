@@ -171,6 +171,15 @@ while true; do
     pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
     exit 1
   fi
+  
+  if [ "$ADMIN_PASS_1" != "$ADMIN_PASS_2" ]; then
+    zenity --error \
+      --title="Password Mismatch" \
+      --text="Passwords do not match. Please try again." \
+      --width=420
+    unset ADMIN_PASS_1 ADMIN_PASS_2
+    continue
+  fi
 
   break
 done

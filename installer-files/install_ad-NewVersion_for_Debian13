@@ -122,6 +122,7 @@ while true; do
   # Create NetBIOS Name
   NETBIOS_DOMAIN="$(printf '%s' "$REALM" | cut -d'.' -f1)"
   NETBIOS_DOMAIN="$(printf '%s' "$NETBIOS_DOMAIN" | tr '[:lower:]' '[:upper:]')"
+  NETBIOS_DOMAIN="${NETBIOS_DOMAIN:0:15}"
   break
 done
 

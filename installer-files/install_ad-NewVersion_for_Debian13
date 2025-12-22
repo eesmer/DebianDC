@@ -138,14 +138,19 @@ while true; do
       --title="Administrator Password" \
       --text="Enter Administrator password for Samba AD (e.g., for 'Administrator')." \
       --width=420); then
-
     zenity --info \
       --title="Operation Canceled" \
       --text="Password input was canceled.\nReturning to DebianDC Manager." \
       --width=360
-
     pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
     exit 1
+  fi
+  if [ -z "$ADMIN_PASS_1" ]; then
+    zenity --error \
+      --title="Password Required" \
+      --text="Password cannot be empty." \
+      --width=380
+    continue
   fi
 
   break

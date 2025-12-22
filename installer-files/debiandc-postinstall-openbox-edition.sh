@@ -22,9 +22,9 @@ cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiand
 chown -R root:root /usr/local/debiandc
 chmod -R 744 /usr/local/debiandc
 chmod +x /usr/local/debiandc/manager
-cp /usr/local/debiandc/manager /usr/sbin/
-chmod 755 /usr/sbin/manager
-chmod +x /usr/sbin/manager
+#cp /usr/local/debiandc/manager /usr/sbin/
+#chmod 755 /usr/sbin/manager
+#chmod +x /usr/sbin/manager
 
 mkdir -p /root/.config/openbox
 cp /etc/xdg/openbox/{rc.xml,autostart} /root/.config/openbox/
@@ -48,7 +48,7 @@ cat > /root/.config/openbox/menu.xml << EOF
         <menu id="root-menu" label="DebianDC">
         <item label="Open DebianDC Manager">
         <action name="Execute">
-        <command>/usr/local/bin/manager.sh</command>
+        <command>/usr/local/debiandc/manager</command>
         </action>
         </item>
 	<item label="Restart DebianDC Manager Screen">

@@ -124,6 +124,14 @@ while true; do
   NETBIOS_DOMAIN="$(printf '%s' "$NETBIOS_DOMAIN" | tr '[:lower:]' '[:upper:]')"
   NETBIOS_DOMAIN="${NETBIOS_DOMAIN:0:15}"
   NETBIOS_DOMAIN="$(printf '%s' "$NETBIOS_DOMAIN" | sed 's/[^A-Z0-9]//g')"
+  if [ -z "$NETBIOS_DOMAIN" ]; then
+	  zenity --error \
+		  --title="Invalid NetBIOS Domain" \
+		  --text="Unable to derive a valid NetBIOS domain name from realm:\n\n$REALM" \
+		  --width=460
+	  pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	  exit 1
+fi
   break
 done
 

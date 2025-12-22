@@ -119,6 +119,8 @@ while true; do
       --width=460
     continue
   fi
+  # Create NetBIOS Name
+  NETBIOS_DOMAIN="$(printf '%s' "$REALM" | cut -d'.' -f1)"
   break
 done
 

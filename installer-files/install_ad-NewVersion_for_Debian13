@@ -10,6 +10,7 @@ LOG_PROV="${LOG_DIR}/ad-bind13-provision.log"
 die() { zenity --error --width=720 --height=260 --text="$1"; exit 1; }
 info(){ zenity --info  --width=720 --height=220 --text="$1"; }
 ask() { zenity --question --width=720 --height=280 --text="$1"; }
+MANAGER_BIN="/usr/local/debiandc/manager"
 
 # AD Install
 while true; do
@@ -18,7 +19,8 @@ if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostn
 	--title="Operation Canceled" \
 	--text="Hostname input was canceled.\nReturning to DebianDC Manager." \
 	--width=350
-	pgrep -f '/usr/local/bin/manager\.sh' >/dev/null || /usr/local/bin/manager.sh &
+	#pgrep -f '/usr/local/bin/manager\.sh' >/dev/null || /usr/local/bin/manager.sh &
+	pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
 	exit 1
 fi
 HNAME="$(printf '%s' "$HNAME" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"

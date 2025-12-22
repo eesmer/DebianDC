@@ -50,3 +50,19 @@ fi
 break
 done
 
+# Get REALM/DOMAIN
+while true; do
+  if ! REALM=$(zenity --entry \
+      --title="Domain Name (Realm)" \
+      --text="Enter Domain Name (e.g., EXAMPLE.LOC)" \
+      --width=420); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="Domain input was canceled.\nReturning to DebianDC Manager." \
+      --width=360
+
+    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    exit 1
+  fi
+

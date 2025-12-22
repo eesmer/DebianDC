@@ -56,7 +56,7 @@ source common-value
 
 bash service_check
 
-CHOICE=$(zenity  --list  --text "Active Directory Management" --title="Active Directory Management" --width $WIDTH --height $HEIGHT --column "" \
+CHOICE=$(zenity  --list  --text "DebianDC - Active Directory Management" --title="DebianDC - Active Directory Management" --width $WIDTH --height $HEIGHT --column "" \
 "User Management" \
 "Group Management" \
 "OU Management" \

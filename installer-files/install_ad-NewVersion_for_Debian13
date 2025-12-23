@@ -42,6 +42,31 @@ HEALTHCHECK_INSTALLAD() {
   } >>"$LOG" 2>&1
 }
 
+BIND_FORWARDERS() {
+  local ips_csv="$DNS_FORWARDER"
+  local conf="/etc/bind/named.conf.options"
+  local ips_sc
+  # "1.1.1.1,8.8.8.8" -> "1.1.1.1; 8.8.8.8;"
+  ips_sc="$(printf '%s' "$ips_csv" | sed 's/,/; /g; s/$/;/' )"
+  cp -a "$conf" "${conf}.bak.$(date +%F_%H%M%S)" 2>/dev/null || true
+  if ! grep -qE '^\s*options\s*\{' "$conf"; then
+    cat > "$conf" <<EOF
+options {
+  directory "/var/cache/bind";
+  forwarders { $ips_sc };
+  dnssec-validation auto;
+  listen-on-v6 { any; };
+};
+EOF
+    return 0
+  fi
+  if grep -qE '^\s*forwarders\s*\{' "$conf"; then
+    sed -i -E "s|^\s*forwarders\s*\{[^}]*\};|  forwarders { $ips_sc };|g" "$conf"
+  else
+    sed -i -E "0,/^\s*options\s*\{/{s/^\s*options\s*\{/options {\n  forwarders { $ips_sc };\n/}" "$conf"
+  fi
+}
+
 # AD Install
 while true; do
 if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostname (e.g., DC01)" --width=400); then

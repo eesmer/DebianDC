@@ -269,3 +269,19 @@ done
 
 DNS_BACKEND="BIND9_DLZ"
 
+# Final Summary
+if zenity --question \
+    --title="Final Summary - Samba AD Installation" \
+    --ok-label="Install" \
+    --cancel-label="Cancel" \
+    --width=520 \
+    --text="Hostname:        $HNAME\nRealm (Domain):  $REALM\nNetBIOS Domain:  $NETBIOS_DOMAIN\nDNS Backend:     BIND9_DLZ\nDNS Forwarder:   $DNS_FORWARDER\n\nProceed with installation?"; then
+  :
+else
+  zenity --info \
+    --title="Operation Canceled" \
+    --text="Installation canceled.\nReturning to DebianDC Manager." \
+    --width=380
+  RETURN_MANAGER
+fi
+

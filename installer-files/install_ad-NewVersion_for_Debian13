@@ -220,5 +220,21 @@ while true; do
     continue
   fi
 
+  valid=1
+  IFS=',' read -r -a _ips <<< "$DNS_FORWARDER"
+  for ip in "${_ips[@]}"; do
+    if ! [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+      valid=0
+      break
+    fi
+    IFS='.' read -r o1 o2 o3 o4 <<< "$ip"
+    for o in "$o1" "$o2" "$o3" "$o4"; do
+      if [ "$o" -gt 255 ]; then
+        valid=0
+        break 2
+      fi
+    done
+  done
+
 DNS_BACKEND="BIND9_DLZ"
 

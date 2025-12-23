@@ -12,6 +12,24 @@ info(){ zenity --info  --width=720 --height=220 --text="$1"; }
 ask() { zenity --question --width=720 --height=280 --text="$1"; }
 MANAGER_BIN="/usr/local/debiandc/manager"
 
+RETURN_MANAGER() {
+  if [ -z "${DISPLAY:-}" ]; then
+    if [ -S /tmp/.X11-unix/X0 ]; then
+      DISPLAY=":0"
+    else
+      # Display NotFound
+      exit 1
+    fi
+  fi
+  # root default
+  if [ -z "${XAUTHORITY:-}" ]; then
+    XAUTHORITY="/root/.Xauthority"
+  fi
+  nohup setsid env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" \
+    "$MANAGER_BIN" >/dev/null 2>&1 &
+  exit 1
+}
+
 # AD Install
 while true; do
 if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostname (e.g., DC01)" --width=400); then

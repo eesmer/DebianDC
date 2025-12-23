@@ -37,7 +37,6 @@ if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostn
 	--title="Operation Canceled" \
 	--text="Hostname input was canceled.\nReturning to DebianDC Manager." \
 	--width=350
-	#pgrep -f '/usr/local/bin/manager\.sh' >/dev/null || /usr/local/bin/manager.sh &
 	pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
 	exit 1
 fi

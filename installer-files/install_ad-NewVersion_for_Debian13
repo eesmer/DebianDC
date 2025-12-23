@@ -202,6 +202,7 @@ while true; do
     pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
     exit 1
   fi
+  DNS_FORWARDER="$(printf '%s' "$DNS_FORWARDER" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
 
 DNS_BACKEND="BIND9_DLZ"
 

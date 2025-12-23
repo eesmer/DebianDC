@@ -235,6 +235,14 @@ while true; do
       fi
     done
   done
+  
+  if [ "$valid" -ne 1 ]; then
+    zenity --error \
+      --title="Invalid IP Address" \
+      --text="One or more DNS forwarder IP addresses are invalid.\n\nExample:\n1.1.1.1\nor\n1.1.1.1,8.8.8.8" \
+      --width=480
+    continue
+  fi
 
 DNS_BACKEND="BIND9_DLZ"
 

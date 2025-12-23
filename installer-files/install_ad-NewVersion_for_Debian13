@@ -37,7 +37,8 @@ if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostn
 	--title="Operation Canceled" \
 	--text="Hostname input was canceled.\nReturning to DebianDC Manager." \
 	--width=350
-	pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	#pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	RETURN_MANAGER
 	exit 1
 fi
 HNAME="$(printf '%s' "$HNAME" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
@@ -78,8 +79,8 @@ while true; do
       --title="Operation Canceled" \
       --text="Domain input was canceled.\nReturning to DebianDC Manager." \
       --width=360
-
-    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
     exit 1
   fi
 
@@ -146,7 +147,8 @@ while true; do
 		  --title="Invalid NetBIOS Domain" \
 		  --text="Unable to derive a valid NetBIOS domain name from realm:\n\n$REALM" \
 		  --width=460
-	  pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	  #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	  RETURN_MANAGER
 	  exit 1
   fi
   break
@@ -161,7 +163,8 @@ done
       --title="Operation Canceled" \
       --text="Password input was canceled.\nReturning to DebianDC Manager." \
       --width=360
-    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
     exit 1
   fi
   if [ -z "$ADMIN_PASS_1" ]; then
@@ -187,7 +190,8 @@ done
       --title="Operation Canceled" \
       --text="Password confirmation was canceled.\nReturning to DebianDC Manager." \
       --width=380
-    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
     exit 1
   fi
   
@@ -215,8 +219,8 @@ while true; do
       --title="Operation Canceled" \
       --text="DNS forwarder input was canceled.\nReturning to DebianDC Manager." \
       --width=380
-
-    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
     exit 1
   fi
   DNS_FORWARDER="$(printf '%s' "$DNS_FORWARDER" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"

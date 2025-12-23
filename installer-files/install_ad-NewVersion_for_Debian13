@@ -212,5 +212,13 @@ while true; do
     continue
   fi
 
+  if [[ "$DNS_FORWARDER" =~ [[:space:]] ]]; then
+    zenity --error \
+      --title="Invalid Format" \
+      --text="Do not use spaces.\nUse comma-separated IP addresses.\nExample: 1.1.1.1,8.8.8.8" \
+      --width=460
+    continue
+  fi
+
 DNS_BACKEND="BIND9_DLZ"
 

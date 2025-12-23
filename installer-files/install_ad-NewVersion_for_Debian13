@@ -188,4 +188,20 @@ done
   break
 done
 
+while true; do
+  if ! DNS_FORWARDER=$(zenity --entry \
+      --title="DNS Forwarder" \
+      --text="Enter DNS forwarder IP address(es).\nExample: 1.1.1.1 or 1.1.1.1,8.8.8.8" \
+      --width=480); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="DNS forwarder input was canceled.\nReturning to DebianDC Manager." \
+      --width=380
+
+    pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    exit 1
+  fi
+
 DNS_BACKEND="BIND9_DLZ"
+

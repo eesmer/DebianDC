@@ -243,6 +243,8 @@ while true; do
       --width=480
     continue
   fi
+  break
+done
 
 DNS_BACKEND="BIND9_DLZ"
 

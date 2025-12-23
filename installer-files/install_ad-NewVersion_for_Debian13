@@ -21,6 +21,27 @@ RETURN_MANAGER() {
   exit 1
 }
 
+HEALTHCHECK_INSTALLAD() {
+  {
+    echo
+    echo "===== DebianDC Health Check ====="
+    date
+    echo "--- hostnamectl ---"
+    hostnamectl status || true
+    echo "--- samba-tool domain level show ---"
+    samba-tool domain level show || true
+    echo "--- samba-tool drs showrepl ---"
+    samba-tool drs showrepl || true
+    echo "--- Kerberos test (kinit) ---"
+    echo "Skipped: kinit administrator (interactive / security)"
+    echo "--- DNS SRV checks ---"
+    host -t SRV "_ldap._tcp.${REALM}" || true
+    host -t SRV "_kerberos._tcp.${REALM}" || true
+    echo "===== Health Check End ====="
+    echo
+  } >>"$LOG" 2>&1
+}
+
 # AD Install
 while true; do
 if ! HNAME=$(zenity --entry --title="DC Hostname" --text="Enter DC Machine Hostname (e.g., DC01)" --width=400); then

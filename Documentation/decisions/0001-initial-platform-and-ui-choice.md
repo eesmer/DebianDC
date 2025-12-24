@@ -55,3 +55,5 @@ The advantages of this approach included:
 - Rapid prototyping and development capability
 - Transparent and traceable execution of operations
 
+At the beginning of the project, Zenity was considered a suitable tool that aligned well with the goal of a “lightweight graphical interface.”
+

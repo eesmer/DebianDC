@@ -13,3 +13,8 @@ As the project evolved:
 - Long-term maintenance, release upgrades, and package lifecycle considerations became more prominent
 
 At this stage, the platform and desktop environment were re-evaluated to ensure the long-term sustainability of DebianDC.
+
+---
+
+## Considerations
+

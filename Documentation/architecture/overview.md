@@ -90,3 +90,13 @@ DebianDC is developed with an approach that
 **keeps control in the hands of the system administrator**
 and values transparency and learnability.
 
+---
+
+## Documentation Structure
+
+DebianDC documentation is organized under two main sections:
+
+- **Architecture/**  
+  Describes the project’s timeless architectural approach
+  and core design principles
+

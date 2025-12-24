@@ -69,3 +69,7 @@ The primary motivations behind this decision were:
 - Operations being easy to inspect and modify
 - Providing a structure close to distribution independence
 
+As a result, DebianDC evolved into a system that is learnable and modifiable, rather than a closed and opaque management tool.
+
+---
+

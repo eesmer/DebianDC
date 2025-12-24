@@ -48,3 +48,13 @@ DebianDC is developed with the following use cases in mind:
 
 The following principles guide the development of DebianDC:
 
+### 1. Balance Between Automation and Control
+- Installation and repetitive tasks are automated
+- Visibility into system behavior is always prioritized
+  for the system administrator
+
+### 2. Lightweight Graphical Interface Approach
+- Graphical interfaces are used only where they add real value
+- Heavy desktop components are deliberately avoided
+- Tools must remain simple, fast, and auditable
+

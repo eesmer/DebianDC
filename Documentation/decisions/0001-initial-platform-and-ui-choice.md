@@ -73,3 +73,6 @@ As a result, DebianDC evolved into a system that is learnable and modifiable, ra
 
 ---
 
+## Consequences
+
+With this initial technology stack:

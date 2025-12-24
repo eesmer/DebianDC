@@ -63,3 +63,4 @@ At the beginning of the project, Zenity was considered a suitable tool that alig
 
 All management tools in DebianDC were developed as **Bash scripts**.
 
+The primary motivations behind this decision were:

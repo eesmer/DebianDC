@@ -24,3 +24,6 @@ In line with these goals, the following core technology stack was selected for t
 The initial versions of DebianDC were developed on top of **Debian 11 (Bullseye)**.
 
 This choice was made because:
+- Debian 11 provides long-term stability
+- It offers a mature ecosystem for Samba and related packages
+- It is widely preferred in enterprise environments

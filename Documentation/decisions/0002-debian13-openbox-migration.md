@@ -81,3 +81,6 @@ The transition to Debian 13 and Openbox does not imply a complete change in the 
 
 ## Consequences and Impact
 
+As a result of this decision:
+- DebianDC has been moved to a more modern platform
+- The desktop environment has been simplified and made more customizable

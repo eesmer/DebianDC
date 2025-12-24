@@ -62,3 +62,8 @@ The following principles guide the development of DebianDC:
 - Management tools are script-based
 - Operations remain readable and can be
   performed manually when necessary
+
+### 4. Alignment with Debian Standards
+- Debian’s official packages and infrastructure are preferred
+- Custom forks and aggressive patching are avoided
+- Debian release transitions are handled in a controlled manner

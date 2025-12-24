@@ -103,3 +103,6 @@ DebianDC documentation is organized under two main sections:
 - **Decisions/**  
   Records technical and design decisions made over time,
   together with their rationale
+
+This structure is intended to ensure that DebianDC’s maintenance
+and development process remains **systematic, transparent, and traceable**.

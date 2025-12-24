@@ -49,3 +49,8 @@ For this reason, instead of a full-featured desktop environment, a **lightweight
 It was decided that new versions of DebianDC would be developed on top of **Debian 13 (Trixie)**.
 
 The main reasons for this decision include:
+- A more up-to-date package ecosystem
+- A longer forward-looking maintenance horizon
+- Easier integration of new tools and technologies
+- Reduction of long-term technical debt
+

@@ -54,3 +54,11 @@ The main reasons for this decision include:
 - Easier integration of new tools and technologies
 - Reduction of long-term technical debt
 
+---
+
+---
+
+### Desktop Environment: Openbox
+
+Instead of LXDE, the lightweight window manager **Openbox** was selected.
+

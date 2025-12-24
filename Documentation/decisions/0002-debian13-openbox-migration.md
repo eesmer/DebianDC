@@ -11,3 +11,5 @@ As the project evolved:
 - The number and scope of tools increased
 - More scripts and supporting components were added for Samba Active Directory management
 - Long-term maintenance, release upgrades, and package lifecycle considerations became more prominent
+
+At this stage, the platform and desktop environment were re-evaluated to ensure the long-term sustainability of DebianDC.

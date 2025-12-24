@@ -21,3 +21,8 @@ At this stage, the platform and desktop environment were re-evaluated to ensure 
 ### Debian Release
 
 Debian 11 was a correct choice at the beginning of the project in terms of stability and maturity.
+
+However, over time:
+
+- Debian 13 (Trixie) introduced more up-to-date Samba, Python, and core system components
+- A need emerged to move to a more forward-looking release from a long-term maintenance perspective

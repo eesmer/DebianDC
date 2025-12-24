@@ -68,3 +68,5 @@ The reasons for choosing Openbox include:
 - Clearer management of autostart behavior, window handling, and user interactions
 - Easier construction of a DebianDC-specific user experience
 
+This approach aligns with DebianDC’s goal of being a **focused management environment** rather than a general-purpose desktop distribution.
+

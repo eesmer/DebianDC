@@ -87,3 +87,4 @@ As a result of this decision:
 - Changes in package and tool behavior have become more visible
 - Some previous approaches (such as HTML rendering via Zenity) have required reconsideration
 
+This document records the decision to transition DebianDC to Debian 13 and Openbox, together with its technical and historical context.

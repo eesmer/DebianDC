@@ -14,3 +14,11 @@ During the early stages of the project, the following goals were prioritized:
 - Ensuring the system remains easy to understand and straightforward to intervene in when needed
 
 In line with these goals, the following core technology stack was selected for the initial releases.
+
+---
+
+## Decisions
+
+### Operating System Base: Debian 11
+
+The initial versions of DebianDC were developed on top of **Debian 11 (Bullseye)**.

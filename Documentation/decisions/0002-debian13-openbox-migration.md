@@ -3,3 +3,7 @@
 ## Status
 Accepted
 
+## Context
+
+The initial versions of the DebianDC project were developed using the Debian 11 (Bullseye) base and the LXDE desktop environment.
+

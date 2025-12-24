@@ -70,3 +70,7 @@ The reasons for choosing Openbox include:
 
 This approach aligns with DebianDC’s goal of being a **focused management environment** rather than a general-purpose desktop distribution.
 
+---
+
+### Graphical Tooling Approach
+

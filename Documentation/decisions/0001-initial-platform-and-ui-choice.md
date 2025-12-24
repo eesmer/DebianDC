@@ -27,3 +27,11 @@ This choice was made because:
 - Debian 11 provides long-term stability
 - It offers a mature ecosystem for Samba and related packages
 - It is widely preferred in enterprise environments
+
+---
+
+### Desktop Environment: LXDE
+
+For management interfaces that required graphical interaction,
+the **LXDE** desktop environment was selected.
+

@@ -39,3 +39,8 @@ The graphical interface requirements of DebianDC are:
 - Limited to helper screens that assist system administrators in performing specific tasks
 
 For this reason, instead of a full-featured desktop environment, a **lightweight and controllable window management approach** was considered more appropriate.
+
+---
+
+## Decisions
+

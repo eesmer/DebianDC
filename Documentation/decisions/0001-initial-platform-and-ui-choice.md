@@ -22,3 +22,5 @@ In line with these goals, the following core technology stack was selected for t
 ### Operating System Base: Debian 11
 
 The initial versions of DebianDC were developed on top of **Debian 11 (Bullseye)**.
+
+This choice was made because:

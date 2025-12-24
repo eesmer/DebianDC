@@ -44,3 +44,6 @@ For this reason, instead of a full-featured desktop environment, a **lightweight
 
 ## Decisions
 
+### Operating System: Debian 13 (Trixie)
+
+It was decided that new versions of DebianDC would be developed on top of **Debian 13 (Trixie)**.

@@ -74,3 +74,5 @@ This approach aligns with DebianDC’s goal of being a **focused management envi
 
 ### Graphical Tooling Approach
 
+Graphical interaction in DebianDC will continue to be provided through Zenity-based Bash scripts, as in previous versions.
+

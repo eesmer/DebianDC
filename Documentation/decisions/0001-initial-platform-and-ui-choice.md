@@ -44,3 +44,7 @@ In the early releases of DebianDC, LXDE provided a sufficient and balanced envir
 
 ---
 
+### User Interface Tool: Zenity
+
+In DebianDC, operations requiring graphical interaction
+were implemented through Bash scripts using **Zenity**.

@@ -48,3 +48,10 @@ In the early releases of DebianDC, LXDE provided a sufficient and balanced envir
 
 In DebianDC, operations requiring graphical interaction
 were implemented through Bash scripts using **Zenity**.
+
+The advantages of this approach included:
+- Natural integration with Bash scripts
+- No requirement for additional programming languages or frameworks
+- Rapid prototyping and development capability
+- Transparent and traceable execution of operations
+

@@ -100,3 +100,6 @@ DebianDC documentation is organized under two main sections:
   Describes the project’s timeless architectural approach
   and core design principles
 
+- **Decisions/**  
+  Records technical and design decisions made over time,
+  together with their rationale

@@ -59,3 +59,7 @@ At the beginning of the project, Zenity was considered a suitable tool that alig
 
 ---
 
+### Application Development Approach: Bash Scripts
+
+All management tools in DebianDC were developed as **Bash scripts**.
+

@@ -77,3 +77,7 @@ This approach aligns with DebianDC’s goal of being a **focused management envi
 Graphical interaction in DebianDC will continue to be provided through Zenity-based Bash scripts, as in previous versions.
 The transition to Debian 13 and Openbox does not imply a complete change in the UI approach; however, it does require re-evaluating the existing tools under the conditions of the new platform.
 
+---
+
+## Consequences and Impact
+

@@ -29,3 +29,8 @@ However, over time:
 - There was a desire to avoid constraining new projects and development efforts with limitations imposed by older releases
 
 For these reasons, updating the Debian base release became a key consideration.
+
+---
+
+### Desktop Environment and UI Approach
+

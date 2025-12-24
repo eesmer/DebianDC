@@ -67,3 +67,13 @@ The following principles guide the development of DebianDC:
 - Debian’s official packages and infrastructure are preferred
 - Custom forks and aggressive patching are avoided
 - Debian release transitions are handled in a controlled manner
+
+### 5. Documentation and Continuity
+- Architectural choices and tool selections are documented
+  together with their rationale
+- Decisions should remain traceable and understandable over time
+- The development process should progress in a structured
+  and disciplined manner
+
+---
+

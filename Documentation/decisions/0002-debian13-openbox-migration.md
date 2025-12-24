@@ -27,3 +27,5 @@ However, over time:
 - Debian 13 (Trixie) introduced more up-to-date Samba, Python, and core system components
 - A need emerged to move to a more forward-looking release from a long-term maintenance perspective
 - There was a desire to avoid constraining new projects and development efforts with limitations imposed by older releases
+
+For these reasons, updating the Debian base release became a key consideration.

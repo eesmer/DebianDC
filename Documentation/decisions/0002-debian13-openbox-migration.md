@@ -62,3 +62,5 @@ The main reasons for this decision include:
 
 Instead of LXDE, the lightweight window manager **Openbox** was selected.
 
+The reasons for choosing Openbox include:
+- Minimal resource consumption

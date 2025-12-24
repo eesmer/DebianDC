@@ -39,3 +39,8 @@ The main reasons for choosing LXDE were:
 - Low resource consumption
 - Simple and predictable window management
 - A deliberate avoidance of complex desktop components
+
+In the early releases of DebianDC, LXDE provided a sufficient and balanced environment for graphical interaction.
+
+---
+

@@ -18,3 +18,6 @@ At this stage, the platform and desktop environment were re-evaluated to ensure 
 
 ## Considerations
 
+### Debian Release
+
+Debian 11 was a correct choice at the beginning of the project in terms of stability and maturity.

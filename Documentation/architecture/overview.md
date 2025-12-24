@@ -77,3 +77,16 @@ The following principles guide the development of DebianDC:
 
 ---
 
+## What DebianDC Is Not
+
+DebianDC does **not** aim to be:
+
+- A general-purpose desktop Linux distribution
+- An end-user–oriented computing environment
+- A one-to-one replica of Windows Active Directory
+- A closed management tool that hides all underlying operations
+
+DebianDC is developed with an approach that
+**keeps control in the hands of the system administrator**
+and values transparency and learnability.
+

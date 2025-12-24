@@ -26,3 +26,19 @@ Within this scope, DebianDC:
 - Supports daily administration and auditing tasks with
   lightweight graphical tools
 - Aims for script-based, traceable, and auditable operations
+
+---
+
+## Target Use Scenarios
+
+DebianDC is developed with the following use cases in mind:
+
+- Deployment of new Samba Active Directory domain environments
+- Management of existing Samba AD infrastructures
+- Monitoring, validating, and reporting on
+  Linux-based AD environments
+- Using the **same administrative approach** across
+  training, testing, and production environments
+- Reducing the daily operational workload of system administrators
+  in enterprise environments
+

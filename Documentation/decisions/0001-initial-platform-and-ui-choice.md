@@ -80,3 +80,5 @@ With this initial technology stack:
 - Samba Active Directory deployment and management tools became functional in a short time
 - The project’s core philosophy and direction were clearly established
 
+This document records the platform and tool choices made during the early versions of DebianDC, together with their historical context.
+

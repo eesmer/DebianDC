@@ -10,7 +10,7 @@ When the DebianDC project was first initiated, the primary objective was to buil
 During the early stages of the project, the following goals were prioritized:
 
 - Making the installation process as automated as possible
-- Solving graphical interface requirements
-  using simple and lightweight tools
-- Ensuring the system remains easy to understand
-  and straightforward to intervene in when needed
+- Solving graphical interface requirements using simple and lightweight tools
+- Ensuring the system remains easy to understand and straightforward to intervene in when needed
+
+In line with these goals, the following core technology stack was selected for the initial releases.

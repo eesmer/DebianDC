@@ -76,3 +76,7 @@ As a result, DebianDC evolved into a system that is learnable and modifiable, ra
 ## Consequences
 
 With this initial technology stack:
+- DebianDC could be developed rapidly
+- Samba Active Directory deployment and management tools became functional in a short time
+- The project’s core philosophy and direction were clearly established
+

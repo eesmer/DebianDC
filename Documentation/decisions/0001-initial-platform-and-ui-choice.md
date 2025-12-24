@@ -35,3 +35,7 @@ This choice was made because:
 For management interfaces that required graphical interaction,
 the **LXDE** desktop environment was selected.
 
+The main reasons for choosing LXDE were:
+- Low resource consumption
+- Simple and predictable window management
+- A deliberate avoidance of complex desktop components

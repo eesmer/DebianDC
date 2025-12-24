@@ -34,3 +34,7 @@ For these reasons, updating the Debian base release became a key consideration.
 
 ### Desktop Environment and UI Approach
 
+The graphical interface requirements of DebianDC are:
+- Not intended to provide an end-user desktop experience
+- Limited to helper screens that assist system administrators in performing specific tasks
+

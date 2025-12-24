@@ -7,3 +7,4 @@ Accepted (historical record)
 
 When the DebianDC project was first initiated, the primary objective was to build a **lightweight, script-based, and controllable** system for deploying and managing Samba Active Directory environments.
 
+During the early stages of the project, the following goals were prioritized:

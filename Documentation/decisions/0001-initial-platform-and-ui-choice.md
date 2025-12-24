@@ -81,4 +81,4 @@ With this initial technology stack:
 - The project’s core philosophy and direction were clearly established
 
 This document records the platform and tool choices made during the early versions of DebianDC, together with their historical context.
-
+Subsequent decisions were built upon this foundational layer.

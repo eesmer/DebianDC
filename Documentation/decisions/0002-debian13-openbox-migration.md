@@ -64,3 +64,7 @@ Instead of LXDE, the lightweight window manager **Openbox** was selected.
 
 The reasons for choosing Openbox include:
 - Minimal resource consumption
+- Full control over desktop components
+- Clearer management of autostart behavior, window handling, and user interactions
+- Easier construction of a DebianDC-specific user experience
+

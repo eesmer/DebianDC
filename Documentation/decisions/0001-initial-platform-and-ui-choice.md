@@ -57,3 +57,5 @@ The advantages of this approach included:
 
 At the beginning of the project, Zenity was considered a suitable tool that aligned well with the goal of a “lightweight graphical interface.”
 
+---
+

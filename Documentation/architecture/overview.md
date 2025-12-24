@@ -42,3 +42,9 @@ DebianDC is developed with the following use cases in mind:
 - Reducing the daily operational workload of system administrators
   in enterprise environments
 
+---
+
+## Design Principles
+
+The following principles guide the development of DebianDC:
+

@@ -58,3 +58,7 @@ The following principles guide the development of DebianDC:
 - Heavy desktop components are deliberately avoided
 - Tools must remain simple, fast, and auditable
 
+### 3. Script-Based and Traceable Structure
+- Management tools are script-based
+- Operations remain readable and can be
+  performed manually when necessary

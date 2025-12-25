@@ -30,9 +30,11 @@ As a result, the previously used approach of “displaying HTML reports inside Z
 ### 1. Using Zenity Markup (Pango)
 
 Zenity’s supported markup and colored text features were evaluated.
+
 **Pros:**
 - Compatible with Zenity
 - Allows short, colored, and formatted output
+
 **Cons:**
 - Not suitable for long reports requiring scrolling
 - Insufficient for tables, sectioning, and complex report structures
@@ -46,3 +48,6 @@ For these reasons, the markup approach was considered suitable only for short me
 
 The option of displaying HTML or markup content using a custom viewer application was evaluated.
 
+**Pros:**
+- Supports colored output and scrolling
+- Does not require a web browser

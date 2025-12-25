@@ -33,3 +33,6 @@ Zenity’s supported markup and colored text features were evaluated.
 **Pros:**
 - Compatible with Zenity
 - Allows short, colored, and formatted output
+**Cons:**
+- Not suitable for long reports requiring scrolling
+- Insufficient for tables, sectioning, and complex report structures

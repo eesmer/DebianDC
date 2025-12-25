@@ -95,4 +95,5 @@ As a result of this decision:
 
 - A sustainable report viewing approach, independent of Debian 13 packaging decisions, has been adopted
 - Report readability and extensibility have improved
+- The reporting infrastructure is now suitable for future content expansion
 

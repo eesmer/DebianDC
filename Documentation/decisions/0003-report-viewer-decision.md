@@ -44,3 +44,5 @@ For these reasons, the markup approach was considered suitable only for short me
 
 ### 2. Custom Viewer Application (GTK / Python)
 
+The option of displaying HTML or markup content using a custom viewer application was evaluated.
+

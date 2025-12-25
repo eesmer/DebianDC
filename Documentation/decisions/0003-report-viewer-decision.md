@@ -23,3 +23,7 @@ During evaluations in the Debian 13 environment, it was observed that:
 
 As a result, the previously used approach of “displaying HTML reports inside Zenity” is no longer sustainable on the new platform.
 
+---
+
+## Considered Options
+

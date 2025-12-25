@@ -84,4 +84,6 @@ In the DebianDC project, it was decided to use **netsurf-gtk** for displaying re
 
 Accordingly:
 - Reports will continue to be generated in HTML format
+- Zenity will remain the primary user interaction interface
+- HTML reports will be opened in a separate viewer window, outside of Zenity
 

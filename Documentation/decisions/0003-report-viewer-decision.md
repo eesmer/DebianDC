@@ -99,3 +99,11 @@ As a result of this decision:
 - The display layer has been decoupled from the report generation logic
 
 This document records why and how the report viewing approach in DebianDC was changed, together with its historical and technical context.
+
+## References
+
+- Debian Zenity package:
+  https://packages.debian.org/trixie/zenity
+
+- Zenity upstream project page:
+  https://gitlab.gnome.org/GNOME/zenity

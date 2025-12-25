@@ -63,3 +63,4 @@ This approach was rejected as it would introduce unnecessary complexity.
 
 ### 3. Using a Lightweight HTML Viewer (netsurf-gtk)
 
+The option of displaying HTML reports using a lightweight graphical browser was evaluated.

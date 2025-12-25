@@ -18,3 +18,6 @@ During this transition, the tools used for displaying reports and their behavior
 
 During evaluations in the Debian 13 environment, it was observed that:
 - The `zenity --text-info --html` option is disabled in Debian’s Zenity packages
+- This limitation is not caused by missing dependencies, but by packaging and build-time decisions
+- The YAD package also does not provide HTML rendering support
+

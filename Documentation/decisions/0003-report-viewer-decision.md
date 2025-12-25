@@ -68,4 +68,6 @@ The option of displaying HTML reports using a lightweight graphical browser was 
 **Pros:**
 - True HTML rendering support
 - Suitable for long and complex reports
+- Lightweight and fast
+- Requires minimal dependencies
 

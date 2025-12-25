@@ -27,3 +27,9 @@ As a result, the previously used approach of “displaying HTML reports inside Z
 
 ## Considered Options
 
+### 1. Using Zenity Markup (Pango)
+
+Zenity’s supported markup and colored text features were evaluated.
+**Pros:**
+- Compatible with Zenity
+- Allows short, colored, and formatted output

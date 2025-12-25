@@ -87,3 +87,7 @@ Accordingly:
 - Zenity will remain the primary user interaction interface
 - HTML reports will be opened in a separate viewer window, outside of Zenity
 
+---
+
+## Consequences and Impact
+

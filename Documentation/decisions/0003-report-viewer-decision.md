@@ -57,3 +57,5 @@ The option of displaying HTML or markup content using a custom viewer applicatio
 - Introduces maintenance and distribution overhead
 - Expands DebianDC’s intentionally minimal toolset
 
+This approach was rejected as it would introduce unnecessary complexity.
+

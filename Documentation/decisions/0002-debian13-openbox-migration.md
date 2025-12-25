@@ -88,3 +88,23 @@ As a result of this decision:
 - Some previous approaches (such as HTML rendering via Zenity) have required reconsideration
 
 This document records the decision to transition DebianDC to Debian 13 and Openbox, together with its technical and historical context.
+
+## References
+
+- Debian 13 (Trixie) – General Information:
+  https://www.debian.org/releases/trixie/
+
+- Debian Release Cycle and Support Lifetimes:
+  https://www.debian.org/releases/
+
+- Openbox Official Project:
+  http://openbox.org/
+
+- Openbox Wiki:
+  https://openbox.org/wiki/Main_Page
+
+- Debian Openbox package:
+  https://packages.debian.org/trixie/openbox
+
+- Zenity Debian package:
+  https://packages.debian.org/trixie/zenity

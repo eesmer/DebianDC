@@ -22,6 +22,18 @@ You can install a new domain environment with DebianDC or manage your existing S
 - LXDE Desktop environment support.
 - Ready to use after installation.
 
+## 📷 Key Features
+- Domain and Domain Controller setup
+- DC or ADDC setup (New Domain or join to existing domain)
+- User Management
+- Group Management
+- OU Management
+- Computer Management
+- DNS Management
+- Domain Operations (demote DC, fsmo management etc.)
+- AD Settings Management (password policy, age, settings etc.)
+- Reports
+
 ## 🛠️ Requirements
 - Computer with x86_64 architecture.
 - Minimum 2 CPUs, 2 GB RAM, 20 GB disk space.
@@ -34,19 +46,6 @@ You can install a new domain environment with DebianDC or manage your existing S
 <br>
 
 ![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-StartMenu.png "DebianDC StartMenu")
-
-
-## 📷 Key Features
-- Domain and Domain Controller setup
-- DC or ADDC setup (New Domain or join to existing domain)
-- User Management
-- Group Management
-- OU Management
-- Computer Management
-- DNS Management
-- Domain Operations (demote DC, fsmo management etc.)
-- AD Settings Management (password policy, age, settings etc.)
-- Reports
 
 ---
 

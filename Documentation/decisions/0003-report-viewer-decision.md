@@ -81,3 +81,7 @@ Since DebianDC already considers displaying reports in a separate window outside
 ## Decision
 
 In the DebianDC project, it was decided to use **netsurf-gtk** for displaying reports generated in HTML format.
+
+Accordingly:
+- Reports will continue to be generated in HTML format
+

@@ -76,3 +76,8 @@ The option of displaying HTML reports using a lightweight graphical browser was 
 
 Since DebianDC already considers displaying reports in a separate window outside Zenity to be acceptable, this drawback was deemed acceptable.
 
+---
+
+## Decision
+
+In the DebianDC project, it was decided to use **netsurf-gtk** for displaying reports generated in HTML format.

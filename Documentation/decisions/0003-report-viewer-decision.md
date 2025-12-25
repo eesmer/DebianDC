@@ -71,3 +71,8 @@ The option of displaying HTML reports using a lightweight graphical browser was 
 - Lightweight and fast
 - Requires minimal dependencies
 
+**Cons:**
+- Requires opening a separate window outside of the Zenity interface
+
+Since DebianDC already considers displaying reports in a separate window outside Zenity to be acceptable, this drawback was deemed acceptable.
+

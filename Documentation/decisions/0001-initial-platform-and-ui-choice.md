@@ -82,3 +82,14 @@ With this initial technology stack:
 
 This document records the platform and tool choices made during the early versions of DebianDC, together with their historical context.
 Subsequent decisions were built upon this foundational layer.
+
+## References
+
+- Debian 11 (Bullseye) – General Information:
+  https://www.debian.org/releases/bullseye/
+
+- Debian Long Term Support (LTS) Policy:
+  https://wiki.debian.org/LTS
+
+- Samba Official Documentation:
+  https://www.samba.org/samba/docs/

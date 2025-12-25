@@ -7,3 +7,6 @@
 - `decisions/0001-initial-platform-and-ui-choice.md`
 - `decisions/0002-debian13-openbox-migration.md`
 - `decisions/0003-report-viewer-decision.md`
+
+
+- [`decisions/0001-initial-platform-and-ui-choice.md`](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/installation/installation.md)

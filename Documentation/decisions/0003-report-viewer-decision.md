@@ -37,3 +37,5 @@ Zenity’s supported markup and colored text features were evaluated.
 - Not suitable for long reports requiring scrolling
 - Insufficient for tables, sectioning, and complex report structures
 - Struggles to meet enterprise reporting requirements
+
+For these reasons, the markup approach was considered suitable only for short messages and was not selected for report viewing.

@@ -51,3 +51,9 @@ The option of displaying HTML or markup content using a custom viewer applicatio
 **Pros:**
 - Supports colored output and scrolling
 - Does not require a web browser
+
+**Cons:**
+- Requires an additional application beyond Zenity
+- Introduces maintenance and distribution overhead
+- Expands DebianDC’s intentionally minimal toolset
+

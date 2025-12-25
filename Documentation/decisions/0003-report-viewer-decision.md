@@ -39,3 +39,8 @@ Zenity’s supported markup and colored text features were evaluated.
 - Struggles to meet enterprise reporting requirements
 
 For these reasons, the markup approach was considered suitable only for short messages and was not selected for report viewing.
+
+---
+
+### 2. Custom Viewer Application (GTK / Python)
+

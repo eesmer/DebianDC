@@ -59,3 +59,7 @@ The option of displaying HTML or markup content using a custom viewer applicatio
 
 This approach was rejected as it would introduce unnecessary complexity.
 
+---
+
+### 3. Using a Lightweight HTML Viewer (netsurf-gtk)
+

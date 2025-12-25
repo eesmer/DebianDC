@@ -47,9 +47,6 @@ You can install a new domain environment with DebianDC or manage your existing S
 - Domain Operations (demote DC, fsmo management etc.)
 - AD Settings Management (password policy, age, settings etc.)
 - Reports
-### Other Additional Features
-- Centralized management of Windows client and host machines
-    - install and uninstall .msi package
 
 ---
 

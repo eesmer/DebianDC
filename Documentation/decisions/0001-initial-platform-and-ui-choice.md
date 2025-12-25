@@ -93,3 +93,12 @@ Subsequent decisions were built upon this foundational layer.
 
 - Samba Official Documentation:
   https://www.samba.org/samba/docs/
+
+- LXDE Project:
+  https://www.lxde.org/
+
+- Zenity Official Documentation:
+  https://help.gnome.org/users/zenity/stable/
+
+- Bash Scripting – GNU Bash Manual: 
+  https://www.gnu.org/software/bash/manual/

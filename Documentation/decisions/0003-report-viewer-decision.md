@@ -12,3 +12,9 @@ With ADR-0002, DebianDC was decided to transition to a Debian 13 (Trixie) and Op
 
 During this transition, the tools used for displaying reports and their behavior on the new platform were re-evaluated.
 
+---
+
+## Problem
+
+During evaluations in the Debian 13 environment, it was observed that:
+

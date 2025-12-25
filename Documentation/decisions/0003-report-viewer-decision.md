@@ -17,4 +17,4 @@ During this transition, the tools used for displaying reports and their behavior
 ## Problem
 
 During evaluations in the Debian 13 environment, it was observed that:
-
+- The `zenity --text-info --html` option is disabled in Debian’s Zenity packages

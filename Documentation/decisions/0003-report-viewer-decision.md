@@ -107,3 +107,9 @@ This document records why and how the report viewing approach in DebianDC was ch
 
 - Zenity upstream project page:
   https://gitlab.gnome.org/GNOME/zenity
+
+- Debian YAD package:
+  https://packages.debian.org/trixie/yad
+
+- NetSurf web browser:
+  https://www.netsurf-browser.org/

@@ -21,3 +21,5 @@ During evaluations in the Debian 13 environment, it was observed that:
 - This limitation is not caused by missing dependencies, but by packaging and build-time decisions
 - The YAD package also does not provide HTML rendering support
 
+As a result, the previously used approach of “displaying HTML reports inside Zenity” is no longer sustainable on the new platform.
+

@@ -97,3 +97,5 @@ As a result of this decision:
 - Report readability and extensibility have improved
 - The reporting infrastructure is now suitable for future content expansion
 - The display layer has been decoupled from the report generation logic
+
+This document records why and how the report viewing approach in DebianDC was changed, together with its historical and technical context.

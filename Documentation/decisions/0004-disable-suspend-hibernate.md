@@ -21,3 +21,7 @@ DebianDC also uses a lightweight Openbox-based desktop environment where the gra
 
 ---
 
+## Problem
+
+In a minimal desktop environment such as Openbox, power actions shown in UI menus may appear but remain unavailable without the correct authorization layer.
+

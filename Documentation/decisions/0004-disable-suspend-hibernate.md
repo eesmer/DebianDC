@@ -3,3 +3,6 @@
 ## Status
 Accepted
 
+## Context
+
+DebianDC is designed and deployed as a Samba Active Directory Domain Controller (AD DC) platform.

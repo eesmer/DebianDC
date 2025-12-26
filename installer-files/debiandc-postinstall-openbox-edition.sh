@@ -12,6 +12,7 @@ apt-get -y install syslog-ng #for auth.log
 apt-get -y install xrdp
 apt-get -y install --no-install-recommends xorg openbox dbus-x11 x11-xserver-utils xterm zenity yad
 apt-get -y install --no-install-recommends lightdm lightdm-gtk-greeter
+apt-get -y install netsurf-gtk xdg-utils
 systemctl enable lightdm
 
 # -----------------------------------------------------------------------------

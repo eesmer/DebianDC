@@ -13,3 +13,4 @@ A Domain Controller is an always-on infrastructure component that commonly provi
 - DNS services (often integrated with AD)
 - Directory replication and time-sensitive operations
 
+Because of these characteristics, a DC is expected to remain continuously available.

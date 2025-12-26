@@ -57,3 +57,5 @@ This provides a lightweight PolicyKit authentication agent without introducing a
 
 As a result of this decision:
 - DebianDC aligns power behavior with the operational expectations of a Domain Controller
+- Suspend/Hibernate-related risks are avoided by design
+- The user interface remains minimal and purpose-focused

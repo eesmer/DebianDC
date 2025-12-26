@@ -13,6 +13,7 @@ apt-get -y install xrdp
 apt-get -y install --no-install-recommends xorg openbox dbus-x11 x11-xserver-utils xterm zenity yad
 apt-get -y install --no-install-recommends lightdm lightdm-gtk-greeter
 apt-get -y install netsurf-gtk xdg-utils
+apt-get -y install --no-install-recommends policykit-1 lxqt-policykit
 systemctl enable lightdm
 
 # -----------------------------------------------------------------------------

@@ -28,3 +28,8 @@ In a minimal desktop environment such as Openbox, power actions shown in UI menu
 At the same time, even if supported, Suspend and Hibernate are not meaningful (or desired) for a Domain Controller role:
 - They interrupt critical services unexpectedly
 - They may cause replication delays and operational inconsistencies
+- They can contribute to Kerberos issues such as time drift/clock skew scenarios
+- They reduce predictability and increase operational risk
+
+Therefore, DebianDC must clearly define which power operations are supported.
+

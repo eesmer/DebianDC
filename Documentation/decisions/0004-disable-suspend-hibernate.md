@@ -17,3 +17,7 @@ Because of these characteristics, a DC is expected to remain continuously availa
 Power states that pause execution (Suspend) or persist memory to disk and stop services (Hibernate)
 are not aligned with the operational model of directory services in enterprise environments.
 
+DebianDC also uses a lightweight Openbox-based desktop environment where the graphical UI exists only as a helper interface for administrators and not as an end-user desktop experience.
+
+---
+

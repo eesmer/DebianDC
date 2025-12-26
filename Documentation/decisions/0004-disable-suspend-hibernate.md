@@ -51,3 +51,9 @@ To ensure Restart/Shut Down actions work correctly in the Openbox environment, D
 
 This provides a lightweight PolicyKit authentication agent without introducing a full desktop stack or additional power-management frameworks.
 
+---
+
+## Consequences and Impact
+
+As a result of this decision:
+- DebianDC aligns power behavior with the operational expectations of a Domain Controller

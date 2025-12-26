@@ -45,3 +45,9 @@ DebianDC supports only the following power operations for administrators:
 - Restart
 - Shut Down
 
+To ensure Restart/Shut Down actions work correctly in the Openbox environment, DebianDC includes the minimal authorization components required for systemd-logind power actions:
+- `policykit-1`
+- `lxqt-policykit` (provides `lxqt-policykit-agent`)
+
+This provides a lightweight PolicyKit authentication agent without introducing a full desktop stack or additional power-management frameworks.
+

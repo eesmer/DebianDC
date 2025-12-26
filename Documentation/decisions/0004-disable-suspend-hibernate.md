@@ -25,3 +25,4 @@ DebianDC also uses a lightweight Openbox-based desktop environment where the gra
 
 In a minimal desktop environment such as Openbox, power actions shown in UI menus may appear but remain unavailable without the correct authorization layer.
 
+At the same time, even if supported, Suspend and Hibernate are not meaningful (or desired) for a Domain Controller role:

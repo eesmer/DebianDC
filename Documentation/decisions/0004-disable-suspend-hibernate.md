@@ -38,6 +38,10 @@ Therefore, DebianDC must clearly define which power operations are supported.
 ## Decision
 
 DebianDC intentionally does **not** support:
-
 - Suspend
 - Hibernate
+
+DebianDC supports only the following power operations for administrators:
+- Restart
+- Shut Down
+

@@ -33,3 +33,11 @@ At the same time, even if supported, Suspend and Hibernate are not meaningful (o
 
 Therefore, DebianDC must clearly define which power operations are supported.
 
+---
+
+## Decision
+
+DebianDC intentionally does **not** support:
+
+- Suspend
+- Hibernate

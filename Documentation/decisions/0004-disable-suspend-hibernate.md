@@ -63,3 +63,7 @@ As a result of this decision:
 - DebianDC does not expand its scope into end-user desktop power management
 
 This document records DebianDC’s deliberate choice to disable Suspend and Hibernate and to provide only the minimum required components for authorized Restart and Shut Down actions.
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

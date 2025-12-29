@@ -28,7 +28,6 @@ Used for SSL/TLS secure connection over LDAP. This port is used for encryption a
 - **TCP/UDP 88** <br> Used for Kerberos authentication. Kerberos is a secure protocol for authenticating users in an Active Directory environment. <br>
 - **TCP/UDP 53** <br> Used for DNS (Domain Name System) communication. In an Active Directory environment, DNS is important for name resolution and record updates between domain controllers and other servers. <br>
 
-
 ## What is Domain Controller?
 Domain Controller is the machine on which the Active Directory service runs.<br>
 Domain Controller is the role of a physical machine in the Active Directory environment.<br>
@@ -41,7 +40,6 @@ Therefore, a mechanism is required that translates IP Address -> Machine / Machi
 Like DNS servers in the Internet environment, DNS servers in the Domain environment also perform the same process.<br>
 DNS is not required for the network to function, but DNS is required for the domain environment.<br>
 
-<br>
-
 ---
-[Documentation](https://github.com/eesmer/DebianDC/tree/master/Documentation)
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation)

@@ -12,11 +12,13 @@ Architecture Decision Records (ADR).
 - [`decisions/0004-disable-suspend-hibernate.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0004-disable-suspend-hibernate.md)
 
 ## Concepts
+Fundamental concepts related to Active Directory and identity services.
 - [`concepts/Domain_and_Active_Directory.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Domain_and_Active_Directory.md)
 - [`concepts/FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/FSMO_Roles.md)
 - [`concepts/Best_Configuration_for_FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Best_Configuration_for_FSMO_Roles.md)
 
 ## Guides
+Installation, usage, and operational guides.
 - [`guides/access_to_debiandc.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/access_to_debiandc.md)
 - [`guides/debiandc-manager.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/debiandc-manager.md)
 - [`guides/host-management.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/host-management.md)
@@ -25,4 +27,5 @@ Architecture Decision Records (ADR).
     - [`guides/installation/installation_from_script.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_script.md)
 
 ## Assets
+Images and other supporting documentation assets.
 - [`assets/assets`](https://github.com/eesmer/DebianDC/tree/master/Documentation/assets)

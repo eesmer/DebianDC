@@ -102,3 +102,7 @@ Subsequent decisions were built upon this foundational layer.
 
 - Bash Scripting – GNU Bash Manual: 
   https://www.gnu.org/software/bash/manual/
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

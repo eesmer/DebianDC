@@ -34,10 +34,10 @@ RSAT is the same as the Microsoft Active Directory usage screen. <br>
 
 For example, the screenshot below is a screenshot of RSAT connected to the Samba Active Directory environment. <br>
 
-![alt text](screenshots/handbook/rsat-screenshot1.png "RSAT Screen")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/rsat-screenshot1.png "RSAT Screen")
 
 You can see the link below for details. <br>
 https://wiki.samba.org/index.php/Installing_RSAT
 <br>
 <br>
-[UserGuide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)
+[UserGuide](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

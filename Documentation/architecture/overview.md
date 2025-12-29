@@ -106,3 +106,7 @@ DebianDC documentation is organized under two main sections:
 
 This structure is intended to ensure that DebianDC’s maintenance
 and development process remains **systematic, transparent, and traceable**.
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

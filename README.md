@@ -41,11 +41,11 @@ You can install a new domain environment with DebianDC or manage your existing S
 
 ---
 
-![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-Screenshot.png "DebianDC_Desktop")
+![alt text](Documentation/assets/screenshots/DebianDC-Screenshot.png "DebianDC_Desktop")
 
 <br>
 
-![alt text](docs/DebianDC-UserGuide/screenshots/DebianDC-StartMenu.png "DebianDC StartMenu")
+![alt text](Documentation/assets/screenshots/DebianDC-StartMenu.png "DebianDC StartMenu")
 
 ---
 

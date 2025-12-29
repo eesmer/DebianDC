@@ -8,3 +8,8 @@
 - [`decisions/0002-debian13-openbox-migration.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0002-debian13-openbox-migration.md)
 - [`decisions/0003-report-viewer-decision.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0003-report-viewer-decision.md)
 - [`decisions/0004-disable-suspend-hibernate.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0004-disable-suspend-hibernate.md)
+
+## Concepts
+- [`concepts/Domain_and_Active_Directory.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Domain_and_Active_Directory.md)
+- [`concepts/FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/FSMO_Roles.md)
+- [`concepts/Best_Configuration_for_FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Best_Configuration_for_FSMO_Roles.md)

@@ -108,3 +108,7 @@ This document records the decision to transition DebianDC to Debian 13 and Openb
 
 - Zenity Debian package:
   https://packages.debian.org/trixie/zenity
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

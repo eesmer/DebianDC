@@ -21,3 +21,6 @@
     #### Installation
     - [`guides/installation/installation_from_iso.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_iso.md)
     - [`guides/installation/installation_from_script.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_script.md)
+
+## Assets
+- [`assets/assets`](https://github.com/eesmer/DebianDC/tree/master/Documentation/assets)

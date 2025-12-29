@@ -29,14 +29,14 @@ After these processes, you can use the Windows host machine over DebianDC.<br>
 You can use a special user account or Administrator account for access with winrm.
 <br>
 <br>
-![alt text](screenshots/StartMenu_WindowsManager.png "DebianDC StartMenu Windows Manager")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/StartMenu_WindowsManager.png "DebianDC StartMenu Windows Manager")
 <br>
 <br>
 #### use of Ping Action
-![alt text](screenshots/handbook/manage_windows_host-2_ping.png "DebianDC Manage Windows Host ping action")
-![alt text](screenshots/handbook/manage_windows_host-3_ping.png "DebianDC Manage Windows Host access for ping action")
-![alt text](screenshots/handbook/manage_windows_host-4_ping_result.png "DebianDC Manage Windows Host result of ping action")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/manage_windows_host-2_ping.png "DebianDC Manage Windows Host ping action")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/manage_windows_host-3_ping.png "DebianDC Manage Windows Host access for ping action")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/manage_windows_host-4_ping_result.png "DebianDC Manage Windows Host result of ping action")
 
 <br>
 
-[UserGuide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)
+[Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#guides)

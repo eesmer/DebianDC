@@ -20,4 +20,4 @@ If you are installing DebianDC on a system with a desktop installed, **DebianDC 
 
 ---
 
-[Documentation](https://github.com/eesmer/DebianDC/tree/master/Documentation#Guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#concepts)

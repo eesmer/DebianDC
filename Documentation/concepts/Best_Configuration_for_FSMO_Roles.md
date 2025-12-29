@@ -21,4 +21,4 @@ Accordingly, for example; <br>
 <br>
 
 ---
-[DebianDC Documentation](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-Docs.md)
+[Documentation](https://github.com/eesmer/DebianDC/tree/master/Documentation)

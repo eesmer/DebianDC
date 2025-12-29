@@ -109,4 +109,4 @@ and development process remains **systematic, transparent, and traceable**.
 
 ---
 
-[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

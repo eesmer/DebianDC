@@ -116,3 +116,7 @@ This document records why and how the report viewing approach in DebianDC was ch
 
 - Debian NetSurf package:
   https://packages.debian.org/trixie/netsurf-gtk
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

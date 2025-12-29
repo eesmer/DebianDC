@@ -34,9 +34,9 @@ It asks for the new name of the machine, the domain name to be installed, and th
 After getting the information required to install the role, a screen will appear asking for confirmation for installation.
 After the confirmation of this screen, the Active Directory role installation begins.
 
-![alt text](screenshots/7-install_ad-5.png "ADManager install AD Role")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/7-install_ad-5.png "ADManager install AD Role")
 <br>
-![alt text](screenshots/8-install_ad-6.png "ADManager install AD Role")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/8-install_ad-6.png "ADManager install AD Role")
 
 When the installation is complete, DebianDC will ask for a reboot.
 After DebianDC restarts, you can log in with the root user and use the manager application.
@@ -44,7 +44,7 @@ After DebianDC restarts, you can log in with the root user and use the manager a
 Once the Domain setup is complete and DebianDC restarts, log in again.
 You can now use the Manager application with its new menus.
 
-![alt text](screenshots/login1.png "DebianDC Login")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/login1.png "DebianDC Login")
 
 ### 4- Using the Manager application after domain setup
 The DebianDC-ADManager application is used by obtaining a kerberos ticket.
@@ -55,7 +55,7 @@ Thus, it can be used in menus that require Administrator password without enteri
 #### 5- User Management
 This screen is where Active Directory user management is done.
 
-![alt text](screenshots/handbook/user-management-1.png "DebianDC User Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/user-management-1.png "DebianDC User Management")
 
 From this menu,
 can create new users, user can delete, can determine the duration of stay active, can disable the use of the user account, <br>

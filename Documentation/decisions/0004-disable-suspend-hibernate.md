@@ -66,4 +66,4 @@ This document records DebianDC’s deliberate choice to disable Suspend and Hibe
 
 ---
 
-[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

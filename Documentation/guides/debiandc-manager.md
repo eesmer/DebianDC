@@ -63,17 +63,17 @@ can set new password or force password change, and you can get the list of the u
 <br>
 <br>
 opening a new user account<br>
-![alt text](screenshots/handbook/create-user-1.png "DebianDC User Management")
-![alt text](screenshots/handbook/create-user-2.png "DebianDC User Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/create-user-1.png "DebianDC User Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/create-user-2.png "DebianDC User Management")
 <br>
 <br>
 active directory user account list<br>
-![alt text](screenshots/handbook/user-list-report-1.png "DebianDC User Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/user-list-report-1.png "DebianDC User Management")
 
 ### 6- Group Management
 This screen is where Active Directory group management is done.
 
-![alt text](screenshots/handbook/group-management-1.png "DebianDC Group Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/group-management-1.png "DebianDC Group Management")
 
 From this menu
 You can create a group, delete the group, add members to the group, remove the group, group list and member list report can be obtained.
@@ -81,7 +81,7 @@ You can create a group, delete the group, add members to the group, remove the g
 ### 7- OU Management
 This screen is where Active Directory organization unit management is done.
 
-![alt text](screenshots/handbook/ou-management-1.png "DebianDC OU Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/ou-management-1.png "DebianDC OU Management")
 
 From this menu
 You can create and delete organizational units, Members can be added to or removed from organizational units, OU list and OU member list report are created.
@@ -93,7 +93,7 @@ From this menu
 List of Domain Controller machines can be taken, A list of computer accounts that are members of the domain can be retrieved, Moving computer accounts between OUs
 and the computer account can be removed.
 
-![alt text](screenshots/handbook/computer-management-1.png "DebianDC Computer Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/computer-management-1.png "DebianDC Computer Management")
 
 ### 9- DNS Management
 This screen is where Active Directory DNS management is done.
@@ -101,7 +101,7 @@ This screen is where Active Directory DNS management is done.
 From this menu
 DNS Zone information can be obtained, DNS records can be added, deleted and updated
 
-![alt text](screenshots/handbook/dns-management-1.png "DebianDC DNS Management")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/dns-management-1.png "DebianDC DNS Management")
 
 ### 10- Domain Operations
 This screen is where domain operations is done
@@ -110,7 +110,8 @@ There are 2 menus on this screen.
 From the Domain Controller Operations screen; DC machine can be removed and dropped from the environment.
 From the FSMO Operations screen; FSMO roles can be transferred to DC machines.
 
-![alt text](screenshots/handbook/domain-operations-1.png "DebianDC Domain Operations") ![alt text](screenshots/handbook/domain-operations-2.png "DebianDC Domain Operations") 
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/domain-operations-1.png "DebianDC Domain Operations")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/domain-operations-2.png "DebianDC Domain Operations") 
 
 The operations here will be covered in detail in the Sample Scenarios and Best Practies title.
 
@@ -120,8 +121,8 @@ This screen is where Active Directory settings is done
 This menu
 For user accounts; Password complexity, length, expiration time, etc. are set.
 
-![alt text](screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
 
 <br>
 
-[UserGuide](https://github.com/eesmer/DebianDC/blob/master/docs/DebianDC-UserGuide/DebianDC-UserGuide.md)
+[Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#guides)

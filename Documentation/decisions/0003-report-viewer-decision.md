@@ -119,4 +119,4 @@ This document records why and how the report viewing approach in DebianDC was ch
 
 ---
 
-[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

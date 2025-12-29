@@ -1,7 +1,7 @@
 # ADR-0004: Disabling Suspend and Hibernate in DebianDC
 
 ## Status
-Accepted
+Superseded by ADR-0005 (Selection of SLiM as Login Manager)
 
 ## Context
 

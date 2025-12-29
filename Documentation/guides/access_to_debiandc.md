@@ -7,11 +7,11 @@ www.xrdp.org
 ```
 xfreerdp /u:root /p:$PASSWORD /w:1366 /h:768 /v:$DEBIANDC_SERVER:3389
 ```
-![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screeshots/handbook/xrdp-login1.png "XRDP Login Screen")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/xrdp-login1.png "XRDP Login Screen")
 
 #### From Windows
 
-![alt text](screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/rdp_fromwindows1.png "Windows RDP Screen")
 
 ### 2- SSH
 ```

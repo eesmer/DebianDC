@@ -48,4 +48,4 @@ You can log in with the root user you specified during the installation.
 
 <br>
 
-[Documentation](https://github.com/eesmer/DebianDC/tree/master/Documentation#Guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#guides)

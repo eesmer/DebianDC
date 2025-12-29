@@ -40,4 +40,4 @@ You can see the link below for details. <br>
 https://wiki.samba.org/index.php/Installing_RSAT
 <br>
 <br>
-[UserGuide](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)
+[Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

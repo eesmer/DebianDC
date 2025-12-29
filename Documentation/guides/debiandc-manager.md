@@ -7,7 +7,7 @@ You can access the Manager application from the opened DebianDC desktop environm
 After the DebianDC desktop installation, the Active Directory role must be installed.
 When you open the Manager application, a menu will open with setup and configuration options if Active Directory Role is not installed.
 
-![alt text](screenshots/1-Manager_MainMenu1.png "ADManager Main Menu")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/1-Manager_MainMenu1.png "ADManager Main Menu")
 
 `Important Notice`: <ins> You must give a static IP to the DC machine. </ins>
 
@@ -15,8 +15,8 @@ When you open the Manager application, a menu will open with setup and configura
 The IP address of the DC machine must be fixed.
 Otherwise, the changed ip address later may cause the Active Directory role to not work.
 
-![alt text](screenshots/2-set_static_ip-1.png "ADManager Static ip assignment")
-![alt text](screenshots/2-set_static_ip-2.png "ADManager Static ip assignment")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/2-set_static_ip-1.png "ADManager Static ip assignment")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/2-set_static_ip-2.png "ADManager Static ip assignment")
 
 DebianDC will prompt you to reboot for ip definition to take effect.
 
@@ -27,9 +27,9 @@ The installation of this role is done with the "Setup a New Domain" option from 
 The process of installing the AD role;
 It asks for the new name of the machine, the domain name to be installed, and the password of the Administrator user, respectively.
 
-![alt text](screenshots/4-install_ad-2.png "ADManager install AD Role")
-![alt text](screenshots/5-install_ad-3.png "ADManager install AD Role")
-![alt text](screenshots/6-install_ad-4.png "ADManager install AD Role")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/4-install_ad-2.png "ADManager install AD Role")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/5-install_ad-3.png "ADManager install AD Role")
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/6-install_ad-4.png "ADManager install AD Role")
 
 After getting the information required to install the role, a screen will appear asking for confirmation for installation.
 After the confirmation of this screen, the Active Directory role installation begins.

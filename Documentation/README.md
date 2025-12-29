@@ -18,6 +18,6 @@
 - [`guides/access_to_debiandc.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/access_to_debiandc.md)
 - [`guides/debiandc-manager.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/debiandc-manager.md)
 - [`guides/host-management.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/host-management.md)
-
-### Installation
-- [`guides/installation/installation_from_iso.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_iso.md)
+    #### Installation
+    - [`guides/installation/installation_from_iso.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_iso.md)
+    - [`guides/installation/installation_from_script.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/guides/installation/installation_from_script.md)

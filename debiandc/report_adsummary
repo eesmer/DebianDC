@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # ----------------------------------------------------------------------------------------------
-# DebianDC Manager Script
-# Name        : add_member
-# Purpose     : Add a domain user to a domain group (samba-tool group addmembers).
+# DebianDC Scripts
+# Name        : report_adsummary
+# Purpose     : Generates a AD summary report.
 # UI          : zenity forms + text-info
 # Requires    : samba-tool, zenity, /usr/local/debiandc/common-value
-# Called from : group_man -> Add Member
+# Called from : reports -> AD/Domain Summary Report
+# Notes       : Always returns to reports after completion/cancel.
 # ----------------------------------------------------------------------------------------------
 
 OUT_DIR="/tmp"

@@ -45,7 +45,7 @@ while true; do
       bash registered_dc_list
       ;;
     "AD/Domain Summary Report")
-      bash report_adsummary.sh
+      bash report_adsummary
       ;;
     *)
       zenity --warning --title="DebianDC Reports" --text="Unknown selection: $CHOICE"

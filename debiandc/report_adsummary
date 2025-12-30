@@ -4,6 +4,9 @@
 # DebianDC Manager Script
 # Name        : add_member
 # Purpose     : Add a domain user to a domain group (samba-tool group addmembers).
+# UI          : zenity forms + text-info
+# Requires    : samba-tool, zenity, /usr/local/debiandc/common-value
+# Called from : group_man -> Add Member
 # ----------------------------------------------------------------------------------------------
 
 OUT_DIR="/tmp"

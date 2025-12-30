@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# ----------------------------------------------------------------------------------------------------------------------
+# DebianDC Scripts
+# Name        : report_userlist
+# Purpose     : Detailed Domain Users report (summary table + enabled/disabled split + full user show output).
+# UI          : zenity progress + netsurf-gtk viewer
+# Requires    : samba-tool, zenity, netsurf-gtk, /usr/local/debiandc/common-value
+# Called from : Reports
+# ----------------------------------------------------------------------------------------------------------------------
+
 cd /usr/local/debiandc 2>/dev/null || exit 1
 . ./common-value 2>/dev/null
 

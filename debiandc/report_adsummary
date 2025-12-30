@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# ----------------------------------------------------------------------------------------------
+# DebianDC Manager Script
+# Name        : add_member
+# Purpose     : Add a domain user to a domain group (samba-tool group addmembers).
+# ----------------------------------------------------------------------------------------------
+
 OUT_DIR="/tmp"
 OUT_FILE="${OUT_DIR}/ad-summary.html"
 

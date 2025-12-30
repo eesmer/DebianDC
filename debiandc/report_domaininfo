@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#--------------------------------------------------------------------------------------------------
+# DebianDC Scripts
+# Name        : report_domaininfo.sh
+# Purpose     : Generate "Domain Information" HTML report (domain info + domain level + FSMO).
+# UI          : zenity progress + netsurf-gtk viewer
+# Requires    : samba-tool, zenity, netsurf-gtk, /usr/local/debiandc/common-value
+# Called from : Reports
+# Notes       : Viewer exit code is ignored to avoid breaking the menu loop.
+#--------------------------------------------------------------------------------------------------
+
 cd /usr/local/debiandc || exit 1
 source common-value
 

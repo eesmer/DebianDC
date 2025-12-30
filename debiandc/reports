@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #----------------------------------------------------------------------
-# DebianDC Manager Scripts
+# DebianDC Scripts
 # Name        : reports
 # Purpose     : Reports Main Screen.
 # UI          : zenity forms + text-info

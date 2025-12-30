@@ -1,33 +1,45 @@
-#
+#!/bin/bash
+
 cd /usr/local/debiandc
 source common-value
 
-CHOICE=$(zenity --forms --text="DebianDC Reports" --title="DebianDC Reports" --width $WIDTH --height $HEIGHT \
-        --add-combo="Reports" --combo-values="Detailed Users List|Show to FSMO Roles|Domain Info|Registered DC on $DOMAIN"
-)
+while true; do
+  CHOICE=$(zenity --forms \
+    --text="DebianDC Reports" \
+    --title="DebianDC Reports" \
+    --width "$WIDTH" --height "$HEIGHT" \
+    --add-combo="Reports" \
+    --combo-values="Detailed Users List|Show to FSMO Roles|Domain Info|Registered DC on $DOMAIN|AD/Domain Summary Report" \
+  ) || {
+    # Cancel/close
+    bash manager
+    exit 0
+  }
 
-if [ "$?" = "1" ]
-then
-	bash manager
-elif [ "$CHOICE" = " " ]
-then
-	bash manager
-fi
+  if [[ -z "${CHOICE// /}" ]]; then
+    bash manager
+    exit 0
+  fi
 
-if [ "$CHOICE" = "Detailed Users List" ]
-then
-	bash report_user_list
-	exit 1
-elif [ "$CHOICE" = "Show to FSMO Roles" ]
-then
-        bash report_fsmo_roles
-        exit 1
-elif [ "$CHOICE" = "Domain Info" ]
-then
-        bash domain_info
-        exit 1
-elif [ "$CHOICE" = "Registered DC on $DOMAIN" ]
-then
-        bash registered_dc_list
-        exit 1
-fi
+  case "$CHOICE" in
+    "Detailed Users List")
+      bash report_user_list
+      ;;
+    "Show to FSMO Roles")
+      bash report_fsmo_roles
+      ;;
+    "Domain Info")
+      bash domain_info
+      ;;
+    "Registered DC on $DOMAIN")
+      bash registered_dc_list
+      ;;
+    "AD/Domain Summary Report")
+      bash report_adsummary.sh
+      ;;
+    *)
+      zenity --warning --title="DebianDC Reports" --text="Unknown selection: $CHOICE"
+      ;;
+  esac
+done
+

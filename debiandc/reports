@@ -36,7 +36,7 @@ while true; do
       bash report_user_list
       ;;
     "Show to FSMO Roles")
-      bash report_fsmo_roles
+      bash report_fsmoroles
       ;;
     "Domain Info")
       bash report_domaininfo

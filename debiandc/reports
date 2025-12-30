@@ -39,7 +39,7 @@ while true; do
       bash report_fsmo_roles
       ;;
     "Domain Info")
-      bash domain_info
+      bash report_domaininfo
       ;;
     "Registered DC on $DOMAIN")
       bash registered_dc_list

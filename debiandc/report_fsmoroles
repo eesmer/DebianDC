@@ -1,9 +1,19 @@
 #!/bin/bash
 
+# ---------------------------------------------------------------------------------------
+# DebianDC Scripts
+# Name        : report_fsmoroles
+# Purpose     : Generate "FSMO Roles" HTML report (samba-tool fsmo show).
+# UI          : zenity progress + netsurf-gtk viewer
+# Requires    : samba-tool, zenity, netsurf-gtk, /usr/local/debiandc/common-value
+# Called from : Reports
+# Notes       : Viewer exit code is ignored to avoid breaking the reports loop.
+# ---------------------------------------------------------------------------------------
+
 cd /usr/local/debiandc || exit 1
 source common-value
 
-REPORT_DIR="/tmp/debiandc-reports"
+REPORT_DIR="/tmp"
 REPORT_NAME="fsmo-roles.html"
 OUT_FILE="${REPORT_DIR}/${REPORT_NAME}"
 

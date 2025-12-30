@@ -1,0 +1,296 @@
+#!/bin/bash
+
+OUT_DIR="/tmp"
+OUT_FILE="${OUT_DIR}/ad-summary.html"
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+h() {
+  sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g' -e "s/'/\&#39;/g"
+}
+
+run_cmd() {
+  local out rc
+  set +e
+  out="$("$@" 2>&1)"
+  rc=$?
+  set -e
+  if [[ $rc -ne 0 ]]; then
+    printf "%s" "N/A (rc=$rc) - $out"
+  else
+    printf "%s" "$out"
+  fi
+}
+
+kv() {
+  local k="$1"; shift
+  local v="$*"
+  printf '<tr><td class="k">%s</td><td class="v"><pre>%s</pre></td></tr>\n' \
+    "$(printf "%s" "$k" | h)" \
+    "$(printf "%s" "$v" | h)"
+}
+
+ensure_outdir() {
+  if [[ ! -d "$OUT_DIR" ]]; then
+    mkdir -p "$OUT_DIR" 2>/dev/null || true
+  fi
+}
+
+generate_report() {
+  ensure_outdir
+
+  local hostname_fqdn hostname_short ip_addrs os_pretty kernel date_now
+  local samba_ver domain_info fsmo realm domain dns_domain server site ad_status
+
+  hostname_fqdn="$(run_cmd hostname -f)"
+  hostname_short="$(run_cmd hostname)"
+  ip_addrs="$(run_cmd bash -lc "hostname -I | tr ' ' '\n' | sed '/^$/d'")"
+  os_pretty="$(run_cmd bash -lc "source /etc/os-release 2>/dev/null; echo \"${PRETTY_NAME:-unknown}\"")"
+  kernel="$(run_cmd uname -r)"
+  date_now="$(date -Is)"
+
+  samba_ver="N/A"
+  if have samba; then
+    samba_ver="$(run_cmd samba -V)"
+  elif have smbd; then
+    samba_ver="$(run_cmd smbd -V)"
+  fi
+
+  domain_info="N/A"
+  if have samba-tool; then
+    domain_info="$(run_cmd samba-tool domain info 127.0.0.1)"
+  fi
+
+  fsmo="N/A"
+  if have samba-tool; then
+    fsmo="$(run_cmd samba-tool fsmo show)"
+  fi
+
+  realm="$(printf "%s\n" "$domain_info" | awk -F': ' '/^Realm/{print $2; exit}' | tr -d '\r' || true)"
+  domain="$(printf "%s\n" "$domain_info" | awk -F': ' '/^Domain/{print $2; exit}' | tr -d '\r' || true)"
+  dns_domain="$(printf "%s\n" "$domain_info" | awk -F': ' '/^DNS domain/{print $2; exit}' | tr -d '\r' || true)"
+  server="$(printf "%s\n" "$domain_info" | awk -F': ' '/^Server/{print $2; exit}' | tr -d '\r' || true)"
+  site="$(printf "%s\n" "$domain_info" | awk -F': ' '/^Site/{print $2; exit}' | tr -d '\r' || true)"
+
+  [[ -z "${realm:-}" ]] && realm="N/A"
+  [[ -z "${domain:-}" ]] && domain="N/A"
+  [[ -z "${dns_domain:-}" ]] && dns_domain="N/A"
+  [[ -z "${server:-}" ]] && server="N/A"
+  [[ -z "${site:-}" ]] && site="N/A"
+
+  ad_status="UNKNOWN"
+  if have samba-tool; then
+    if samba-tool domain info 127.0.0.1 >/dev/null 2>&1; then
+      ad_status="INSTALLED"
+    else
+      ad_status="NOT READY"
+    fi
+  else
+    ad_status="UNKNOWN (samba-tool missing)"
+  fi
+
+  local tmp
+  tmp="$(mktemp)"
+  trap 'rm -f "$tmp"' RETURN
+
+  cat >"$tmp" <<'HTML_HEAD'
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DebianDC - AD Summary</title>
+<style>
+  body{
+    margin:18px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height:1.35;
+    background:#f6f7fb;
+    color:#111827;
+  }
+  .container{max-width:1100px;margin:0 auto;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .logo{width:12px;height:12px;border-radius:50%;background:#d32f2f;}
+  h1{margin:0;font-size:20px;font-weight:900;}
+  .meta{font-size:12px;color:#6b7280;}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border:1px solid #e5e7eb;border-radius:999px;font-weight:800;background:#fff;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:#f9a825;}
+  .dot.ok{background:#2e7d32;}
+  .dot.bad{background:#d32f2f;}
+
+  .grid{display:block;}
+  .card{
+    margin-top:12px;
+    padding:12px;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    background:#ffffff;
+  }
+  .section-title{
+    margin:0 0 10px 0;
+    font-size:15px;
+    font-weight:950;
+    padding-left:10px;
+    border-left:4px solid #d32f2f;
+  }
+  table{width:100%;border-collapse:collapse;}
+  td{vertical-align:top;padding:8px 8px;border-top:1px solid #eef0f3;}
+  tr:first-child td{border-top:0;}
+  td.k{width:220px;font-weight:900;color:#111827;}
+  td.v{color:#111827;}
+
+  .code{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:10px;
+    background:#f3f4f6;
+    color:#111827;
+  }
+  pre{
+    margin:0;
+    white-space:pre-wrap;
+    word-break:break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size:12px;
+    color:inherit;
+  }
+  .footer{margin-top:12px;font-size:12px;color:#6b7280;}
+</style>
+</head>
+<body>
+<div class="container">
+HTML_HEAD
+
+# status dot class
+dot_class="bad"
+[[ "$ad_status" == "INSTALLED" ]] && dot_class="ok"
+[[ "$ad_status" == "NOT READY" ]] && dot_class="bad"
+
+{
+  printf '<div class="topbar">\n'
+  printf '  <div class="brand">\n'
+  printf '    <span class="logo"></span>\n'
+  printf '    <div>\n'
+  printf '      <h1>DebianDC — AD / Domain Summary</h1>\n'
+  printf '      <div class="meta muted">%s</div>\n' "$(printf "%s" "$date_now" | h)"
+  printf '    </div>\n'
+  printf '  </div>\n'
+  printf '  <div class="meta">\n'
+  printf '    <span class="chip"><span class="dot %s"></span>%s</span>\n' "$dot_class" "$(printf "%s" "$ad_status" | h)"
+  printf '  </div>\n'
+  printf '</div>\n'
+
+  printf '<div class="grid">\n'
+
+  printf '  <div class="card">\n'
+  printf '    <div class="section-title">System</div>\n'
+  printf '    <table>\n'
+  kv "Hostname" "$hostname_short"
+  kv "FQDN" "$hostname_fqdn"
+  kv "IP Addresses" "$ip_addrs"
+  kv "OS" "$os_pretty"
+  kv "Kernel" "$kernel"
+  kv "Samba Version" "$samba_ver"
+  printf '    </table>\n'
+  printf '  </div>\n'
+
+  printf '  <div class="card">\n'
+  printf '    <div class="section-title">Domain Overview</div>\n'
+  printf '    <table>\n'
+  kv "Realm" "$realm"
+  kv "Domain (NetBIOS)" "$domain"
+  kv "DNS Domain" "$dns_domain"
+  kv "Server" "$server"
+  kv "Site" "$site"
+  printf '    </table>\n'
+  printf '  </div>\n'
+
+  printf '  <div class="card span2">\n'
+  printf '    <div class="section-title">FSMO Roles</div>\n'
+  printf '    <div class="code"><pre>%s</pre></div>\n' "$(printf "%s" "$fsmo" | h)"
+  printf '  </div>\n'
+
+  printf '  <div class="card span2">\n'
+  printf '    <div class="section-title">Raw Output</div>\n'
+  printf '    <div class="muted" style="font-size:12px;margin:0 0 8px 0;">samba-tool domain info 127.0.0.1</div>\n'
+  printf '    <div class="code"><pre>%s</pre></div>\n' "$(printf "%s" "$domain_info" | h)"
+  printf '  </div>\n'
+
+  printf '</div>\n' # grid
+
+  printf '<div class="footer muted">Generated by <b>DebianDC Manager</b></div>\n'
+  printf '</div></body></html>\n'
+} >>"$tmp"
+
+  if ! cp "$tmp" "$OUT_FILE" 2>/dev/null; then
+    OUT_FILE="$HOME/ad-summary.html"
+    cp "$tmp" "$OUT_FILE"
+  fi
+}
+
+open_report() {
+  if have netsurf-gtk; then
+    # Foreground: back to report screen
+    netsurf-gtk "$OUT_FILE"
+  else
+    if have zenity; then
+      zenity --info --title="DebianDC Reports" \
+        --width=520 \
+        --text="Report generated:\n\n$OUT_FILE\n\nReport Viewer Not Found!"
+    else
+      echo "Report generated: $OUT_FILE"
+      echo "Report Viewer Not Found!"
+    fi
+  fi
+}
+
+main() {
+  # No DISPLAY status
+  if [[ -z "${DISPLAY:-}" ]] || ! have zenity; then
+    generate_report
+    open_report
+    return 0
+  fi
+
+  # seperate process
+  local fifo zpid
+  fifo="$(mktemp -u /tmp/debiandc_adsummary.XXXX.fifo)"
+  mkfifo "$fifo"
+
+  # Running Progress
+  zenity --progress \
+    --title="DebianDC Reports" \
+    --text="AD/Domain Summary Report" \
+    --pulsate \
+    --auto-close \
+    --no-cancel \
+    --width=520 \
+    < "$fifo" &
+  zpid=$!
+
+  cleanup() {
+    # ignore
+    exec 3>&- 2>/dev/null || true
+    rm -f "$fifo" 2>/dev/null || true
+    kill "$zpid" 2>/dev/null || true
+  }
+  trap cleanup EXIT INT TERM HUP
+  exec 3>"$fifo"
+  # messages of progress
+  echo "# AD/Domain Summary Report is being prepared.." >&3
+  echo "10" >&3
+
+  generate_report
+
+  echo "# Report Generated. Opening.." >&3
+  echo "100" >&3
+
+  # Close FIFO
+  exec 3>&-
+  wait "$zpid" 2>/dev/null || true
+  open_report
+}
+
+main "$@"
+

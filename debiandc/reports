@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#----------------------------------------------------------------------
+# DebianDC Manager Scripts
+# Name        : reports
+# Purpose     : Reports Main Screen.
+#----------------------------------------------------------------------
+
 cd /usr/local/debiandc
 source common-value
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DEBIAN_FRONTEND=noninteractive
+
 apt-get -y install git
 apt-get -y install openssh-server chrony
 apt-get -y install dnsutils net-tools

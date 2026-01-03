@@ -8,7 +8,7 @@ wait_for_dpkg() {
   while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || \
         fuser /var/lib/dpkg/lock >/dev/null 2>&1 || \
         fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do
-    echo "[postinstall] dpkg/apt kilidi var, bekleniyor..."
+    echo "[postinstall] waiting for dpkg/apt lock"
     sleep 2
   done
 }

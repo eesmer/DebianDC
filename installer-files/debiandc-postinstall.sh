@@ -1,6 +1,8 @@
 #!/bin/bash
 
-DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+export NEEDRESTART_MODE=a
 
 apt-get -y install git
 apt-get -y install openssh-server chrony

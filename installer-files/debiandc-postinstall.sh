@@ -4,6 +4,18 @@ export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 export NEEDRESTART_MODE=a
 
+wait_for_dpkg() {
+  while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || \
+        fuser /var/lib/dpkg/lock >/dev/null 2>&1 || \
+        fuser /var/lib/apt/lists/lock >/dev/null 2>&1; do
+    echo "[postinstall] dpkg/apt kilidi var, bekleniyor..."
+    sleep 2
+  done
+}
+
+wait_for_dpkg
+apt-get -y -o Dpkg::Use-Pty=0 update
+
 apt-get -y install git
 apt-get -y install openssh-server chrony
 apt-get -y install dnsutils net-tools

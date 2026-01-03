@@ -1,107 +1,86 @@
 #!/bin/bash
 
-ADDRESS="http://www.esmerkan.com/debiandc"
-export DEBIAN_FRONTEND=noninteractive
-echo "DebianDC post-install is running..."
+apt-get -y install git
+apt-get -y install openssh-server chrony
+apt-get -y install dnsutils net-tools
+apt-get -y install curl wget
+apt-get -y install ack expect #krb5-user krb5-config
+apt-get -y install syslog-ng #for auth.log
+apt-get -y install openbox
+apt-get -y install tmux vim htop
+apt-get -y install xdg-utils xorg dbus-x11 x11-xserver-utils xserver-xorg-input-libinput
+apt-get -y install slim netsurf-gtk zenity xterm xrdp
+#apt-get -y install ansible
 
 # -----------------------------------------------------------------------------
-# INSTALL DESKTOP Env.
+# APPLICATION INSTALL & CONFIG
 # -----------------------------------------------------------------------------
-apt-get -y update && apt-get -y upgrade && apt-get -y autoremove
-apt-get install -y lxde-core
-#apt-get install -y mate-desktop-environment-core #FOR MATE DESKTOP
-apt-get install -y lightdm
-apt-get autoremove -y && apt-get -y autoclean
+git clone https://github.com/eesmer/DebianDC.git
+cp -R DebianDC/debiandc/ /usr/local/ && cp DebianDC/README.md /usr/local/debiandc/
+chown -R root:root /usr/local/debiandc
+chmod -R 744 /usr/local/debiandc
+chmod +x /usr/local/debiandc/manager
+#cp /usr/local/debiandc/manager /usr/sbin/
+#chmod 755 /usr/sbin/manager
+#chmod +x /usr/sbin/manager
 
-# -----------------------------------------------------------------------------
-# DebianDC IMAGE,LOGO,GRUB
-# -----------------------------------------------------------------------------
-sed -i '50aOS="DebianDC"' /etc/grub.d/10_linux
-update-grub
-wget -O /usr/share/lxde/images/logout-banner.png $ADDRESS/images/logout-banner.png
-wget -O /usr/share/lxde/images/lxde-icon.png $ADDRESS/images/DebianDC-icon.png
+cp -r /usr/share/slim/themes/desktop-slim-theme /usr/share/slim/themes/debiandc
+cp DebianDC/Documentation/assets/branding/DebianDC-LoginScreenImage.png /usr/share/slim/themes/debiandc/background.jpg && chmod 644 /usr/share/slim/themes/debiandc/background.jpg
+rm -rf DebianDC
 
-# -----------------------------------------------------------------------------
-# DEBIANDC INSTALL
-# -----------------------------------------------------------------------------
-wget https://raw.githubusercontent.com/eesmer/DebianDC/master/debiandc-installer.sh -O /tmp/debiandc-installer.sh
-bash /tmp/debiandc-installer.sh
-
-# editor
-update-alternatives --set editor /usr/bin/vim.basic
-
-# -----------------------------------------------------------------------------
-# DebianDC-Setup Menu - settings of /etc/skel directory
-# -----------------------------------------------------------------------------
-mkdir -p /etc/skel/.local/share/applications
-cat > /etc/skel/.local/share/applications/DebianDC-ADManager.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Name=DebianDC - AD Manager
-Comment=Active Directory Manager
-Categories=IDE
-Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/local/debiandc/manager
-Terminal=true
-X-KeepTerminal=true
+cat > /etc/slim.conf << EOF
+# DebianDC - SLiM Login Manager Configuration
+# This file is managed by DebianDC installer.
+# Manual changes may be overwritten.
+current_theme       debiandc
+login_cmd           exec openbox-session
+sessions            openbox
+allowed_users       root
+fail_delay          3
+welcome_msg         DebianDC - Authorized Access Only (%host %domain)
+shutdown_msg        DebianDC - The system is halting...
+reboot_msg          DebianDC - The system is rebooting...
+lockfile            /run/slim.pid
+logfile             /var/log/slim.log
 EOF
-cat > /etc/skel/.local/share/applications/DebianDC-Utility.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Name=DebianDC - Utility
-Terminal=false
-Comment=Active Directory Environment Utility Tools
-Categories=IDE
-Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/local/debiandc/utility
+chmod 644 /etc/slim.conf
+
+mkdir -p /root/.config/openbox
+cp /etc/xdg/openbox/{rc.xml,autostart} /root/.config/openbox/
+
+cat > /root/.config/openbox/autostart << EOF
+#!/bin/sh
+exec >> "$HOME/.openbox-autostart.log" 2>&1
+echo "=== AUTOSTART $(date) ==="
+xsetroot -solid "#1e1e1e" || true
+if command -v dbus-launch >/dev/null 2>&1; then
+  eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
+sleep 1
+/usr/local/debiandc/manager &
 EOF
-cat > /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Type=Application
-Name=DebianDC - Windows Manager
-Terminal=false
-Comment=Windows Host Manager
-Categories=IDE
-Icon=/usr/share/icons/gnome/48x48/actions/stock_up.png
-Exec=bash /usr/local/debiandc/ansible/windows_manager
+chmod +x /root/.config/openbox/autostart 
+
+cat > /root/.config/openbox/menu.xml << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+        <menu id="root-menu" label="DebianDC">
+        <item label="Open DebianDC Manager">
+        <action name="Execute">
+        <command>/usr/local/debiandc/manager</command>
+        </action>
+        </item>
+	<item label="Restart DebianDC Manager">
+        <action name="Execute">
+        <command>/usr/local/bin/debiandc-console-restart.sh</command>
+        </action>
+        </item>
+	<separator/>
+	<item label="Reload Openbox">
+        <action name="Reconfigure"/>
+        </item>
+	<item label="Logout">
+        <action name="Exit"/>
+        </item>
+        </menu>
 EOF
-
-mkdir -p /root/Desktop/DebianDC
-cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/Desktop/DebianDC/
-cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/Desktop/DebianDC/
-cp /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop /root/Desktop/DebianDC/
-chmod +x /root/Desktop/DebianDC/DebianDC-ADManager.desktop
-chmod +x /root/Desktop/DebianDC/DebianDC-Utility.desktop
-chmod +x /root/Desktop/DebianDC/DebianDC-WindowsManager.desktop
-
-mkdir -p /root/.local/share/applications/
-cp /etc/skel/.local/share/applications/DebianDC-ADManager.desktop /root/.local/share/applications/
-cp /etc/skel/.local/share/applications/DebianDC-Utility.desktop /root/.local/share/applications/
-cp /etc/skel/.local/share/applications/DebianDC-WindowsManager.desktop /root/Desktop/DebianDC/
-chmod +x /root/.local/share/applications/DebianDC-ADManager.desktop
-chmod +x /root/.local/share/applications/DebianDC-Utility.desktop
-chmod +x /root/Desktop/DebianDC/DebianDC-WindowsManager.desktop
-
-# Desktop Menu - removed menus
-rm /usr/share/applications/gcr-prompter.desktop
-rm /usr/share/applications/gcr-viewer.desktop
-rm /usr/share/applications/lxde-screenlock.desktop
-rm /usr/share/applications/lxrandr.desktop
-rm /usr/share/applications/lxsession-default-apps.desktop
-rm /usr/share/applications/mimeinfo.cache
-rm /usr/share/applications/notification-daemon.desktop
-rm /usr/share/applications/obconf.desktop
-rm /usr/share/applications/openbox.desktop
-rm /usr/share/applications/org.gnome.Screenshot.desktop
-rm /usr/share/applications/pavucontrol.desktop
-rm /usr/share/applications/python3.11.desktop
-rm /usr/share/applications/screensavers
-rm /usr/share/applications/vim.desktop
-rm /usr/share/applications/xdg-desktop-portal-gtk.desktop
-rm /usr/share/applications/xscreensaver-settings.desktop
-
-echo "post-install finished"
-echo "Please reboot the machine"

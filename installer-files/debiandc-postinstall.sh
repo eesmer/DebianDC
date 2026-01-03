@@ -16,17 +16,30 @@ wait_for_dpkg() {
 wait_for_dpkg
 apt-get -y -o Dpkg::Use-Pty=0 update
 
-apt-get -y install git
-apt-get -y install openssh-server chrony
-apt-get -y install dnsutils net-tools
-apt-get -y install curl wget
-apt-get -y install ack expect #krb5-user krb5-config
-apt-get -y install syslog-ng #for auth.log
-apt-get -y install openbox
-apt-get -y install tmux vim htop
-apt-get -y install xdg-utils xorg dbus-x11 x11-xserver-utils xserver-xorg-input-libinput
-apt-get -y install slim netsurf-gtk zenity xterm xrdp
-#apt-get -y install ansible
+wait_for_dpkg
+apt-get -y -o Dpkg::Use-Pty=0 install \
+  git \
+  openssh-server chrony \
+  dnsutils net-tools \
+  curl wget ca-certificates \
+  ack expect \
+  syslog-ng \
+  openbox \
+  tmux vim htop \
+  xdg-utils xorg dbus-x11 x11-xserver-utils xserver-xorg-input-libinput \
+  slim netsurf-gtk zenity xterm xrdp
+
+#apt-get -y install git
+#apt-get -y install openssh-server chrony
+#apt-get -y install dnsutils net-tools
+#apt-get -y install curl wget
+#apt-get -y install ack expect #krb5-user krb5-config
+#apt-get -y install syslog-ng #for auth.log
+#apt-get -y install openbox
+#apt-get -y install tmux vim htop
+#apt-get -y install xdg-utils xorg dbus-x11 x11-xserver-utils xserver-xorg-input-libinput
+#apt-get -y install slim netsurf-gtk zenity xterm xrdp
+##apt-get -y install ansible
 
 # -----------------------------------------------------------------------------
 # APPLICATION INSTALL & CONFIG

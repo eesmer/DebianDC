@@ -95,6 +95,26 @@ ensure_interfaces_include() {
   fi
 }
 
+remove_dhcp_stanzas(){
+  local f="$1"
+  [[ -f "$f" ]] || return 0
+  backup_file "$f"
+
+  awk '
+    BEGIN {skip=0}
+    /^[[:space:]]*iface[[:space:]].*[[:space:]]inet[[:space:]]dhcp[[:space:]]*$/ {skip=1; next}
+    /^[[:space:]]*iface[[:space:]]/ {skip=0}
+    /^[[:space:]]*auto[[:space:]]/ {skip=0}
+    /^[[:space:]]*allow-hotplug[[:space:]]/ {skip=0}
+    skip==1 && /^[[:space:]]+/ {next}
+    skip==1 && /^[[:space:]]*$/ {skip=0; next}
+    {print}
+  ' "$f" > "${f}.tmp"
+
+  mv -f "${f}.tmp" "$f"
+}
+
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

@@ -25,6 +25,16 @@ fatal(){
   exit 1
 }
 
+on_err(){
+  local ec=$?
+  log "[ERR] Exit code: $ec (line $1)"
+  local tail_txt
+  tail_txt="$(tail -n 60 "$LOG_FILE" 2>/dev/null || true)"
+  zenity --error --width="$WIDTH" --title="DebianDC Static IP - Error" \
+    --text="Process finished with errors(exit=$ec).\n\nLast logs:\n$tail_txt\n\nLog: $LOG_FILE" || true
+  exit "$ec"
+}
+trap 'on_err $LINENO' ERR
 
 
 #####function create_debiandcnw(){

@@ -50,6 +50,21 @@ list_ifaces(){
   ip -o link show | awk -F': ' '{print $2}' | grep -v '^lo$' | sort -u
 }
 
+valid_ipv4(){
+  local ip="$1"
+  [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
+  IFS='.' read -r a b c d <<<"$ip"
+  for n in "$a" "$b" "$c" "$d"; do
+    [[ "$n" -ge 0 && "$n" -le 255 ]] || return 1
+  done
+  return 0
+}
+
+valid_netmask(){
+  valid_ipv4 "$1"
+}
+
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

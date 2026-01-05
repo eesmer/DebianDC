@@ -64,7 +64,9 @@ valid_netmask(){
   valid_ipv4 "$1"
 }
 
-
+normalize_dns_list(){
+  echo "$1" | tr ',' ' ' | xargs
+}
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

@@ -68,6 +68,16 @@ normalize_dns_list(){
   echo "$1" | tr ',' ' ' | xargs
 }
 
+write_atomic(){
+  local target="$1"
+  local tmp
+  tmp="$(mktemp)"
+  cat >"$tmp"
+  chmod 644 "$tmp"
+  mv -f "$tmp" "$target"
+}
+
+
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down
 sleep 1

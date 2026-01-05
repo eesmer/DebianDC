@@ -15,6 +15,16 @@ mkdir -p "$LOG_DIR" || true
 touch "$LOG_FILE" || true
 chmod 600 "$LOG_FILE" 2>/dev/null || true
 
+ts(){ date -Is; }
+log(){ echo "[$(ts)] $*" >> "$LOG_FILE"; }
+
+fatal(){
+  local msg="$1"
+  log "[FATAL] $msg"
+  zenity --error --width="$WIDTH" --title="DebianDC Static IP" --text="$msg\n\nLog: $LOG_FILE" || true
+  exit 1
+}
+
 
 
 #####function create_debiandcnw(){

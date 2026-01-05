@@ -40,6 +40,17 @@ need_cmd(){
   command -v "$1" >/dev/null 2>&1 || fatal "Command not found!: $1"
 }
 
+# for DebianDC install/config
+IFDOWN="$(command -v ifdown 2>/dev/null || true)"
+IFUP="$(command -v ifup 2>/dev/null || true)"
+[[ -n "$IFDOWN" ]] || IFDOWN="/sbin/ifdown"
+[[ -n "$IFUP" ]]   || IFUP="/sbin/ifup"
+
+list_ifaces(){
+  ip -o link show | awk -F': ' '{print $2}' | grep -v '^lo$' | sort -u
+}
+
+
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down
 sleep 1

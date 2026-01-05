@@ -77,6 +77,24 @@ write_atomic(){
   mv -f "$tmp" "$target"
 }
 
+backup_file(){
+  local f="$1"
+  [[ -f "$f" ]] || return 0
+  cp -a "$f" "${f}.bak.$(date +%Y%m%d-%H%M%S)"
+}
+
+ensure_interfaces_include() {
+  local f="$IFACES_FILE"
+  [[ -f "$f" ]] || touch "$f"
+
+  if ! grep -qE '^[[:space:]]*source[[:space:]]+/etc/network/interfaces\.d/\*$' "$f"; then
+    log "Adding interfaces.d include line to $f"
+    printf "\n# DebianDC: include per-interface configs\nsource /etc/network/interfaces.d/*\n" >> "$f"
+  else
+    log "interfaces.d include already present"
+  fi
+}
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

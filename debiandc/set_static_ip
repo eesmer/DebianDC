@@ -114,6 +114,22 @@ remove_dhcp_stanzas(){
   mv -f "${f}.tmp" "$f"
 }
 
+write_debiandcnw(){
+  local iface="$1" ipaddr="$2" netmask="$3" gw="$4" dns_list="$5"
+  mkdir -p /etc/network/interfaces.d
+  backup_file "$CFG_D_FILE"
+  {
+    echo "auto $iface"
+    echo "iface $iface inet static"
+    echo "    address $ipaddr"
+    echo "    netmask $netmask"
+    [[ -n "$gw" ]] && echo "    gateway $gw"
+    echo "    dns-nameservers $dns_list"
+  } | write_atomic "$CFG_D_FILE"
+  log "Wrote $CFG_D_FILE"
+}
+
+
 
 
 #####function create_debiandcnw(){

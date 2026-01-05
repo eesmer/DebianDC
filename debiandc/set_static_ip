@@ -1,32 +1,21 @@
-#
-set -e
-trap 'bash manager' ERR
+#!/bin/bash
 
-cd /usr/local/debiandc
-source common-value
+set -Eeuo pipefail
 
-#ip link |grep "state UP" |grep -v "lo:" |cut -d ":" -f2 |cut -d " " -f2 > /tmp/interface-list
-#cat /var/run/network/ifstate |cut -d "=" -f1 |grep -v "lo" > /tmp/interface-list
-netstat -i | awk {'print $1'} | grep -v "Kernel" | grep -v "Iface" | grep -v "lo" > /tmp/interface-list
-sed -i 's/^/|/' /tmp/interface-list
-INTERFACES=$(cat /tmp/interface-list)
+source /usr/local/debiandc/common-value
 
-CHOICE=$(zenity --forms --text="DebianDC Static IP Settings" --title="Settings Screen" --width $WIDTH --height $HEIGHT \
---add-combo="Interface" --combo-values="$INTERFACES" \
---add-entry="IP Adress" \
---add-entry="Netmask" \
---add-entry="Gateway"
-)
+MANAGER="/usr/local/debiandc/manager"
+CFG_D_FILE="/etc/network/interfaces.d/debiandcnw"
+IFACES_FILE="/etc/network/interfaces"
 
-(
-INTERFACE=$(echo $CHOICE | cut -d "|" -f1)
-IPADDRESS=$(echo $CHOICE | cut -d "|" -f2)
-NETMASK=$(echo $CHOICE | cut -d "|" -f3)
-GATEWAY=$(echo $CHOICE | cut -d "|" -f4)
+LOG_DIR="/var/log/debiandc"
+LOG_FILE="$LOG_DIR/set_static_ip.log"
 
-echo "10" ; sleep 1
+mkdir -p "$LOG_DIR" || true
+touch "$LOG_FILE" || true
+chmod 600 "$LOG_FILE" 2>/dev/null || true
 
-rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup #&& create_debiandcnw
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down
@@ -64,14 +53,4 @@ if [ "$?" = -1 ] ; then
           --text="Set IP Address process canceled."
 fi
 
-#rm -f /etc/network/interfaces.d/debiandcnw && rm -f /etc/network/interfaces.d/setup && create_debiandcnw
-
-#ip r |grep "link src" > /tmp/nw_status
-#systemctl status networking.service >> /tmp/nw_status
-#cat /tmp/nw_status |zenity --text-info --title="Network Status" --width $WIDTH --height $HEIGHT
-#rm /tmp/nw_status
-
-#zenity --info --text "The machine will be restarted for the use of the $IPADDRESS IP Adress" --width 350 --height 100
-##############zenity --info --text "The new ip address: $IPADDRESS" --width 350 --height 100
-#reboot
 bash manager

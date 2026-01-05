@@ -36,6 +36,9 @@ on_err(){
 }
 trap 'on_err $LINENO' ERR
 
+need_cmd(){
+  command -v "$1" >/dev/null 2>&1 || fatal "Command not found!: $1"
+}
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

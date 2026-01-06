@@ -257,42 +257,6 @@ else
     --text="IP Address not readed\n\nInterface: $INTERFACE\nIP Address: $IPADDRESS\nDNS: $DNS_LIST\n\nLog: $LOG_FILE" || true
 fi
 
+log "==== END set_static_ip.sh ===="
+return_to_manager
 
-
-#####function create_debiandcnw(){
-ifconfig $INTERFACE down
-sleep 1
-cat > /etc/network/interfaces.d/debiandcnw << EOF
-auto $INTERFACE
-iface $INTERFACE inet static
-address $IPADDRESS
-netmask $NETMASK
-gateway $GATEWAY
-EOF
-chmod 644 /etc/network/interfaces.d/debiandcnw
-sed -i /$INTERFACE/d /etc/network/interfaces
-ifconfig $INTERFACE up
-##################################}
-
-echo "50" ; sleep 1
-
-ifdown $INTERFACE
-sleep 1
-ifup $INTERFACE
-
-echo "99" ; sleep 1
-
-zenity --info --text "The new ip address: $IPADDRESS" --ellipsize #--width 350 --height 100
-) |
-zenity --progress \
-  --title="IP Config" \
-  --text="Set Static IP Address" \
-  --percentage=0 \
-  --auto-close
-
-if [ "$?" = -1 ] ; then
-        zenity --error \
-          --text="Set IP Address process canceled."
-fi
-
-bash manager

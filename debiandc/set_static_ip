@@ -159,6 +159,21 @@ write_resolv_conf() {
   fi
 }
 
+get_current_ipv4_cidr(){
+  local iface="$1"
+  ip -4 -o addr show dev "$iface" | awk '{print $4}' | head -n1
+}
+
+apply_iface(){
+  local iface="$1"
+  log "Applying interface: $iface (flush + ifdown/ifup)"
+  # Old address cleanup
+  ip addr flush dev "$iface" || true
+  "$IFDOWN" --force "$iface" >>"$LOG_FILE" 2>&1 || true
+  sleep 1
+  "$IFUP" "$iface" >>"$LOG_FILE" 2>&1 || true
+  sleep 1
+}
 
 
 

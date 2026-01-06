@@ -43,7 +43,7 @@ on_err(){
 trap 'on_err $LINENO' ERR
 
 need_cmd(){
-  command -v "$1" >/dev/null 2>&1 || fatal "Gerekli komut yok: $1"
+  command -v "$1" >/dev/null 2>&1 || fatal "Command not found!!: $1"
 }
 
 # Find ifup/ifdown command - for DebianDC install
@@ -237,7 +237,6 @@ while true; do
 
   if ! zenity --question --width="$WIDTH" --title="Confirm" \
     --text="It be set?\n\nInterface: $INTERFACE\nIP: $IPADDRESS\nNetmask: $NETMASK\nGateway: ${GATEWAY:-Empty}\nDNS: $DNS_LIST"; then
-    # User said No -> reopen
     continue
   fi
 

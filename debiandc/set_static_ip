@@ -210,8 +210,8 @@ NETMASK="$(echo "${NETMASK:-}" | xargs)"
 GATEWAY="$(echo "${GATEWAY:-}" | xargs)"
 DNSSERVER="$(echo "${DNSSERVER:-}" | xargs)"
 
-
-
+[[ -n "$INTERFACE" && -n "$IPADDRESS" && -n "$NETMASK" && -n "$DNSSERVER" ]] \
+  || fatal "Please fill in all fields.( IP / Netmask / DNS )"
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

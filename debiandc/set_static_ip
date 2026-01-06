@@ -175,6 +175,15 @@ apply_iface(){
   sleep 1
 }
 
+return_to_manager(){
+  if [[ -x "$MANAGER" ]]; then
+    exec "$MANAGER"
+  fi
+  zenity --warning --width="$WIDTH" --title="DebianDC Static IP" \
+    --text="manager script not found: $MANAGER" || true
+  exit 0
+}
+
 
 
 

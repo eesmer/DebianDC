@@ -248,6 +248,16 @@ zenity --question --width="$WIDTH" --title="Confirm" \
   echo "100"; echo "# Completed"
 ) | zenity --progress --title="DebianDC Static IP" --text="Set Static IP" --percentage=0 --auto-close || true
 
+NEW_IP="$(get_current_ipv4_cidr "$INTERFACE" || true)"
+if [[ -n "$NEW_IP" ]]; then
+  zenity --info --width="$WIDTH" --title="DebianDC Static IP" \
+    --text="Set static IP process completed\n\nInterface: $INTERFACE\nNew IPv4: $NEW_IP\nDNS: $DNS_LIST\n\nLog: $LOG_FILE" || true
+else
+  zenity --warning --width="$WIDTH" --title="DebianDC Static IP" \
+    --text="IP Address not readed\n\nInterface: $INTERFACE\nIP Address: $IPADDRESS\nDNS: $DNS_LIST\n\nLog: $LOG_FILE" || true
+fi
+
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

@@ -225,6 +225,29 @@ DNS_LIST="$(normalize_dns_list "$DNSSERVER")"
 zenity --question --width="$WIDTH" --title="Confirm" \
   --text="It be set\n\nInterface: $INTERFACE\nIP: $IPADDRESS\nNetmask: $NETMASK\nGateway: ${GATEWAY:-Empty}\nDNS: $DNS_LIST" || exit 0
 
+(
+  echo "10"; echo "# /etc/network/interfaces prepare..."
+  ensure_interfaces_include
+
+  echo "25"; echo "# DHCP set cleaning..."
+  log "Removing DHCP stanzas from $IFACES_FILE"
+  remove_dhcp_stanzas "$IFACES_FILE" || true
+
+  echo "45"; echo "# Static config writing..."
+  write_debiandcnw "$INTERFACE" "$IPADDRESS" "$NETMASK" "$GATEWAY" "$DNS_LIST"
+
+  echo "65"; echo "# resolv.conf updating..."
+  write_resolv_conf "$DNS_LIST"
+
+  echo "80"; echo "# Restart Interface..."
+  apply_iface "$INTERFACE"
+
+  echo "95"; echo "# Current status checking..."
+  NEW_IP="$(get_current_ipv4_cidr "$INTERFACE" || true)"
+  log "Interface $INTERFACE current IPv4: ${NEW_IP:-N/A}"
+  echo "100"; echo "# Completed"
+) | zenity --progress --title="DebianDC Static IP" --text="Set Static IP" --percentage=0 --auto-close || true
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

@@ -68,23 +68,51 @@ chmod +x /root/.config/openbox/autostart
 cat > /root/.config/openbox/menu.xml << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
-        <menu id="root-menu" label="DebianDC">
-        <item label="Open DebianDC Manager">
-        <action name="Execute">
-        <command>/usr/local/debiandc/manager</command>
-        </action>
-        </item>
-	<item label="Restart DebianDC Manager">
-        <action name="Execute">
-        <command>/usr/local/bin/debiandc-console-restart.sh</command>
-        </action>
-        </item>
-	<separator/>
-	<item label="Reload Openbox">
-        <action name="Reconfigure"/>
-        </item>
-	<item label="Logout">
-        <action name="Exit"/>
-        </item>
-        </menu>
+<menu id="root-menu" label="DebianDC">
+<item label="Open DebianDC Manager">
+<action name="Execute">
+<command>/usr/local/debiandc/manager</command>
+</action>
+</item>
+<!-- System submenu -->
+ <menu id="system-menu" label="System Tools">
+ <item label="Disk Usage">
+ <action name="Execute">
+ <command>xterm -geometry 120x35+300+200 -e bash -lc 'df -h; echo; read -n1 -p "Press any key..."'</command>
+ </action>
+ </item>
+ <item label="Network Status">
+ <action name="Execute">
+ <command>x-terminal-emulator -geometry 120x35+300+200 -e bash -lc 'ip a; echo; read -n1 -p "Press any key..."'</command>
+ </action>
+ </item>
+ <item label="System Update">
+ <action name="Execute">
+ <command>x-terminal-emulator -geometry 120x35+300+200 -e bash -lc 'apt update &amp;&amp; apt upgrade; echo; read -n1 -p "Press any key..."'</command>
+ </action>
+ </item>
+ </menu>
+<separator/>
+<item label="About DebianDC">
+<action name="Execute">
+<command>xmessage -center -button "OK" "DebianDC Trixie -- https://github.com/eesmer/DebianDC"</command>
+</action>
+</item>
+<separator/>
+<item label="Logout">
+<action name="Exit"/>
+</item>
+<item label="Restart">
+<action name="Execute">
+<command>/sbin/reboot</command>
+</action>
+</item>
+<separator/>
+<item label="Poweroff">
+<action name="Execute">
+<command>/sbin/poweroff</command>
+</action>
+</item>
+</menu>
+</openbox_menu>
 EOF

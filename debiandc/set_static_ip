@@ -222,6 +222,9 @@ fi
 DNS_LIST="$(normalize_dns_list "$DNSSERVER")"
 [[ -n "$DNS_LIST" ]] || fatal "DNS Server input not empty"
 
+zenity --question --width="$WIDTH" --title="Confirm" \
+  --text="It be set\n\nInterface: $INTERFACE\nIP: $IPADDRESS\nNetmask: $NETMASK\nGateway: ${GATEWAY:-Empty}\nDNS: $DNS_LIST" || exit 0
+
 
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down

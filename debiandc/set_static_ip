@@ -219,6 +219,10 @@ if [[ -n "$GATEWAY" ]]; then
   valid_ipv4 "$GATEWAY" || fatal "Gateway Address not valid: $GATEWAY"
 fi
 
+DNS_LIST="$(normalize_dns_list "$DNSSERVER")"
+[[ -n "$DNS_LIST" ]] || fatal "DNS Server input not empty"
+
+
 #####function create_debiandcnw(){
 ifconfig $INTERFACE down
 sleep 1

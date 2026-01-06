@@ -184,6 +184,32 @@ return_to_manager(){
   exit 0
 }
 
+log "==== START set_static_ip.sh ===="
+need_cmd zenity
+need_cmd ip
+# for DebianDC install and settings
+[[ -x "$IFDOWN" ]] || fatal "ifdown command not found: $IFDOWN (package: ifupdown)"
+[[ -x "$IFUP" ]]   || fatal "ifup command not found: $IFUP (package: ifupdown)"
+
+IFACE_LIST="$(list_ifaces | paste -sd'|' -)"
+[[ -n "$IFACE_LIST" ]] || fatal "NIC Not Found!!"
+
+CHOICE="$(zenity --forms --title="DebianDC Static IP Settings" --text="Static IP" \
+  --width="$WIDTH" --height="$HEIGHT" \
+  --add-combo="Interface" --combo-values="$IFACE_LIST" \
+  --add-entry="IP Address (example: 10.1.1.11)" \
+  --add-entry="Netmask (example: 255.255.255.0)" \
+  --add-entry="Gateway (optional, example: 10.1.1.1)" \
+  --add-entry="DNS Server(s) (example: 10.1.1.10,8.8.8.8)")" || exit 0
+
+IFS='|' read -r INTERFACE IPADDRESS NETMASK GATEWAY DNSSERVER <<<"$CHOICE"
+
+INTERFACE="$(echo "${INTERFACE:-}" | xargs)"
+IPADDRESS="$(echo "${IPADDRESS:-}" | xargs)"
+NETMASK="$(echo "${NETMASK:-}" | xargs)"
+GATEWAY="$(echo "${GATEWAY:-}" | xargs)"
+DNSSERVER="$(echo "${DNSSERVER:-}" | xargs)"
+
 
 
 

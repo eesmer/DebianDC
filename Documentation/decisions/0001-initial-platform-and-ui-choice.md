@@ -1,7 +1,8 @@
 # ADR-0001: Initial Platform and User Interface Choices
 
 ## Status
-Accepted (historical record)
+Accepted (historical record) <br>
+Superseded by ADR-0005 (UI-Stack)
 
 ## Context
 

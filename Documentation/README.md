@@ -11,6 +11,7 @@ Architecture Decision Records (ADR) / [Decisions Main Page:](https://github.com/
 - [`decisions/0003-report-viewer-decision.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0003-report-viewer-decision.md)
 - [`decisions/0004-disable-suspend-hibernate.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0004-disable-suspend-hibernate.md)
 - [`decisions/0005-UI-Stack.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0005-UI-Stack.md)
+- [`decisions/0006-post-initial-setup-tools.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/decisions/0006-post-initial-setup-tools.md)
 
 ## Concepts
 Fundamental concepts related to Active Directory and identity services.

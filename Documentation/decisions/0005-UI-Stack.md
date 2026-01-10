@@ -69,3 +69,10 @@ General flow:
 - The UI layer should be separated from the business logic.
   - Scripts aim to make a clear distinction between “doing the job” and “presenting the result.”
 - If the report viewer changes (e.g., NetSurf is replaced with another option), report generation (HTML) remains unchanged; only the “viewer” layer is modified.
+
+---
+
+## Context
+
+This decision replaces the original UI and tooling choices documented in ADR-0001, which was based on Debian 11 and LXDE. <br>
+Changes in Debian lifecycle, maintenance complexity, and DebianDC’s evolving operational goals required a reassessment of the UI stack and post-installation flow.

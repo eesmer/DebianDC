@@ -106,3 +106,8 @@ Reasons for rejection:
 Any additional first-boot logic should be integrated
 with this mechanism rather than introducing
 parallel or temporary solutions.
+
+---
+
+## Notes
+This decision forms the basis for all future post-installation workflows in DebianDC.

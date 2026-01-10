@@ -22,7 +22,7 @@ DebianDC uses a lightweight desktop approach tailored to focused management scen
 
 - **Openbox** provides more control over window behavior, auto-start mechanisms, and user workflow.
 
-> For the decision log on this choice, see: `Documentation/decisions/0002-debian13-openbox-migration.md`
+> For the decision doc on this choice, see: `Documentation/decisions/0002-debian13-openbox-migration.md`
 
 ### 2. Interaction Dialogs: Zenity
 
@@ -51,7 +51,7 @@ Since Zenity does not provide HTML viewing support in the Debian 13 environment,
 
 - **netsurf-gtk** is used as the default viewer for HTML reports
 
-> For the decision log on this choice, see: `Documantation/decisions/0003-report-viewer-decision.md`
+> For the decision doc on this choice, see: `Documantation/decisions/0003-report-viewer-decision.md`
 
 ## UI Flow
 

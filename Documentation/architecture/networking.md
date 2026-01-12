@@ -5,3 +5,15 @@ DebianDC does not aim to provide a flexible, user-oriented networking stack. Ins
 
 ---
 
+### 1. Scope and Design Goals
+DebianDC network communication is designed for controlled server environments. <br>
+It is assumed that network parameters are known in advance and should not change implicitly during system operation.
+
+**The primary objectives are:**
+Stable behavior during reboots
+Clear ownership of network configuration
+Minimal dependency on background services
+DNS behavior that reliably supports AD and Kerberos
+Easy analysis when problems arise
+
+Clarity and control are prioritized over convenience and automatic adaptation. <br>

@@ -40,6 +40,7 @@ Simplified view of the Debian network startup sequence:
 - User space services start.
 
 An important detail is that DNS configuration does not need to occur at a single fixed point in this sequence.
+Multiple components may attempt to update it.
 
 ---
 

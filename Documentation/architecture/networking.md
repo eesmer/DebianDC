@@ -10,10 +10,10 @@ DebianDC network communication is designed for controlled server environments. <
 It is assumed that network parameters are known in advance and should not change implicitly during system operation.
 
 **The primary objectives are:**
-Stable behavior during reboots
-Clear ownership of network configuration
-Minimal dependency on background services
-DNS behavior that reliably supports AD and Kerberos
-Easy analysis when problems arise
+- Stable behavior during reboots
+- Clear ownership of network configuration
+- Minimal dependency on background services
+- DNS behavior that reliably supports AD and Kerberos
+- Easy analysis when problems arise
 
 Clarity and control are prioritized over convenience and automatic adaptation. <br>

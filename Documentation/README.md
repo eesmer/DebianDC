@@ -3,6 +3,7 @@
 ## Architecture
 Core architectural principles and system design.
 - [`architecture/overview.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/architecture/overview.md)
+- [`architecture/networking.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/architecture/networking.md)
 
 ## Decisions (ADR)
 Architecture Decision Records (ADR) / [Decisions Main Page:](https://github.com/eesmer/DebianDC/tree/master/Documentation/decisions)

@@ -30,6 +30,15 @@ Depending on the system state and boot timing, the following may occur:
 As a result, the DNS configuration may appear correct in initial tests, but may change unexpectedly after subsequent reboots. <br>
 This behavior can directly impact AD discovery and Kerberos operations.
 
+### 3. Debian Network Lifecycle Overview
+
+Simplified view of the Debian network startup sequence:
+System boot begins.
+Network interfaces are initialized.
+Interfaces become active.
+DNS configuration is applied or modified.
+User space services start.
+
 ---
 
 [Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

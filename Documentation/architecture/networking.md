@@ -33,11 +33,13 @@ This behavior can directly impact AD discovery and Kerberos operations.
 ### 3. Debian Network Lifecycle Overview
 
 Simplified view of the Debian network startup sequence:
-System boot begins.
-Network interfaces are initialized.
-Interfaces become active.
-DNS configuration is applied or modified.
-User space services start.
+- System boot begins.
+- Network interfaces are initialized.
+- Interfaces become active.
+- DNS configuration is applied or modified.
+- User space services start.
+
+An important detail is that DNS configuration does not need to occur at a single fixed point in this sequence.
 
 ---
 

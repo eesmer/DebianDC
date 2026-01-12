@@ -17,3 +17,7 @@ It is assumed that network parameters are known in advance and should not change
 - Easy analysis when problems arise
 
 Clarity and control are prioritized over convenience and automatic adaptation. <br>
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

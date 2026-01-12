@@ -18,6 +18,18 @@ It is assumed that network parameters are known in advance and should not change
 
 Clarity and control are prioritized over convenience and automatic adaptation. <br>
 
+### 2. Problem Description: Why Does DNS Become Unstable?
+In Debian systems, the DNS configuration file /etc/resolv.conf is not always static.
+
+Depending on the system state and boot timing, the following may occur:
+- It may be rewritten during network startup.
+- It may be affected by previous DHCP usage.
+- It may be rebuilt when the interface state changes.
+- It may be affected by the type of reboot or boot order.
+
+As a result, the DNS configuration may appear correct in initial tests, but may change unexpectedly after subsequent reboots. <br>
+This behavior can directly impact AD discovery and Kerberos operations.
+
 ---
 
 [Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

@@ -52,13 +52,16 @@ Basic principles:
 - Static configuration is isolated in a dedicated file
 - The main interface file contains only `interfaces.d/*`
 
+This separation ensures that DebianDC settings are not mixed with distribution defaults or legacy configurations.
+
 ### 5. DNS Persistence Strategy
 Instead of writing the `/etc/resolv.conf` file once and assuming persistence, DebianDC dynamically rebuilds the DNS configuration.
 
 The strategy is as follows:
 - DNS servers are defined alongside the static interface configuration
 - DNS is reapplied every time the interface enters the UP state
-- The last entry written always takes precedence.
+- The last configuration is always valid
+- Thus, DebianDC becomes the configuration that updates DNS settings last
 
 ---
 

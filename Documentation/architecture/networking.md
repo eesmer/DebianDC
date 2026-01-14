@@ -57,6 +57,8 @@ Instead of writing the `/etc/resolv.conf` file once and assuming persistence, De
 
 The strategy is as follows:
 - DNS servers are defined alongside the static interface configuration
+- DNS is reapplied every time the interface enters the UP state
+- The last entry written always takes precedence.
 
 ---
 

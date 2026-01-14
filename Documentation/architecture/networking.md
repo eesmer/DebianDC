@@ -60,13 +60,13 @@ On Debian systems, DNS configuration may be modified during boot and interface <
 state transitions, and it may also be intentionally managed by role-specific services. <br>
 
 For this reason, DebianDC treats DNS configuration in two phases: <br>
-### Phase A — Bootstrap / Pre-DC (before Samba AD is installed)
+#### Phase A — Bootstrap / Pre-DC (before Samba AD is installed)
 Before the system becomes a Domain Controller, DebianDC applies DNS settings defined alongside the static interface configuration (`/etc/network/interfaces.d/debiandcnw`). <br>
 This provides a known working DNS path for package installation, basic connectivity, and initial setup steps.<br>
 
 At this stage, DebianDC actively writes `/etc/resolv.conf` whenever the network interface becomes active. <br>
 
-### Phase B — DC / AD DNS (after Samba AD is installed)
+#### Phase B — DC / AD DNS (after Samba AD is installed)
 Once the system becomes an Active Directory Domain Controller, DNS resolution is intentionally delegated to the local AD DNS service. <br>
 in a DC role, it is common (and desirable) for the system resolver to point to `127.0.0.1`, allowing the local DNS server to serve the AD zone and forward external queries if configured. <br>
 

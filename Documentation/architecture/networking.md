@@ -83,11 +83,9 @@ DebianDC installs a special script in the following location: <br>
 This script is automatically executed by ifupdown when a network interface becomes active. <br>
 
 The hook performs the following actions:
-- Reads the DNS servers defined in DebianDC's interface configuration
-- Re-creates the /etc/resolv.conf file
-- Ensures the system uses the intended DNS configuration after boot and reboot
-
-Because the hook runs after the interface is active, it overrides earlier or intermediate DNS changes.
+- Checks whether the Samba and AD DNS roles are present on the server.
+- If the AD DNS role is active, it configures the system's DNS settings using the AD DNS role.
+- If the AD DNS role is not yet installed/active, the resolv.conf file is rewritten using the DNS address specified in the dns-servers field of the debiandcnw file.
 
 ---
 

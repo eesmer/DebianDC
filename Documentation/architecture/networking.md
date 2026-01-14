@@ -31,7 +31,6 @@ As a result, the DNS configuration may appear correct in initial tests, but may 
 This behavior can directly impact AD discovery and Kerberos operations.
 
 ### 3. Debian Network Lifecycle Overview
-
 Simplified view of the Debian network startup sequence:
 - System boot begins.
 - Network interfaces are initialized.
@@ -39,8 +38,19 @@ Simplified view of the Debian network startup sequence:
 - DNS configuration is applied or modified.
 - User space services start.
 
-An important detail is that DNS configuration does not need to occur at a single fixed point in this sequence.
+An important detail is that DNS configuration does not need to occur at a single fixed point in this sequence. <br>
 Multiple components may attempt to update it.
+
+### 4. Static IP Configuration in DebianDC
+DebianDC implements static IP configuration as follows:
+
+- `/etc/network/interfaces`
+- `/etc/network/interfaces.d/debiandcnw`
+
+Basic principles:
+- DHCP lines are explicitly removed
+- Static configuration is isolated in a dedicated file
+- The main interface file contains only `interfaces.d/*`
 
 ---
 

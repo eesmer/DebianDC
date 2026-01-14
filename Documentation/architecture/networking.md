@@ -64,16 +64,16 @@ The strategy is as follows:
 - Thus, DebianDC becomes the configuration that updates DNS settings last
 
 ### 6. if-up.d Hook Mechanism
-DebianDC installs a special script in the following location: /etc/network/if-up.d/debiandc-resolv
+DebianDC installs a special script in the following location: <br>
+/etc/network/if-up.d/debiandc-resolv
 This script is automatically executed by ifupdown when a network interface becomes active. <br>
 
 The hook performs the following actions:
-The hook performs the following actions:
 - Reads the DNS servers defined in DebianDC's interface configuration
 - Re-creates the /etc/resolv.conf file
+- Ensures the system uses the intended DNS configuration after boot and reboot
 
-Ensures the system uses the intended DNS configuration after boot and reboot <br>
-Since the hook runs after the interface becomes active, it overrides any previous or intermediate DNS changes.
+Because the hook runs after the interface is active, it overrides earlier or intermediate DNS changes.
 
 ---
 

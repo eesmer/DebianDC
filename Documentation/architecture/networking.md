@@ -70,6 +70,13 @@ At this stage, DebianDC actively writes `/etc/resolv.conf` whenever the network 
 Once the system becomes an Active Directory Domain Controller, DNS resolution is intentionally delegated to the local AD DNS service. <br>
 in a DC role, it is common (and desirable) for the system resolver to point to `127.0.0.1`, allowing the local DNS server to serve the AD zone and forward external queries if configured. <br>
 
+In this phase, DebianDC does not override `/etc/resolv.conf`. Instead, it avoids fighting the AD DNS role and leaves resolver management to the Samba AD DC service.<br>
+
+#### Result
+This model avoids fragile assumptions about boot order while keeping responsibilities clear:
+- DebianDC enforces DNS settings only when the system has no AD DNS role.
+- Once the AD DNS role exists, DNS is managed by the directory service layer.
+
 ### 6. if-up.d Hook Mechanism
 DebianDC installs a special script in the following location: <br>
 /etc/network/if-up.d/debiandc-resolv

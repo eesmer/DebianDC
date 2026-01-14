@@ -55,13 +55,6 @@ Basic principles:
 This separation ensures that DebianDC settings are not mixed with distribution defaults or legacy configurations.
 
 ### 5. DNS Persistence Strategy
-Instead of writing the `/etc/resolv.conf` file once and assuming persistence, DebianDC dynamically rebuilds the DNS configuration.
-
-The strategy is as follows:
-- DNS servers are defined alongside the static interface configuration
-- DNS is reapplied every time the interface enters the UP state
-- The last configuration is always valid
-- Thus, DebianDC becomes the configuration that updates DNS settings last
 
 ### 6. if-up.d Hook Mechanism
 DebianDC installs a special script in the following location: <br>

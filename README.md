@@ -10,10 +10,10 @@ You can install a new domain environment with DebianDC or manage your existing S
 ---
 
 ## 🎛️ Project Purpose
-- Automatic installation via Custom ISO.
-- Simple interface with desktop environment (LXDE).
-- Samba Active Directory installation and management.
-- Provides GUI with Zenity interface.
+- Automatic installation via Custom ISO - [Download](https://sourceforge.net/projects/debiandc/files/latest/download "DebianDC latest download link")
+- Simple interface with desktop environment (openbox)
+- Samba Active Directory installation and management screens
+- Provides GUI with Zenity interface
 
 ## 📦 Content and Features
 - Easy installation based on Debian.

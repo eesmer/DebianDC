@@ -554,7 +554,7 @@ if zenity --question \
   --cancel-label="Cancel" \
   --width=520 \
   --text="Hostname:        $HNAME\nRealm (Domain):  $REALM\nNetBIOS Domain:  $NETBIOS_DOMAIN\nDNS Backend:     BIND9_DLZ\nDNS Forwarder:   $DNS_FORWARDER\n\nProceed with installation?"; then
-INSTALL_SAMBAAD_v3
+INSTALL_SAMBAAD
 else
   zenity --info \
     --title="Operation Canceled" \

@@ -1,6 +1,7 @@
 # DebianDC
 
-![alt text](Documentation/assets/branding/DebianDC-Logo-bullseye.png "DebianDC Bullseye Logo")
+![alt text](Documentation/assets/branding/DebianDC-Logo-trixie.png "DebianDC Bullseye Logo")
+
 
 ### Samba Active Directory Graphic Interface Environment<br>
 DebianDC provides a graphical interface environment for Samba Active Directory.<br>

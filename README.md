@@ -1,6 +1,6 @@
 # DebianDC
 
-![alt text](Documentation/assets/branding/DebianDC-Logo-trixie.png "DebianDC Bullseye Logo")
+![alt text](Documentation/assets/branding/DebianDC-Logo-trixie.png "DebianDC Logo")
 
 
 ### Samba Active Directory Graphic Interface Environment<br>

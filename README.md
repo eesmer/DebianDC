@@ -20,7 +20,6 @@ You can install a new domain environment with DebianDC or manage your existing S
 - Samba Active Directory Domain Controller installation.
 - Configuration of DNS, Kerberos and related services.
 - Zenity based visual management tools.
-- LXDE Desktop environment support.
 - Ready to use after installation.
 
 ## 📷 Key Features

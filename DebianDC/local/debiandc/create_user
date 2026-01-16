@@ -1,0 +1,53 @@
+#
+set -e
+trap 'bash user_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+samba-tool ou list | cut -d "=" -f2 > /tmp/ou-list
+sed -i 's/^/|/' /tmp/ou-list
+OU=$(cat /tmp/ou-list)
+
+CHOICE=$(zenity --forms --text="Create User" --show-header --title="Screen of Create User" --width $WIDTH --height $HEIGHT \
+        --add-entry="Name" \
+        --add-entry="SurName" \
+        --add-entry="UserName" \
+	--add-password="Password" \
+	--add-combo="OU" --combo-values="$OU" \
+        --add-combo="Must Change at Next Login" --combo-values="Yes|No" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "|||| | " ] #OK
+then
+	bash create_user
+	exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+	bash user_man
+	exit 1
+fi
+
+	NAME=$(echo $CHOICE | cut -d "|" -f1)
+        SURNAME=$(echo $CHOICE | cut -d "|" -f2)
+        USERNAME=$(echo $CHOICE | cut -d "|" -f3)
+        PASSWORD=$(echo $CHOICE | cut -d "|" -f4)
+        OU=$(echo $CHOICE | cut -d "|" -f5)
+
+if [ "$OU" = " " ]; then
+samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME 2>&1 | tee /tmp/outfile
+else
+samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --userou="ou=$OU" 2>&1 | tee /tmp/outfile
+fi
+
+        # samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --mail-address=$EMAIL --department=$DEPARTMENT 2>&1 | tee /tmp/outfile
+        # samba-tool user create $USERNAME $PASSWORD --given-name=$NAME --surname=$SURNAME --userou="ou=$OU" 2>&1 | tee /tmp/outfile
+
+	cat /tmp/outfile | zenity --text-info --title="Result of the Create User Process for $USERNAME" --width $WIDTH --height $HEIGHT
+	CHANGEPASS=$(echo $CHOICE | cut -d "|" -f 7)
+	if [ "$CHANGEPASS" = "Yes" ]
+	then
+		samba-tool user setpassword --newpassword="$PASSWORD" --must-change-at-next-login $USERNAME
+	fi
+clear
+
+bash user_man

@@ -1,0 +1,24 @@
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Remove Member" --title="Screen of Remove Member from OU" --width $WIDTH --height $HEIGHT \
+	--add-entry="UserName" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash ou_remove_member
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash ou_man
+        exit 1
+fi
+
+USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
+
+samba-tool user move $USERNAME CN=Users 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of move $USERNAME to Users" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash ou_man

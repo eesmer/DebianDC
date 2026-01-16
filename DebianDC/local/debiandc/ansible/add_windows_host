@@ -1,0 +1,57 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Add a Windows Host" --show-header --title="Screen of Add Windows Host" --width $WIDTH --height $HEIGHT \
+        --add-entry="Hostname" \
+        --add-entry="User" \
+        --add-entry="Password" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "||" ]; then #OK
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+fi
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ]; then #CANCEL
+	bash $ACTIONPATH/add_host
+	exit 1
+fi
+
+MAC_HOSTNAME=$(echo $CHOICE | cut -d "|" -f 1)
+MAC_USER=$(echo $CHOICE | cut -d "|" -f 2)
+MAC_PASSWORD=$(echo $CHOICE | cut -d "|" -f 3)
+
+if [ "$MAC_HOSTNAME" = "" ] || [ "$MAC_USER" = "" ] || [ "$MAC_PASSWORD" = "" ]; then
+	zenity --error --text="Please fill in all fields" --ellipsize
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+fi
+
+ping $MAC_HOSTNAME -c 1 &> /dev/null
+pingReturn=$?
+
+if [ "$pingReturn" -eq 0 ]; then
+cat >> /tmp/windowshost << EOF
+[G_$MAC_HOSTNAME]
+$MAC_HOSTNAME
+[G_$MAC_HOSTNAME:vars]
+ansible_user=$MAC_USER
+ansible_password=$MAC_PASSWORD
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+EOF
+	zenity --info --text="$MAC_HOSTNAME added successfully" --ellipsize
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+elif [ "$pingReturn" -eq 1 ]; then
+	zenity --info --text="Host Unreachable" --ellipsize
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+elif [ "$pingReturn" -eq 2 ]; then
+	zenity --info --text="Hostname could not be resolved" --ellipsize
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+fi
+
+clear
+bash $ACTIONPATH/add_host

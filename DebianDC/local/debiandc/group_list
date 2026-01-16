@@ -1,0 +1,43 @@
+#
+set -e
+trap 'bash group_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+REPORT_NAME=grouplist.html
+REPORT_DIR=/tmp/debiandcreportsdir
+mkdir -p $REPORT_DIR
+RDATE=$(date)
+
+cat > $REPORT_DIR/$REPORT_NAME << EOF
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<body>
+<p style="color: darkblue; font-size 15px; font-weight: bold; text-align:center;">Domain Groups List</p>
+<p style="color: darkblue; font-size 10px; text-align:left;">$DOMAIN</p>
+<p style="color: darkred; font-size: 10px; text-align:left;">$RDATE</p>
+<hr class="solid">
+EOF
+
+samba-tool group list > $REPORT_DIR/group-list.txt
+
+numgroup=$(cat $REPORT_DIR/group-list.txt | wc -l)
+i=1
+while [ "$i" -le $numgroup ]; do
+group=$(ls -l | sed -n $i{p} $REPORT_DIR/group-list.txt)
+
+echo '<p style="color: black; font-size: 12px; text-align:left;">' >> $REPORT_DIR/$REPORT_NAME
+echo "$i- &nbsp; $group" >> $REPORT_DIR/$REPORT_NAME
+
+i=$(( i + 1 ))
+done
+
+echo "</body>" >> $REPORT_DIR/$REPORT_NAME
+echo "</html>" >> $REPORT_DIR/$REPORT_NAME
+
+zenity --text-info --title="Group List" --html --filename="$REPORT_DIR/$REPORT_NAME" --no-interaction --width $WIDTH --height $HEIGHT
+
+bash group_man
+exit 1

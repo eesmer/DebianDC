@@ -1,0 +1,9 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+samba-tool processes | zenity --text-info --title="Report of Running Processes" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash reports

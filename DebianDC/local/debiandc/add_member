@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# ----------------------------------------------------------------------------------------------
+# DebianDC Scripts
+# Name        : add_member
+# Purpose     : Add a domain user to a domain group (samba-tool group addmembers).
+# UI          : zenity forms + text-info
+# Requires    : samba-tool, zenity, /usr/local/debiandc/common-value
+# Called from : group_man -> Add Member
+# Notes       : Always returns to group_man after completion/cancel.
+# ----------------------------------------------------------------------------------------------
+
+cd /usr/local/debiandc
+source common-value
+
+return_menu() {
+  bash group_man
+  exit 0
+}
+
+have() { command -v "$1" >/dev/null 2>&1; }
+
+while true; do
+  CHOICE="$(zenity --forms \
+    --text="Add Member to Group" \
+    --title="Add Member to Group" \
+    --width "$WIDTH" --height "$HEIGHT" \
+    --add-entry="Group Name" \
+    --add-entry="UserName" \
+  )" || return_menu
+
+  IFS='|' read -r GROUPNAME USERNAME <<<"$CHOICE"
+  if [[ -z "${GROUPNAME// /}" || -z "${USERNAME// /}" ]]; then
+    zenity --warning --title="DebianDC - Add Member" \
+      --text="The GroupName or UserName fields cannot be left blank."
+    continue
+  fi
+
+  OUTFILE="$(mktemp /tmp/debiandc_add_member.XXXXXX)"
+  trap "rm -f '$OUTFILE' 2>/dev/null || true" EXIT
+  RC=0
+  {
+    echo "Command: samba-tool group addmembers \"$GROUPNAME\" \"$USERNAME\""
+    echo "------------------------------------------------------------"
+    samba-tool group addmembers "$GROUPNAME" "$USERNAME"
+  } >"$OUTFILE" 2>&1 || RC=$?
+
+  TITLE="Add Member Result (rc=$RC)"
+  zenity --text-info \
+    --title="$TITLE" \
+    --width "$WIDTH" --height "$HEIGHT" \
+    --filename="$OUTFILE"
+
+  rm -f "$OUTFILE" 2>/dev/null || true
+  trap - EXIT
+
+  return_menu
+done
+

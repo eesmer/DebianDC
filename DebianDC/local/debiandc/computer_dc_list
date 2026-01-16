@@ -1,0 +1,18 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+samba-tool ou listobjects OU="Domain Controllers" |cut -d "=" -f2 |cut -d "," -f1 > /tmp/computerlist
+cat /tmp/computerlist | zenity --text-info --title="Active Directory Domain Controller List" --width $WIDTH --height $HEIGHT
+
+clear
+
+if [ "$?" = "0" ] #OK
+then
+bash computer_man
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash computer_man
+exit 1
+fi

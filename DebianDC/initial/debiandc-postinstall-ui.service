@@ -1,0 +1,19 @@
+[Unit]
+Description=DebianDC postinstall UI (TTY1)
+Wants=debiandc-postinstall.service
+Before=getty@tty1.service
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/sbin/debiandc-postinstall-ui.sh
+StandardInput=tty
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+#
+set -e
+trap 'bash group_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Create Group" --show-header --title="Screen of Create Group" --width $WIDTH --height $HEIGHT \
+	--add-entry="Group Name" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+	bash create_group
+	exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+	bash group_man
+	exit 1
+fi
+
+samba-tool group add $CHOICE 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of the Create Group Process for $CHOICE" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash group_man

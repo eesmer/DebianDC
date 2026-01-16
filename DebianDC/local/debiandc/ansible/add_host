@@ -1,0 +1,29 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Add a Host" --show-header --title="Screen of Add Host" --width $WIDTH --height $HEIGHT \
+        --add-combo="Select the Host OS" --combo-values="Linux|Windows" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+	bash $ACTIONPATH/add_host
+	exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+	bash manager
+	exit 1
+fi
+
+if [ "$CHOICE" = "Linux" ]
+then
+	bash $ACTIONPATH/add_linux_host
+	exit 1
+elif [ "$CHOICE" = "Windows" ]
+then
+	bash $ACTIONPATH/add_windows_host
+	exit 1
+fi
+
+clear
+bash manager

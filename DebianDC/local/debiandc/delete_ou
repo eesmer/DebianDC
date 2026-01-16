@@ -1,0 +1,26 @@
+#
+set -e
+trap 'bash ou_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Delete OU" --show-header --title="Screen of Delete OU" --width $WIDTH --height $HEIGHT \
+	--add-entry="OU Name" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+	bash delete_ou
+	exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+	bash ou_man
+	exit 1
+fi
+
+samba-tool ou delete OU="$CHOICE" 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of the Delete OU Process for $CHOICE" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash ou_man

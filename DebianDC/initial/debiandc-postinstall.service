@@ -1,0 +1,13 @@
+[Unit]
+Description=DebianDC postinstall (first boot)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/debiandc-postinstall.done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/debiandc-postinstall.sh
+TimeoutStartSec=3600
+
+[Install]
+WantedBy=multi-user.target

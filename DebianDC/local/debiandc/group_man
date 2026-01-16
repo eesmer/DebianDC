@@ -1,0 +1,39 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Domain Groups Management" --title="Screen of Group Management" --width $WIDTH --height $HEIGHT --add-combo="Group Management" --combo-values="Create Group|Delete Group|Add Member|Remove Member|Group List|Member List" )
+
+if [ "$CHOICE" = "Create Group" ]
+then
+	bash create_group
+	exit 1
+elif [ "$CHOICE" = "Delete Group" ]
+then
+	bash delete_group
+	exit 1
+elif [ "$CHOICE" = "Add Member" ]
+then
+	bash add_member
+	exit 1
+elif [ "$CHOICE" = "Remove Member" ]
+then
+	bash remove_member
+	exit 1
+elif [ "$CHOICE" = "Group List" ]
+then
+	bash group_list
+	exit 1
+elif [ "$CHOICE" = "Member List" ]
+then
+	bash member_list
+	exit 1
+elif [ "$CHOICE" = "" ]
+then
+	bash manager
+	exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+	bash group_man
+	exit 1
+fi

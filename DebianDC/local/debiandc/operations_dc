@@ -1,0 +1,32 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Domain Controller Operations" --title="Screen of DC Operations Management" --width $WIDTH --height $HEIGHT \
+	--add-combo="DC Operations" --combo-values="Demote DC" \
+)
+
+if [ "$CHOICE" = "Demote DC" ]
+then
+	bash dc_demote
+	exit 1
+fi
+
+bash manager
+exit 1
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash manager
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash user_man
+exit 1
+fi
+
+clear
+
+bash user_man

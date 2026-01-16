@@ -1,0 +1,49 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+zenity --question --text="This DC will be dead. It cannot be used after this procedure.\n\nDo you approve this action?" --default-cancel --ellipsize
+
+DRETURN=$?
+
+if [ "$DRETURN" = "1" ]
+then
+zenity --info --text="You are canceled process" --ellipsize
+bash operations_domain
+exit 1
+fi
+
+(
+DEMOTE_RESULT=FALSE
+
+apt-get -y purge samba*
+apt-get -y autoremove --purge
+
+echo "40" ; sleep 1
+
+DEMOTE_RESULT=TRUE
+
+echo "75" ; sleep 1
+
+if [ "$DEMOTE_RESULT" = "FALSE" ]; then
+	zenity --error --text="The operation could not be completed." --ellipsize
+	bash operations_domain
+	exit 1
+fi
+
+zenity --info --text="$HNAME DC dead.\n\nR.I.P"
+bash operations_domain
+exit 1
+) |
+zenity --progress \
+  --title="Demote DC" \
+  --text="Demote DC process is running.." \
+  --percentage=0 \
+  --auto-close
+
+if [ "$?" = -1 ] ; then
+        zenity --error \
+          --text="Demote DC process canceled."
+fi
+
+#ABC=$(killdc | tee >(zenity --progress --pulsate --text="Kill DC process is running.."))

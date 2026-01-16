@@ -1,0 +1,74 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+MSIFILE=$(zenity --file-selection)
+if [ "$?" = "1" ] && [ "$MSIFILE" = "" ] #CANCEL
+then
+	bash $ACTIONPATH/windows_manager
+        exit 1
+fi
+
+MACHINE=$(zenity --forms --text="Uninstall .msi Windows Host" --show-header --title="Screen of uninstall .msi Windows Host" --width $WIDTH --height $HEIGHT \
+        --add-entry="Hostname" \
+        --add-entry="User" \
+        --add-password="Password"
+)
+
+if [ "$?" = "1" ] && [ "$MACHINE" = "" ] #CANCEL
+then
+	bash $ACTIONPATH/windows_manager
+        exit 1
+fi
+
+WINHOST=$(echo $MACHINE | cut -d "|" -f1)
+WINUSER=$(echo $MACHINE | cut -d "|" -f2)
+WINPASS=$(echo $MACHINE | cut -d "|" -f3)
+
+ping $WINHOST -c 1 &> /dev/null
+pingReturn=$?
+
+if [ "$pingReturn" -eq 0 ]; then
+cat > /tmp/windowshost << EOF
+[G_$WINHOST]
+$WINHOST
+[G_$WINHOST:vars]
+ansible_user=$WINUSER
+ansible_password=$WINPASS
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+EOF
+
+cat > /tmp/uninstall_msi.yml <<EOF
+---
+- name: uninstall msi
+  hosts: $WINHOST
+
+  tasks:
+         - name: uninstall msi
+           win_package:
+                   path: $MSIFILE
+                   staite: absent
+EOF
+
+	ansible-playbook -i /tmp/windowshost /tmp/uninstall_msi.yml > /tmp/action_result.txt
+	rm /tmp/uninstall_msi.yml
+	rm /tmp/windowshost
+	cat /tmp/action_result.txt | zenity --text-info --title="Action Result" --width $WIDTH --height $HEIGHT
+	rm /tmp/action_result.txt
+	bash $ACTIONPATH/uninstallmsi_windows_host
+	exit 1
+fi
+
+elif [ "$pingReturn" -eq 1 ]; then
+        zenity --info --text="Host Unreachable" --ellipsize
+        bash $ACTIONPATH/uninstallmsi_windows_host
+        exit 1
+elif [ "$pingReturn" -eq 2 ]; then
+        zenity --info --text="Hostname could not be resolved" --ellipsize
+        bash $ACTIONPATH/uninstallmsi_windows_host
+        exit 1
+fi
+
+clear
+bash $ACTIONPATH/windows_manager

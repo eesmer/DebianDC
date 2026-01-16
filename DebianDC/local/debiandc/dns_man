@@ -1,0 +1,34 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="DNS Management" --title="DNS Management Screen" --width $WIDTH --height $HEIGHT \
+	--title="DNS Management" --add-combo="DNS Management" --combo-values="DNS Zone Info|List DNS Records|Add DNS Record|Update DNS Record|Delete DNS Record" )
+
+if [ "$CHOICE" = "DNS Zone Info" ]
+then
+	bash dns_zone_info
+elif [ "$CHOICE" = "List DNS Records" ]
+then
+	bash dns_record_list
+elif [ "$CHOICE" = "Add DNS Record" ]
+then
+	bash dns_add_record
+	exit 1 
+elif [ "$CHOICE" = "Update DNS Record" ]
+then
+	bash dns_update_record
+	exit 1
+elif [ "$CHOICE" = "Delete DNS Record" ]
+then
+	bash dns_del_record
+	exit 1 
+elif [ "$CHOICE" = "" ] #OK_BUTTON
+then
+	bash manager
+	exit 1
+elif [ "$?" = "1" ] #CANCEL_BUTTON
+then
+	bash dns_man
+	exit 1
+fi

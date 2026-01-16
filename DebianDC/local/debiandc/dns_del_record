@@ -1,0 +1,22 @@
+#
+#set -e
+#trap 'bash dns_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Select Record Type" \
+	--title="DNS Record Deletion Screen" --add-combo="Record Types" --combo-values="A" --width $WIDTH --height $HEIGHT)
+
+if [ "$CHOICE" = "A" ]
+then
+	bash dns_del_a_record
+elif [ "$CHOICE" = "" ] #OK_BUTTON
+then
+	bash dns_man
+	exit 1
+elif [ "$?" = "1" ] #CANCEL_BUTTON
+then
+	bash dns_del_record
+	exit 1
+fi

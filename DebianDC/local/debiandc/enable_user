@@ -1,0 +1,28 @@
+#
+set -e
+trap 'bash user_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Enable User" --title="Screen Of Enable User" --width $WIDTH --height $HEIGHT \
+        --add-entry="UserName" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+        bash enable_user
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash user_man
+        exit 1
+fi
+
+USERNAME=$(echo $CHOICE | cut -d "|" -f 1)
+
+samba-tool user enable $USERNAME 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of the Enable User Process for $USERNAME" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash user_man

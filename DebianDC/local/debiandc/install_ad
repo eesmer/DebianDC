@@ -1,0 +1,569 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+MANAGER_BIN="/usr/local/debiandc/manager"
+
+RETURN_MANAGER() {
+  if [ -z "${DISPLAY:-}" ]; then
+    if [ -S /tmp/.X11-unix/X0 ]; then
+      DISPLAY=":0"
+    else
+      echo "No DISPLAY found; cannot start GUI manager." >&2
+      exit 0
+    fi
+  fi
+  if [ -z "${XAUTHORITY:-}" ]; then
+    XAUTHORITY="/root/.Xauthority"
+  fi
+  nohup setsid env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" \
+    "$MANAGER_BIN" >/dev/null 2>&1 &
+  exit 0
+}
+
+BIND_FORWARDERS() {
+  local ips_csv="$DNS_FORWARDER"
+  local conf="/etc/bind/named.conf.options"
+  local ips_sc
+  # "1.1.1.1,8.8.8.8" -> "1.1.1.1; 8.8.8.8;"
+  ips_sc="$(printf '%s' "$ips_csv" | sed 's/,/; /g; s/$/;/' )"
+  cp -a "$conf" "${conf}.bak.$(date +%F_%H%M%S)" 2>/dev/null || true
+  if ! grep -qE '^\s*options\s*\{' "$conf"; then
+    cat > "$conf" <<EOF
+options {
+  directory "/var/cache/bind";
+  forwarders { $ips_sc };
+  dnssec-validation auto;
+  listen-on-v6 { any; };
+};
+EOF
+    return 0
+  fi
+  if grep -qE '^\s*forwarders\s*\{' "$conf"; then
+    sed -i -E "s|^\s*forwarders\s*\{[^}]*\};|  forwarders { $ips_sc };|g" "$conf"
+  else
+    sed -i -E "0,/^\s*options\s*\{/{s/^\s*options\s*\{/options {\n  forwarders { $ips_sc };\n/}" "$conf"
+  fi
+}
+
+FINAL_REBOOT() {
+    sync
+    sleep 2
+    /sbin/reboot
+}
+
+INSTALL_SAMBAAD() {
+  LOG="/var/log/debiandc-sambaad-install.log"
+  mkdir -p /var/log
+  : > "$LOG"
+  lower() { echo "$1" | tr '[:upper:]' '[:lower:]'; }
+  upper() { echo "$1" | tr '[:lower:]' '[:upper:]'; }
+  get_server_ip() {
+    ip route get 1.1.1.1 2>/dev/null | awk '/src/ {for(i=1;i<=NF;i++) if($i=="src") {print $(i+1); exit}}'
+  }
+  get_lan_cidr() {
+    local dev
+    dev="$(ip route show default 2>/dev/null | awk 'NR==1{print $5}')"
+    [ -n "$dev" ] || return 1
+    ip -o -f inet addr show dev "$dev" scope global 2>/dev/null | awk 'NR==1{print $4}'
+  }
+  ensure_hosts() {
+    # args: IP FQDN SHORT
+    local ip="$1" fqdn="$2" short="$3"
+    sed -i -E "/\s${fqdn}(\s|$)/d; /\s${short}(\s|$)/d" /etc/hosts
+    echo "${ip}   ${fqdn} ${short}" >> /etc/hosts
+  }
+  write_resolv_conf_static() {
+    local realm_lc="$1"
+    chattr -i /etc/resolv.conf 2>/dev/null || true
+    cat > /etc/resolv.conf <<EOF
+nameserver 127.0.0.1
+search ${realm_lc}
+EOF
+    chmod 644 /etc/resolv.conf
+    chattr +i /etc/resolv.conf 2>/dev/null || true
+  }
+  check_dlz_module() {
+    local p1="/usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_*.so"
+    local p2="/usr/lib/*/samba/bind9/dlz_bind9_*.so"
+    compgen -G "$p1" >/dev/null 2>&1 && return 0
+    compgen -G "$p2" >/dev/null 2>&1 && return 0
+    return 1
+  }
+  disable_classic_samba() {
+    systemctl disable --now smbd nmbd winbind >/dev/null 2>&1 || true
+    systemctl disable --now samba >/dev/null 2>&1 || true
+  }
+  configure_named_local_include() {
+    local f="/etc/bind/named.conf.local"
+    mkdir -p /etc/bind
+    touch "$f"
+    if ! grep -qF 'include "/var/lib/samba/bind-dns/named.conf";' "$f"; then
+      echo 'include "/var/lib/samba/bind-dns/named.conf";' >> "$f"
+    fi
+  }
+  configure_named_options_minimal() {
+    local f="/etc/bind/named.conf.options"
+    cat > "$f" <<EOF
+options {
+  directory "/var/cache/bind";
+
+  recursion yes;
+  allow-recursion { localhost; localnets; };
+  allow-query { localhost; localnets; };
+
+  dnssec-validation auto;
+
+  listen-on { any; };
+  listen-on-v6 { any; };
+};
+EOF
+    chmod 644 "$f"
+  }
+  fix_bind_paths_perms() {
+    if [ -f /var/lib/samba/bind-dns/dns.keytab ]; then
+      chgrp bind /var/lib/samba/bind-dns/dns.keytab || true
+      chmod 640 /var/lib/samba/bind-dns/dns.keytab || true
+    fi
+    chgrp -R bind /var/lib/samba/bind-dns 2>/dev/null || true
+    chmod -R g+rX /var/lib/samba/bind-dns 2>/dev/null || true
+  }
+  configure_apparmor_named_allow() {
+    local prof="/etc/apparmor.d/usr.sbin.named"
+    [ -f "$prof" ] || return 0
+    local marker="# DebianDC Samba AD (BIND9_DLZ) allow rules"
+    if ! grep -qF "$marker" "$prof"; then
+      cat >> "$prof" <<'EOF'
+
+# DebianDC Samba AD (BIND9_DLZ) allow rules
+/var/lib/samba/bind-dns/** r,
+/var/lib/samba/private/** r,
+/usr/lib/**/samba/bind9/dlz_bind9_*.so mr,
+EOF
+      systemctl reload apparmor >/dev/null 2>&1 || true
+      apparmor_parser -r "$prof" >/dev/null 2>&1 || true
+    fi
+  }
+  verify_bind_loads_ad_zones() {
+    local realm_lc="$1"
+    dig @127.0.0.1 "${realm_lc}" SOA +short
+    dig @127.0.0.1 "_kerberos._udp.${realm_lc}" SRV +short
+    dig @127.0.0.1 "_ldap._tcp.${realm_lc}" SRV +short
+  }
+  apply_forwarders_safe() {
+    if command -v BIND_FORWARDERS >/dev/null 2>&1; then
+      BIND_FORWARDERS
+    else
+      echo "WARN: BIND_FORWARDERS not found; skipping forwarders apply."
+      return 0
+    fi
+  }
+  REALM_UC="$(upper "$REALM")"
+  REALM_LC="$(lower "$REALM")"
+  FQDN="${HNAME}.${REALM_LC}"
+  IP="$(get_server_ip)"
+  # live log with tail
+  zenity --text-info \
+    --title="DebianDC - Install Log" \
+    --width=900 --height=600 \
+    --filename="$LOG" \
+    --tail &
+  LOG_UI_PID=$!
+  local old_opts
+  old_opts="$(set +o)"
+  set +e
+  (
+    echo "5"; echo "# 1/10 Hostname + hosts"
+    echo "$(date -Is) STEP hostname/hosts" >>"$LOG"
+    hostnamectl set-hostname "$FQDN" >>"$LOG" 2>&1 || exit 13
+    if [ -z "$IP" ]; then
+      echo "ERROR: IP Not Detect" >>"$LOG"
+      exit 16
+    fi
+    ensure_hosts "$IP" "$FQDN" "$HNAME" >>"$LOG" 2>&1 || exit 17
+
+    echo "20"; echo "# 2/10 Update and Package Install"
+    echo "$(date -Is) STEP Update/PackagesInstall" >>"$LOG"
+    export DEBIAN_FRONTEND=noninteractive
+    apt update >>"$LOG" 2>&1 || exit 11
+    apt install -y \
+      samba samba-dsdb-modules samba-vfs-modules winbind \
+      bind9 bind9utils bind9-dnsutils dnsutils \
+      krb5-user acl attr >>"$LOG" 2>&1 || exit 12
+
+    echo "35"; echo "# 3/10 DLZ module check"
+    echo "$(date -Is) STEP Check DLZ Module" >>"$LOG"
+    check_dlz_module >>"$LOG" 2>&1 || { echo "ERROR: DLZ module not found" >>"$LOG"; exit 19; }
+
+    echo "45"; echo "# 4/10 Disable Unused Samba Services"
+    echo "$(date -Is) STEP Disable Unused Samba Services" >>"$LOG"
+    disable_classic_samba >>"$LOG" 2>&1 || true
+
+    echo "55"; echo "# 5/10 $REALM_UC Domain Provision (Create Samba ADDC)"
+    echo "$(date -Is) STEP $REALM_UC Domain Provision" >>"$LOG"
+
+    rm -f /etc/samba/smb.conf >>"$LOG" 2>&1 || true
+
+    samba-tool domain provision \
+      --server-role=dc \
+      --use-rfc2307 \
+      --dns-backend=BIND9_DLZ \
+      --realm="$REALM_UC" \
+      --domain="$NETBIOS_DOMAIN" \
+      --adminpass="$ADMIN_PASS" >>"$LOG" 2>&1 || exit 14
+
+    unset ADMIN_PASS
+
+    echo "70"; echo "# 6/10 Kerberos Config"
+    echo "$(date -Is) STEP krb5.conf File Configure" >>"$LOG"
+    cp -f /var/lib/samba/private/krb5.conf /etc/krb5.conf >>"$LOG" 2>&1 || exit 20
+    chmod 644 /etc/krb5.conf >>"$LOG" 2>&1 || true
+
+    echo "80"; echo "# 7/10 BIND DNS Service and Apparmor Configure"
+    echo "$(date -Is) STEP BIND Config" >>"$LOG"
+    configure_named_local_include >>"$LOG" 2>&1 || exit 21
+    configure_named_options_minimal >>"$LOG" 2>&1 || exit 22
+    apply_forwarders_safe >>"$LOG" 2>&1 || exit 15
+    fix_bind_paths_perms >>"$LOG" 2>&1 || true
+    configure_apparmor_named_allow >>"$LOG" 2>&1 || true
+
+    echo "88"; echo "# 8/10 Start Services"
+    echo "$(date -Is) STEP Start Services" >>"$LOG"
+    systemctl enable --now samba-ad-dc >>"$LOG" 2>&1 || true
+    systemctl enable --now bind9 >>"$LOG" 2>&1 || true
+    # Ensure Samba BIND9_DLZ config is usable for BIND 9.18/9.20 (for Debian 13)
+    # Provision creates: /var/lib/samba/bind-dns/named.conf
+    DLZ_SO="/usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_18.so"
+    SAMBA_NAMEDCONF="/var/lib/samba/bind-dns/named.conf"
+    if [ -f "$SAMBA_NAMEDCONF" ]; then
+	    if [ -f "$DLZ_SO" ]; then
+		    # uncomment the exact BIND 9.18/9.20 line if present
+		    sed -i 's|^[[:space:]]*#[[:space:]]*\(database "dlopen /usr/lib/x86_64-linux-gnu/samba/bind9/dlz_bind9_18\.so";\)|\1|' "$SAMBA_NAMEDCONF"
+	    else
+		    echo "WARN: $DLZ_SO not found; listing available dlz_bind9 modules..." >>"$LOG"
+		    ls -1 /usr/lib/x86_64-linux-gnu/samba/bind9/ 2>>"$LOG" | grep '^dlz_bind9.*\.so$' >>"$LOG" || true
+	    fi
+    else
+	    echo "ERROR: $SAMBA_NAMEDCONF not found after provision" >>"$LOG"
+	    exit 41
+    fi
+
+    systemctl restart bind9 >>"$LOG" 2>&1 || true
+    sleep 2
+
+    echo "92"; echo "# 9.5/10 resolv.conf -> 127.0.0.1 "
+    echo "$(date -Is) STEP resolv.conf " >>"$LOG"
+    write_resolv_conf_static "$REALM_LC" >>"$LOG" 2>&1 || exit 18
+
+    echo "96"; echo "# 10/10 Verify DNS SRV"
+    echo "$(date -Is) STEP Verify DNS SRV" >>"$LOG"
+    verify_bind_loads_ad_zones "$REALM_LC" >>"$LOG" 2>&1 || true
+
+    echo "100"; echo "# Done - Domain setup Successfully Completed. The System Will be Rebooted"
+    FINAL_REBOOT
+    exit 0
+  ) | zenity --progress \ || true
+      --title="DebianDC - Samba AD Installation" \
+      --text="Installing..." \
+      --width=560 \
+      --auto-close \
+      --no-cancel
+
+  INSTALL_RC=${PIPESTATUS[0]}
+  eval "$old_opts"
+
+  if [ "$INSTALL_RC" -eq 0 ]; then
+    kill "$LOG_UI_PID" 2>/dev/null || true
+    zenity --info \
+      --title="Installation Completed" \
+      --width=540 \
+      --text="Samba AD installation completed.\n\nFQDN: $FQDN\nRealm: $REALM_UC\nNetBIOS: $NETBIOS_DOMAIN\n\nLog: $LOG"
+    return_to_manager
+  else
+    zenity --error \
+      --title="Installation Failed" \
+      --width=560 \
+      --text="Samba AD Installation Failed (code: $INSTALL_RC).\n\nPlease review log:\n$LOG"
+
+    zenity --text-info \
+      --title="DebianDC - Install Log" \
+      --width=900 --height=600 \
+      --filename="$LOG"
+
+    return_to_manager
+  fi
+}
+
+#-----------------
+# AD Install
+#-----------------
+# Get Hostname
+while true; do
+if ! HNAME=$(zenity --entry \
+	--title="DC Hostname" \
+	--text="Enter DC Machine Hostname (e.g., DC01)" \
+	--width=400); then
+		zenity --info \
+			--title="Operation Canceled" \
+			--text="Hostname input was canceled.\nReturning to DebianDC Manager." \
+			--width=350
+		#pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+		RETURN_MANAGER
+		exit 1
+fi
+HNAME="$(printf '%s' "$HNAME" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+if [ -z "$HNAME" ]; then
+	zenity --error \
+	--title="Hostname Required" \
+	--text="Hostname cannot be empty. Please enter a hostname (e.g., DC01)." \
+	--width=380
+	continue
+fi
+# Long Check
+if [ "${#HNAME}" -gt 15 ]; then
+	zenity --error \
+	--title="Invalid Hostname Length" \
+	--text="Hostname must be between 1 and 15 characters." \
+	--width=380
+	continue
+fi
+# Regex Check - letters/numbers / dash can use / It cannot start/end with dash.
+if ! [[ "$HNAME" =~ ^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$ ]]; then
+	zenity --error \
+	--title="Invalid Hostname" \
+	--text="Hostname may contain only letters, numbers, and hyphens (-).\nIt cannot start or end with a hyphen." \
+	--width=420
+	continue
+fi
+break
+done
+
+# Get REALM/DOMAIN
+while true; do
+  if ! REALM=$(zenity --entry \
+      --title="Domain Name (Realm)" \
+      --text="Enter Domain Name (e.g., EXAMPLE.LOC)" \
+      --width=420); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="Domain input was canceled.\nReturning to DebianDC Manager." \
+      --width=360
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
+    exit 1
+  fi
+
+  # Trim
+  REALM="$(printf '%s' "$REALM" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+  if [ -z "$REALM" ]; then
+    zenity --error \
+      --title="Domain Required" \
+      --text="Domain name cannot be empty. Example: EXAMPLE.LOC" \
+      --width=420
+    continue
+  fi
+
+  # for Uppercase
+  REALM="$(printf '%s' "$REALM" | tr '[:lower:]' '[:upper:]')"
+
+  if ! [[ "$REALM" =~ ^[A-Z0-9]+(\.[A-Z0-9]+)+$ ]]; then
+    zenity --error \
+      --title="Invalid Domain Format" \
+      --text="Use only letters, numbers and dots.\nExample: EXAMPLE.LOC\nNo spaces, underscores, or hyphens." \
+      --width=440
+    continue
+  fi
+
+  if [[ "$REALM" == .* || "$REALM" == *. || "$REALM" == *..* ]]; then
+    zenity --error \
+      --title="Invalid Domain Format" \
+      --text="Domain cannot start/end with a dot and cannot contain consecutive dots." \
+      --width=440
+    continue
+  fi
+
+  # DNS limits
+  if [ "${#REALM}" -gt 253 ]; then
+    zenity --error \
+      --title="Domain Too Long" \
+      --text="Domain name is too long (max 253 characters)." \
+      --width=420
+    continue
+  fi
+
+  bad_label=0
+  IFS='.' read -r -a _labels <<< "$REALM"
+  for _l in "${_labels[@]}"; do
+    if [ -z "$_l" ] || [ "${#_l}" -gt 63 ]; then
+      bad_label=1
+      break
+    fi
+  done
+  if [ "$bad_label" -eq 1 ]; then
+    zenity --error \
+      --title="Invalid Domain Label" \
+      --text="Each domain part between dots must be 1–63 characters.\nExample: EXAMPLE.LOC" \
+      --width=460
+    continue
+  fi
+  NETBIOS_DOMAIN="$(printf '%s' "$REALM" | cut -d'.' -f1)"
+  NETBIOS_DOMAIN="$(printf '%s' "$NETBIOS_DOMAIN" | tr '[:lower:]' '[:upper:]')"
+  NETBIOS_DOMAIN="${NETBIOS_DOMAIN:0:15}"
+  NETBIOS_DOMAIN="$(printf '%s' "$NETBIOS_DOMAIN" | sed 's/[^A-Z0-9]//g')"
+  if [ -z "$NETBIOS_DOMAIN" ]; then
+	  zenity --error \
+		  --title="Invalid NetBIOS Domain" \
+		  --text="Unable to derive a valid NetBIOS domain name from realm:\n\n$REALM" \
+		  --width=460
+	  #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+	  RETURN_MANAGER
+	  exit 1
+fi
+  break
+done
+
+# Get Administrator Password
+while true; do
+  if ! ADMIN_PASS_1=$(zenity --password \
+      --title="Administrator Password" \
+      --text="Enter Administrator password for Samba AD (e.g., for 'Administrator')." \
+      --width=420); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="Password input was canceled.\nReturning to DebianDC Manager." \
+      --width=360
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
+    exit 1
+  fi
+
+  if [ -z "$ADMIN_PASS_1" ]; then
+    zenity --error \
+      --title="Password Required" \
+      --text="Password cannot be empty." \
+      --width=380
+    continue
+  fi
+
+  if [ "${#ADMIN_PASS_1}" -lt 8 ]; then
+    zenity --error \
+      --title="Weak Password" \
+      --text="Password must be at least 8 characters." \
+      --width=380
+    continue
+  fi
+
+  if ! ADMIN_PASS_2=$(zenity --password \
+      --title="Confirm Password" \
+      --text="Re-enter the Administrator password to confirm." \
+      --width=420); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="Password confirmation was canceled.\nReturning to DebianDC Manager." \
+      --width=380
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
+    exit 1
+  fi
+
+  if [ "$ADMIN_PASS_1" != "$ADMIN_PASS_2" ]; then
+    zenity --error \
+      --title="Password Mismatch" \
+      --text="Passwords do not match. Please try again." \
+      --width=420
+    unset ADMIN_PASS_1 ADMIN_PASS_2
+    continue
+  fi
+
+  ADMIN_PASS="$ADMIN_PASS_1"
+  unset ADMIN_PASS_1 ADMIN_PASS_2
+
+  break
+done
+
+while true; do
+  if ! DNS_FORWARDER=$(zenity --entry \
+      --title="DNS Forwarder" \
+      --text="Enter DNS forwarder IP address(es).\nExample: 1.1.1.1 or 1.1.1.1,8.8.8.8" \
+      --width=480); then
+
+    zenity --info \
+      --title="Operation Canceled" \
+      --text="DNS forwarder input was canceled.\nReturning to DebianDC Manager." \
+      --width=380
+    #pgrep -f "^${MANAGER_BIN}$" >/dev/null || "$MANAGER_BIN" &
+    RETURN_MANAGER
+    exit 1
+  fi
+
+  # Trim
+  DNS_FORWARDER="$(printf '%s' "$DNS_FORWARDER" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+  if [ -z "$DNS_FORWARDER" ]; then
+    zenity --error \
+      --title="DNS Forwarder Required" \
+      --text="DNS forwarder cannot be empty." \
+      --width=380
+    continue
+  fi
+
+  if [[ "$DNS_FORWARDER" =~ [[:space:]] ]]; then
+    zenity --error \
+      --title="Invalid Format" \
+      --text="Do not use spaces.\nUse comma-separated IP addresses.\nExample: 1.1.1.1,8.8.8.8" \
+      --width=460
+    continue
+  fi
+
+  valid=1
+  IFS=',' read -r -a _ips <<< "$DNS_FORWARDER"
+  for ip in "${_ips[@]}"; do
+    if ! [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+      valid=0
+      break
+    fi
+    IFS='.' read -r o1 o2 o3 o4 <<< "$ip"
+    for o in "$o1" "$o2" "$o3" "$o4"; do
+      if [ "$o" -gt 255 ]; then
+        valid=0
+        break 2
+      fi
+    done
+  done
+
+  if [ "$valid" -ne 1 ]; then
+    zenity --error \
+      --title="Invalid IP Address" \
+      --text="One or more DNS forwarder IP addresses are invalid.\n\nExample:\n1.1.1.1\nor\n1.1.1.1,8.8.8.8" \
+      --width=480
+    continue
+  fi
+
+  break
+done
+
+DNS_BACKEND="BIND9_DLZ"
+
+# Final Summary
+if zenity --question \
+  --title="Final Summary - Samba AD Installation" \
+  --ok-label="Install" \
+  --cancel-label="Cancel" \
+  --width=520 \
+  --text="Hostname:        $HNAME\nRealm (Domain):  $REALM\nNetBIOS Domain:  $NETBIOS_DOMAIN\nDNS Backend:     BIND9_DLZ\nDNS Forwarder:   $DNS_FORWARDER\n\nProceed with installation?"; then
+INSTALL_SAMBAAD_v3
+else
+  zenity --info \
+    --title="Operation Canceled" \
+    --text="Installation canceled.\nReturning to DebianDC Manager." \
+    --width=380
+  RETURN_MANAGER
+fi
+
+zenity --info --title="Operation Canceled" --text="Installation canceled.\nReturning to DebianDC Manager." --width=380
+RETURN_MANAGER
+exit 1
+

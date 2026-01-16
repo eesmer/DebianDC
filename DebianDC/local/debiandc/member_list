@@ -1,0 +1,34 @@
+#
+set -e
+trap 'bash group_man' ERR
+
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Group Member List" title="Screen of Member List" --width $WIDTH --height $HEIGHT \
+	--add-entry="Group Name" )
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "" ] #OK
+then
+bash member_list
+exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+bash group_man
+exit 1
+fi
+
+GROUPNAME=$(echo $CHOICE | cut -d "|" -f 1)
+
+samba-tool group listmembers $GROUPNAME 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Member List of $CHOICE" --width $WIDTH --height $HEIGHT
+
+if [ "$?" = "0" ] #OK
+then
+bash group_man
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash group_man
+exit 1
+fi

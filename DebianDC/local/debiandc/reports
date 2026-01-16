@@ -1,0 +1,55 @@
+#!/bin/bash
+
+#----------------------------------------------------------------------
+# DebianDC Scripts
+# Name        : reports
+# Purpose     : Reports Main Screen.
+# UI          : zenity forms + text-info
+# Requires    : samba-tool, zenity, /usr/local/debiandc/common-value
+# Called from : manager -> reports
+# Notes       : Always returns to the reports screen
+#----------------------------------------------------------------------
+
+cd /usr/local/debiandc
+source common-value
+
+while true; do
+  CHOICE=$(zenity --forms \
+    --text="DebianDC Reports" \
+    --title="DebianDC Reports" \
+    --width "$WIDTH" --height "$HEIGHT" \
+    --add-combo="Reports" \
+    --combo-values="Detailed Users List|Show to FSMO Roles|Domain Info|Registered DC on $DOMAIN|AD/Domain Summary Report" \
+  ) || {
+    # Cancel/close
+    bash manager
+    exit 0
+  }
+
+  if [[ -z "${CHOICE// /}" ]]; then
+    bash manager
+    exit 0
+  fi
+
+  case "$CHOICE" in
+    "Detailed Users List")
+      bash report_userlist
+      ;;
+    "Show to FSMO Roles")
+      bash report_fsmoroles
+      ;;
+    "Domain Info")
+      bash report_domaininfo
+      ;;
+    "Registered DC on $DOMAIN")
+      bash registered_dc_list
+      ;;
+    "AD/Domain Summary Report")
+      bash report_adsummary
+      ;;
+    *)
+      zenity --warning --title="DebianDC Reports" --text="Unknown selection: $CHOICE"
+      ;;
+  esac
+done
+

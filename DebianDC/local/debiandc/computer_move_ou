@@ -1,0 +1,28 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="Move to OU" --title="Move Computer Account to OU" --width $WIDTH --height $HEIGHT \
+        --add-entry="Computer Hostname" \
+	--add-entry="Name of OU"
+)
+
+if [ "$?" = "0" ] && [ "$CHOICE" = "|" ] #OK
+then
+        bash computer_move_ou
+        exit 1
+elif [ "$?" = "1" ] && [ "$CHOICE" = "" ] #CANCEL
+then
+        bash computer_man
+        exit 1
+fi
+
+HNAME=$(echo $CHOICE | cut -d "|" -f 1)
+OU=$(echo $CHOICE | cut -d "|" -f 2)
+
+samba-tool computer move $HNAME OU=$OU 2>&1 | tee /tmp/outfile
+cat /tmp/outfile | zenity --text-info --title="Result of $HNAME migration to $OU" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash computer_move_ou

@@ -1,0 +1,99 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+CHOICE=$(zenity --forms --text="FSMO Operations" --title="Screen of FSMO Transfer Management" --width $WIDTH --height $HEIGHT \
+	--add-combo="FSMO Transfer" --combo-values="Schema Master Role|Infrastructure Master Role|Rid Allocation Master Role|Pdc Emulation Master Role|Domain Naming Master Role" \
+)
+
+if [ "$CHOICE" = "Schema Master Role" ]
+then
+OWNER_ROLE=$(samba-tool fsmo show |grep SchemaMasterRole |cut -d ',' -f2 |cut -d '=' -f2)
+zenity --question --text="The Schema Master Role will be transferred from $OWNER_ROLE DC to this ($HNAME) DC server.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+
+	if [ "$DRETURN" = "1" ]
+	then
+		zenity --info --text="You are canceled process" --ellipsize
+		bash fsmo_transfer
+		exit 1
+	fi
+samba-tool fsmo transfer --role=schema  2>&1 > /tmp/outfile
+zenity --text-info --title="Result of FSMO Role Transfer Schema Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+
+elif [ "$CHOICE" = "Infrastructure Master Role" ]
+then
+OWNER_ROLE=$(samba-tool fsmo show |grep InfrastructureMasterRole |cut -d ',' -f2 |cut -d '=' -f2)
+zenity --question --text="The Infrastructure Master Role will be transferred from $OWNER_ROLE DC to this ($HNAME) DC server.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+        if [ "$DRETURN" = "1" ]
+        then
+        zenity --info --text="You are canceled process" --ellipsize
+        bash fsmo_transfer
+        exit 1
+        elif [ "$DRETURN" = "0" ]
+        then
+        samba-tool fsmo transfer --role=infrastructure 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer Infrastructure Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+elif [ "$CHOICE" = "Rid Allocation Master Role" ]
+then
+OWNER_ROLE=$(samba-tool fsmo show |grep RidAllocationMasterRole |cut -d ',' -f2 |cut -d '=' -f2)
+zenity --question --text="The Rid Allocation Master Role will be transferred from $OWNER_ROLE DC to this ($HNAME) DC server.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+        if [ "$DRETURN" = "1" ]
+        then
+        zenity --info --text="You are canceled process" --ellipsize
+        bash fsmo_transfer
+        exit 1
+        elif [ "$DRETURN" = "0" ]
+        then
+        samba-tool fsmo transfer --role=rid 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer Rid Allocation Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+elif [ "$CHOICE" = "Pdc Emulation Master Role" ]
+then
+OWNER_ROLE=$(samba-tool fsmo show |grep PdcEmulationMasterRole |cut -d ',' -f2 |cut -d '=' -f2)
+zenity --question --text="The PDC Emulation Master Role will be transferred from $OWNER_ROLE DC to this ($HNAME) DC server.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+        if [ "$DRETURN" = "1" ]
+        then
+        zenity --info --text="You are canceled process" --ellipsize
+        bash fsmo_transfer
+        exit 1
+        elif [ "$DRETURN" = "0" ]
+        then
+        samba-tool fsmo transfer --role=pdc 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer PDC Emulation Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+elif [ "$CHOICE" = "Domain Naming Master Role" ]
+then
+OWNER_ROLE=$(samba-tool fsmo show |grep DomainNamingMasterRole |cut -d ',' -f2 |cut -d '=' -f2)
+zenity --question --text="The PDC Emulation Master Role will be transferred from $OWNER_ROLE DC to this ($HNAME) DC server.\n\nDo you approve this action?" --default-cancel --ellipsize
+DRETURN=$?
+        if [ "$DRETURN" = "1" ]
+        then
+        zenity --info --text="You are canceled process" --ellipsize
+        bash fsmo_transfer
+        exit 1
+        elif [ "$DRETURN" = "0" ]
+        then
+        samba-tool fsmo transfer --role=naming 2>&1 | tee /tmp/outfile
+	zenity --text-info --title="Result of FSMO Role Transfer Naming Master Role" --filename=/tmp/outfile --width $WIDTH --height $HEIGHT
+	fi
+fi
+
+if [ "$?" = "1" ] || [ "$CHOICE" = "" ]
+then
+bash operations_domain
+exit 1
+fi
+
+if [ "$?" = "0" ] || [ "$CHOICE" = "" ]
+then
+bash fsmo_transfer
+exit 1
+fi
+
+clear
+bash fsmo_transfer

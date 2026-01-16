@@ -1,0 +1,9 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+samba-tool fsmo show | zenity --text-info --title="Report of FSMO Role" --width $WIDTH --height $HEIGHT
+
+clear
+
+bash reports

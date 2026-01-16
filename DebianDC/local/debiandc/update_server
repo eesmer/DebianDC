@@ -1,0 +1,10 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+function update_server {
+apt -y update && apt -y upgrade
+apt -y autoremove
+}
+
+update_server | zenity --text-info --title="DebianDC Server Update" --width $WIDTH --height $HEIGHT

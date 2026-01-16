@@ -1,0 +1,35 @@
+#
+cd /usr/local/debiandc
+source common-value
+
+bash service_check
+
+ZONE=$(samba-tool domain info 127.0.0.1 |grep Domain |cut -d ":" -f2 |cut -d " " -f2)
+samba-tool dns query $HNAME $ZONE @ ALL |tee /tmp/output.txt
+
+if [ "$OUTPUTCHECK" = empty ]; then
+kdestroy
+ADMIN_PASS=$(zenity --entry --text="Administrator password" --hide-text)
+echo $ADMIN_PASS | kinit administrator@$DOMAIN
+fi
+
+sed -i /msdcs/d /tmp/output.txt
+sed -i /sites/d /tmp/output.txt
+sed -i /tcp/d /tmp/output.txt
+sed -i /udp/d /tmp/output.txt
+sed -i /DomainDnsZones/d /tmp/output.txt
+sed -i /ForestDnsZones/d /tmp/output.txt
+sed -i '/A:/a ------------------------------------------------------------------------------------------' /tmp/output.txt
+
+cat /tmp/output.txt | zenity --text-info --title="List of DNS Records in $ZONE zone" --width $WIDTH --height $HEIGHT
+clear
+
+if [ "$?" = "0" ] #OK
+then
+bash dns_man
+exit 1
+elif [ "$?" = "1" ] #CANCEL
+then
+bash dns_man
+exit 1
+fi

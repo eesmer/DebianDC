@@ -11,6 +11,7 @@
 - The initial-setup layer was added after ISO installation
 - The configuration process running at first boot was defined
 - The installation and runtime phases were clearly separated
+- A report viewer was added (NetSurf Broeser)
 ---
 #### DebianDC Bullseye
 ---

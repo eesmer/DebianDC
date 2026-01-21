@@ -4,7 +4,7 @@
 ### DebianDC Bullseye
 Post-installation configurations are primarily based on post-install scripts. This is the first functional stage of DebianDC.
 - Debian 11 (Bullseye)
-- DebianDC-custom.iso prepared
+- custom.iso prepared
 - LXDE desktop environment
 - Zenity
 - Bash script

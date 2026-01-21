@@ -4,7 +4,6 @@
 ---
 #### DebianDC Trixie
 ---
-
 ##### Build/Version / 2026-0116-r1
 - Debian 13 (Trixie)
 - Openbox was adopted instead of the LXDE desktop environment (LXDE -> Openbox)
@@ -15,9 +14,11 @@
 ---
 #### DebianDC Bullseye
 ---
-Post-installation configurations are primarily based on post-install scripts. This is the first functional stage of DebianDC.
+##### Build/Version / d11-260724
 - Debian 11 (Bullseye)
 - custom.iso prepared
 - LXDE desktop environment
 - Zenity
 - Bash script
+<br>
+Post-installation configurations are primarily based on post-install scripts. This is the first functional stage of DebianDC.

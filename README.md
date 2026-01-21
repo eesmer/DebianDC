@@ -42,12 +42,7 @@ You can install a new domain environment with DebianDC or manage your existing S
 ---
 
 ![alt text](Documentation/assets/screenshots/DebianDC-trixie-MainMenu-SS1.png "DebianDC_Desktop")
-
-![alt text](Documentation/assets/screenshots/DebianDC-Screenshot.png "DebianDC_Desktop")
-
-<br>
-
-![alt text](Documentation/assets/screenshots/DebianDC-StartMenu.png "DebianDC StartMenu")
+![alt text](Documentation/assets/screenshots/DebianDC-trixie-MainMenu-SS2.png "DebianDC Manager MainMenu")
 
 ---
 

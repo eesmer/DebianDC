@@ -44,6 +44,8 @@ The installation will then continue and complete without asking any further ques
 After the installation is complete
 You can log in with the root user you specified during the installation.
 
+![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/LoginScreen-SS1.png "DebianDC Login")
+
 <br>
 
 [Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#guides)

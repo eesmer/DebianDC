@@ -111,4 +111,4 @@ This document records the decision to transition DebianDC to Debian 13 and Openb
 
 ---
 
-[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#decisions)

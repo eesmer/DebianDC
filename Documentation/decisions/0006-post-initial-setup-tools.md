@@ -111,3 +111,7 @@ parallel or temporary solutions.
 
 ## Notes
 This decision forms the basis for all future post-installation workflows in DebianDC.
+
+---
+
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#architecture)

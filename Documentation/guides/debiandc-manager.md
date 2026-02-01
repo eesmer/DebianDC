@@ -123,6 +123,6 @@ For user accounts; Password complexity, length, expiration time, etc. are set.
 
 ![alt text](https://github.com/eesmer/DebianDC/blob/master/Documentation/assets/screenshots/handbook/ad-settings-1.png "DebianDC Active Directory Settings")
 
-<br>
+---
 
-[Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation#guides)
+[Back to Documentation](https://github.com/eesmer/DebianDC/blob/master/Documentation/#guides)

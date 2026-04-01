@@ -2,6 +2,10 @@
 
 ![alt text](Documentation/assets/branding/DebianDC-Logo-trixie.png "DebianDC Logo")
 
+![DebianDC](https://img.shields.io/badge/DebianDC-Linux%20Active%20Directory%20Server-1e3a8a?style=for-the-badge&logo=debian&logoColor=magenta&labelColor=yellow&color=darkgray) <br>
+![Version](https://img.shields.io/badge/version-trixie-1e3a8a?style=flat-square&labelColor=gray&color=yellow)
+
+---
 
 ### Samba Active Directory Graphic Interface Environment<br>
 DebianDC provides a graphical interface environment for Samba Active Directory.<br>

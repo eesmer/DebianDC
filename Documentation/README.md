@@ -19,6 +19,7 @@ Fundamental concepts related to Active Directory and identity services.
 - [`concepts/Domain_and_Active_Directory.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Domain_and_Active_Directory.md)
 - [`concepts/FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/FSMO_Roles.md)
 - [`concepts/Best_Configuration_for_FSMO_Roles.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/Best_Configuration_for_FSMO_Roles.md)
+- [`concepts/SYSVOL Replication.md`](https://github.com/eesmer/DebianDC/blob/master/Documentation/concepts/SYSVOL_Replication.md)
 
 ## Guides
 Installation, usage, and operational guides.

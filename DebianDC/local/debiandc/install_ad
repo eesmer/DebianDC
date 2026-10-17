@@ -183,12 +183,21 @@ EOF
 
     echo "20"; echo "# 2/10 Update and Package Install"
     echo "$(date -Is) STEP Update/PackagesInstall" >>"$LOG"
-    export DEBIAN_FRONTEND=noninteractive
-    apt update >>"$LOG" 2>&1 || exit 11
-    apt install -y \
-      samba samba-dsdb-modules samba-vfs-modules winbind \
-      bind9 bind9utils bind9-dnsutils dnsutils \
-      krb5-user acl attr >>"$LOG" 2>&1 || exit 12
+    #export DEBIAN_FRONTEND=noninteractive
+    #apt update >>"$LOG" 2>&1 || exit 11
+    #apt install -y \
+    #  samba samba-dsdb-modules samba-vfs-modules winbind \
+    #  bind9 bind9utils bind9-dnsutils dnsutils \
+    #  krb5-user acl attr >>"$LOG" 2>&1 || exit 12
+
+	apt-get update >>"$LOG" 2>&1 || exit 11
+	DEBIAN_FRONTEND=noninteractive \
+	apt-get install -y --no-install-recommends \
+	samba-ad-dc samba-ad-provision samba-common-bin winbind krb5-user bind9 bind9-utils bind9-dnsutils \
+	chrony smbclient \
+	ldb-tools tdb-tools \
+	acl attr rsync openssh-server \
+	>>"$LOG" 2>&1 || exit 12
 
     echo "35"; echo "# 3/10 DLZ module check"
     echo "$(date -Is) STEP Check DLZ Module" >>"$LOG"
